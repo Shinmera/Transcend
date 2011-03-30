@@ -24,6 +24,9 @@ import static org.lwjgl.util.glu.GLU.*;
 
 public class MainFrame {
     public static final Logger LOGGER = Logger.getLogger("TRA-MainFrame");
+    public static int DISPLAY_WIDTH = Const.DISPLAY_WIDTH;
+    public static int DISPLAY_HEIGHT= Const.DISPLAY_HEIGHT;
+
 
     static {
         try {LOGGER.addHandler(new FileHandler("err.log",true));}
@@ -33,11 +36,17 @@ public class MainFrame {
     public static void main(String[] args){
         Arguments arg = new Arguments();
         //arg.addArgument('m', "map file", "path");
+        arg.addArgument('w', "windowed", "Run in window mode", null);
+        arg.addArgument('c', "config","Change the configuration file.","path");
         String flags = arg.eval(args);
         HashMap<Character,String> vals = arg.getVals();
 
+
         MainFrame mf = new MainFrame();
-        try{mf.create();mf.run();}
+        try{
+            mf.create(!flags.contains("w"));
+            mf.run();
+        }
         catch(Exception ex){LOGGER.log(Level.SEVERE,ex.toString(),ex);}
         finally{mf.destroy();}
     }
@@ -46,10 +55,12 @@ public class MainFrame {
         
     }
 
-    public void create() throws LWJGLException {
+    public void create(boolean fs) throws LWJGLException {
         //Display
-        Display.setDisplayMode(new DisplayMode(Const.DISPLAY_WIDTH,Const.DISPLAY_HEIGHT));
-        Display.setFullscreen(false);
+        Display.setFullscreen(fs);
+        if(fs){ DISPLAY_WIDTH=Display.getDisplayMode().getWidth();
+                DISPLAY_HEIGHT=Display.getDisplayMode().getHeight();}
+        else    Display.setDisplayMode(new DisplayMode(DISPLAY_WIDTH, DISPLAY_HEIGHT));
         Display.setTitle("Transcend - v"+Const.VERSION);
         Display.create();
 
@@ -92,11 +103,11 @@ public class MainFrame {
 
     public void resizeGL() {
     //2D Scene
-    glViewport(0,0,Const.DISPLAY_WIDTH,Const.DISPLAY_HEIGHT);
+    glViewport(0,0,DISPLAY_WIDTH,DISPLAY_HEIGHT);
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluOrtho2D(0.0f,Const.DISPLAY_WIDTH,0.0f,Const.DISPLAY_HEIGHT);
+    gluOrtho2D(0.0f,DISPLAY_WIDTH,0.0f,DISPLAY_HEIGHT);
     glPushMatrix();
 
     glMatrixMode(GL_MODELVIEW);

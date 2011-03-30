@@ -1,2 +1,11 @@
-[23:47 29.03.2011]
-GIT repository aufgesetzt und projekt vorbereitungen getroffen
+[20:12-23:47 29.03.2011]
+GIT repository set up and project preparations taken.
+
+[16:02-19:09 30.03.2011]
+Laid out plans for the base class for block level elements in the world.
+Informed about even handling systems http://en.wikipedia.org/wiki/Event-driven_programming .
+Discussed about the world update mechanics and possible performance issues.
+Began writing the Event Handling System.
+
+[19:52-21:00 30.03.2011]
+Continue writing the EHS. 
