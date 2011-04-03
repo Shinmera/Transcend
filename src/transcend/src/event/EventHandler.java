@@ -11,6 +11,7 @@ package event;
 
 import NexT.util.OptionSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 import world.World;
 
 public class EventHandler {
@@ -53,31 +54,49 @@ public class EventHandler {
      * Induce the event chain. If called the Handler will process the event and
      * call the right objects and functions.
      * @param event The type of event to trigger.
-     * @param identifier A referebce pointer to the throwing object.
+     * @param identifier A reference pointer to the sending object.
+     * @param arguments Pass additional arguments.
      */
-    public void triggerEvent(int event,int identifier){
+    public void triggerEvent(int event,int identifier,HashMap<String,String> arguments){
         for(int i=0;i<events.size();i++){
             if(events.containsValue(events.getKey(i),event)){
-                ((EventListener)world.getByID(events.getKey(i))).onEvent(event,identifier);
+                ((EventListener)world.getByID(events.getKey(i))).onEvent(event,identifier,arguments);
             }
         }
     }
 
     /**
-     * Induce the event chain for the specified world. If called the Handler
-     * will process the event and call the right objects and functions.
-     * It is NOT recommended to use this as saved event identifiers might be
-     * false.
+     * Induce the event chain. If called the Handler will process the event and
+     * call the right objects and functions.
      * @param event The type of event to trigger.
-     * @param identifier A referebce pointer to the throwing object.
-     * @param world The world to send events to.
+     * @param identifier A reference pointer to the sending object.
      */
-    @Deprecated
-    public void triggerEvent(int event,int identifier,World world){
+    public void triggerAnonymousEvent(int event,HashMap<String,String> arguments){
         for(int i=0;i<events.size();i++){
             if(events.containsValue(events.getKey(i),event)){
-                ((EventListener)world.getByID(events.getKey(i))).onEvent(event,identifier);
+                ((EventListener)world.getByID(events.getKey(i))).onAnonymousEvent(event,arguments);
             }
         }
+    }
+
+    /**
+     * Trigger an event for a specific object.
+     * @param event The type of event to trigger.
+     * @param from A reference pointer to the sending object.
+     * @param to A reference pointer to the receiving object.
+     * @param arguments Pass additional arguments.
+     */
+    public void triggerSpecificEvent(int event,int from, int to,HashMap<String,String> arguments){
+        ((EventListener)world.getByID(to)).onEvent(event, from,arguments);
+    }
+
+    /**
+     * Trigger an event for a specific object anonymously.
+     * @param event The type of event to trigger.
+     * @param to A reference pointer to the receiving object.
+     * @param arguments Pass additional arguments.
+     */
+    public void triggerAnonymousSpecificEvent(int event,int to,HashMap<String,String> arguments){
+        ((EventListener)world.getByID(to)).onAnonymousEvent(event,arguments);
     }
 }

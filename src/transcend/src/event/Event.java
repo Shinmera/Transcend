@@ -26,6 +26,14 @@ public class Event {
     public static final int BLOCK_MOVE      = 0x21;
     public static final int BLOCK_DESTROY   = 0x22;
 
+    public static final int MOUSE_MOVE      = 0x31;
+    public static final int MOUSE_PRESS     = 0x32;
+    public static final int MOUSE_RELEASE   = 0x33;
+    public static final int MOUSE_WHEEL     = 0x34;
+
+    public static final int KEY_PRESS       = 0x41;
+    public static final int KEY_RELEASE     = 0x42;
+
     public static final int LEVEL_HIGH      = 2;
     public static final int LEVEL_MIDDLE    = 1;
     public static final int LEVEL_LOW       = 0;

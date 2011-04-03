@@ -1,5 +1,7 @@
 package transcend;
 
+import java.util.logging.Logger;
+
 /**
  * Supplies constants throughout the project.
  * @author Shinmera
@@ -16,4 +18,7 @@ public class Const {
     //STRINGS
     public static final String  MAINTAINER              = "NexT";
     public static final String  DEVELOPER               = "Shinmera";
+
+    //OBJECT
+    public static final Logger LOGGER                   = Logger.getLogger("TRA-PUBLIC");
 }

@@ -9,12 +9,9 @@
 
 package event;
 
-public class EventListener {
-    public EventListener(){
-        
-    }
+import java.util.HashMap;
 
-    public void onEvent(int event,int identifier){
-        
-    }
+public interface EventListener {
+    public void onEvent(int event,int identifier,HashMap<String,String> arguments);
+    public void onAnonymousEvent(int event,HashMap<String,String> arguments);
 }

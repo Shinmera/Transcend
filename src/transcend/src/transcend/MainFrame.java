@@ -8,6 +8,7 @@
 \**********************/
 
 package transcend;
+import world.World;
 import java.util.HashMap;
 import NexT.util.Arguments;
 import org.lwjgl.input.Mouse;
@@ -26,7 +27,7 @@ public class MainFrame {
     public static final Logger LOGGER = Logger.getLogger("TRA-MainFrame");
     public static int DISPLAY_WIDTH = Const.DISPLAY_WIDTH;
     public static int DISPLAY_HEIGHT= Const.DISPLAY_HEIGHT;
-
+    private static World world;
 
     static {
         try {LOGGER.addHandler(new FileHandler("err.log",true));}
@@ -51,9 +52,8 @@ public class MainFrame {
         finally{mf.destroy();}
     }
 
-    public MainFrame(){
-        
-    }
+    public MainFrame(){this.world = new World();}
+    public static World getWorld(){return world;}
 
     public void create(boolean fs) throws LWJGLException {
         //Display
@@ -81,7 +81,7 @@ public class MainFrame {
     public void initGL() {
     //2D Initialization
     glClearColor(0.0f,0.0f,0.0f,0.0f);
-    glDisable(GL_DEPTH_TEST);
+    glEnable(GL_DEPTH_TEST);
     glDisable(GL_LIGHTING);
     }
 
@@ -96,9 +96,10 @@ public class MainFrame {
     }
 
     public void render() {
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
-
+    world.draw();
+    
     }
 
     public void resizeGL() {
