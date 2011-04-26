@@ -30,12 +30,10 @@ Extended EHS for arguments.
 Added Element identification.
 Started writing the WorldLoader class.
 
-[]
+[18:04-18:38 24.4.2011]
+Began GUI implementation.
+Read up about OpenGL primitives and text drawing.
 
-[]
-
--------------------
-Week 1 Total: 3:35+3:07+1:18+1:10+1:00 = 10:10
------------------------------------------------------
-
-[]
+[20:00-21:55 24.4.2011]
+Begin of Bitmap Font Rendering implementation.
+Abandoned Bitmap Font Rendering in favor of Slick-util library.

@@ -7,7 +7,11 @@
   version: 0.1a
 \**********************/
 
+//FIXME: Add loading
+//FIXME: Add GUI
+
 package transcend;
+import gui.GPanel;
 import world.World;
 import java.util.HashMap;
 import NexT.util.Arguments;
@@ -28,6 +32,7 @@ public class MainFrame {
     public static int DISPLAY_WIDTH = Const.DISPLAY_WIDTH;
     public static int DISPLAY_HEIGHT= Const.DISPLAY_HEIGHT;
     private static World world;
+    private static GPanel panel;
 
     static {
         try {LOGGER.addHandler(new FileHandler("err.log",true));}
@@ -52,7 +57,10 @@ public class MainFrame {
         finally{mf.destroy();}
     }
 
-    public MainFrame(){this.world = new World();}
+    public MainFrame(){
+        this.world = new World();
+        this.panel = new GPanel(0,0,DISPLAY_WIDTH,DISPLAY_HEIGHT);
+    }
     public static World getWorld(){return world;}
 
     public void create(boolean fs) throws LWJGLException {
@@ -87,18 +95,22 @@ public class MainFrame {
 
     public void processKeyboard() {
     if(Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {}
+    //FIXME: Add key processing events
     }
 
     public void processMouse() {
+    //FIXME: Add mouse processing events for GUI
     }
 
     public void update() {
+    //FIXME: Hook to world loop
     }
 
     public void render() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
     world.draw();
+
     
     }
 
