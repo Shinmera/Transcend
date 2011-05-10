@@ -12,4 +12,5 @@ package event;
 public interface KeyboardListener {
     public void keyPressed(int key);
     public void keyReleased(int key);
+    public void keyTyped(int key);
 }

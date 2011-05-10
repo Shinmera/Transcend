@@ -21,7 +21,7 @@ public class GButton extends GLabel implements MouseListener{
     }
 
     public void mouseMoved(int x, int y) {}
-    public void mousePressed(int button) {}
-    public void mouseReleased(int button) {}
+    public void mousePressed(int button) {back = back.darker(0.05f);}
+    public void mouseReleased(int button) {back = back.brighter(0.05f);}
 
 }

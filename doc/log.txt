@@ -1,39 +1,60 @@
 [20:12-23:47 29.03.2011]
-GIT repository set up and project preparations taken.
+GIT repository set up und Projekt Vorbereitungen getroffen.
 
 [16:02-19:09 30.03.2011]
-Laid out plans for the base class for block level elements in the world.
-Informed about even handling systems http://en.wikipedia.org/wiki/Event-driven_programming .
-Discussed about the world update mechanics and possible performance issues.
-Began writing the Event Handling System.
-Wrote MainFrame class.
+Pläne für die Block-Basis der Welt ausgelegt.
+Über Event-Handling-Systeme nachgelesen.
+Mit Malakin über Geschwindigkeits-Optimierungen und Welt-Aufbau diskutiert.
+Event Handling System begonnen.
+MainFrame Klasse geschrieben.
 
 [19:52-21:00 30.03.2011]
-Continued writing the EHS. 
+Weiterführung des EHS. 
 
 [20:11-21:16 31.03.2011]
-Logo design concepts.
+Logo design konzepte entworfen.
 
 [00:48-1:58 02.04.2011]
-Finished basic EHS. 
-Finished basic World class.
-Finished base block elements.
-Started WorldLoader class.
-Started Animation class.
+Basic-EHS fertiggestellt. 
+Basic-World fertiggestellt.
+Basis-Block Element fertiggestellt.
+WorldLoader Klass angefangen.
+Animation Klasse angefangen.
 
 [13:34-14:34 02.04.2011]
-Extended Block class.
-Extended Entity class.
-Added triggerSpecificEvent, triggerAnonymousSpecificEvent to EventHandler class.
-Added Mouse and Keyboard events.
-Extended EHS for arguments.
-Added Element identification.
-Started writing the WorldLoader class.
+Block Klasse erweitert.
+Entity Klasse erweitert.
+triggerSpecificEvent, triggerAnonymousSpecificEvent zur EventHandler Klasse hinzugefügt.
+Maus & Tastatur Evente hinzugefügt.
+EHS für Argumente erweitert.
+Element Identifikation hinzugefügt.
+WorldLoader erweitert.
 
 [18:04-18:38 24.4.2011]
-Began GUI implementation.
-Read up about OpenGL primitives and text drawing.
+GUI implementation begonnen.
+Über OpenGL primitives und text drawing recherchiert.
 
 [20:00-21:55 24.4.2011]
-Begin of Bitmap Font Rendering implementation.
-Abandoned Bitmap Font Rendering in favor of Slick-util library.
+itmap Font Rendering implementation angefangen.
+Bitmap Font Rendering aufgegeben und durch Slick-util library ersetzt.
+
+[22:30-23:00 1.5.2011]
+Probleme mit Slick-util Entdeckt. TrueTypeFont class bringt das Programm zum abstuz.
+Neue Klasse gefunden, die die Slick TrueTypeFont Klasse ohne zusätzliche Library ersetzt.
+Problem gelöst furch hinzufügen von Render Flags.
+
+[15:30-19:30 2.5.2011]
+Probleme mit Fonts scheinen instabil und erscheinen nicht immer.
+DisplayModeChooser Klasse hinzugefügt und in das MainFrame eingebunden.
+Das Korrekte setzen des DisplayModes beseitigt das Problem mit den Fonts.
+Probleme mit Alpha blending.
+
+[19:00-19:30 3.5.2011]
+NexT library um JarUtils Klasse erweitert. Diese Klasse stellt funktionen zum laden
+von Ressourcen in jar files bereit.
+
+[22:20-00:00 3.5.2011]
+Erweitern der DisplayModeChooser Klasse um einen "Advanced"-Dialog.
+Const Klasse um Registry erweitert.
+Registry speicher- und lade-Funktionen hinzugefügt.
+Registry in den Advanced-Dialog eingebunden.
