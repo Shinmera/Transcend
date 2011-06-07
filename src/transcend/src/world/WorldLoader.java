@@ -18,17 +18,19 @@ import java.util.logging.Level;
 import transcend.Const;
 
 public class WorldLoader {
+
     public WorldLoader(){
         
     }
 
-    public boolean loadWorld(File file,World world){
+    public boolean loadWorld(File file){
         if(!file.exists())return false;
+        boolean skip = false,inBlock = false,inMulti = false;
+        int line = 1,elementsLoaded=0;
+        HashMap<String,String> arguments = new HashMap<String,String>();
+        String type = "";
         try{
-            boolean skip = false,inBlock = false,inMulti = false;
-            HashMap<String,String> arguments = new HashMap<String,String>();
-            String type = "";
-            int line = 1;
+            World.LOGGER.info("[World] Loading World from "+file.getAbsolutePath());
 
             BufferedReader in = new BufferedReader(new FileReader(file));
             String read = in.readLine();
@@ -40,11 +42,12 @@ public class WorldLoader {
                 if(read.contains("*/"))skip = false;
                 read = read.trim();
 
-                if(!skip&&!read.equals("")){
+                if(!skip&&read.length() != 0){
                     //READ IN BLOCKS.
                     if(!inBlock&&read.contains("{")){
                         inBlock = true;
-                        type = read.substring(0,read.indexOf("{"));
+                        type = read.substring(0,read.indexOf("{")).trim();
+                        read="";
                     }
                     if(inBlock){
                         if(read.contains("}")){
@@ -53,9 +56,9 @@ public class WorldLoader {
                         }
                         
                         read = read.trim();
-                        if(!read.equals("")){ //value.
+                        if(read.length() != 0){ //value.
                             if(!inMulti){
-                            if(!read.contains(":")){Const.LOGGER.log(Level.SEVERE, "Failed to load World: Parse error on line {0}", line);return false;}
+                                if(!read.contains(":")){Const.LOGGER.log(Level.SEVERE, "Failed to load World: Parse error on line {0}", line);return false;}
                                 String key = read.substring(0,read.indexOf(":"));
                                 String val = read.substring(read.indexOf(":")+1);
                                 arguments.put(key.trim(), val.trim());
@@ -63,14 +66,15 @@ public class WorldLoader {
                         }
 
                         if(!inBlock){ //End of block reached.
-                            world.addElement(ElementBuilder.buildElement(type, arguments));
+                            elementsLoaded++;
+                            ElementBuilder.buildElement(type, arguments);
                         }
                     }
                 }
                 line++;
             }
-        }catch(IOException e){Const.LOGGER.log(Level.SEVERE,"Failed to load World: Read exception",e);}
-
+        }catch(IOException e){World.LOGGER.log(Level.SEVERE,"Failed to load World: Read exception",e);}
+        World.LOGGER.info("[World] Loaded "+elementsLoaded+" elements.");
         return true;
     }
 }

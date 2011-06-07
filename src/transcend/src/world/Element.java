@@ -20,7 +20,7 @@ public class Element {
     public Animation drawable;
     
     public Element(){
-        
+        drawable = new Animation();
     }
 
     public String getName(){return name;}

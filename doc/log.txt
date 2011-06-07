@@ -58,3 +58,11 @@ Erweitern der DisplayModeChooser Klasse um einen "Advanced"-Dialog.
 Const Klasse um Registry erweitert.
 Registry speicher- und lade-Funktionen hinzugefügt.
 Registry in den Advanced-Dialog eingebunden.
+
+[17:30-19:30 27.5.2011]
+Speicherung der Standard-Werte des DisplayModeChoosers eingebunden.
+GUI temporär aus dem MF entfernt.
+Begin der implementation des WorldLoaders und der einzelnen Block-Elemente.
+Weitere suche nach dem Grund der Inkompatibilität von GL_COLOR_MATERIAL und GL_TEXTURE_2D.
+->Möglicherweise ein LWJGL bug.
+

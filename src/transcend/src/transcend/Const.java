@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.logging.Logger;
 
 /**
@@ -41,10 +42,12 @@ public class Const {
 
     public boolean saveRegistry(){
         try{
+        LOGGER.info("[CONST] Saving");
         OutputStreamWriter fw = new OutputStreamWriter(new FileOutputStream(new File("constants.reg")),"UTF-8");
         PrintWriter pw = new PrintWriter(fw);
 
-        Set entries = registry.entrySet();
+        Map<String,String> tempmap = new TreeMap<String,String>(((Map)registry));
+        Set entries = tempmap.entrySet();
         Iterator entriesIterator = entries.iterator();
         while(entriesIterator.hasNext()){
             Map.Entry mapping = (Map.Entry) entriesIterator.next();
@@ -60,6 +63,7 @@ public class Const {
 
     public boolean loadRegistry(){
         try{
+            LOGGER.info("[CONST] Loading");
             registry.clear();
             BufferedReader in = new BufferedReader(new FileReader(new File("constants.reg")));
             String read = "";
@@ -77,21 +81,40 @@ public class Const {
     }
 
     public String gString(String key){
-        return registry.get(key);
+        if(registry.containsKey(key))return registry.get(key);else return null;
     }
     public boolean gBoolean(String key){
-        return Boolean.parseBoolean(registry.get(key));
+        if(registry.containsKey(key))return Boolean.parseBoolean(registry.get(key));else return false;
     }
     public int gInteger(String key){
-        return Integer.parseInt(registry.get(key));
+        if(registry.containsKey(key))return Integer.parseInt(registry.get(key));else return 0;
     }
     public double gDouble(String key){
-        return Double.parseDouble(registry.get(key));
+        if(registry.containsKey(key))return Double.parseDouble(registry.get(key));else return 0;
     }
     public float gFloat(String key){
-        return Float.parseFloat(registry.get(key));
+        if(registry.containsKey(key))return Float.parseFloat(registry.get(key));else return 0;
     }
     public Color gColor(String key){
-        return Toolkit.toColor(registry.get(key));
+        if(registry.containsKey(key))return Toolkit.toColor(registry.get(key));else return null;
+    }
+
+    public void sString(String key,String value){
+        registry.put(key, value);
+    }
+    public void sBoolean(String key,boolean value){
+        if(value)registry.put(key, "true");else registry.put(key,"false");
+    }
+    public void sInteger(String key,int value){
+        registry.put(key, value+"");
+    }
+    public void sDouble(String key,double value){
+        registry.put(key, value+"");
+    }
+    public void sFloat(String key,float value){
+        registry.put(key, value+"");
+    }
+    public void sColor(String key,Color value){
+        registry.put(key, value.getRed()+","+value.getGreen()+","+value.getBlue());
     }
 }

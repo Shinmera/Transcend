@@ -11,16 +11,14 @@
 //FIXME: Add GUI
 
 package transcend;
+import java.io.File;
+import world.WorldLoader;
 import java.awt.Font;
 import gui.TrueTypeFont;
-import org.newdawn.slick.Color;
 import gui.DisplayModeChooser;
 import event.InputEventHandler;
-import gui.GButton;
 import gui.GPanel;
 import world.World;
-import java.util.HashMap;
-import NexT.util.Arguments;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
@@ -30,16 +28,17 @@ import java.io.IOException;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.util.glu.GLU.*;
 
 public class MainFrame {
     public static final Logger LOGGER = Logger.getLogger("TRA-MainFrame");
     public static int DISPLAY_WIDTH = Const.DISPLAY_WIDTH;
     public static int DISPLAY_HEIGHT= Const.DISPLAY_HEIGHT;
-    private static World world;
+    public static final World world = new World();
+    public static final WorldLoader worldLoader = new WorldLoader();
     private static GPanel panel;
     private InputEventHandler ieh = new InputEventHandler();
     TrueTypeFont ttf;
+    public static Const CONST = new Const();
 
     static {
         try {LOGGER.addHandler(new FileHandler("err.log",true));}
@@ -47,17 +46,11 @@ public class MainFrame {
     }
 
     public static void main(String[] args){
-        Arguments arg = new Arguments();
-        //arg.addArgument('m', "map file", "path");
-        arg.addArgument('w', "windowed", "Run in window mode", null);
-        arg.addArgument('c', "config","Change the configuration file.","path");
-        String flags = arg.eval(args);
-        HashMap<Character,String> vals = arg.getVals();
-
-
+        LOGGER.info("[MF] Booting up...");
         MainFrame mf = new MainFrame();
         try{
             if(!DisplayModeChooser.showDialog("Display Mode"))System.exit(0);
+            mf.CONST.loadRegistry();
             mf.create();
             mf.run();
         }
@@ -66,12 +59,10 @@ public class MainFrame {
     }
 
     public MainFrame(){
-        this.world = new World();
-        this.panel = new GPanel(0,0,DISPLAY_WIDTH,DISPLAY_HEIGHT);
     }
-    public static World getWorld(){return world;}
 
     public void create() throws LWJGLException {
+        LOGGER.info("[MF] Initializing...");
         //Display
         Display.setTitle("Transcend - v"+Const.VERSION);
         Display.create();
@@ -82,9 +73,13 @@ public class MainFrame {
         Mouse.setGrabbed(false);
         Mouse.create();
         initGL();
+
+        //load test map
+        worldLoader.loadWorld(new File("world"+File.separator+"test.tw"));
     }
 
     public void destroy() {
+        LOGGER.info("[MF] Shutting down...");
         Mouse.destroy();
         Keyboard.destroy();
         Display.destroy();
@@ -93,18 +88,20 @@ public class MainFrame {
 
     public void initGL() {
         //2D Initialization
+        //glEnable(GL_TEXTURE_2D); // Enable Texture Mapping //<!>CAUSES CONFLICT WITH GL_COLOR_MATERIAL.
         glEnable(GL_COLOR_MATERIAL);
-        glEnable(GL_TEXTURE_2D); // Enable Texture Mapping
        	glClearColor(0.5f,0.5f,0.5f,0f); // Black Background
         glDisable(GL_DITHER);
-        glDepthFunc(GL_LESS); // Depth function less or equal
+        glDisable(GL_LIGHTING);
         glEnable(GL_NORMALIZE); // calculated normals when scaling
-        glEnable(GL_BLEND); // Enabled blending
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // selects blending method
-        glEnable(GL_ALPHA_TEST); // allows alpha channels or transperancy
-        glAlphaFunc(GL_GREATER, 0.1f); // sets aplha function
+        glEnable(GL_LINE_SMOOTH);
+        glShadeModel(GL_SMOOTH);
+        glDisable(GL_DEPTH_TEST);
+        glDepthFunc(GL_LESS);
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+        glEnable(GL_COLOR_MATERIAL);
         glShadeModel(GL_SMOOTH); // Enable Smooth Shading
-        glDepthMask(true);								// Enable Depth Mask
         
         //2D Scene
         glViewport(0,0,DISPLAY_WIDTH,DISPLAY_HEIGHT);
@@ -112,19 +109,12 @@ public class MainFrame {
         glLoadIdentity();
 	glOrtho(0, DISPLAY_WIDTH, 0, DISPLAY_HEIGHT, -1, 1);
 
-    
-        /*GButton button = new GButton();
-        button.setBounds(10,10,100,100);
-        button.setBackground(Color.cyan);
-        button.setForeground(Color.black);
-        button.setText("BUTTON");
-        this.panel.add(button);*/
-
         ttf = new TrueTypeFont(new Font("Arial",Font.BOLD,46),true);
     }
 
     public void update() {
         //FIXME: Hook to world loop
+        world.update();
     }
 
     public void render() {
@@ -132,10 +122,16 @@ public class MainFrame {
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
 
+        glColor4f(255,255,255,255);
+        glBegin(GL_QUADS);
+        glVertex2f(150f,150f);
+        glVertex2f(50f,150f);
+        glVertex2f(50f,50f);
+        glVertex2f(150f,50f);
+        glEnd();
 
-        //world.draw();
-        panel.paint();
-        ttf.drawString(100, 100, "HEYY",1,1);
+        world.draw();
+        //ttf.drawString(100, 100, "HEYY",1,1);
         
     }
 

@@ -9,18 +9,24 @@
 
 package world;
 
-import NexT.util.SimpleSet;
 import block.Block;
 import entity.Entity;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.logging.Logger;
 
 public class World {
+    public static final Logger LOGGER = Logger.getLogger("TRA-World");
     ArrayList<Integer> ids              = new ArrayList<Integer>();
-    SimpleSet<Integer,Block> blocks     = new SimpleSet<Integer,Block>();
-    SimpleSet<Integer,Entity> entities  = new SimpleSet<Integer,Entity>();
+    HashMap<Integer,Block> blocks     = new HashMap<Integer,Block>();
+    HashMap<Integer,Entity> entities  = new HashMap<Integer,Entity>();
 
     public World(){
         
+    }
+
+    public void printWorldStats(){
+        LOGGER.info("[World] World incorporates "+blocks.size()+" blocks and "+entities.size()+" entities.");
     }
 
     public void addBlock(Block block){
@@ -36,7 +42,6 @@ public class World {
     public void addElement(Element element){
         if(element.ELEMENT_ID>Block.ELEMENT_ID)addBlock((Block)element);else
         if(element.ELEMENT_ID>Entity.ELEMENT_ID)addEntity((Entity)element);
-        
     }
 
     public boolean isBlock(int identifier){return blocks.containsKey(identifier);}

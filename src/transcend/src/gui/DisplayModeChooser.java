@@ -75,6 +75,7 @@ public class DisplayModeChooser extends JDialog implements ActionListener, ItemL
         add(full);
         add(lmodes);
 
+        int tosel=0;
         try{
             DisplayMode[] ddmodes = Display.getAvailableDisplayModes();
             for(int i=0;i<ddmodes.length;i++){
@@ -84,9 +85,15 @@ public class DisplayModeChooser extends JDialog implements ActionListener, ItemL
                     fs_capable.put(label, mode.isFullscreenCapable());
                     dmodes.add(mode);
                     modes.addItem(label);
+                    if(constants.gString("DEFAULT_SCREEN").equals(label))
+                        tosel=dmodes.size()-1;
                 }
             }
         }catch(Exception ex){ex.printStackTrace();}
+
+        modes.setSelectedIndex(tosel);
+        full.setSelected(constants.gBoolean("DEFAULT_FULL"));
+        vsync.setSelected(constants.gBoolean("DEFAULT_VSYNC"));
 
         getRootPane().setDefaultButton(ok);
         setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
@@ -110,6 +117,10 @@ public class DisplayModeChooser extends JDialog implements ActionListener, ItemL
             Display.setFullscreen(full.isSelected());
             Display.setVSyncEnabled(vsync.isSelected());
             }catch(Exception ex){/*Nobody cares.*/}
+            constants.sString("DEFAULT_SCREEN",modes.getSelectedItem().toString());
+            constants.sBoolean("DEFAULT_FULL",full.isSelected());
+            constants.sBoolean("DEFAULT_VSYNC",vsync.isSelected());
+            constants.saveRegistry();
             setVisible(false);
         }else if(e.getActionCommand().equals("Advanced")){
             AdvancedDialog adialog = new AdvancedDialog("Advanced Settings");

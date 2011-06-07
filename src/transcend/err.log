@@ -687,3 +687,289 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 </log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2011-05-27T16:58:10</date>
+  <millis>1306508290460</millis>
+  <sequence>0</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>SEVERE</level>
+  <class>transcend.MainFrame</class>
+  <method>main</method>
+  <thread>10</thread>
+  <message>java.lang.IllegalArgumentException: setSelectedIndex: 22 out of bounds</message>
+  <exception>
+    <message>java.lang.IllegalArgumentException: setSelectedIndex: 22 out of bounds</message>
+    <frame>
+      <class>javax.swing.JComboBox</class>
+      <method>setSelectedIndex</method>
+      <line>601</line>
+    </frame>
+    <frame>
+      <class>gui.DisplayModeChooser</class>
+      <method>&lt;init&gt;</method>
+      <line>94</line>
+    </frame>
+    <frame>
+      <class>gui.DisplayModeChooser</class>
+      <method>showDialog</method>
+      <line>105</line>
+    </frame>
+    <frame>
+      <class>transcend.MainFrame</class>
+      <method>main</method>
+      <line>60</line>
+    </frame>
+  </exception>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2011-05-27T17:14:01</date>
+  <millis>1306509241131</millis>
+  <sequence>1</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.Const</class>
+  <method>loadRegistry</method>
+  <thread>10</thread>
+  <message>[CONST] Loading</message>
+</record>
+<record>
+  <date>2011-05-27T17:14:06</date>
+  <millis>1306509246046</millis>
+  <sequence>2</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.Const</class>
+  <method>saveRegistry</method>
+  <thread>11</thread>
+  <message>[CONST] Saving</message>
+</record>
+<record>
+  <date>2011-05-27T17:14:10</date>
+  <millis>1306509250275</millis>
+  <sequence>3</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.Const</class>
+  <method>saveRegistry</method>
+  <thread>11</thread>
+  <message>[CONST] Saving</message>
+</record>
+<record>
+  <date>2011-05-27T17:14:10</date>
+  <millis>1306509250296</millis>
+  <sequence>4</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.Const</class>
+  <method>loadRegistry</method>
+  <thread>10</thread>
+  <message>[CONST] Loading</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2011-05-27T17:14:17</date>
+  <millis>1306509257012</millis>
+  <sequence>1</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.Const</class>
+  <method>loadRegistry</method>
+  <thread>10</thread>
+  <message>[CONST] Loading</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2011-05-27T17:35:21</date>
+  <millis>1306510521066</millis>
+  <sequence>1</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>main</method>
+  <thread>10</thread>
+  <message>[MF] Booting...</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2011-05-27T17:36:42</date>
+  <millis>1306510602611</millis>
+  <sequence>1</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>main</method>
+  <thread>10</thread>
+  <message>[MF] Booting up...</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2011-05-27T17:37:43</date>
+  <millis>1306510663432</millis>
+  <sequence>1</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>main</method>
+  <thread>10</thread>
+  <message>[MF] Booting up...</message>
+</record>
+<record>
+  <date>2011-05-27T17:37:48</date>
+  <millis>1306510668459</millis>
+  <sequence>5</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>create</method>
+  <thread>10</thread>
+  <message>[MF] Initializing...</message>
+</record>
+<record>
+  <date>2011-05-27T17:37:59</date>
+  <millis>1306510679276</millis>
+  <sequence>6</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>destroy</method>
+  <thread>10</thread>
+  <message>[MF] Shutting down...</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2011-05-27T17:47:26</date>
+  <millis>1306511246303</millis>
+  <sequence>1</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>main</method>
+  <thread>10</thread>
+  <message>[MF] Booting up...</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2011-05-27T17:48:18</date>
+  <millis>1306511298692</millis>
+  <sequence>1</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>main</method>
+  <thread>10</thread>
+  <message>[MF] Booting up...</message>
+</record>
+</log>

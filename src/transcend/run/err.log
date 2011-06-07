@@ -1,0 +1,1291 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2011-05-27T17:49:44</date>
+  <millis>1306511384783</millis>
+  <sequence>1</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>main</method>
+  <thread>10</thread>
+  <message>[MF] Booting up...</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2011-05-27T17:57:40</date>
+  <millis>1306511860415</millis>
+  <sequence>1</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>main</method>
+  <thread>10</thread>
+  <message>[MF] Booting up...</message>
+</record>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2011-05-27T17:58:36</date>
+  <millis>1306511916328</millis>
+  <sequence>1</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>main</method>
+  <thread>10</thread>
+  <message>[MF] Booting up...</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2011-05-27T18:00:39</date>
+  <millis>1306512039502</millis>
+  <sequence>1</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>main</method>
+  <thread>10</thread>
+  <message>[MF] Booting up...</message>
+</record>
+<record>
+  <date>2011-05-27T18:00:44</date>
+  <millis>1306512044380</millis>
+  <sequence>6</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>create</method>
+  <thread>10</thread>
+  <message>[MF] Initializing...</message>
+</record>
+<record>
+  <date>2011-05-27T18:00:52</date>
+  <millis>1306512052960</millis>
+  <sequence>7</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>destroy</method>
+  <thread>10</thread>
+  <message>[MF] Shutting down...</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2011-05-27T18:03:09</date>
+  <millis>1306512189852</millis>
+  <sequence>1</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>main</method>
+  <thread>10</thread>
+  <message>[MF] Booting up...</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2011-05-27T18:05:06</date>
+  <millis>1306512306553</millis>
+  <sequence>1</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>main</method>
+  <thread>10</thread>
+  <message>[MF] Booting up...</message>
+</record>
+<record>
+  <date>2011-05-27T18:05:11</date>
+  <millis>1306512311198</millis>
+  <sequence>7</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>create</method>
+  <thread>10</thread>
+  <message>[MF] Initializing...</message>
+</record>
+<record>
+  <date>2011-05-27T18:05:13</date>
+  <millis>1306512313740</millis>
+  <sequence>8</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>destroy</method>
+  <thread>10</thread>
+  <message>[MF] Shutting down...</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2011-05-27T18:05:58</date>
+  <millis>1306512358452</millis>
+  <sequence>1</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>main</method>
+  <thread>10</thread>
+  <message>[MF] Booting up...</message>
+</record>
+<record>
+  <date>2011-05-27T18:06:03</date>
+  <millis>1306512363461</millis>
+  <sequence>5</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>create</method>
+  <thread>10</thread>
+  <message>[MF] Initializing...</message>
+</record>
+<record>
+  <date>2011-05-27T18:06:06</date>
+  <millis>1306512366514</millis>
+  <sequence>8</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>destroy</method>
+  <thread>10</thread>
+  <message>[MF] Shutting down...</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2011-05-27T18:07:31</date>
+  <millis>1306512451171</millis>
+  <sequence>1</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>main</method>
+  <thread>10</thread>
+  <message>[MF] Booting up...</message>
+</record>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2011-05-27T18:07:48</date>
+  <millis>1306512468883</millis>
+  <sequence>1</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>main</method>
+  <thread>10</thread>
+  <message>[MF] Booting up...</message>
+</record>
+<record>
+  <date>2011-05-27T18:07:54</date>
+  <millis>1306512474000</millis>
+  <sequence>5</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>create</method>
+  <thread>10</thread>
+  <message>[MF] Initializing...</message>
+</record>
+<record>
+  <date>2011-05-27T18:07:57</date>
+  <millis>1306512477849</millis>
+  <sequence>9</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>destroy</method>
+  <thread>10</thread>
+  <message>[MF] Shutting down...</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2011-05-27T18:08:28</date>
+  <millis>1306512508035</millis>
+  <sequence>1</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>main</method>
+  <thread>10</thread>
+  <message>[MF] Booting up...</message>
+</record>
+<record>
+  <date>2011-05-27T18:08:34</date>
+  <millis>1306512514461</millis>
+  <sequence>5</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>create</method>
+  <thread>10</thread>
+  <message>[MF] Initializing...</message>
+</record>
+<record>
+  <date>2011-05-27T18:08:41</date>
+  <millis>1306512521867</millis>
+  <sequence>8</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>destroy</method>
+  <thread>10</thread>
+  <message>[MF] Shutting down...</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2011-05-27T18:08:48</date>
+  <millis>1306512528285</millis>
+  <sequence>1</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>main</method>
+  <thread>10</thread>
+  <message>[MF] Booting up...</message>
+</record>
+<record>
+  <date>2011-05-27T18:08:53</date>
+  <millis>1306512533091</millis>
+  <sequence>5</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>create</method>
+  <thread>10</thread>
+  <message>[MF] Initializing...</message>
+</record>
+<record>
+  <date>2011-05-27T18:08:56</date>
+  <millis>1306512536828</millis>
+  <sequence>9</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>destroy</method>
+  <thread>10</thread>
+  <message>[MF] Shutting down...</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2011-05-27T18:15:57</date>
+  <millis>1306512957649</millis>
+  <sequence>1</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>main</method>
+  <thread>10</thread>
+  <message>[MF] Booting up...</message>
+</record>
+<record>
+  <date>2011-05-27T18:16:02</date>
+  <millis>1306512962248</millis>
+  <sequence>5</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>create</method>
+  <thread>10</thread>
+  <message>[MF] Initializing...</message>
+</record>
+<record>
+  <date>2011-05-27T18:16:05</date>
+  <millis>1306512965320</millis>
+  <sequence>9</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>destroy</method>
+  <thread>10</thread>
+  <message>[MF] Shutting down...</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2011-05-27T18:17:57</date>
+  <millis>1306513077738</millis>
+  <sequence>1</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>main</method>
+  <thread>10</thread>
+  <message>[MF] Booting up...</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2011-05-27T18:25:00</date>
+  <millis>1306513500243</millis>
+  <sequence>1</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>main</method>
+  <thread>10</thread>
+  <message>[MF] Booting up...</message>
+</record>
+<record>
+  <date>2011-05-27T18:25:05</date>
+  <millis>1306513505002</millis>
+  <sequence>5</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>create</method>
+  <thread>10</thread>
+  <message>[MF] Initializing...</message>
+</record>
+<record>
+  <date>2011-05-27T18:25:05</date>
+  <millis>1306513505790</millis>
+  <sequence>7</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>SEVERE</level>
+  <class>transcend.MainFrame</class>
+  <method>main</method>
+  <thread>10</thread>
+  <message>java.lang.IndexOutOfBoundsException: Index: 0, Size: 0</message>
+  <exception>
+    <message>java.lang.IndexOutOfBoundsException: Index: 0, Size: 0</message>
+    <frame>
+      <class>java.util.ArrayList</class>
+      <method>RangeCheck</method>
+      <line>547</line>
+    </frame>
+    <frame>
+      <class>java.util.ArrayList</class>
+      <method>get</method>
+      <line>322</line>
+    </frame>
+    <frame>
+      <class>NexT.util.SimpleSet</class>
+      <method>put</method>
+      <line>50</line>
+    </frame>
+    <frame>
+      <class>world.World</class>
+      <method>addBlock</method>
+      <line>33</line>
+    </frame>
+    <frame>
+      <class>world.ElementBuilder</class>
+      <method>buildElement</method>
+      <line>31</line>
+    </frame>
+    <frame>
+      <class>world.WorldLoader</class>
+      <method>loadWorld</method>
+      <line>70</line>
+    </frame>
+    <frame>
+      <class>transcend.MainFrame</class>
+      <method>create</method>
+      <line>78</line>
+    </frame>
+    <frame>
+      <class>transcend.MainFrame</class>
+      <method>main</method>
+      <line>54</line>
+    </frame>
+  </exception>
+</record>
+<record>
+  <date>2011-05-27T18:25:05</date>
+  <millis>1306513505792</millis>
+  <sequence>8</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>destroy</method>
+  <thread>10</thread>
+  <message>[MF] Shutting down...</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2011-05-27T18:34:58</date>
+  <millis>1306514098250</millis>
+  <sequence>1</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>main</method>
+  <thread>10</thread>
+  <message>[MF] Booting up...</message>
+</record>
+<record>
+  <date>2011-05-27T18:35:02</date>
+  <millis>1306514102692</millis>
+  <sequence>5</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>create</method>
+  <thread>10</thread>
+  <message>[MF] Initializing...</message>
+</record>
+<record>
+  <date>2011-05-27T18:35:03</date>
+  <millis>1306514103411</millis>
+  <sequence>9</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>SEVERE</level>
+  <class>transcend.MainFrame</class>
+  <method>main</method>
+  <thread>10</thread>
+  <message>java.lang.NullPointerException</message>
+  <exception>
+    <message>java.lang.NullPointerException</message>
+    <frame>
+      <class>world.Element</class>
+      <method>draw</method>
+      <line>42</line>
+    </frame>
+    <frame>
+      <class>world.World</class>
+      <method>draw</method>
+      <line>73</line>
+    </frame>
+    <frame>
+      <class>transcend.MainFrame</class>
+      <method>render</method>
+      <line>125</line>
+    </frame>
+    <frame>
+      <class>transcend.MainFrame</class>
+      <method>run</method>
+      <line>136</line>
+    </frame>
+    <frame>
+      <class>transcend.MainFrame</class>
+      <method>main</method>
+      <line>55</line>
+    </frame>
+  </exception>
+</record>
+<record>
+  <date>2011-05-27T18:35:03</date>
+  <millis>1306514103412</millis>
+  <sequence>10</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>destroy</method>
+  <thread>10</thread>
+  <message>[MF] Shutting down...</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2011-05-27T18:36:12</date>
+  <millis>1306514172762</millis>
+  <sequence>1</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>main</method>
+  <thread>10</thread>
+  <message>[MF] Booting up...</message>
+</record>
+<record>
+  <date>2011-05-27T18:36:17</date>
+  <millis>1306514177694</millis>
+  <sequence>5</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>create</method>
+  <thread>10</thread>
+  <message>[MF] Initializing...</message>
+</record>
+<record>
+  <date>2011-05-27T18:36:26</date>
+  <millis>1306514186085</millis>
+  <sequence>9</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>destroy</method>
+  <thread>10</thread>
+  <message>[MF] Shutting down...</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2011-05-27T18:51:26</date>
+  <millis>1306515086226</millis>
+  <sequence>1</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>main</method>
+  <thread>10</thread>
+  <message>[MF] Booting up...</message>
+</record>
+<record>
+  <date>2011-05-27T18:51:31</date>
+  <millis>1306515091057</millis>
+  <sequence>5</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>create</method>
+  <thread>10</thread>
+  <message>[MF] Initializing...</message>
+</record>
+<record>
+  <date>2011-05-27T18:51:33</date>
+  <millis>1306515093381</millis>
+  <sequence>8</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>destroy</method>
+  <thread>10</thread>
+  <message>[MF] Shutting down...</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2011-05-27T18:58:14</date>
+  <millis>1306515494921</millis>
+  <sequence>1</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>main</method>
+  <thread>10</thread>
+  <message>[MF] Booting up...</message>
+</record>
+<record>
+  <date>2011-05-27T18:58:19</date>
+  <millis>1306515499687</millis>
+  <sequence>5</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>create</method>
+  <thread>10</thread>
+  <message>[MF] Initializing...</message>
+</record>
+<record>
+  <date>2011-05-27T18:58:31</date>
+  <millis>1306515511142</millis>
+  <sequence>8</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>destroy</method>
+  <thread>10</thread>
+  <message>[MF] Shutting down...</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2011-05-27T19:01:57</date>
+  <millis>1306515717956</millis>
+  <sequence>1</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>main</method>
+  <thread>10</thread>
+  <message>[MF] Booting up...</message>
+</record>
+<record>
+  <date>2011-05-27T19:02:02</date>
+  <millis>1306515722568</millis>
+  <sequence>5</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>create</method>
+  <thread>10</thread>
+  <message>[MF] Initializing...</message>
+</record>
+<record>
+  <date>2011-05-27T19:02:05</date>
+  <millis>1306515725054</millis>
+  <sequence>8</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>destroy</method>
+  <thread>10</thread>
+  <message>[MF] Shutting down...</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2011-05-27T19:02:18</date>
+  <millis>1306515738637</millis>
+  <sequence>1</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>main</method>
+  <thread>10</thread>
+  <message>[MF] Booting up...</message>
+</record>
+<record>
+  <date>2011-05-27T19:02:23</date>
+  <millis>1306515743491</millis>
+  <sequence>5</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>create</method>
+  <thread>10</thread>
+  <message>[MF] Initializing...</message>
+</record>
+<record>
+  <date>2011-05-27T19:02:44</date>
+  <millis>1306515764500</millis>
+  <sequence>8</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>destroy</method>
+  <thread>10</thread>
+  <message>[MF] Shutting down...</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2011-05-27T19:02:59</date>
+  <millis>1306515779410</millis>
+  <sequence>1</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>main</method>
+  <thread>10</thread>
+  <message>[MF] Booting up...</message>
+</record>
+<record>
+  <date>2011-05-27T19:03:04</date>
+  <millis>1306515784000</millis>
+  <sequence>5</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>create</method>
+  <thread>10</thread>
+  <message>[MF] Initializing...</message>
+</record>
+<record>
+  <date>2011-05-27T19:03:07</date>
+  <millis>1306515787153</millis>
+  <sequence>8</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>destroy</method>
+  <thread>10</thread>
+  <message>[MF] Shutting down...</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2011-05-27T19:03:16</date>
+  <millis>1306515796477</millis>
+  <sequence>1</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>main</method>
+  <thread>10</thread>
+  <message>[MF] Booting up...</message>
+</record>
+<record>
+  <date>2011-05-27T19:03:21</date>
+  <millis>1306515801014</millis>
+  <sequence>5</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>create</method>
+  <thread>10</thread>
+  <message>[MF] Initializing...</message>
+</record>
+<record>
+  <date>2011-05-27T19:03:22</date>
+  <millis>1306515802863</millis>
+  <sequence>8</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>destroy</method>
+  <thread>10</thread>
+  <message>[MF] Shutting down...</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2011-05-27T19:03:32</date>
+  <millis>1306515812887</millis>
+  <sequence>1</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>main</method>
+  <thread>10</thread>
+  <message>[MF] Booting up...</message>
+</record>
+<record>
+  <date>2011-05-27T19:03:37</date>
+  <millis>1306515817954</millis>
+  <sequence>5</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>create</method>
+  <thread>10</thread>
+  <message>[MF] Initializing...</message>
+</record>
+<record>
+  <date>2011-05-27T19:03:42</date>
+  <millis>1306515822049</millis>
+  <sequence>8</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>destroy</method>
+  <thread>10</thread>
+  <message>[MF] Shutting down...</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2011-05-27T19:03:59</date>
+  <millis>1306515839944</millis>
+  <sequence>1</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>main</method>
+  <thread>10</thread>
+  <message>[MF] Booting up...</message>
+</record>
+<record>
+  <date>2011-05-27T19:04:04</date>
+  <millis>1306515844553</millis>
+  <sequence>5</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>create</method>
+  <thread>10</thread>
+  <message>[MF] Initializing...</message>
+</record>
+<record>
+  <date>2011-05-27T19:04:06</date>
+  <millis>1306515846675</millis>
+  <sequence>8</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>destroy</method>
+  <thread>10</thread>
+  <message>[MF] Shutting down...</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2011-05-27T19:05:39</date>
+  <millis>1306515939662</millis>
+  <sequence>1</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>main</method>
+  <thread>10</thread>
+  <message>[MF] Booting up...</message>
+</record>
+<record>
+  <date>2011-05-27T19:05:44</date>
+  <millis>1306515944212</millis>
+  <sequence>5</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>create</method>
+  <thread>10</thread>
+  <message>[MF] Initializing...</message>
+</record>
+<record>
+  <date>2011-05-27T19:05:48</date>
+  <millis>1306515948011</millis>
+  <sequence>8</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>destroy</method>
+  <thread>10</thread>
+  <message>[MF] Shutting down...</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2011-05-27T19:07:46</date>
+  <millis>1306516066085</millis>
+  <sequence>1</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>main</method>
+  <thread>10</thread>
+  <message>[MF] Booting up...</message>
+</record>
+<record>
+  <date>2011-05-27T19:07:50</date>
+  <millis>1306516070861</millis>
+  <sequence>5</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>create</method>
+  <thread>10</thread>
+  <message>[MF] Initializing...</message>
+</record>
+<record>
+  <date>2011-05-27T19:07:57</date>
+  <millis>1306516077581</millis>
+  <sequence>8</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>destroy</method>
+  <thread>10</thread>
+  <message>[MF] Shutting down...</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2011-05-27T19:13:16</date>
+  <millis>1306516396306</millis>
+  <sequence>1</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>main</method>
+  <thread>10</thread>
+  <message>[MF] Booting up...</message>
+</record>
+<record>
+  <date>2011-05-27T19:13:20</date>
+  <millis>1306516400593</millis>
+  <sequence>5</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>create</method>
+  <thread>10</thread>
+  <message>[MF] Initializing...</message>
+</record>
+<record>
+  <date>2011-05-27T19:13:22</date>
+  <millis>1306516402840</millis>
+  <sequence>8</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>destroy</method>
+  <thread>10</thread>
+  <message>[MF] Shutting down...</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2011-05-27T19:21:04</date>
+  <millis>1306516864953</millis>
+  <sequence>1</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>main</method>
+  <thread>10</thread>
+  <message>[MF] Booting up...</message>
+</record>
+<record>
+  <date>2011-05-27T19:21:09</date>
+  <millis>1306516869667</millis>
+  <sequence>5</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>create</method>
+  <thread>10</thread>
+  <message>[MF] Initializing...</message>
+</record>
+<record>
+  <date>2011-05-27T19:21:11</date>
+  <millis>1306516871498</millis>
+  <sequence>8</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>destroy</method>
+  <thread>10</thread>
+  <message>[MF] Shutting down...</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2011-05-27T19:21:17</date>
+  <millis>1306516877101</millis>
+  <sequence>1</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>main</method>
+  <thread>10</thread>
+  <message>[MF] Booting up...</message>
+</record>
+<record>
+  <date>2011-05-27T19:21:21</date>
+  <millis>1306516881834</millis>
+  <sequence>5</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>create</method>
+  <thread>10</thread>
+  <message>[MF] Initializing...</message>
+</record>
+<record>
+  <date>2011-05-27T19:21:23</date>
+  <millis>1306516883671</millis>
+  <sequence>8</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>destroy</method>
+  <thread>10</thread>
+  <message>[MF] Shutting down...</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2011-05-27T19:21:42</date>
+  <millis>1306516902283</millis>
+  <sequence>1</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>main</method>
+  <thread>10</thread>
+  <message>[MF] Booting up...</message>
+</record>
+<record>
+  <date>2011-05-27T19:21:46</date>
+  <millis>1306516906866</millis>
+  <sequence>5</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>create</method>
+  <thread>10</thread>
+  <message>[MF] Initializing...</message>
+</record>
+<record>
+  <date>2011-05-27T19:21:49</date>
+  <millis>1306516909145</millis>
+  <sequence>8</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>destroy</method>
+  <thread>10</thread>
+  <message>[MF] Shutting down...</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2011-05-27T19:55:07</date>
+  <millis>1306518907297</millis>
+  <sequence>1</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>main</method>
+  <thread>10</thread>
+  <message>[MF] Booting up...</message>
+</record>
+<record>
+  <date>2011-05-27T19:55:12</date>
+  <millis>1306518912124</millis>
+  <sequence>5</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>create</method>
+  <thread>10</thread>
+  <message>[MF] Initializing...</message>
+</record>
+<record>
+  <date>2011-05-27T19:55:21</date>
+  <millis>1306518921044</millis>
+  <sequence>8</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>destroy</method>
+  <thread>10</thread>
+  <message>[MF] Shutting down...</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2011-05-27T19:55:28</date>
+  <millis>1306518928696</millis>
+  <sequence>1</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>main</method>
+  <thread>10</thread>
+  <message>[MF] Booting up...</message>
+</record>
+<record>
+  <date>2011-05-27T19:55:33</date>
+  <millis>1306518933414</millis>
+  <sequence>5</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>create</method>
+  <thread>10</thread>
+  <message>[MF] Initializing...</message>
+</record>
+<record>
+  <date>2011-05-27T19:55:37</date>
+  <millis>1306518937143</millis>
+  <sequence>8</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>destroy</method>
+  <thread>10</thread>
+  <message>[MF] Shutting down...</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2011-05-27T19:56:05</date>
+  <millis>1306518965037</millis>
+  <sequence>1</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>main</method>
+  <thread>10</thread>
+  <message>[MF] Booting up...</message>
+</record>
+<record>
+  <date>2011-05-27T19:56:09</date>
+  <millis>1306518969581</millis>
+  <sequence>5</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>create</method>
+  <thread>10</thread>
+  <message>[MF] Initializing...</message>
+</record>
+<record>
+  <date>2011-05-27T19:56:12</date>
+  <millis>1306518972612</millis>
+  <sequence>8</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>destroy</method>
+  <thread>10</thread>
+  <message>[MF] Shutting down...</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2011-05-27T19:56:29</date>
+  <millis>1306518989159</millis>
+  <sequence>1</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>main</method>
+  <thread>10</thread>
+  <message>[MF] Booting up...</message>
+</record>
+<record>
+  <date>2011-05-27T19:56:34</date>
+  <millis>1306518994602</millis>
+  <sequence>5</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>create</method>
+  <thread>10</thread>
+  <message>[MF] Initializing...</message>
+</record>
+<record>
+  <date>2011-05-27T19:56:36</date>
+  <millis>1306518996886</millis>
+  <sequence>8</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>destroy</method>
+  <thread>10</thread>
+  <message>[MF] Shutting down...</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2011-05-27T19:56:43</date>
+  <millis>1306519003107</millis>
+  <sequence>1</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>main</method>
+  <thread>10</thread>
+  <message>[MF] Booting up...</message>
+</record>
+<record>
+  <date>2011-05-27T19:56:47</date>
+  <millis>1306519007857</millis>
+  <sequence>5</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>create</method>
+  <thread>10</thread>
+  <message>[MF] Initializing...</message>
+</record>
+<record>
+  <date>2011-05-27T19:56:50</date>
+  <millis>1306519010303</millis>
+  <sequence>8</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>destroy</method>
+  <thread>10</thread>
+  <message>[MF] Shutting down...</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2011-05-27T19:57:03</date>
+  <millis>1306519023897</millis>
+  <sequence>1</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>main</method>
+  <thread>10</thread>
+  <message>[MF] Booting up...</message>
+</record>
+<record>
+  <date>2011-05-27T19:57:08</date>
+  <millis>1306519028548</millis>
+  <sequence>5</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>create</method>
+  <thread>10</thread>
+  <message>[MF] Initializing...</message>
+</record>
+<record>
+  <date>2011-05-27T19:57:11</date>
+  <millis>1306519031733</millis>
+  <sequence>8</sequence>
+  <logger>TRA-MainFrame</logger>
+  <level>INFO</level>
+  <class>transcend.MainFrame</class>
+  <method>destroy</method>
+  <thread>10</thread>
+  <message>[MF] Shutting down...</message>
+</record>
+</log>
