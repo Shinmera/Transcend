@@ -66,3 +66,25 @@ Begin der implementation des WorldLoaders und der einzelnen Block-Elemente.
 Weitere suche nach dem Grund der Inkompatibilität von GL_COLOR_MATERIAL und GL_TEXTURE_2D.
 ->Möglicherweise ein LWJGL bug.
 
+[12:00-16:30 25.6.2011]
+Implementierung eines dynamischen Block-ladungssystems.
+Vernetzung der Klassen.
+Relokalisierung der LWJGL Native Library.
+Erster erfolgreicher Keyboard/Player test.
+Camera Klasse hinzugefügt zur Steuerung des Views.
+Implementierung eines Zoom verfahrens.
+Custom Logger hinzugefügt.
+
+[00:30-3:50 26.6.2011]
+Behebung des Problems mit GL_COLOR_MATERIAL und GL_TEXTURE_2D.
+Test eines XOR verfahrens.
+JBox2D als mögliche Physik-Engine in Betracht gezogen.
+
+[16:00-19:00 26.6.2011]
+Weiterentwicklung des GUI Systems.
+Shader tests.
+
+[6:00- 27.6.2011]
+Weiteres testen von GLSL.
+Erfolglos; Verwurf des Konzeptes (für jetzt zumindest)
+Implementation von Spritesheet basierter Animation.

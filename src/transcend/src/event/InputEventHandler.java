@@ -17,8 +17,17 @@ public class InputEventHandler {
     ArrayList<KeyboardListener> klisteners = new ArrayList();
     ArrayList<MouseListener> mlisteners = new ArrayList();
     private ArrayList<Integer> downKeys = new ArrayList();
+    private ArrayList<Integer> downButtons = new ArrayList();
+    private boolean lockKeyboard=false,lockMouse=false;
 
     public InputEventHandler(){}
+
+    public void lockKeyboard(boolean b){lockKeyboard=b;}
+    public void lockMouse(boolean b){lockMouse=b;}
+
+    public int size(){
+        return mlisteners.size()+klisteners.size();
+    }
 
     public void addKeyboardListener(KeyboardListener kl){
         if(!klisteners.contains(kl))klisteners.add(kl);
@@ -37,44 +46,61 @@ public class InputEventHandler {
     }
 
     public void triggerMouseEvent(){
+        if(!Mouse.isInsideWindow())return;
+        if(lockMouse)return;
+        
         if(Mouse.isButtonDown(0)){
-            for(int i=0;i<mlisteners.size();i++){
+            if(!downButtons.contains(0)){
+                for(int i=0;i<mlisteners.size();i++)
+                    mlisteners.get(i).mouseType(0);
+                downButtons.add(0);
+            }
+            for(int i=0;i<mlisteners.size();i++)
                 mlisteners.get(i).mousePressed(0);
-            }
+        }else if(downButtons.contains(0)){
+            downButtons.remove((Object)0);
+            for(int i=0;i<mlisteners.size();i++)
+                mlisteners.get(i).mouseReleased(0);
         }
+        
         if(Mouse.isButtonDown(1)){
-            for(int i=0;i<mlisteners.size();i++){
-                mlisteners.get(i).mousePressed(1);
+            if(!downButtons.contains(1)){
+                for(int i=0;i<mlisteners.size();i++)
+                    mlisteners.get(i).mouseType(1);
+                downButtons.add(1);
             }
+            for(int i=0;i<mlisteners.size();i++)
+                mlisteners.get(i).mousePressed(1);
+        }else if(downButtons.contains(1)){
+            downButtons.remove((Object)1);
+            for(int i=0;i<mlisteners.size();i++)
+                mlisteners.get(i).mouseReleased(1);
         }
+
+        for(int i=0;i<mlisteners.size();i++)mlisteners.get(i).mouseMoved(Mouse.getX(),Mouse.getY());
     }
 
     public void triggerKeyboardEvent(){
-        if(Keyboard.getEventKey()!=Keyboard.CHAR_NONE){
-            ArrayList<Integer> keysPressedNow = new ArrayList();
+        if(lockKeyboard)return;
             while(Keyboard.next()){
                 int key = Keyboard.getEventKey();
-                keysPressedNow.add(key);
-                if(!downKeys.contains(key)){
-                    downKeys.add(key);
-                    for(int i=0;i<klisteners.size();i++){
-                        klisteners.get(i).keyTyped(key);
+                if(Keyboard.getEventKeyState()){
+                    if(!downKeys.contains(key)){
+                        for(int i=0;i<klisteners.size();i++)
+                            klisteners.get(i).keyType(key);
+                        downKeys.add(key);
                     }
-                }
-                for(int i=0;i<klisteners.size();i++){
-                    klisteners.get(i).keyPressed(key);
+                }else{
+                    if(downKeys.contains(key)){
+                        downKeys.remove((Object)key);
+                        for(int i=0;i<klisteners.size();i++)
+                            klisteners.get(i).keyReleased(key);
+                    }
                 }
             }
-            //remove unpressed keys
-            for(int i=0;i<downKeys.size();i++){
-                int key = downKeys.get(i);
-                if(!keysPressedNow.contains(key)){
-                    downKeys.remove(key);
-                    for(int j=0;j<klisteners.size();j++){
-                        klisteners.get(j).keyReleased(key);
-                    }
-                }
+            for(int j=0;j<downKeys.size();j++){
+                for(int i=0;i<klisteners.size();i++)
+                    klisteners.get(i).keyPressed(downKeys.get(j));
             }
         }
-    }
 }

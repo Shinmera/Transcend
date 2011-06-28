@@ -6,6 +6,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.util.HashMap;
@@ -13,6 +14,8 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -25,7 +28,7 @@ public class Const {
     public static final int     DISPLAY_WIDTH           = 640;
 
     //DOUBLES
-    public static final double  VERSION                 = 0.01;
+    public static final double  VERSION                 = 0.02;
 
     //STRINGS
     public static final String  MAINTAINER              = "NexT";
@@ -36,7 +39,17 @@ public class Const {
 
     public HashMap<String,String> registry              = new HashMap();
 
+    static {
+        try {
+            LOGGER.setUseParentHandlers(false);
+            LOGGER.addHandler(new XLogger(new File("err.log")));
+        } catch (IOException ex) {
+            LOGGER.log(Level.WARNING, ex.toString(), ex);
+        }
+    }
+
     public Const(){
+        setDefaults();
         loadRegistry();
     }
 
@@ -64,7 +77,6 @@ public class Const {
     public boolean loadRegistry(){
         try{
             LOGGER.info("[CONST] Loading");
-            registry.clear();
             BufferedReader in = new BufferedReader(new FileReader(new File("constants.reg")));
             String read = "";
             while ((read = in.readLine()) != null) {
@@ -78,6 +90,10 @@ public class Const {
             in.close();
         }catch(Exception e){return false;}
         return true;
+    }
+
+    public void setDefaults(){
+        registry.put("FPS","60");
     }
 
     public String gString(String key){

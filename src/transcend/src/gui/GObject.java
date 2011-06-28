@@ -14,8 +14,8 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class GObject {
     int x,y,w,h;
-    Color back = new Color(0,0,0,0),
-          border = new Color(0,0,0,0);
+    Color back = new Color(255,255,255,255),
+          border = new Color(0,0,0,255);
     float thickness = 0;
 
     public GObject(){ }
@@ -34,17 +34,17 @@ public class GObject {
     }
 
     public void paint(){
+        back.bind();
         glBegin(GL_QUADS);
-            glColor4f(back.getRed()/255.0f,back.getGreen()/255.0f,back.getBlue()/255.0f,1f);
             glVertex2f(x,y);
             glVertex2f(x,y+h);
             glVertex2f(x+w,y+h);
             glVertex2f(x+w,y);
         glEnd();
 
+        border.bind();
         glLineWidth(thickness);
         glBegin(GL_LINE_LOOP);
-            glColor4f(border.getRed()/255.0f,border.getGreen()/255.0f,border.getBlue()/255.0f,border.getAlpha()/255);
             glVertex2f(x,y);
             glVertex2f(x,y+h);
             glVertex2f(x+w,y+h);

@@ -1,0 +1,185 @@
+8
+
+dir
+116
+https://jbox2d.svn.sourceforge.net/svnroot/jbox2d/trunk
+https://jbox2d.svn.sourceforge.net/svnroot/jbox2d
+
+
+
+2008-04-05T00:30:18.719921Z
+116
+ewjordan
+has-props
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+6f22cd85-313b-0410-a2db-fd6cdd1a72a6
+
+.classpath
+file
+
+
+
+
+2008-04-04T07:00:35.000000Z
+c6e436f28bd571f396eaf297c60bf99a
+2008-04-05T00:30:18.719921Z
+116
+ewjordan
+
+.project
+file
+
+
+
+
+2008-04-04T06:58:29.000000Z
+43d82e356e6f39dfae8e1a79ca47bf6b
+2008-04-05T00:30:18.719921Z
+116
+ewjordan
+
+IF YOU USE PIXEL UNITS YOU WILL BE SHOT.txt
+file
+
+https://jbox2d.svn.sourceforge.net/svnroot/jbox2d/trunk/IF%20YOU%20USE%20PIXEL%20UNITS%20YOU%20WILL%20BE%20SHOT.txt
+
+
+2008-04-01T22:23:40.000000Z
+04843b4cc113dc2e4757028ba7f8a660
+2008-04-05T00:30:18.719921Z
+116
+ewjordan
+
+JBox2d 03-27-2008.zip
+file
+115
+https://jbox2d.svn.sourceforge.net/svnroot/jbox2d/trunk/JBox2d%2003-27-2008.zip
+
+
+2008-03-28T01:37:50.000000Z
+e0fd223ab1b8d137f583ad1b3ca8a7ee
+2008-03-28T01:38:59.713782Z
+99
+ewjordan
+has-props
+
+JBox2d 03-31-2008.zip
+file
+115
+https://jbox2d.svn.sourceforge.net/svnroot/jbox2d/trunk/JBox2d%2003-31-2008.zip
+
+
+2008-04-01T00:41:20.000000Z
+9c6071d8c49c39897e38d74d6a44bcef
+2008-04-01T22:21:13.605437Z
+113
+ewjordan
+has-props
+
+Profiling.txt
+file
+115
+
+
+
+2008-03-30T08:07:26.000000Z
+58d931e10c9bef84f1c64871ec35d0f5
+2008-03-31T10:17:30.694115Z
+103
+ewjordan
+
+Readme.txt
+file
+
+
+
+
+2008-04-04T18:11:14.000000Z
+d3d9ba397b12646fda40fab3c7f4d83a
+2008-04-05T00:30:18.719921Z
+116
+ewjordan
+
+TODO.txt
+file
+115
+
+
+
+2008-03-31T18:58:57.000000Z
+f80fecca798f84fc2ae6417e031548ae
+2008-04-01T00:23:11.700315Z
+104
+ewjordan
+
+core.jar
+file
+115
+
+
+
+2008-03-01T01:12:24.000000Z
+38d92a9700811a3e53012a95c48614c2
+2007-10-17T12:59:43.374341Z
+53
+quixote_arg
+has-props
+
+data
+dir
+
+demo.html
+file
+115
+
+
+
+2008-04-05T00:28:39.307000Z
+9595096d0548f56304631bb07034455c
+2008-03-30T08:05:22.996089Z
+101
+ewjordan
+
+doc
+dir
+
+index.html
+file
+115
+
+
+
+2008-04-01T00:42:59.000000Z
+88787b538bacdfe12f702ae7927a03c1
+2008-04-01T22:22:05.806588Z
+114
+ewjordan
+
+jbox2d.jar
+file
+
+
+
+delete
+2008-04-04T05:41:34.000000Z
+c7e8fb1e4ed60ab0d2d5b60747ec7c59
+2008-04-05T00:30:18.719921Z
+116
+ewjordan
+has-props
+
+src
+dir
+

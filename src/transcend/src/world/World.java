@@ -9,34 +9,38 @@
 
 package world;
 
+import NexT.util.SimpleSet;
 import block.Block;
 import entity.Entity;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.logging.Logger;
+import transcend.Const;
+import transcend.MainFrame;
 
 public class World {
-    public static final Logger LOGGER = Logger.getLogger("TRA-World");
     ArrayList<Integer> ids              = new ArrayList<Integer>();
-    HashMap<Integer,Block> blocks     = new HashMap<Integer,Block>();
-    HashMap<Integer,Entity> entities  = new HashMap<Integer,Entity>();
+    SimpleSet<Integer,Block> blocks     = new SimpleSet<Integer,Block>();
+    SimpleSet<Integer,Entity> entities  = new SimpleSet<Integer,Entity>();
 
     public World(){
         
     }
 
     public void printWorldStats(){
-        LOGGER.info("[World] World incorporates "+blocks.size()+" blocks and "+entities.size()+" entities.");
+        Const.LOGGER.info("[World] World incorporates "+blocks.size()+" blocks and "+entities.size()+" entities.");
     }
 
-    public void addBlock(Block block){
-        blocks.put(ids.size(), block);
+    public int addBlock(Block block){
         ids.add(ids.size());
+        block.wID=ids.size()-1;
+        blocks.put(ids.size()-1, block);
+        return ids.size()-1;
     }
 
-    public void addEntity(Entity entity){
-        entities.put(ids.size(), entity);
+    public int addEntity(Entity entity){
         ids.add(ids.size());
+        entity.wID=ids.size()-1;
+        entities.put(ids.size()-1, entity);
+        return ids.size()-1;
     }
 
     public void addElement(Element element){
@@ -60,21 +64,21 @@ public class World {
 
     public void update(){
         for(int i=0;i<blocks.size();i++){
-            blocks.get(i).update();
+            blocks.getAt(i).update();
         }
 
         for(int i=0;i<entities.size();i++){
-            entities.get(i).update();
+            entities.getAt(i).update();
         }
     }
 
     public void draw(){
         for(int i=0;i<blocks.size();i++){
-            blocks.get(i).draw();
+            blocks.getAt(i).draw();
         }
 
         for(int i=0;i<entities.size();i++){
-            entities.get(i).draw();
+            entities.getAt(i).draw();
         }
     }
 }

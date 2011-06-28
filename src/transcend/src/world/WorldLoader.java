@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.logging.Level;
 import transcend.Const;
+import transcend.MainFrame;
 
 public class WorldLoader {
 
@@ -30,7 +31,7 @@ public class WorldLoader {
         HashMap<String,String> arguments = new HashMap<String,String>();
         String type = "";
         try{
-            World.LOGGER.info("[World] Loading World from "+file.getAbsolutePath());
+            Const.LOGGER.info("[World] Loading World from "+file.getAbsolutePath());
 
             BufferedReader in = new BufferedReader(new FileReader(file));
             String read = in.readLine();
@@ -67,14 +68,14 @@ public class WorldLoader {
 
                         if(!inBlock){ //End of block reached.
                             elementsLoaded++;
-                            ElementBuilder.buildElement(type, arguments);
+                            MainFrame.elementBuilder.buildElement(type, arguments);
                         }
                     }
                 }
                 line++;
             }
-        }catch(IOException e){World.LOGGER.log(Level.SEVERE,"Failed to load World: Read exception",e);}
-        World.LOGGER.info("[World] Loaded "+elementsLoaded+" elements.");
+        }catch(IOException e){Const.LOGGER.log(Level.SEVERE,"Failed to load World: Read exception",e);}
+        Const.LOGGER.info("[World] Loaded "+elementsLoaded+" elements.");
         return true;
     }
 }

@@ -15,5 +15,6 @@ public interface MouseListener {
 
     public void mouseMoved(int x,int y);
     public void mousePressed(int button);
+    public void mouseType(int button);
     public void mouseReleased(int button);
 }

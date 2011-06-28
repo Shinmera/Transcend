@@ -11,7 +11,6 @@ package gui;
 
 import java.awt.Font;
 import org.newdawn.slick.Color;
-import org.newdawn.slick.TrueTypeFont;
 import static org.lwjgl.opengl.GL11.*;
 
 public class GLabel extends GObject{
@@ -19,7 +18,7 @@ public class GLabel extends GObject{
     String fontType = "Arial";
     int fontSize = 12;
     int fontWeight = Font.PLAIN;
-    Color fore = new Color(0,0,0,0);
+    Color fore = new Color(0,0,0,255);
     TrueTypeFont font = new TrueTypeFont(new Font(fontType, fontWeight, fontSize),false);
 
     public GLabel(){}
@@ -48,8 +47,10 @@ public class GLabel extends GObject{
 
     public void paint(){
         super.paint();
-        //glColor4f(fore.getRed()/255f,fore.getGreen()/255f,fore.getBlue()/255f,fore.getAlpha()/255f);
-        font.drawString(x+w/2-font.getWidth(text)/2, y+h/2-font.getHeight(text)/2, text, fore);
+        
+        fore.bind();
+        font.drawString(x+w/2, y+h/2-font.getLineHeight()/2, text, 1,1, TrueTypeFont.ALIGN_CENTER);
+        glBindTexture(GL_TEXTURE_2D, 0); //release
     }
 
 

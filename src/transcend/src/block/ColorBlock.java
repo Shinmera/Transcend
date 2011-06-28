@@ -10,7 +10,7 @@
 package block;
 
 import NexT.util.Toolkit;
-import java.awt.Color;
+import org.newdawn.slick.Color;
 import static org.lwjgl.opengl.GL11.*;
 
 public class ColorBlock extends Block{
@@ -26,7 +26,8 @@ public class ColorBlock extends Block{
     }
 
     public void setColor(String color){
-        c = Toolkit.toColor(color);
+        java.awt.Color c = Toolkit.toColor(color);
+        this.c = new Color(c.getRed(),c.getGreen(),c.getBlue(),c.getAlpha());
     }
 
     public void setColor(Color color){
@@ -34,9 +35,8 @@ public class ColorBlock extends Block{
     }
 
     public void draw(){
-
+        c.bind();
         glBegin(GL_QUADS);
-            glColor4f(c.getRed()/255.0f,c.getGreen()/255.0f,c.getBlue()/255.0f,1f);
             glVertex2f(x,y);
             glVertex2f(x,y+h);
             glVertex2f(x+w,y+h);

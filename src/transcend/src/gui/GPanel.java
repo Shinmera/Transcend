@@ -9,12 +9,11 @@
 
 package gui;
 import java.util.ArrayList;
-import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.util.glu.GLU.*;
 
 public class GPanel extends GObject{
     private int x,y,w,h;
     private ArrayList<GObject> regs = new ArrayList();
+    private boolean visible = false;
 
     public GPanel(int x,int y,int w,int h){
         this.x=x;this.y=y;this.w=w;this.h=h;
@@ -28,8 +27,13 @@ public class GPanel extends GObject{
         regs.remove(i);
     }
 
+    public void setVisible(boolean mod){visible=mod;}
+    public boolean isVisible(){return visible;}
+
     public void paint(){
-        super.paint();
-        for(int i=0;i<regs.size();i++){regs.get(i).paint();}
+        if(visible){
+            super.paint();
+            for(int i=0;i<regs.size();i++){regs.get(i).paint();}
+        }
     }
 }

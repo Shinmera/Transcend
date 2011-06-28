@@ -14,6 +14,7 @@ import org.lwjgl.util.Point;
 
 public class Element {
     public static final int ELEMENT_ID = 0x0;
+    public int wID = -1;
     public String name = "element";
     public int x,y,z;
     public int w,h;
@@ -37,6 +38,8 @@ public class Element {
     public void setLayer(int z){this.z=z;}
     public void setSize(int w,int h){this.w=w;this.h=h;}
     public void setDrawable(Animation drawable){this.drawable = drawable;}
+
+    public void setOptions(String[] keys,String[] values){}
 
     public void draw(){
         drawable.draw(x,y,w,h);
