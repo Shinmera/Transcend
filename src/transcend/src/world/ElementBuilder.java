@@ -60,10 +60,23 @@ public class ElementBuilder {
 
     public void buildElement(String name,HashMap<String,String> arguments){
         name = name.trim().toLowerCase();
-
         //HARD CODED BLOCKS
         if(name.equals("dirtblock")){
             DirtBlock block = new DirtBlock(Integer.parseInt(arguments.get("x")),
+                              Integer.parseInt(arguments.get("y")),
+                              Integer.parseInt(arguments.get("w")),
+                              Integer.parseInt(arguments.get("h")));
+            MainFrame.world.addBlock(block);
+        }
+        else if(name.equals("grassblock")){
+            GrassBlock block = new GrassBlock(Integer.parseInt(arguments.get("x")),
+                              Integer.parseInt(arguments.get("y")),
+                              Integer.parseInt(arguments.get("w")),
+                              Integer.parseInt(arguments.get("h")));
+            MainFrame.world.addBlock(block);
+        }
+        else if(name.equals("stoneblock")){
+            StoneBlock block = new StoneBlock(Integer.parseInt(arguments.get("x")),
                               Integer.parseInt(arguments.get("y")),
                               Integer.parseInt(arguments.get("w")),
                               Integer.parseInt(arguments.get("h")));
@@ -88,7 +101,7 @@ public class ElementBuilder {
                                      arguments.values().toArray(new String[arguments.keySet().size()]));
                     MainFrame.world.addElement(block);
                 } catch (Exception ex) {
-
+                    Const.LOGGER.log(Level.WARNING,"Failed to instantiate block '"+name+"'.",ex);
                 }
             }
         }

@@ -40,6 +40,13 @@ public class Camera {
         }
     }
 
+    public void setPosition(int x,int y){this.x=x;this.y=y;}
+
+    public double getX(){return x;}
+    public double getY(){return y;}
+    public double getRelativeX(){return x-MainFrame.DISPLAY_WIDTH/zoom/2;}
+    public double getRelativeY(){return y-MainFrame.DISPLAY_HEIGHT/zoom/2;}
+
     public void camBegin(){
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();

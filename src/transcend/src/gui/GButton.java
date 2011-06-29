@@ -25,6 +25,7 @@ public class GButton extends GLabel implements MouseListener{
     public void onRelease(){}
 
     public void paint() {
+        if(!visible)return;
         if(pressed)back.darker().bind();else back.bind();
         glBegin(GL_QUADS);
             glVertex2f(x,y);
@@ -50,12 +51,14 @@ public class GButton extends GLabel implements MouseListener{
 
     public final void mouseMoved(int x, int y) {}
     public final void mousePressed(int button) {
+        if(!visible)return;
         if(Mouse.getX()>x&&Mouse.getX()<x+w&&
            Mouse.getY()>y&&Mouse.getY()<y+h){
             if(button==0)pressed=true;
         }else pressed=false;
     }
     public final void mouseReleased(int button) {
+        if(!visible)return;
         if(button==0){
             if(Mouse.getX()>x&&Mouse.getX()<x+w&&
                Mouse.getY()>y&&Mouse.getY()<y+h)
@@ -64,6 +67,7 @@ public class GButton extends GLabel implements MouseListener{
         }
     }
     public final void mouseType(int button) {
+        if(!visible)return;
         if(Mouse.getX()>x&&Mouse.getX()<x+w&&
            Mouse.getY()>y&&Mouse.getY()<y+h){
             if(button==0){

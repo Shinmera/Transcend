@@ -1,15 +1,78 @@
-#transcend world file
-dirtblock{
-    x: 50
-    y: 50
-    w: 500
-    h: 30
+#!transcend world file
+GrassBlock{
+x: 0
+y: 64
+w: 512
+h: 64
 }
 
-colorblock{
-    x: 50
-    y: 50
-    w: 50
-    h: 50
-    color: 0,0,255
+GrassBlock{
+x: 512
+y: 448
+w: 256
+h: 64
 }
+
+GrassBlock{
+x: 512
+y: 64
+w: 448
+h: 64
+}
+
+GrassBlock{
+x: 128
+y: 256
+w: 320
+h: 64
+}
+
+DirtBlock{
+x: 128
+y: 128
+w: 320
+h: 192
+}
+
+DirtBlock{
+x: 0
+y: -128
+w: 960
+h: 256
+}
+
+DirtBlock{
+x: 512
+y: 128
+w: 256
+h: 384
+}
+
+GrassBlock{
+x: 960
+y: 64
+w: 256
+h: 64
+}
+
+GrassBlock{
+x: 1216
+y: 64
+w: 256
+h: 64
+}
+
+GrassBlock{
+x: 1472
+y: 64
+w: 256
+h: 64
+}
+
+DirtBlock{
+x: 960
+y: -128
+w: 768
+h: 256
+}
+

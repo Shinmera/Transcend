@@ -84,7 +84,43 @@ JBox2D als mögliche Physik-Engine in Betracht gezogen.
 Weiterentwicklung des GUI Systems.
 Shader tests.
 
-[6:00- 27.6.2011]
+[6:00-9:45 27.6.2011]
 Weiteres testen von GLSL.
 Erfolglos; Verwurf des Konzeptes (für jetzt zumindest)
 Implementation von Spritesheet basierter Animation.
+
+[15:15-16:00 28.6.2011]
+Scene-Antialiasing implementation.
+
+[17:30-18:15 18.6.2011]
+Editor Klasse hinzugefügt.
+Tiling für Texturen implementiert.
+Einige Beispiel-Texturen gemalt.
+
+[20:00-21:20 18.6.2011]
+Layer implementation zur sortierten Zeichnung von Elementen.
+Editor optimierung.
+
+[22:30-23:40 18.6.2011]
+GTextField hinzugefügt.
+Probleme mit GPanel behoben.
+Nach Web gesucht um Texturen in BufferedImages zu konvertieren.
+
+[15:00-17:50 29.6.2011]
+Optimierung des Editors.
+Einfache Kollisionserkennung implementiert.
+
+[18:11-18:45 29.6.2011]
+Erweitern der Player Klasse.
+Weitere Kollisionsprüfung hinzugefügt.
+Auf Version 0.03 fortgeschritten.
+
+[19:15-21:30 29.6.2011]
+Erweiterte Kollisionserkennung.
+Spieler interaktion verbessert.
+Verhalten von GUI Elementen verändert.
+
+[22:15-23:30 29.6.2011]
+WorldLoader um eine Save funktion erweitert.
+World uID bug behoben.
+Editor um remove Funktion erweitert.

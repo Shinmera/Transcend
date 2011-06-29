@@ -9,10 +9,14 @@
 
 package world;
 
+import NexT.util.SimpleSet;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.logging.Level;
 import transcend.Const;
@@ -22,6 +26,39 @@ public class WorldLoader {
 
     public WorldLoader(){
         
+    }
+
+    public boolean saveWorld(File file){
+        try{
+            Const.LOGGER.info("[World] Save World to "+file.getAbsolutePath());
+            OutputStreamWriter fw = new OutputStreamWriter(new FileOutputStream(file),"UTF-8");
+            PrintWriter pw = new PrintWriter(fw);
+            pw.println("#!transcend world file");
+
+            for(int i=0;i<MainFrame.world.size();i++){
+                Element e = MainFrame.world.getByID(MainFrame.world.getID(i));
+                if(!e.getClass().getName().equals("entity.Player")){
+                pw.println(e.getClass().getName().replace("entity.", "").replace("block.", "")+"{");
+                pw.println("x: "+(int)e.getX());
+                pw.println("y: "+(int)e.getY());
+                pw.println("w: "+e.getWidth());
+                pw.println("h: "+e.getHeight());
+
+                SimpleSet s = e.getOptions();
+                if(s!=null){
+                    for(int j=0;j<s.size();j++)
+                        pw.println(s.getKey(j)+": "+s.getAt(j));
+                }
+
+                pw.println("}\n");
+                }
+            }
+            pw.flush();
+            pw.close();
+        }catch(IOException e){Const.LOGGER.log(Level.SEVERE,"Failed to save World: Write exception",e);}
+        Const.LOGGER.info("[World] Saved "+MainFrame.world.size()+" elements.");
+
+        return true;
     }
 
     public boolean loadWorld(File file){
@@ -35,7 +72,7 @@ public class WorldLoader {
 
             BufferedReader in = new BufferedReader(new FileReader(file));
             String read = in.readLine();
-            if(!read.equals("#transcend world file")){Const.LOGGER.log(Level.SEVERE,"Failed to load World: Invalid header");return false;}
+            if((read==null)||(!read.equals("#!transcend world file"))){Const.LOGGER.log(Level.SEVERE,"Failed to load World: Invalid header");return false;}
             while((read = in.readLine()) != null){
                 if(read.contains("#"))read = read.substring(0,read.indexOf("#"));
                 if(read.contains("//"))read = read.substring(0,read.indexOf("//"));

@@ -11,29 +11,33 @@ package gui;
 import java.util.ArrayList;
 
 public class GPanel extends GObject{
-    private int x,y,w,h;
     private ArrayList<GObject> regs = new ArrayList();
-    private boolean visible = false;
 
     public GPanel(int x,int y,int w,int h){
         this.x=x;this.y=y;this.w=w;this.h=h;
     }
 
-    public void add(GObject i){
+    public int add(GObject i){
         regs.add(i);
+        return regs.size()-1;
+    }
+
+    public GObject get(int i){
+        return regs.get(i);
     }
 
     public void remove(GObject i){
         regs.remove(i);
     }
 
-    public void setVisible(boolean mod){visible=mod;}
-    public boolean isVisible(){return visible;}
+    public void setVisible(boolean mod){
+        visible=mod;
+        for(int i=0;i<regs.size();i++){regs.get(i).setVisible(mod);}
+    }
 
     public void paint(){
-        if(visible){
-            super.paint();
-            for(int i=0;i<regs.size();i++){regs.get(i).paint();}
-        }
+        if(!visible)return;
+        super.paint();
+        for(int i=0;i<regs.size();i++){regs.get(i).paint();}
     }
 }

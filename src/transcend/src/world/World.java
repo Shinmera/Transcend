@@ -21,26 +21,32 @@ public class World {
     SimpleSet<Integer,Block> blocks     = new SimpleSet<Integer,Block>();
     SimpleSet<Integer,Entity> entities  = new SimpleSet<Integer,Entity>();
 
-    public World(){
-        
-    }
+    public World(){}
 
     public void printWorldStats(){
         Const.LOGGER.info("[World] World incorporates "+blocks.size()+" blocks and "+entities.size()+" entities.");
     }
 
+    public int blockSize(){return blocks.size();}
+    public int entitySize(){return entities.size();}
+    public int size(){return ids.size();}
+
+    public int getID(int i){return ids.get(i);}
+
     public int addBlock(Block block){
-        ids.add(ids.size());
-        block.wID=ids.size()-1;
-        blocks.put(ids.size()-1, block);
-        return ids.size()-1;
+        int nID=0;if(ids.size()>0)nID=ids.get(ids.size()-1)+1;
+        ids.add(nID);
+        block.wID=nID;
+        blocks.put(nID, block);
+        return nID;
     }
 
     public int addEntity(Entity entity){
-        ids.add(ids.size());
-        entity.wID=ids.size()-1;
-        entities.put(ids.size()-1, entity);
-        return ids.size()-1;
+        int nID=0;if(ids.size()>0)nID=ids.get(ids.size()-1)+1;
+        ids.add(nID);
+        entity.wID=nID;
+        entities.put(nID, entity);
+        return nID;
     }
 
     public void addElement(Element element){
@@ -58,8 +64,8 @@ public class World {
     }
     
     public void delByID(int identifier){
-        if(blocks.containsKey(identifier))blocks.remove(identifier);
-        if(entities.containsKey(identifier))entities.remove(identifier);
+        if(blocks.containsKey(identifier)){blocks.remove(identifier);ids.remove((Object)identifier);}
+        if(entities.containsKey(identifier)){entities.remove(identifier);ids.remove((Object)identifier);}
     }
 
     public void update(){
@@ -73,8 +79,10 @@ public class World {
     }
 
     public void draw(){
-        for(int i=0;i<blocks.size();i++){
-            blocks.getAt(i).draw();
+        for(int j=-10;j<10;j++){
+            for(int i=0;i<blocks.size();i++){
+                if(blocks.getAt(i).z==j)blocks.getAt(i).draw();
+            }
         }
 
         for(int i=0;i<entities.size();i++){

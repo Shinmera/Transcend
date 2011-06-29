@@ -40,12 +40,20 @@ public class GLabel extends GObject{
     public void setText(String text){
         this.text = text;
     }
+    public String getText(){
+        return text;
+    }
+    public TrueTypeFont getFont(){ return font;}
 
     public void setForeground(Color color){
         this.fore=color;
     }
 
+    public Color getForeground(){return fore;}
+
+    public void sPaint(){super.paint();}
     public void paint(){
+        if(!visible)return;
         super.paint();
         
         fore.bind();

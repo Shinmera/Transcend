@@ -14,6 +14,7 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class GObject {
     int x,y,w,h;
+    boolean visible=false;
     Color back = new Color(255,255,255,255),
           border = new Color(0,0,0,255);
     float thickness = 0;
@@ -33,7 +34,17 @@ public class GObject {
         this.back=color;
     }
 
+    public Color getBackground(){return back;}
+    public Color getBorder(){return border;}
+
+    public void setVisible(boolean mod){
+        this.visible=mod;
+    }
+    public boolean isVisible(){return visible;}
+
     public void paint(){
+        if(!visible)return;
+
         back.bind();
         glBegin(GL_QUADS);
             glVertex2f(x,y);

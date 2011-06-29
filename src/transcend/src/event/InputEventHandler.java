@@ -45,6 +45,10 @@ public class InputEventHandler {
         if(mlisteners.contains(ml))mlisteners.remove(ml);
     }
 
+    public boolean isKeyDown(int key){
+        return downKeys.contains(key);
+    }
+
     public void triggerMouseEvent(){
         if(!Mouse.isInsideWindow())return;
         if(lockMouse)return;

@@ -17,6 +17,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Level;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import transcend.Const;
@@ -39,6 +40,7 @@ public class DisplayModeChooser extends JDialog implements ActionListener, ItemL
         setLocation((int)(dim.getWidth()/2)-w/2,(int)(dim.getHeight()/2)-h);
         setLayout(null);
         setResizable(false);
+        setAlwaysOnTop(true);
 
         fs_capable = new HashMap<String,Boolean>();
         dmodes = new ArrayList<DisplayMode>();
@@ -79,8 +81,8 @@ public class DisplayModeChooser extends JDialog implements ActionListener, ItemL
         try{
             DisplayMode[] ddmodes = Display.getAvailableDisplayModes();
             for(int i=0;i<ddmodes.length;i++){
-                if(ddmodes[i].getFrequency()>=60&&ddmodes[i].getBitsPerPixel()==32){
-                    DisplayMode mode = ddmodes[i];
+                DisplayMode mode = ddmodes[i];
+                if(mode.getFrequency()>=60&&mode.getBitsPerPixel()==32&&mode.getWidth()>=800&&mode.getHeight()>=600){
                     String label = mode.getWidth()+"x"+mode.getHeight()+" @"+mode.getFrequency();
                     fs_capable.put(label, mode.isFullscreenCapable());
                     dmodes.add(mode);
@@ -116,7 +118,7 @@ public class DisplayModeChooser extends JDialog implements ActionListener, ItemL
             Display.setDisplayMode(dmodes.get(modes.getSelectedIndex()));
             Display.setFullscreen(full.isSelected());
             Display.setVSyncEnabled(vsync.isSelected());
-            }catch(Exception ex){/*Nobody cares.*/}
+            }catch(Exception ex){Const.LOGGER.log(Level.WARNING,"Failed to set Display settings",ex);}
             constants.sString("DEFAULT_SCREEN",modes.getSelectedItem().toString());
             constants.sBoolean("DEFAULT_FULL",full.isSelected());
             constants.sBoolean("DEFAULT_VSYNC",vsync.isSelected());

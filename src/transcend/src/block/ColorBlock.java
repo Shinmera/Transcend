@@ -37,10 +37,10 @@ public class ColorBlock extends Block{
     public void draw(){
         c.bind();
         glBegin(GL_QUADS);
-            glVertex2f(x,y);
-            glVertex2f(x,y+h);
-            glVertex2f(x+w,y+h);
-            glVertex2f(x+w,y);
+            glVertex2d(x,y);
+            glVertex2d(x,y+h);
+            glVertex2d(x+w,y+h);
+            glVertex2d(x+w,y);
         glEnd();
 
         /*glLineWidth(thickness);
