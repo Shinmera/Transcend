@@ -22,6 +22,7 @@ public class GButton extends GLabel implements MouseListener{
     public GButton(String text){super(text);MainFrame.ieh.addMouseListener(this);}
 
     public void onPress(){}
+    public void onHold(){}
     public void onRelease(){}
 
     public void paint() {
@@ -55,6 +56,7 @@ public class GButton extends GLabel implements MouseListener{
         if(Mouse.getX()>x&&Mouse.getX()<x+w&&
            Mouse.getY()>y&&Mouse.getY()<y+h){
             if(button==0)pressed=true;
+            onHold();
         }else pressed=false;
     }
     public final void mouseReleased(int button) {

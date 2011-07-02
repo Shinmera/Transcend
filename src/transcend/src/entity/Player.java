@@ -48,8 +48,21 @@ public class Player extends Entity implements KeyboardListener{
     public Element check(double ax,double ay,double bx,double by){
         Element e=null;
         for(int i=0;i<MainFrame.world.size();i++){
-            if(MainFrame.world.getByID(MainFrame.world.getID(i)).checkInside(ax,ay)||MainFrame.world.getByID(MainFrame.world.getID(i)).checkInside(bx,by)){
-                e=MainFrame.world.getByID(MainFrame.world.getID(i));
+            Element el = MainFrame.world.getByID(MainFrame.world.getID(i));
+            if((el!=null)&&(el.checkInside(ax,ay)||el.checkInside(bx,by))){
+                e=el;
+                break;
+            }
+        }
+        return e;
+    }
+
+    public Element check(double ax,double ay,double bx,double by,double minSolid){
+        Element e=null;
+        for(int i=0;i<MainFrame.world.size();i++){
+            Element el = MainFrame.world.getByID(MainFrame.world.getID(i));
+            if((el!=null)&&(el.checkInside(ax,ay,minSolid)||el.checkInside(bx,by,minSolid))){
+                e=el;
                 break;
             }
         }
@@ -59,28 +72,30 @@ public class Player extends Entity implements KeyboardListener{
     public void update(){
         drawable.update();
 
-        ground=check(x+2,y,x+w-2,y);
+        if(vy<=0)ground=check(x+2,y,x+w-2,y);else ground=null;
         ceiling=check(x+2,y+h,x+w-2,y+h);
-        left=check(x,y+2,x,y+h-2);
-        right=check(x+w,y+2,x+w,y+h-2);
+        left=check(x,y+2,x,y+h-2,1);
+        right=check(x+w,y+2,x+w,y+h-2,1);
 
         //LIMIT
         if(ground==null){
             vy-=vydcc;
-            Element temp = check(x+2,y+vy,x+w-2,y+vy);
-            if(temp!=null){
-                vy=0;
-                y=temp.y+temp.h;
+            if(vy<0){
+                Element temp = check(x+2,y+vy,x+w-2,y+vy);
+                if(temp!=null&&temp.y+temp.h-y-vy<5){
+                    vy=0;
+                    y=temp.y+temp.h;
+                }
             }
-        } else if (ground.y + ground.h - y < 5) {y = ground.y + ground.h;vy = 0;
+        } else if (ground.y+ground.h-y<5 && vy<0) {y=ground.y+ground.h;vy = 0;
         } else if(vy<0)vy=0;
         if(left!=null&&vx<0){x-=vx;vx=0;}
         if(right!=null&&vx>0){x-=vx;vx=0;}
-
-        //INPUT
         if((ceiling!=null)&&(vy>0&&ceiling.solid>0.5))vy=0;
 
-        if(K_SPACE&&ground!=null&&vy<vyacc)vy+=vyacc;
+        //INPUT
+
+        if(K_SPACE&&ground!=null&&vy==0)vy+=vyacc;
         if(!K_LEFT&&!K_RIGHT){
             drawable.setReel(1);
             vx=0;

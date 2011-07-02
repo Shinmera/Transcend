@@ -11,22 +11,17 @@
 //FIXME: Add GUI
 
 package transcend;
+import gui.GImage;
+import gui.Background;
 import gui.TrueTypeFont;
 import gui.GLabel;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.io.FileInputStream;
 import org.newdawn.slick.opengl.TextureLoader;
-import org.newdawn.slick.opengl.TextureImpl;
-import org.newdawn.slick.opengl.DeferredTexture;
 import org.newdawn.slick.opengl.Texture;
 import javax.imageio.ImageIO;
-import java.io.ByteArrayInputStream;
-import javax.swing.JFrame;
 import java.awt.image.BufferedImage;
 import gui.GTextField;
 import gui.Editor;
-import shader.Shader;
 import org.lwjgl.BufferUtils;
 import java.nio.IntBuffer;
 import gui.GButton;
@@ -69,7 +64,7 @@ public class MainFrame implements KeyboardListener{
     public static Player p;
     public static int fps = 60;
     private static int ACSIZE = 2;
-    private static GPanel menu,hid;
+    private static GPanel menu,hid,bg;
     public static boolean pause = false;
     private Texture blurTexture;
 
@@ -133,6 +128,13 @@ public class MainFrame implements KeyboardListener{
         camera.follow(id);
         camera.setBoundary(300);
         camera.setPosition(DISPLAY_WIDTH/2,DISPLAY_HEIGHT/2);
+
+        bg = new GPanel(0,0,DISPLAY_WIDTH,DISPLAY_HEIGHT);
+        bg.setVisible(true);
+        //Background bg0 = new Background("background0.png");
+        //Background bg1 = new Background("background1.png");
+        //bg.add(bg0);
+        //bg.add(bg1);
 
 
         hid = new GPanel(0,0,DISPLAY_WIDTH,DISPLAY_HEIGHT);
@@ -199,6 +201,21 @@ public class MainFrame implements KeyboardListener{
                 worldLoader.saveWorld(new File("world"+File.separator+"test.tw"));
             }
         };
+        final GLabel l_zoom = new GLabel(camera.getZoom()+"");
+        GButton b_zoomin = new GButton("+"){
+            public void onHold(){
+                if(camera.getZoom()<5)camera.setZoom(camera.getZoom()+0.01);
+                l_zoom.setText(Math.round(camera.getZoom()*100)/100.0+"");
+            }
+        };
+        GButton b_zoomout = new GButton("-"){
+            public void onHold(){
+                if(camera.getZoom()>0.05)camera.setZoom(camera.getZoom()-0.01);
+                l_zoom.setText(Math.round(camera.getZoom()*100)/100.0+"");
+            }
+        };
+
+        GImage i_logo = new GImage("logo.png");
         b_editor.setBackground(Color.red);
         b_quit.setBounds(10, 10, 100, 30);
         b_editor.setBounds(10,80,100, 30);
@@ -206,8 +223,12 @@ public class MainFrame implements KeyboardListener{
         t_test.setBounds(10,115,100,15);
         b_prev.setBounds(10,135,15,15);
         b_next.setBounds(30,135,15,15);
-        l_block.setBounds(50,135,55,15);
+        l_block.setBounds(50,135,60,15);
         b_save.setBounds(10,155,100,30);
+        b_zoomin.setBounds(10,190,15,15);
+        b_zoomout.setBounds(30,190,15,15);
+        l_zoom.setBounds(50,190,60,15);
+        i_logo.setBounds(DISPLAY_WIDTH/2-250,DISPLAY_HEIGHT-106-50,500,106);
 
         menu.add(b_quit);
         menu.add(b_editor);
@@ -217,6 +238,10 @@ public class MainFrame implements KeyboardListener{
         menu.add(b_next);
         menu.add(l_block);
         menu.add(b_save);
+        menu.add(b_zoomin);
+        menu.add(b_zoomout);
+        menu.add(l_zoom);
+        menu.add(i_logo);
         hid.add(editor);
         hid.add(l_speed);
         hid.setVisible(true);
@@ -224,7 +249,7 @@ public class MainFrame implements KeyboardListener{
 
     public void initGL() {
         //2D Initialization
-       	glClearColor(1,1,1,0);
+       	glClearColor(73,206,255,0);
         glClearAccum(1,1,1,0);
         glClearDepth(1);
         glEnable(GL_COLOR_MATERIAL);
@@ -271,6 +296,8 @@ public class MainFrame implements KeyboardListener{
     public void render() {
         IntBuffer viewport = BufferUtils.createIntBuffer(16);
         glGetInteger(GL_VIEWPORT, viewport);
+
+        bg.paint();
 
         glClear(GL_ACCUM_BUFFER_BIT);
         for (int jitter = 0; jitter < ACSIZE; jitter++) {

@@ -79,6 +79,7 @@ public class World {
     }
 
     public void draw(){
+
         for(int j=-10;j<10;j++){
             for(int i=0;i<blocks.size();i++){
                 if(blocks.getAt(i).z==j)blocks.getAt(i).draw();

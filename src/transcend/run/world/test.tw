@@ -14,13 +14,6 @@ h: 64
 }
 
 GrassBlock{
-x: 512
-y: 64
-w: 448
-h: 64
-}
-
-GrassBlock{
 x: 128
 y: 256
 w: 320
@@ -35,13 +28,6 @@ h: 192
 }
 
 DirtBlock{
-x: 0
-y: -128
-w: 960
-h: 256
-}
-
-DirtBlock{
 x: 512
 y: 128
 w: 256
@@ -49,30 +35,128 @@ h: 384
 }
 
 GrassBlock{
-x: 960
-y: 64
-w: 256
-h: 64
-}
-
-GrassBlock{
-x: 1216
-y: 64
-w: 256
-h: 64
-}
-
-GrassBlock{
-x: 1472
-y: 64
-w: 256
+x: 448
+y: 128
+w: 128
 h: 64
 }
 
 DirtBlock{
-x: 960
-y: -128
-w: 768
-h: 256
+x: 448
+y: 128
+w: 64
+h: 64
+}
+
+GrassBlock{
+x: 512
+y: 64
+w: 1344
+h: 64
+}
+
+GrassBlock{
+x: -1664
+y: -64
+w: 1664
+h: 64
+}
+
+GrassBlock{
+x: -1088
+y: 256
+w: 384
+h: 64
+}
+
+GrassBlock{
+x: -448
+y: 1152
+w: 384
+h: 64
+}
+
+GrassBlock{
+x: -512
+y: 1088
+w: 128
+h: 64
+}
+
+GrassBlock{
+x: -832
+y: 960
+w: 448
+h: 64
+}
+
+GrassBlock{
+x: 64
+y: 832
+w: 320
+h: 64
+}
+
+GrassBlock{
+x: -128
+y: 960
+w: 192
+h: 64
+}
+
+DirtBlock{
+x: -1664
+y: -1344
+w: 3520
+h: 1344
+}
+
+DirtBlock{
+x: 0
+y: 0
+w: 1856
+h: 128
+}
+
+DirtBlock{
+x: -832
+y: 0
+w: 448
+h: 1024
+}
+
+DirtBlock{
+x: -1088
+y: 0
+w: 384
+h: 320
+}
+
+DirtBlock{
+x: -512
+y: 1024
+w: 128
+h: 128
+}
+
+DirtBlock{
+x: -448
+y: 0
+w: 384
+h: 1216
+}
+
+DirtBlock{
+x: -128
+y: 0
+w: 192
+h: 1024
+}
+
+DirtBlock{
+x: 64
+y: 128
+w: 320
+h: 768
 }
 

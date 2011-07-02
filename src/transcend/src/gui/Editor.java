@@ -30,19 +30,24 @@ public class Editor extends GObject implements MouseListener{
     public void paint(){
         if(!visible||!active)return;
 
+        {
         Color.black.bind();
         glLineWidth(0.5f);
-        for(int i=tilesize-((int)MainFrame.camera.getY())%tilesize;i<MainFrame.DISPLAY_HEIGHT;i+=tilesize){
+        double t=this.tilesize*MainFrame.camera.getZoom();
+        double y=MainFrame.camera.getRelativeY()*MainFrame.camera.getZoom();
+        for(double i=t-y%t;i<MainFrame.DISPLAY_HEIGHT;i+=t){//t-(y-Math.floor(y/t)*t)
             glBegin(GL_LINES);
-                glVertex2i(0,i);
-                glVertex2i(MainFrame.DISPLAY_WIDTH,i);
+                glVertex2d(0,i);
+                glVertex2d(MainFrame.DISPLAY_WIDTH,i);
             glEnd();
         }
-        for(int i=tilesize-((int)MainFrame.camera.getX())%tilesize;i<MainFrame.DISPLAY_WIDTH;i+=tilesize){
+        double x=MainFrame.camera.getRelativeX()*MainFrame.camera.getZoom();
+        for(double i=t-x%t;i<MainFrame.DISPLAY_WIDTH;i+=t){
             glBegin(GL_LINES);
-                glVertex2i(i,0);
-                glVertex2i(i,MainFrame.DISPLAY_HEIGHT);
+                glVertex2d(i,0);
+                glVertex2d(i,MainFrame.DISPLAY_HEIGHT);
             glEnd();
+        }
         }
 
         if(x!=0&&y!=0){
@@ -90,11 +95,12 @@ public class Editor extends GObject implements MouseListener{
     public void mouseReleased(int button) {
         if(!active||!visible)return;
         if(button==0){
-
+            x/=MainFrame.camera.getZoom();
+            y/=MainFrame.camera.getZoom();
             x+=MainFrame.camera.getRelativeX();
             y+=MainFrame.camera.getRelativeY();
-            int bx=(int) (Mouse.getX() + MainFrame.camera.getRelativeX())-x;
-            int by=(int) (Mouse.getY() + MainFrame.camera.getRelativeY())-y;
+            int bx=(int) (Mouse.getX()/MainFrame.camera.getZoom() + MainFrame.camera.getRelativeX())-x;
+            int by=(int) (Mouse.getY()/MainFrame.camera.getZoom() + MainFrame.camera.getRelativeY())-y;
             if(bx<0){bx*=-1;x-=bx;}
             if(by<0){by*=-1;y-=by;}
             if(by<tilesize)by=tilesize;
@@ -115,8 +121,10 @@ public class Editor extends GObject implements MouseListener{
         }
         if(button==1){
             Element e=null;
+            double x = Mouse.getX()/MainFrame.camera.getZoom() + MainFrame.camera.getRelativeX();
+            double y = Mouse.getY()/MainFrame.camera.getZoom() + MainFrame.camera.getRelativeY();
             for(int i=0;i<MainFrame.world.size();i++){
-                if(MainFrame.world.getByID(MainFrame.world.getID(i)).checkInside((Mouse.getX() + MainFrame.camera.getRelativeX()),(Mouse.getY() + MainFrame.camera.getRelativeY()),false)){
+                if(MainFrame.world.getByID(MainFrame.world.getID(i)).checkInside(x,y,false)){
                     e=MainFrame.world.getByID(MainFrame.world.getID(i));
                     break;
                 }

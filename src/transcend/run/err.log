@@ -1,24 +1,22 @@
-23:09 [TRA-PUBLIC][INFO] [CONST] Loading
+23:47 [TRA-PUBLIC][INFO] [CONST] Loading
 null.transcend.Const.loadRegistry
-23:09 [TRA-PUBLIC][INFO] [MF] Booting up...
+23:47 [TRA-PUBLIC][INFO] [MF] Booting up...
 null.transcend.MainFrame.main
-23:09 [TRA-PUBLIC][INFO] [CONST] Loading
+23:47 [TRA-PUBLIC][INFO] [CONST] Loading
 null.transcend.Const.loadRegistry
-23:09 [TRA-PUBLIC][INFO] [CONST] Saving
+23:47 [TRA-PUBLIC][INFO] LWJGL found 36 display modes.
+null.gui.DisplayModeChooser.<init>
+23:47 [TRA-PUBLIC][INFO] [CONST] Saving
 null.transcend.Const.saveRegistry
-23:09 [TRA-PUBLIC][INFO] [CONST] Loading
+23:47 [TRA-PUBLIC][INFO] [CONST] Loading
 null.transcend.Const.loadRegistry
-23:09 [TRA-PUBLIC][INFO] [MF] Initializing...
+23:47 [TRA-PUBLIC][INFO] [MF] Initializing...
 null.transcend.MainFrame.create
-23:09 [TRA-PUBLIC][INFO] [World] Loading World from D:\projects\JAVAPROJECTS\transcend\src\transcend\run\world\test.tw
+23:47 [TRA-PUBLIC][INFO] [World] Loading World from D:\projects\JAVAPROJECTS\transcend\src\transcend\run\world\test.tw
 null.world.WorldLoader.loadWorld
-23:09 [TRA-PUBLIC][INFO] [World] Loaded 9 elements.
+23:47 [TRA-PUBLIC][INFO] [World] Loaded 23 elements.
 null.world.WorldLoader.loadWorld
-23:09 [TRA-PUBLIC][INFO] [World] World incorporates 9 blocks and 1 entities.
+23:47 [TRA-PUBLIC][INFO] [World] World incorporates 23 blocks and 1 entities.
 null.world.World.printWorldStats
-23:11 [TRA-PUBLIC][INFO] [World] Save World to D:\projects\JAVAPROJECTS\transcend\src\transcend\run\world\test.tw
-null.world.WorldLoader.saveWorld
-23:11 [TRA-PUBLIC][INFO] [World] Saved 12 elements.
-null.world.WorldLoader.saveWorld
-23:14 [TRA-PUBLIC][INFO] [MF] Shutting down...
+23:49 [TRA-PUBLIC][INFO] [MF] Shutting down...
 null.transcend.MainFrame.destroy

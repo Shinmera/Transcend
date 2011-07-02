@@ -74,4 +74,13 @@ public class Element {
         if(ay>y+h)return false;
         return true;
     }
+    public boolean checkInside(double ax,double ay,double minSolid){
+        if(this.solid<minSolid)return false;
+        if(w<=0||h<=0)return false;
+        if(ax<x)return false;
+        if(ay<y)return false;
+        if(ax>x+w)return false;
+        if(ay>y+h)return false;
+        return true;
+    }
 }

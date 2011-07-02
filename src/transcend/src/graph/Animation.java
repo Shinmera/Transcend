@@ -119,6 +119,7 @@ public class Animation {
         counter=-1;
     }
     public int getReel(){return ind_h;}
+    public Texture getTexture(){return texture;}
 
     public void update(){
             if(counter>MainFrame.fps/pps){

@@ -10,6 +10,8 @@
 package gui;
 import java.awt.Dimension;
 import java.awt.Frame;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 import javax.swing.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -80,16 +82,61 @@ public class DisplayModeChooser extends JDialog implements ActionListener, ItemL
         int tosel=0;
         try{
             DisplayMode[] ddmodes = Display.getAvailableDisplayModes();
+            Const.LOGGER.info("LWJGL found "+ddmodes.length+" display modes.");
             for(int i=0;i<ddmodes.length;i++){
                 DisplayMode mode = ddmodes[i];
-                if(mode.getFrequency()>=60&&mode.getBitsPerPixel()==32&&mode.getWidth()>=800&&mode.getHeight()>=600){
+                if(mode.getWidth()>=800&&mode.getHeight()>=600){
                     String label = mode.getWidth()+"x"+mode.getHeight()+" @"+mode.getFrequency();
-                    fs_capable.put(label, mode.isFullscreenCapable());
-                    dmodes.add(mode);
+                    if(!modesContains(label)){
+                        fs_capable.put(label, mode.isFullscreenCapable());
+                        dmodes.add(mode);
+                        modes.addItem(label);
+                        if(constants.gString("DEFAULT_SCREEN").equals(label))
+                            tosel=dmodes.size()-1;
+                    }
+                }
+            }
+            
+            if(dmodes.size()==0){
+                GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+                GraphicsDevice[] gs = ge.getScreenDevices();
+                java.awt.DisplayMode[] dms = gs[0].getDisplayModes();
+                Const.LOGGER.info("Java found "+dms.length+" display modes.");
+                // Get size of each screen
+                for (int i=0; i<dms.length; i++) {
+                    java.awt.DisplayMode mode = dms[i];
+                    if(mode.getWidth()>=800&&mode.getHeight()>=600){
+                    String label = mode.getWidth()+"x"+mode.getHeight()+" @"+mode.getRefreshRate();
+                    fs_capable.put(label, false);
+                    dmodes.add(new DisplayMode(mode.getWidth(),mode.getHeight()));
                     modes.addItem(label);
                     if(constants.gString("DEFAULT_SCREEN").equals(label))
                         tosel=dmodes.size()-1;
+                    }
                 }
+            }
+            if(dmodes.size()==0){
+                Const.LOGGER.log(Level.WARNING,"No display modes found. Falling back to manual.");
+                    DisplayMode mode = new DisplayMode(800,600);
+                    String label = mode.getWidth()+"x"+mode.getHeight()+" @"+mode.getFrequency();
+                    fs_capable.put(label, mode.isFullscreenCapable());
+                    dmodes.add(mode);modes.addItem(label);
+                    //if(constants.gString("DEFAULT_SCREEN").equals(label))tosel=dmodes.size()-1;
+                    mode = new DisplayMode(1024,768);
+                    label = mode.getWidth()+"x"+mode.getHeight()+" @"+mode.getFrequency();
+                    fs_capable.put(label, mode.isFullscreenCapable());
+                    dmodes.add(mode);modes.addItem(label);
+                    //if(constants.gString("DEFAULT_SCREEN").equals(label))tosel=dmodes.size()-1;
+                    mode = new DisplayMode(1680,1050);
+                    label = mode.getWidth()+"x"+mode.getHeight()+" @"+mode.getFrequency();
+                    fs_capable.put(label, mode.isFullscreenCapable());
+                    dmodes.add(mode);modes.addItem(label);
+                    //if(constants.gString("DEFAULT_SCREEN").equals(label))tosel=dmodes.size()-1;
+                    mode = new DisplayMode(1920,1080);
+                    label = mode.getWidth()+"x"+mode.getHeight()+" @"+mode.getFrequency();
+                    fs_capable.put(label, mode.isFullscreenCapable());
+                    dmodes.add(mode);modes.addItem(label);
+                    //if(constants.gString("DEFAULT_SCREEN").equals(label))tosel=dmodes.size()-1;
             }
         }catch(Exception ex){ex.printStackTrace();}
 
@@ -99,6 +146,13 @@ public class DisplayModeChooser extends JDialog implements ActionListener, ItemL
 
         getRootPane().setDefaultButton(ok);
         setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+    }
+
+    public boolean modesContains(String s){
+        for(int i=0;i<modes.getItemCount();i++){
+            if(modes.getItemAt(i).equals(s))return true;
+        }
+        return false;
     }
     
     public boolean getStatus(){
