@@ -9,12 +9,12 @@
 
 package entity;
 
-import org.newdawn.slick.Color;
 import event.KeyboardListener;
 import graph.Animation;
 import java.io.File;
 import org.lwjgl.input.Keyboard;
 import transcend.MainFrame;
+import world.BElement;
 import world.Element;
 
 public class Player extends Entity implements KeyboardListener{
@@ -48,7 +48,8 @@ public class Player extends Entity implements KeyboardListener{
     public Element check(double ax,double ay,double bx,double by){
         Element e=null;
         for(int i=0;i<MainFrame.world.size();i++){
-            Element el = MainFrame.world.getByID(MainFrame.world.getID(i));
+            BElement bel = MainFrame.world.getByID(MainFrame.world.getID(i));Element el = null;
+            if(!bel.isBaseElement())el=(Element)bel;
             if((el!=null)&&(el.checkInside(ax,ay)||el.checkInside(bx,by))){
                 e=el;
                 break;
@@ -60,7 +61,8 @@ public class Player extends Entity implements KeyboardListener{
     public Element check(double ax,double ay,double bx,double by,double minSolid){
         Element e=null;
         for(int i=0;i<MainFrame.world.size();i++){
-            Element el = MainFrame.world.getByID(MainFrame.world.getID(i));
+            BElement bel = MainFrame.world.getByID(MainFrame.world.getID(i));Element el = null;
+            if(!bel.isBaseElement())el=(Element)bel;
             if((el!=null)&&(el.checkInside(ax,ay,minSolid)||el.checkInside(bx,by,minSolid))){
                 e=el;
                 break;
@@ -72,45 +74,45 @@ public class Player extends Entity implements KeyboardListener{
     public void update(){
         drawable.update();
 
+        //HECK
         if(vy<=0)ground=check(x+2,y,x+w-2,y);else ground=null;
-        ceiling=check(x+2,y+h,x+w-2,y+h);
-        left=check(x,y+2,x,y+h-2,1);
-        right=check(x+w,y+2,x+w,y+h-2,1);
+        if(vy>=0)ceiling=check(x+2,y+h,x+w-2,y+h);else ceiling=null;
+        if(vx<=0)left=check(x,y+2,x,y+h-2,1);else left=null;
+        if(vx>=0)right=check(x+w,y+2,x+w,y+h-2,1);else right=null;
 
         //LIMIT
         if(ground==null){
             vy-=vydcc;
             if(vy<0){
                 Element temp = check(x+2,y+vy,x+w-2,y+vy);
-                if(temp!=null&&temp.y+temp.h-y-vy<5){
+                if((temp!=null)&&(temp.y+temp.h-y-vy<temp.h/2)){
                     vy=0;
                     y=temp.y+temp.h;
                 }
             }
-        } else if (ground.y+ground.h-y<5 && vy<0) {y=ground.y+ground.h;vy = 0;
+        } else if(ground.y+ground.h-y<ground.h/2 && vy<0) {y=ground.y+ground.h;vy = 0;
         } else if(vy<0)vy=0;
         if(left!=null&&vx<0){x-=vx;vx=0;}
         if(right!=null&&vx>0){x-=vx;vx=0;}
         if((ceiling!=null)&&(vy>0&&ceiling.solid>0.5))vy=0;
 
         //INPUT
-
         if(K_SPACE&&ground!=null&&vy==0)vy+=vyacc;
-        if(!K_LEFT&&!K_RIGHT){
-            drawable.setReel(1);
-            vx=0;
-        }
+        
         if(K_LEFT){
             drawable.setDirection(Animation.DIR_LEFT);
             drawable.setReel(0);
             vx=-vxacc;
-        }
-        if(K_RIGHT){
+        }else if(K_RIGHT){
             drawable.setDirection(Animation.DIR_RIGHT);
             drawable.setReel(0);
             vx=vxacc;
+        }else{
+            drawable.setReel(1);
+            vx=0;
         }
 
+        //EVALUATE
         x+=vx;
         y+=vy;
     }

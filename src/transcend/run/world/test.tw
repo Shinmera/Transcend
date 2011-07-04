@@ -1,4 +1,23 @@
 #!transcend world file
+Background{
+x: 0
+y: 0
+w: 250
+h: 250
+tex: background0.png
+vsp: 1.0
+}
+
+SoundEmitter{
+x: 2300
+y: 200
+snd: cave2.wav
+near: 300
+far: 800
+music: true
+loop: true
+}
+
 GrassBlock{
 x: 0
 y: 64
@@ -158,5 +177,299 @@ x: 64
 y: 128
 w: 320
 h: 768
+}
+
+StoneBlock{
+x: 1728
+y: 256
+w: 640
+h: 128
+}
+
+StoneBlock{
+x: 1856
+y: 384
+w: 512
+h: 320
+}
+
+StoneBlock{
+x: 1600
+y: -384
+w: 896
+h: 448
+}
+
+StoneBlock{
+x: 1856
+y: 64
+w: 576
+h: 64
+}
+
+StoneBlock{
+x: 2368
+y: 448
+w: 320
+h: 256
+}
+
+StoneBlock{
+x: 2624
+y: 128
+w: 256
+h: 320
+}
+
+StoneBlock{
+x: 2688
+y: 448
+w: 128
+h: 256
+}
+
+StoneBlock{
+x: 2496
+y: -384
+w: 384
+h: 384
+}
+
+StoneBackBlock{
+x: 1728
+y: 128
+w: 128
+h: 128
+}
+
+StoneBackBlock{
+x: 1856
+y: 0
+w: 1024
+h: 448
+}
+
+StoneBlock{
+x: 2880
+y: -64
+w: 512
+h: 64
+}
+
+StoneBlock{
+x: 2880
+y: -64
+w: 128
+h: 64
+}
+
+StoneBlock{
+x: 2880
+y: -64
+w: 128
+h: 64
+}
+
+StoneBlock{
+x: 2880
+y: -128
+w: 128
+h: 64
+}
+
+StoneBlock{
+x: 2880
+y: 128
+w: 192
+h: 128
+}
+
+StoneBlock{
+x: 3072
+y: 128
+w: 64
+h: 64
+}
+
+StoneBackBlock{
+x: 2880
+y: 0
+w: 256
+h: 128
+}
+
+GrassBlock{
+x: 3392
+y: -64
+w: 512
+h: 64
+}
+
+GrassBlock{
+x: 3712
+y: 192
+w: 256
+h: 64
+}
+
+DirtBlock{
+x: 3712
+y: 0
+w: 256
+h: 256
+}
+
+DirtBlock{
+x: 3392
+y: -64
+w: 320
+h: 64
+}
+
+DirtBlock{
+x: 3712
+y: -384
+w: 576
+h: 448
+}
+
+DirtBlock{
+x: 3584
+y: -192
+w: 128
+h: 128
+}
+
+DirtBlock{
+x: 3648
+y: -320
+w: 64
+h: 192
+}
+
+StoneBlock{
+x: 3392
+y: -128
+w: 192
+h: 64
+}
+
+StoneBlock{
+x: 3264
+y: -96
+w: 128
+h: 32
+}
+
+StoneBlock{
+x: 3136
+y: 128
+w: 32
+h: 32
+}
+
+StoneBlock{
+x: 3072
+y: 192
+w: 32
+h: 64
+}
+
+StoneBlock{
+x: 2944
+y: 0
+w: 128
+h: 32
+}
+
+StoneBlock{
+x: 2528
+y: 192
+w: 96
+h: 64
+}
+
+StoneBlock{
+x: 2464
+y: 224
+w: 64
+h: 32
+}
+
+StoneBlock{
+x: 2240
+y: 128
+w: 96
+h: 32
+}
+
+GrassBlock{
+x: 1856
+y: 96
+w: 128
+h: 32
+}
+
+StoneBlock{
+x: 3392
+y: -64
+w: 96
+h: 64
+}
+
+StoneBlock{
+x: 3456
+y: -160
+w: 128
+h: 32
+}
+
+StoneBlock{
+x: 3520
+y: -384
+w: 128
+h: 224
+}
+
+StoneBlock{
+x: 3648
+y: -384
+w: 64
+h: 64
+}
+
+StoneBlock{
+x: 2880
+y: -192
+w: 96
+h: 64
+}
+
+StoneBlock{
+x: 2880
+y: -320
+w: 32
+h: 128
+}
+
+StoneBlock{
+x: 3008
+y: -80
+w: 144
+h: 16
+}
+
+GrassBlock{
+x: 3968
+y: 0
+w: 320
+h: 64
+}
+
+StoneBlock{
+x: 1920
+y: 224
+w: 192
+h: 32
 }
 

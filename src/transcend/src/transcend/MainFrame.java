@@ -11,15 +11,16 @@
 //FIXME: Add GUI
 
 package transcend;
+import org.newdawn.slick.openal.SoundStore;
+import org.lwjgl.openal.AL;
+import graph.SoundPool;
+import graph.TexturePool;
+import gui.LoadHelper;
+import gui.Loader;
 import gui.GImage;
-import gui.Background;
 import gui.TrueTypeFont;
 import gui.GLabel;
-import java.io.FileInputStream;
-import org.newdawn.slick.opengl.TextureLoader;
 import org.newdawn.slick.opengl.Texture;
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
 import gui.GTextField;
 import gui.Editor;
 import org.lwjgl.BufferUtils;
@@ -54,24 +55,29 @@ import static transcend.Jitter.jps;
 public class MainFrame implements KeyboardListener{
     public static int DISPLAY_WIDTH = Const.DISPLAY_WIDTH;
     public static int DISPLAY_HEIGHT= Const.DISPLAY_HEIGHT;
+    public static final Const CONST = new Const();
     public static final File basedir = new File(".");
     public static final World world = new World();
     public static final WorldLoader worldLoader = new WorldLoader();
     public static final ElementBuilder elementBuilder = new ElementBuilder();
     public static final InputEventHandler ieh = new InputEventHandler();
     public static final Camera camera = new Camera();
-    public static final Const CONST = new Const();
-    public static Player p;
+    public static final TexturePool texturePool = new TexturePool();
+    public static final SoundPool soundPool = new SoundPool();
+    public static Loader loader;
+    public static Player player;
     public static int fps = 60;
     private static int ACSIZE = 2;
-    private static GPanel menu,hid,bg;
+    private static GPanel menu,hid;
     public static boolean pause = false;
     private Texture blurTexture;
 
+    static{
+        System.setProperty("org.lwjgl.librarypath",new File(new File(basedir, "native"), LWJGLUtil.getPlatformName()).getAbsolutePath());
+    }
 
     public static void main(String[] args){
         Const.LOGGER.info("[MF] Booting up...");
-        System.setProperty("org.lwjgl.librarypath",new File(new File(basedir, "native"), LWJGLUtil.getPlatformName()).getAbsolutePath());
         MainFrame mf = new MainFrame();
         try{
             if(!DisplayModeChooser.showDialog("Display Mode"))System.exit(0);
@@ -112,30 +118,21 @@ public class MainFrame implements KeyboardListener{
         Mouse.destroy();
         Keyboard.destroy();
         Display.destroy();
+        AL.destroy();
         System.exit(0);
     }
 
     public void initGame(){
-        //load test map
-        worldLoader.loadWorld(new File("world"+File.separator+"test.tw"));
+        loader = new Loader();
 
         ieh.addKeyboardListener(this);
-        p = new Player();
-        p.setPosition(64,128);
-        int id = world.addEntity(p);
-        System.out.println("AA:"+id);
+        player = new Player();
+        player.setPosition(64,128);
+        int id = world.addEntity(player);
         world.printWorldStats();
         camera.follow(id);
         camera.setBoundary(300);
         camera.setPosition(DISPLAY_WIDTH/2,DISPLAY_HEIGHT/2);
-
-        bg = new GPanel(0,0,DISPLAY_WIDTH,DISPLAY_HEIGHT);
-        bg.setVisible(true);
-        //Background bg0 = new Background("background0.png");
-        //Background bg1 = new Background("background1.png");
-        //bg.add(bg0);
-        //bg.add(bg1);
-
 
         hid = new GPanel(0,0,DISPLAY_WIDTH,DISPLAY_HEIGHT);
         hid.setBackground(new Color(0,0,0,0));
@@ -145,6 +142,12 @@ public class MainFrame implements KeyboardListener{
 
         menu = new GPanel(0,0,DISPLAY_WIDTH,DISPLAY_HEIGHT);
         menu.setBackground(new Color(0,0,0,150));
+        
+        hid.setVisible(true);
+
+        //LOAD MENU AND WORLD
+        LoadHelper helper = new LoadHelper(){
+            public void load(){
         final GLabel l_block = new GLabel(editor.getItemName(editor.getItem()));
         GButton b_quit = new GButton("Quit"){
             public void onRelease(){destroy();}
@@ -192,7 +195,7 @@ public class MainFrame implements KeyboardListener{
             public void paint(){
                 if(!isVisible())return;
                 getForeground().bind();
-                getFont().drawString(10,DISPLAY_HEIGHT-20,p.getInfo(), 1,1, TrueTypeFont.ALIGN_LEFT);
+                getFont().drawString(10,DISPLAY_HEIGHT-20,player.getInfo(), 1,1, TrueTypeFont.ALIGN_LEFT);
                 glBindTexture(GL_TEXTURE_2D, 0); //release
             }
         };
@@ -244,13 +247,18 @@ public class MainFrame implements KeyboardListener{
         menu.add(i_logo);
         hid.add(editor);
         hid.add(l_speed);
-        hid.setVisible(true);
+
+        worldLoader.loadWorld(new File("world"+File.separator+"test.tw"));
+            }
+        };
+        loader.setHelper(helper);
+        loader.start();
     }
 
     public void initGL() {
         //2D Initialization
-       	glClearColor(73,206,255,0);
-        glClearAccum(1,1,1,0);
+       	glClearColor(0,0,0,0);
+        glClearAccum(0,0,0,0);
         glClearDepth(1);
         glEnable(GL_COLOR_MATERIAL);
         glEnable(GL_TEXTURE_2D);
@@ -275,11 +283,7 @@ public class MainFrame implements KeyboardListener{
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
 
-        try{
-        BufferedImage img = new BufferedImage(DISPLAY_WIDTH,DISPLAY_HEIGHT,BufferedImage.TYPE_INT_ARGB);
-        ImageIO.write(img, "png", new File("tmp.png"));
-        blurTexture = TextureLoader.getTexture("PNG", new FileInputStream("tmp.png"));
-        }catch(Exception e){Const.LOGGER.log(Level.SEVERE,"Failed to load blur texture.",e);}
+        SoundStore.get().setSoundVolume(0);
     }
 
     public void update() {
@@ -297,8 +301,6 @@ public class MainFrame implements KeyboardListener{
         IntBuffer viewport = BufferUtils.createIntBuffer(16);
         glGetInteger(GL_VIEWPORT, viewport);
 
-        bg.paint();
-
         glClear(GL_ACCUM_BUFFER_BIT);
         for (int jitter = 0; jitter < ACSIZE; jitter++) {
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -307,7 +309,7 @@ public class MainFrame implements KeyboardListener{
                     j[jps[ACSIZE]][jitter].y * 4.5f / viewport.get(3), 0.0f);
 
             Color.white.bind();
-
+            
             camera.camBegin();
                 world.draw();
 
@@ -334,15 +336,21 @@ public class MainFrame implements KeyboardListener{
         menu.paint();
         hid.paint();
 
-        glFlush();
     }
     
 
     public void run() {
         while(!Display.isCloseRequested()) {
             if(Display.isVisible()) {
-                update();
-                render();
+                if(loader.isLoading()){
+                    loader.draw();
+                    loader.run();
+                }else{
+                    render();
+                    update();
+                }
+                SoundStore.get().poll(1000/fps);
+                glFlush();
             }else {
                 if(Display.isDirty())render();
                 try {Thread.sleep(100);}

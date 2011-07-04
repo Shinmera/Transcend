@@ -9,12 +9,8 @@
 
 package gui;
 
-import world.Element;
+import world.BElement;
 import java.util.HashMap;
-import transcend.Const;
-import block.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import transcend.MainFrame;
 import org.newdawn.slick.Color;
 import event.MouseListener;
@@ -22,7 +18,7 @@ import org.lwjgl.input.Mouse;
 import static org.lwjgl.opengl.GL11.*;
 
 public class Editor extends GObject implements MouseListener{
-    private String[] blocks = {"dirtblock","grassblock","stoneblock"};
+    private String[] blocks = {"dirtblock","grassblock","stoneblock","stonebackblock"};
     private boolean active=false;
     private int tilesize=64;
     private int curItem=0;
@@ -120,11 +116,11 @@ public class Editor extends GObject implements MouseListener{
             x=0;y=0;
         }
         if(button==1){
-            Element e=null;
+            BElement e=null;
             double x = Mouse.getX()/MainFrame.camera.getZoom() + MainFrame.camera.getRelativeX();
             double y = Mouse.getY()/MainFrame.camera.getZoom() + MainFrame.camera.getRelativeY();
-            for(int i=0;i<MainFrame.world.size();i++){
-                if(MainFrame.world.getByID(MainFrame.world.getID(i)).checkInside(x,y,false)){
+            for(int i=MainFrame.world.size()-1;i>=0;i--){
+                if(MainFrame.world.getByID(MainFrame.world.getID(i)).checkInside(x,y)){
                     e=MainFrame.world.getByID(MainFrame.world.getID(i));
                     break;
                 }

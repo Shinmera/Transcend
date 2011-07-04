@@ -18,7 +18,7 @@ public class StoneBlock extends Block{
         super(x,y,w,h);
         drawable.loadTexture(new File(MainFrame.basedir,"tex"+File.separator+"stone.png"));
         drawable.calcTile(w, h);
-        solid=0;
+        solid=1;
         z=-1;
     }
 }

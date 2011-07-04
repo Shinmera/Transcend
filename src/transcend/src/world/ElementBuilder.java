@@ -9,6 +9,8 @@
 
 package world;
 
+import tile.DirtBlock;
+import tile.Background;
 import NexT.util.ClassPathHacker;
 import NexT.util.ConfigManager;
 import NexT.util.SimpleSet;
@@ -17,6 +19,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.logging.Level;
+import tile.SoundEmitter;
+import tile.StoneBackBlock;
 import transcend.Const;
 import transcend.MainFrame;
 
@@ -66,7 +70,14 @@ public class ElementBuilder {
                               Integer.parseInt(arguments.get("y")),
                               Integer.parseInt(arguments.get("w")),
                               Integer.parseInt(arguments.get("h")));
-            MainFrame.world.addBlock(block);
+            MainFrame.world.addTile(block);
+        }
+        else if(name.equals("stonebackblock")){
+            StoneBackBlock block = new StoneBackBlock(Integer.parseInt(arguments.get("x")),
+                              Integer.parseInt(arguments.get("y")),
+                              Integer.parseInt(arguments.get("w")),
+                              Integer.parseInt(arguments.get("h")));
+            MainFrame.world.addTile(block);
         }
         else if(name.equals("grassblock")){
             GrassBlock block = new GrassBlock(Integer.parseInt(arguments.get("x")),
@@ -90,6 +101,22 @@ public class ElementBuilder {
             block.setColor(arguments.get("color"));
             MainFrame.world.addBlock(block);
         }
+        else if(name.equals("background")){
+            Background block = new Background(Integer.parseInt(arguments.get("x")),
+                              Integer.parseInt(arguments.get("y")),
+                              Integer.parseInt(arguments.get("w")),
+                              Integer.parseInt(arguments.get("h")),
+                              arguments.get("tex"));
+            if(arguments.containsKey("vsp"))block.setVSP(Double.parseDouble(arguments.get("vsp")));
+            if(arguments.containsKey("tile"))block.setTiled(Boolean.parseBoolean(arguments.get("tile")));
+            MainFrame.world.addTile(block);
+        }
+        else if(name.equals("soundemitter")){
+            SoundEmitter block = new SoundEmitter(Integer.parseInt(arguments.get("x")),
+                              Integer.parseInt(arguments.get("y")));
+            block.setOptions(arguments);
+            MainFrame.world.addTile(block);
+        }
         //ATTEMPT TO DYNAMICALLY LOAD BLOCK
         else{
             if(loadElement(name)){
@@ -97,8 +124,7 @@ public class ElementBuilder {
                     Element block = (Element) elements.get(name).newInstance();
                     block.setPosition(Integer.parseInt(arguments.get("x")),Integer.parseInt(arguments.get("y")));
                     block.setSize(Integer.parseInt(arguments.get("w")),Integer.parseInt(arguments.get("h")));
-                    block.setOptions(arguments.keySet().toArray(new String[arguments.keySet().size()]),
-                                     arguments.values().toArray(new String[arguments.keySet().size()]));
+                    block.setOptions(arguments);
                     MainFrame.world.addElement(block);
                 } catch (Exception ex) {
                     Const.LOGGER.log(Level.WARNING,"Failed to instantiate block '"+name+"'.",ex);

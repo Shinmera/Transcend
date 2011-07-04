@@ -130,3 +130,21 @@ Problem mit dem Editor und der Zoom Funktion behoben.
 GImage hinzugefügt.
 Background Klasse angefangen.
 Logo Konzipiert und eingebunden.
+
+[22:30-1:50 2/3.7.2011]
+Background System revidiert.
+Tile System hinzugefügt.
+BElement System hinzugefügt.
+Loading System angefangen.
+
+[10:40-12:40 3.7.2011]
+Loading System erweitert.
+Intelligentes Texturen System eingebunden.
+SoundPool und TexturePool Klassen hinzugefügt und ins MainFrame eingebunden.
+
+[17:50-18:10 3.7.2011]
+Sound Klasse hinzugefügt.
+Loading Screen erweitert.
+
+[22:30-23:50 3.7.2011]
+SoundPool und Sound Klasse verändert um den Konflikt zu entfernen.

@@ -8,13 +8,13 @@
 \**********************/
 
 package graph;
+import org.newdawn.slick.opengl.Texture;
+import org.newdawn.slick.opengl.TextureLoader;
 import org.newdawn.slick.Color;
 import transcend.Const;
 import transcend.MainFrame;
 import java.util.logging.Level;
-import org.newdawn.slick.opengl.TextureLoader;
 import java.io.FileInputStream;
-import org.newdawn.slick.opengl.Texture;
 import java.io.File;
 import static org.lwjgl.opengl.GL11.*;
 
@@ -22,6 +22,7 @@ public class Animation {
     public static final int DIR_LEFT = -1;
     public static final int DIR_RIGHT = 1;
 
+    private boolean init = false;
     private Texture texture = null;
     private double spritesize = 64.0;
     private int ind_w = 0;
@@ -43,34 +44,24 @@ public class Animation {
         this.spritesize=spritesize;
         w=spritesize;
         h=spritesize;
-        calcRelative();
         calcTile();
     }
     public Animation(int spritesize,int w,int h){
         this.spritesize=spritesize;
         this.w=w;
         this.h=h;
-        calcRelative();
         calcTile();
     }
 
     public boolean loadTexture(File f){
         if(!f.exists())return false;
-        String extension = f.getName().substring(f.getName().indexOf(".")+1);
-        try{
-        texture = TextureLoader.getTexture(extension.toUpperCase(), new FileInputStream(f));
-        }catch(Exception e){Const.LOGGER.log(Level.SEVERE,"Failed to load texture at "+f.getAbsolutePath()+".",e);return false;}
-        calcRelative();
+        texture = MainFrame.texturePool.loadTexture(f.getName(), f);
         return true;
     }
 
     public boolean loadTexture(File f,int[] start,int[] stop,int[] loop){
         if(!f.exists())return false;
-        String extension = f.getName().substring(f.getName().indexOf(".")+1);
-        try{
-        texture = TextureLoader.getTexture(extension.toUpperCase(), new FileInputStream(f));
-        }catch(Exception e){Const.LOGGER.log(Level.SEVERE,"Failed to load texture at "+f.getAbsolutePath()+".",e);return false;}
-        calcRelative();
+        texture = MainFrame.texturePool.loadTexture(f.getName(), f);
         setStart(start);
         setStop(stop);
         setLoop(loop);
@@ -80,9 +71,12 @@ public class Animation {
     public void calcRelative(){
         rel_w=texture.getImageWidth()/spritesize;
         rel_h=texture.getImageHeight()/spritesize;
-        start = new int[(int)rel_h];
-        stop = new int[(int)rel_h];
-        loop = new int[(int)rel_h];
+        if(start.length!=(int)rel_h){
+            start = new int[(int)rel_h];
+            stop = new int[(int)rel_h];
+            loop = new int[(int)rel_h];
+            for(int i=0;i<start.length;i++){start[i]=0;stop[i]=0;loop[i]=0;}
+        }
     }
 
     public void calcTile(){calcTile(w,h);}
@@ -116,17 +110,19 @@ public class Animation {
     public void setReel(int index){
         if(index==ind_h)return;
         ind_h=index;
-        counter=-1;
+        counter=start[ind_h];
     }
     public int getReel(){return ind_h;}
     public Texture getTexture(){return texture;}
 
     public void update(){
-            if(counter>MainFrame.fps/pps){
-                counter=0;
-                if(ind_w<stop[ind_h])ind_w++;else ind_w=loop[ind_h];
-            }
-            counter++;
+        if(stop[0]<0)return;
+        
+        if(counter>MainFrame.fps/pps){
+            counter=0;
+            if(ind_w<stop[ind_h])ind_w++;else ind_w=loop[ind_h];
+        }
+        counter++;
     }
     
     public void draw(){}
@@ -134,6 +130,7 @@ public class Animation {
     public void draw(int x,int y){draw(x,y,w,h);}
 
     public void draw(int x,int y,int w,int h){
+        if(!init){calcRelative();init=true;}
         if(texture==null){
             new Color(1.0f,0.0f,0.0f,1.0f).bind();
 
@@ -144,7 +141,6 @@ public class Animation {
                 glVertex3i(x, y+h,z);
             glEnd();
         }else{
-            if(counter==-1)counter=start[ind_h];
             Color.white.bind();
             glBindTexture(GL_TEXTURE_2D,texture.getTextureID());
             glPushMatrix();

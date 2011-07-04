@@ -17,7 +17,7 @@ public class GrassBlock extends Block{
     public GrassBlock(int x,int y,int w,int h){
         super(x,y,w,h);
         drawable.loadTexture(new File(MainFrame.basedir,"tex"+File.separator+"grass.png"));
-        drawable.calcTile(w, h);
+        drawable.calcTile(w, h-1);
         solid=0.5;
         z=1;
     }

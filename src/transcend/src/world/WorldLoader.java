@@ -36,9 +36,9 @@ public class WorldLoader {
             pw.println("#!transcend world file");
 
             for(int i=0;i<MainFrame.world.size();i++){
-                Element e = MainFrame.world.getByID(MainFrame.world.getID(i));
+                BElement e = MainFrame.world.getByID(MainFrame.world.getID(i));
                 if(!e.getClass().getName().equals("entity.Player")){
-                pw.println(e.getClass().getName().replace("entity.", "").replace("block.", "")+"{");
+                pw.println(e.getClass().getName().substring(e.getClass().getName().indexOf(".")+1)+"{");
                 pw.println("x: "+(int)e.getX());
                 pw.println("y: "+(int)e.getY());
                 pw.println("w: "+e.getWidth());
@@ -83,6 +83,7 @@ public class WorldLoader {
                 if(!skip&&read.length() != 0){
                     //READ IN BLOCKS.
                     if(!inBlock&&read.contains("{")){
+                        arguments.clear();
                         inBlock = true;
                         type = read.substring(0,read.indexOf("{")).trim();
                         read="";
@@ -112,7 +113,7 @@ public class WorldLoader {
                 line++;
             }
         }catch(IOException e){Const.LOGGER.log(Level.SEVERE,"Failed to load World: Read exception",e);}
-        Const.LOGGER.info("[World] Loaded "+elementsLoaded+" elements.");
+        Const.LOGGER.info("[World] Loaded "+elementsLoaded+" elements. "+MainFrame.world.blockSize()+" Blocks "+MainFrame.world.entitySize()+" Entities "+MainFrame.world.tileSize()+" Tiles.");
         return true;
     }
 }
