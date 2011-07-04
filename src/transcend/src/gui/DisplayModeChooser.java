@@ -169,9 +169,15 @@ public class DisplayModeChooser extends JDialog implements ActionListener, ItemL
         if(e.getActionCommand().equals("Ok")){
             status=true;
             try{
-            Display.setDisplayMode(dmodes.get(modes.getSelectedIndex()));
-            Display.setFullscreen(full.isSelected());
-            Display.setVSyncEnabled(vsync.isSelected());
+            if(constants.gInteger("FORCED_W")>=320&&constants.gInteger("FORCED_H")>=240){
+                Display.setDisplayMode(new DisplayMode(constants.gInteger("FORCED_W"),constants.gInteger("FORCED_H")));
+                Display.setFullscreen(full.isSelected());
+                Display.setVSyncEnabled(vsync.isSelected());
+            }else{
+                Display.setDisplayMode(dmodes.get(modes.getSelectedIndex()));
+                Display.setFullscreen(full.isSelected());
+                Display.setVSyncEnabled(vsync.isSelected());
+            }
             }catch(Exception ex){Const.LOGGER.log(Level.WARNING,"Failed to set Display settings",ex);}
             constants.sString("DEFAULT_SCREEN",modes.getSelectedItem().toString());
             constants.sBoolean("DEFAULT_FULL",full.isSelected());

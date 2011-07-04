@@ -95,6 +95,8 @@ public class Const {
     public void setDefaults(){
         registry.put("FPS","60");
         registry.put("ANTIALIAS","2");
+        registry.put("FORCED_W","0");
+        registry.put("FORCED_H","0");
     }
 
     public String gString(String key){
