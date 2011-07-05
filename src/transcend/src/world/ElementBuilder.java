@@ -70,6 +70,7 @@ public class ElementBuilder {
                               Integer.parseInt(arguments.get("y")),
                               Integer.parseInt(arguments.get("w")),
                               Integer.parseInt(arguments.get("h")));
+            if(arguments.containsKey("z"))block.setLayer(Integer.parseInt(arguments.get("z")));
             MainFrame.world.addTile(block);
         }
         else if(name.equals("stonebackblock")){
@@ -77,6 +78,7 @@ public class ElementBuilder {
                               Integer.parseInt(arguments.get("y")),
                               Integer.parseInt(arguments.get("w")),
                               Integer.parseInt(arguments.get("h")));
+            if(arguments.containsKey("z"))block.setLayer(Integer.parseInt(arguments.get("z")));
             MainFrame.world.addTile(block);
         }
         else if(name.equals("grassblock")){
@@ -84,6 +86,7 @@ public class ElementBuilder {
                               Integer.parseInt(arguments.get("y")),
                               Integer.parseInt(arguments.get("w")),
                               Integer.parseInt(arguments.get("h")));
+            if(arguments.containsKey("z"))block.setLayer(Integer.parseInt(arguments.get("z")));
             MainFrame.world.addBlock(block);
         }
         else if(name.equals("stoneblock")){
@@ -91,6 +94,23 @@ public class ElementBuilder {
                               Integer.parseInt(arguments.get("y")),
                               Integer.parseInt(arguments.get("w")),
                               Integer.parseInt(arguments.get("h")));
+            if(arguments.containsKey("z"))block.setLayer(Integer.parseInt(arguments.get("z")));
+            MainFrame.world.addBlock(block);
+        }
+        else if(name.equals("blankblock")){
+            BlankBlock block = new BlankBlock(Integer.parseInt(arguments.get("x")),
+                              Integer.parseInt(arguments.get("y")),
+                              Integer.parseInt(arguments.get("w")),
+                              Integer.parseInt(arguments.get("h")));
+            if(arguments.containsKey("z"))block.setLayer(Integer.parseInt(arguments.get("z")));
+            MainFrame.world.addBlock(block);
+        }
+        else if(name.equals("halfblankblock")){
+            HalfBlankBlock block = new HalfBlankBlock(Integer.parseInt(arguments.get("x")),
+                              Integer.parseInt(arguments.get("y")),
+                              Integer.parseInt(arguments.get("w")),
+                              Integer.parseInt(arguments.get("h")));
+            if(arguments.containsKey("z"))block.setLayer(Integer.parseInt(arguments.get("z")));
             MainFrame.world.addBlock(block);
         }
         else if(name.equals("colorblock")){
@@ -98,6 +118,7 @@ public class ElementBuilder {
                               Integer.parseInt(arguments.get("y")),
                               Integer.parseInt(arguments.get("w")),
                               Integer.parseInt(arguments.get("h")));
+            if(arguments.containsKey("z"))block.setLayer(Integer.parseInt(arguments.get("z")));
             block.setColor(arguments.get("color"));
             MainFrame.world.addBlock(block);
         }
@@ -124,6 +145,7 @@ public class ElementBuilder {
                     Element block = (Element) elements.get(name).newInstance();
                     block.setPosition(Integer.parseInt(arguments.get("x")),Integer.parseInt(arguments.get("y")));
                     block.setSize(Integer.parseInt(arguments.get("w")),Integer.parseInt(arguments.get("h")));
+                    if(arguments.containsKey("z"))block.setLayer(Integer.parseInt(arguments.get("z")));
                     block.setOptions(arguments);
                     MainFrame.world.addElement(block);
                 } catch (Exception ex) {

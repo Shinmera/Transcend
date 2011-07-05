@@ -14,15 +14,21 @@ import org.newdawn.slick.Color;
 import static org.lwjgl.opengl.GL11.*;
 
 public class GLabel extends GObject{
+    public static int ALIGN_CENTER = TrueTypeFont.ALIGN_CENTER;
+    public static int ALIGN_LEFT = TrueTypeFont.ALIGN_LEFT;
+    public static int ALIGN_RIGHT = TrueTypeFont.ALIGN_RIGHT;
+
     String text = "";
     String fontType = "Arial";
     int fontSize = 12;
     int fontWeight = Font.PLAIN;
+    int fontAlign = ALIGN_CENTER;
     Color fore = new Color(0,0,0,255);
     TrueTypeFont font = new TrueTypeFont(new Font(fontType, fontWeight, fontSize),false);
 
     public GLabel(){}
     public GLabel(String text){this.text=text;}
+    public GLabel(String text,int align){this.text=text;this.fontAlign=align;}
     
     public void setFont(Font f){this.font=new TrueTypeFont(f,false);}
     public void setFontWeight(int weight){
@@ -48,6 +54,12 @@ public class GLabel extends GObject{
     public void setForeground(Color color){
         this.fore=color;
     }
+    public void setAlign(int align){
+        fontAlign=align;
+    }
+    public int getAlign(){
+        return fontAlign;
+    }
 
     public Color getForeground(){return fore;}
 
@@ -57,7 +69,9 @@ public class GLabel extends GObject{
         super.paint();
         
         fore.bind();
-        font.drawString(x+w/2, y+h/2-font.getLineHeight()/2, text, 1,1, TrueTypeFont.ALIGN_CENTER);
+        if(fontAlign==ALIGN_LEFT)font.drawString(x, y+h/2-font.getLineHeight()/2, text, 1,1,ALIGN_LEFT);
+        if(fontAlign==ALIGN_CENTER)font.drawString(x+w/2, y+h/2-font.getLineHeight()/2, text, 1,1,ALIGN_CENTER);
+        if(fontAlign==ALIGN_RIGHT)font.drawString(x+w, y+h/2-font.getLineHeight()/2, text, 1,1,ALIGN_RIGHT);
         glBindTexture(GL_TEXTURE_2D, 0); //release
     }
 

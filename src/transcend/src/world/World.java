@@ -97,13 +97,13 @@ public class World {
     }
 
     public void draw(){
-        for(int j=-5;j<5;j++){
+        for(int j=-5;j<=5;j++){
             for(int i=0;i<tiles.size();i++){
                 if(tiles.getAt(i).z==j)tiles.getAt(i).draw();
             }
         }
         
-        for(int j=-5;j<5;j++){
+        for(int j=-5;j<=5;j++){
             for(int i=0;i<blocks.size();i++){
                 if(blocks.getAt(i).z==j)blocks.getAt(i).draw();
             }

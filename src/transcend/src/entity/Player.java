@@ -19,7 +19,7 @@ import world.Element;
 
 public class Player extends Entity implements KeyboardListener{
     public static final int ELEMENT_ID = 0x2;
-    private final double vxacc=5,vyacc=8,vydcc=0.4,vxdcc=5;
+    private final double vxacc=5,vyacc=9,vydcc=0.4,vxdcc=5;
     private double vx=0,vy=0;
     private Element ground = null,ceiling = null,left = null,right = null;
     private boolean K_LEFT,K_RIGHT,K_SPACE;
@@ -79,7 +79,7 @@ public class Player extends Entity implements KeyboardListener{
         if(vy>=0)ceiling=check(x+2,y+h,x+w-2,y+h);else ceiling=null;
         if(vx<=0)left=check(x,y+2,x,y+h-2,1);else left=null;
         if(vx>=0)right=check(x+w,y+2,x+w,y+h-2,1);else right=null;
-
+        //if(ground!=null&&check(x+2,y+2,x+w-2,y+2)!=null)ground=null;
         //LIMIT
         if(ground==null){
             vy-=vydcc;

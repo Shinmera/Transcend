@@ -106,7 +106,12 @@ public class WorldLoader {
 
                         if(!inBlock){ //End of block reached.
                             elementsLoaded++;
-                            MainFrame.elementBuilder.buildElement(type, arguments);
+                            if(type.equals("player")){
+                                MainFrame.player.setPosition(Integer.parseInt(arguments.get("x")),
+                                                             Integer.parseInt(arguments.get("y")));
+                                
+                            }else
+                                MainFrame.elementBuilder.buildElement(type, arguments);
                         }
                     }
                 }
