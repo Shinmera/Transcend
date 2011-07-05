@@ -18,13 +18,14 @@ import org.lwjgl.input.Mouse;
 import static org.lwjgl.opengl.GL11.*;
 
 public class Editor extends GObject implements MouseListener{
-    private String[] blocks = {"dirtblock","grassblock","stoneblock","stonebackblock"};
+    private String[] blocks = {"blankblock","halfblankblock","dirtblock","grassblock","stoneblock","stonebackblock"};
     private boolean active=false;
     private int tilesize=64;
     private int curItem=0;
+    private int curLayer=0;
 
     public void paint(){
-        if(!visible||!active)return;
+        if(!active)return;
 
         {
         Color.black.bind();
@@ -68,6 +69,8 @@ public class Editor extends GObject implements MouseListener{
     public int getItem(){return curItem;}
     public String getItemName(int i){return blocks[i];}
     public int getItemCount(){return blocks.length;}
+    public int getCurLayer(){return curLayer;}
+    public void setCurLayer(int i){curLayer=i;}
 
     public void mouseMoved(int x, int y) {}
 
@@ -109,6 +112,7 @@ public class Editor extends GObject implements MouseListener{
                 HashMap<String,String> args = new HashMap();
                 args.put("x", x+"");
                 args.put("y", y+"");
+                args.put("z", curLayer+"");
                 args.put("w", bx+"");
                 args.put("h", by+"");
                 MainFrame.elementBuilder.buildElement(blocks[curItem], args);

@@ -14,11 +14,13 @@ import NexT.util.SimpleSet;
 import graph.Sound;
 import java.io.File;
 import java.util.HashMap;
+import org.newdawn.slick.openal.SoundStore;
 import transcend.MainFrame;
 import static org.lwjgl.opengl.GL11.*;
 
 public class SoundEmitter extends Tile{
     Sound playable = new Sound();
+    float fade = 1;
     String file="";
 
     public SoundEmitter(){}
@@ -29,8 +31,18 @@ public class SoundEmitter extends Tile{
         playable.setX(x);playable.setY(y);playable.setFar(far);playable.setNear(near);
     }
 
-    public void update(){playable.update();}
+    public void update(){
+        if(!playable.isMusic())return;
+        if(playable.getFar()>0){
+            playable.update();
+        }else{
+            if(!MainFrame.soundPool.isPlaying(true)){playable.play();fade=0;}
+            if(fade<1){fade+=0.01f;SoundStore.get().setMusicVolume(fade);}
+        }
+    }
+    
     public void draw(){
+        if(!MainFrame.editor.getActive())return;
         Color.red.bind();
         glBegin(GL_LINE_LOOP);
         for(int i = 0; i < 100; i++) {

@@ -62,6 +62,7 @@ public class MainFrame implements KeyboardListener{
     public static final ElementBuilder elementBuilder = new ElementBuilder();
     public static final InputEventHandler ieh = new InputEventHandler();
     public static final Camera camera = new Camera();
+    public static final Editor editor = new Editor();
     public static final TexturePool texturePool = new TexturePool();
     public static final SoundPool soundPool = new SoundPool();
     public static Loader loader;
@@ -136,7 +137,6 @@ public class MainFrame implements KeyboardListener{
 
         hid = new GPanel(0,0,DISPLAY_WIDTH,DISPLAY_HEIGHT);
         hid.setBackground(new Color(0,0,0,0));
-        final Editor editor = new Editor();
         ieh.addMouseListener(editor);
         hid.setVisible(true);
 
@@ -217,6 +217,30 @@ public class MainFrame implements KeyboardListener{
                 l_zoom.setText(Math.round(camera.getZoom()*100)/100.0+"");
             }
         };
+        final GLabel l_layer = new GLabel(editor.getCurLayer()+"");
+        GButton b_layerp = new GButton("+"){
+            public void onPress(){
+                editor.setCurLayer(editor.getCurLayer()+1);
+                if(editor.getCurLayer()>5)editor.setCurLayer(5);
+                l_layer.setText(editor.getCurLayer()+"");
+            }
+        };
+        GButton b_layerm = new GButton("-"){
+            public void onPress(){
+                editor.setCurLayer(editor.getCurLayer()-1);
+                if(editor.getCurLayer()<-5)editor.setCurLayer(-5);
+                l_layer.setText(editor.getCurLayer()+"");
+            }
+        };
+        GLabel l_blockdesc = new GLabel("Block:",GLabel.ALIGN_LEFT);
+        l_blockdesc.setBorder(new Color(0,0,0,0),0);
+        l_blockdesc.setBackground(new Color(1,1,1,0.5f));
+        GLabel l_layerdesc = new GLabel("Layer:",GLabel.ALIGN_LEFT);
+        l_layerdesc.setBorder(new Color(0,0,0,0),0);
+        l_layerdesc.setBackground(new Color(1,1,1,0.5f));
+        GLabel l_zoomdesc = new GLabel("Zoom:",GLabel.ALIGN_LEFT);
+        l_zoomdesc.setBorder(new Color(0,0,0,0),0);
+        l_zoomdesc.setBackground(new Color(1,1,1,0.5f));
 
         GImage i_logo = new GImage("logo.png");
         b_editor.setBackground(Color.red);
@@ -224,13 +248,23 @@ public class MainFrame implements KeyboardListener{
         b_editor.setBounds(10,80,100, 30);
         b_settings.setBounds(10,45,100,30);
         t_test.setBounds(10,115,100,15);
+
         b_prev.setBounds(10,135,15,15);
         b_next.setBounds(30,135,15,15);
         l_block.setBounds(50,135,60,15);
-        b_save.setBounds(10,155,100,30);
-        b_zoomin.setBounds(10,190,15,15);
-        b_zoomout.setBounds(30,190,15,15);
-        l_zoom.setBounds(50,190,60,15);
+        l_blockdesc.setBounds(10,155,100,15);
+
+        b_layerp.setBounds(10,175,15,15);
+        b_layerm.setBounds(30,175,15,15);
+        l_layer.setBounds(50,175,60,15);
+        l_layerdesc.setBounds(10,195,100,15);
+
+        b_zoomin.setBounds(10,215,15,15);
+        b_zoomout.setBounds(30,215,15,15);
+        l_zoom.setBounds(50,215,60,15);
+        l_zoomdesc.setBounds(10,235,100,15);
+
+        b_save.setBounds(10,255,100,30);
         i_logo.setBounds(DISPLAY_WIDTH/2-250,DISPLAY_HEIGHT-106-50,500,106);
 
         menu.add(b_quit);
@@ -244,6 +278,12 @@ public class MainFrame implements KeyboardListener{
         menu.add(b_zoomin);
         menu.add(b_zoomout);
         menu.add(l_zoom);
+        menu.add(b_layerp);
+        menu.add(b_layerm);
+        menu.add(l_layer);
+        menu.add(l_blockdesc);
+        menu.add(l_layerdesc);
+        menu.add(l_zoomdesc);
         menu.add(i_logo);
         hid.add(editor);
         hid.add(l_speed);
