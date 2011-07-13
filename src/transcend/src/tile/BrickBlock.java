@@ -7,18 +7,17 @@
   version: 0.1a
 \**********************/
 
-package block;
+package tile;
 
 import java.io.File;
 import transcend.MainFrame;
 
-public class StoneBlock extends Block{
+public class BrickBlock extends Tile{
     
-    public StoneBlock(int x,int y,int w,int h){
+    public BrickBlock(int x,int y,int w,int h){
         super(x,y,w,h);
-        drawable.loadTexture(new File(MainFrame.basedir,"tex"+File.separator+"stone.png"));
+        drawable.loadTexture(new File(MainFrame.basedir,"tex"+File.separator+"brick.png"));
         drawable.calcTile(w, h);
-        solid=1;
-        z=-1;
+        depth=1.5f;
     }
 }

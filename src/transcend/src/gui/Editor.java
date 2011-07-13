@@ -9,6 +9,7 @@
 
 package gui;
 
+import NexT.util.Toolkit;
 import world.BElement;
 import java.util.HashMap;
 import transcend.MainFrame;
@@ -18,7 +19,7 @@ import org.lwjgl.input.Mouse;
 import static org.lwjgl.opengl.GL11.*;
 
 public class Editor extends GObject implements MouseListener{
-    private String[] blocks = {"blankblock","halfblankblock","dirtblock","grassblock","stoneblock","stonebackblock"};
+    private String[] blocks = {"blankblock","halfblankblock","dirtblock","grassblock","stoneblock","brickblock","tileset"};
     private boolean active=false;
     private int tilesize=64;
     private int curItem=0;
@@ -109,7 +110,7 @@ public class Editor extends GObject implements MouseListener{
             y=roundSampled(y,tilesize);
 
             if(bx>0&&by>0){
-                HashMap<String,String> args = new HashMap();
+                HashMap<String,String> args = Toolkit.stringToMap(((GTextArea)((GPanel)MainFrame.hid.get("p_editor")).get("args")).getText());
                 args.put("x", x+"");
                 args.put("y", y+"");
                 args.put("z", curLayer+"");

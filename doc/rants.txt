@@ -1,0 +1,21 @@
+TRANSCEND CHATLOG RANT RECORDS
+STARTED ON 14.7.2011
+-----------------------------------------------
+
+--->14.7. Working on manual Keyboard Mapping system to translate key input into text.
+00:25 - Derpy Hooves: oh hell no....
+00:26 - Derpy Hooves: I have to... parse the keys... myself... LWJGL doesn't register SHIFT+somekey as the shifted character...
+[...]
+00:48 - Derpy Hooves: oook, got a keyboard mapping system going
+00:48 - Derpy Hooves: now I just need to manually fill in allllllllllll the keys...
+00:48 - Derpy Hooves: HO BOY SO EXCITING
+00:48 - Derpy Hooves: ...fucking shit
+00:48 - Seagoon: lol
+[...]
+00:56 - Derpy Hooves: wow
+00:56 - Seagoon: ?
+00:57 - Derpy Hooves: if I use certain characters, LWJGL COMPLETELY flips it's shit and crashes
+00:57 - Derpy Hooves: bravo
+00:57 - Derpy Hooves: brilliant
+00:57 - Seagoon: fun
+

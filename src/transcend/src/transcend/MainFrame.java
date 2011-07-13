@@ -7,10 +7,8 @@
   version: 0.1a
 \**********************/
 
-//FIXME: Add loading
-//FIXME: Add GUI
-
 package transcend;
+import java.util.logging.Logger;
 import org.newdawn.slick.openal.SoundStore;
 import org.lwjgl.openal.AL;
 import graph.SoundPool;
@@ -20,7 +18,6 @@ import gui.Loader;
 import gui.GImage;
 import gui.TrueTypeFont;
 import gui.GLabel;
-import org.newdawn.slick.opengl.Texture;
 import gui.GTextField;
 import gui.Editor;
 import org.lwjgl.BufferUtils;
@@ -68,16 +65,16 @@ public class MainFrame implements KeyboardListener{
     public static Loader loader;
     public static Player player;
     public static int fps = 60;
-    private static int ACSIZE = 2;
-    private static GPanel menu,hid;
+    public static int ACSIZE = 2;
+    public static GPanel menu,hid;
     public static boolean pause = false;
-    private Texture blurTexture;
 
     static{
         System.setProperty("org.lwjgl.librarypath",new File(new File(basedir, "native"), LWJGLUtil.getPlatformName()).getAbsolutePath());
     }
 
     public static void main(String[] args){
+        System.out.println((0x28)+"");
         Const.LOGGER.info("[MF] Booting up...");
         MainFrame mf = new MainFrame();
         try{
@@ -86,7 +83,7 @@ public class MainFrame implements KeyboardListener{
             mf.create();
             mf.run();
         }
-        catch(Exception ex){Const.LOGGER.log(Level.SEVERE,ex.toString(),ex);}
+        catch(Exception ex){Const.LOGGER.log(Level.SEVERE,"Error in main thread!",ex);}
         finally{mf.destroy();}
     }
 
@@ -114,7 +111,7 @@ public class MainFrame implements KeyboardListener{
         initGame();
     }
 
-    public void destroy() {
+    public static void destroy() {
         Const.LOGGER.info("[MF] Shutting down...");
         Mouse.destroy();
         Keyboard.destroy();
@@ -128,9 +125,7 @@ public class MainFrame implements KeyboardListener{
 
         ieh.addKeyboardListener(this);
         player = new Player();
-        player.setPosition(64,128);
         int id = world.addEntity(player);
-        world.printWorldStats();
         camera.follow(id);
         camera.setBoundary(300);
         camera.setPosition(DISPLAY_WIDTH/2,DISPLAY_HEIGHT/2);
@@ -142,156 +137,9 @@ public class MainFrame implements KeyboardListener{
 
         menu = new GPanel(0,0,DISPLAY_WIDTH,DISPLAY_HEIGHT);
         menu.setBackground(new Color(0,0,0,150));
-        
-        hid.setVisible(true);
 
-        //LOAD MENU AND WORLD
-        LoadHelper helper = new LoadHelper(){
-            public void load(){
-        final GLabel l_block = new GLabel(editor.getItemName(editor.getItem()));
-        GButton b_quit = new GButton("Quit"){
-            public void onRelease(){destroy();}
-        };
-        GButton b_editor = new GButton("Toggle Editor"){
-            public void onRelease(){if(editor.getActive()){
-                editor.setActive(false);this.setBackground(Color.red);
-            }else{
-                editor.setActive(true);this.setBackground(Color.green);
-            }}
-        };
-        GButton b_settings = new GButton("Settings"){
-            public void onRelease(){
-                if(DisplayModeChooser.showDialog("Display Mode")){
-                    CONST.loadRegistry();
-                    DISPLAY_WIDTH=Display.getDisplayMode().getWidth();
-                    DISPLAY_HEIGHT=Display.getDisplayMode().getHeight();
-                    fps=CONST.gInteger("FPS");
-                    ACSIZE=CONST.gInteger("ANTIALIAS");
-                    hid.setBounds(0,0,DISPLAY_WIDTH,DISPLAY_HEIGHT);
-                    menu.setBounds(0,0,DISPLAY_WIDTH,DISPLAY_HEIGHT);
-                }
-            }
-        };
-        GButton b_prev = new GButton("<"){
-            public void onRelease(){
-                editor.setItem(editor.getItem()-1);
-                if(editor.getItem()<0)editor.setItem(editor.getItemCount()-1);
-                l_block.setText(editor.getItemName(editor.getItem()));
-            }
-        };
-        GButton b_next = new GButton(">"){
-            public void onRelease(){
-                editor.setItem(editor.getItem()+1);
-                if(editor.getItem()==editor.getItemCount())editor.setItem(0);
-                l_block.setText(editor.getItemName(editor.getItem()));
-            }
-        };
-        GTextField t_test = new GTextField(editor.getTilesize()+""){
-            public void onConfirm(){
-                editor.setTilesize(Integer.parseInt(getText()));
-            }
-        };
-        GLabel l_speed = new GLabel(""){
-            public void paint(){
-                if(!isVisible())return;
-                getForeground().bind();
-                getFont().drawString(10,DISPLAY_HEIGHT-20,player.getInfo(), 1,1, TrueTypeFont.ALIGN_LEFT);
-                glBindTexture(GL_TEXTURE_2D, 0); //release
-            }
-        };
-        GButton b_save = new GButton("Save"){
-            public void onRelease(){
-                worldLoader.saveWorld(new File("world"+File.separator+"test.tw"));
-            }
-        };
-        final GLabel l_zoom = new GLabel(camera.getZoom()+"");
-        GButton b_zoomin = new GButton("+"){
-            public void onHold(){
-                if(camera.getZoom()<5)camera.setZoom(camera.getZoom()+0.01);
-                l_zoom.setText(Math.round(camera.getZoom()*100)/100.0+"");
-            }
-        };
-        GButton b_zoomout = new GButton("-"){
-            public void onHold(){
-                if(camera.getZoom()>0.05)camera.setZoom(camera.getZoom()-0.01);
-                l_zoom.setText(Math.round(camera.getZoom()*100)/100.0+"");
-            }
-        };
-        final GLabel l_layer = new GLabel(editor.getCurLayer()+"");
-        GButton b_layerp = new GButton("+"){
-            public void onPress(){
-                editor.setCurLayer(editor.getCurLayer()+1);
-                if(editor.getCurLayer()>5)editor.setCurLayer(5);
-                l_layer.setText(editor.getCurLayer()+"");
-            }
-        };
-        GButton b_layerm = new GButton("-"){
-            public void onPress(){
-                editor.setCurLayer(editor.getCurLayer()-1);
-                if(editor.getCurLayer()<-5)editor.setCurLayer(-5);
-                l_layer.setText(editor.getCurLayer()+"");
-            }
-        };
-        GLabel l_blockdesc = new GLabel("Block:",GLabel.ALIGN_LEFT);
-        l_blockdesc.setBorder(new Color(0,0,0,0),0);
-        l_blockdesc.setBackground(new Color(1,1,1,0.5f));
-        GLabel l_layerdesc = new GLabel("Layer:",GLabel.ALIGN_LEFT);
-        l_layerdesc.setBorder(new Color(0,0,0,0),0);
-        l_layerdesc.setBackground(new Color(1,1,1,0.5f));
-        GLabel l_zoomdesc = new GLabel("Zoom:",GLabel.ALIGN_LEFT);
-        l_zoomdesc.setBorder(new Color(0,0,0,0),0);
-        l_zoomdesc.setBackground(new Color(1,1,1,0.5f));
-
-        GImage i_logo = new GImage("logo.png");
-        b_editor.setBackground(Color.red);
-        b_quit.setBounds(10, 10, 100, 30);
-        b_editor.setBounds(10,80,100, 30);
-        b_settings.setBounds(10,45,100,30);
-        t_test.setBounds(10,115,100,15);
-
-        b_prev.setBounds(10,135,15,15);
-        b_next.setBounds(30,135,15,15);
-        l_block.setBounds(50,135,60,15);
-        l_blockdesc.setBounds(10,155,100,15);
-
-        b_layerp.setBounds(10,175,15,15);
-        b_layerm.setBounds(30,175,15,15);
-        l_layer.setBounds(50,175,60,15);
-        l_layerdesc.setBounds(10,195,100,15);
-
-        b_zoomin.setBounds(10,215,15,15);
-        b_zoomout.setBounds(30,215,15,15);
-        l_zoom.setBounds(50,215,60,15);
-        l_zoomdesc.setBounds(10,235,100,15);
-
-        b_save.setBounds(10,255,100,30);
-        i_logo.setBounds(DISPLAY_WIDTH/2-250,DISPLAY_HEIGHT-106-50,500,106);
-
-        menu.add(b_quit);
-        menu.add(b_editor);
-        menu.add(b_settings);
-        menu.add(t_test);
-        menu.add(b_prev);
-        menu.add(b_next);
-        menu.add(l_block);
-        menu.add(b_save);
-        menu.add(b_zoomin);
-        menu.add(b_zoomout);
-        menu.add(l_zoom);
-        menu.add(b_layerp);
-        menu.add(b_layerm);
-        menu.add(l_layer);
-        menu.add(l_blockdesc);
-        menu.add(l_layerdesc);
-        menu.add(l_zoomdesc);
-        menu.add(i_logo);
-        hid.add(editor);
-        hid.add(l_speed);
-
-        worldLoader.loadWorld(new File("world"+File.separator+"test.tw"));
-            }
-        };
-        loader.setHelper(helper);
+        //LOAD MENU
+        loader.setHelper(new MenuLoader());
         loader.start();
     }
 
@@ -327,6 +175,10 @@ public class MainFrame implements KeyboardListener{
     }
 
     public void update() {
+        if(!worldLoader.isLoaded()){
+            loader.setHelper(new LoadHelper(){public void load(){worldLoader.loadWorld(new File("world"+File.separator+"test.tw"));}});
+            loader.start();
+        }
         //Hook to world loop
         if(!pause){
             world.update();
@@ -373,11 +225,9 @@ public class MainFrame implements KeyboardListener{
         }
         glAccum(GL_RETURN, 1.0f);
 
-        menu.paint();
         hid.paint();
-
+        menu.paint();
     }
-    
 
     public void run() {
         while(!Display.isCloseRequested()) {
@@ -418,16 +268,13 @@ public class MainFrame implements KeyboardListener{
             if(!menu.isVisible()){
                 blurScreen();
                 menu.setVisible(true);
-                hid.setVisible(false);
                 pause();
             }else{
                 menu.setVisible(false);
-                hid.setVisible(true);
                 unpause();
             }
             break;
         }
-
     }
     public void keyType(int key) {}
 

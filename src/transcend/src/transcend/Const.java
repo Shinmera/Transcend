@@ -97,6 +97,7 @@ public class Const {
         registry.put("ANTIALIAS","2");
         registry.put("FORCED_W","0");
         registry.put("FORCED_H","0");
+        registry.put("LAYOUT","swiss");
     }
 
     public String gString(String key){

@@ -7,13 +7,13 @@
   version: 0.1a
 \**********************/
 
-package block;
+package tile;
 
 import NexT.util.Toolkit;
 import org.newdawn.slick.Color;
 import static org.lwjgl.opengl.GL11.*;
 
-public class ColorBlock extends Block{
+public class ColorBlock extends Tile{
     Color c = Color.black;
     float thickness = 0.5f;
 

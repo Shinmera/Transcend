@@ -43,21 +43,26 @@ public class Loader{
     public boolean isLoading(){return loading;}
 
     public void run(){
+        if(!loading)return;
         if (helper!=null) {
+            Const.LOGGER.info("[Loader] Loading...");
             helper.load();
             helper=null;
         }
         if (LoadingList.get().getRemainingResources() > 0) {
             DeferredResource nextResource = LoadingList.get().getNext();
+            String currentt = current;
             current = (LoadingList.get().getTotalResources()-LoadingList.get().getRemainingResources())*100/LoadingList.get().getTotalResources()+"%";
+            if(!current.equals(currentt))Const.LOGGER.info("[Loader] "+current);
             try {nextResource.load();}
-            catch (IOException ex) {Const.LOGGER.log(Level.SEVERE, null, ex);}
+            catch (Exception ex) {Const.LOGGER.log(Level.SEVERE,"[Loader] Failed to load resource!", ex);}
         } else {
-           loading=false;
+            Const.LOGGER.info("[Loader] Finished loading. Ready.");
+            loading=false;
         }
     }
     public void start(){
-        LoadingList.setDeferredLoading(true); 
+        LoadingList.get().setDeferredLoading(true);
         loading = true;
     }
 

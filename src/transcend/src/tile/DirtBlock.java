@@ -9,7 +9,6 @@
 
 package tile;
 
-import block.GrassBlock;
 import java.io.File;
 import transcend.MainFrame;
 
@@ -19,15 +18,17 @@ public class DirtBlock extends Tile{
         super(x,y,w,h);this.z=0;
         drawable.loadTexture(new File(MainFrame.basedir,"tex"+File.separator+"dirt.png"));
         drawable.calcTile(w, h);
+        depth=1;
     }
 
     public DirtBlock(int x,int y,int w,int h,boolean addGrass){
         super(x,y,w,h);this.z=0;
         drawable.loadTexture(new File(MainFrame.basedir,"tex"+File.separator+"dirt.png"));
         drawable.calcTile(w, h);
+        depth=1;
         if(addGrass){
             GrassBlock grass = new GrassBlock(x,y+h-64,w,64);
-            MainFrame.world.addBlock(grass);
+            MainFrame.world.addTile(grass);
         }
     }
 }

@@ -9,6 +9,9 @@
 
 package world;
 
+import tile.ColorBlock;
+import tile.StoneBlock;
+import tile.GrassBlock;
 import tile.DirtBlock;
 import tile.Background;
 import NexT.util.ClassPathHacker;
@@ -19,8 +22,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.logging.Level;
+import tile.BrickBlock;
 import tile.SoundEmitter;
-import tile.StoneBackBlock;
+import tile.TileSet;
 import transcend.Const;
 import transcend.MainFrame;
 
@@ -73,21 +77,13 @@ public class ElementBuilder {
             if(arguments.containsKey("z"))block.setLayer(Integer.parseInt(arguments.get("z")));
             MainFrame.world.addTile(block);
         }
-        else if(name.equals("stonebackblock")){
-            StoneBackBlock block = new StoneBackBlock(Integer.parseInt(arguments.get("x")),
-                              Integer.parseInt(arguments.get("y")),
-                              Integer.parseInt(arguments.get("w")),
-                              Integer.parseInt(arguments.get("h")));
-            if(arguments.containsKey("z"))block.setLayer(Integer.parseInt(arguments.get("z")));
-            MainFrame.world.addTile(block);
-        }
         else if(name.equals("grassblock")){
             GrassBlock block = new GrassBlock(Integer.parseInt(arguments.get("x")),
                               Integer.parseInt(arguments.get("y")),
                               Integer.parseInt(arguments.get("w")),
                               Integer.parseInt(arguments.get("h")));
             if(arguments.containsKey("z"))block.setLayer(Integer.parseInt(arguments.get("z")));
-            MainFrame.world.addBlock(block);
+            MainFrame.world.addTile(block);
         }
         else if(name.equals("stoneblock")){
             StoneBlock block = new StoneBlock(Integer.parseInt(arguments.get("x")),
@@ -95,7 +91,15 @@ public class ElementBuilder {
                               Integer.parseInt(arguments.get("w")),
                               Integer.parseInt(arguments.get("h")));
             if(arguments.containsKey("z"))block.setLayer(Integer.parseInt(arguments.get("z")));
-            MainFrame.world.addBlock(block);
+            MainFrame.world.addTile(block);
+        }
+        else if(name.equals("brickblock")){
+            BrickBlock block = new BrickBlock(Integer.parseInt(arguments.get("x")),
+                              Integer.parseInt(arguments.get("y")),
+                              Integer.parseInt(arguments.get("w")),
+                              Integer.parseInt(arguments.get("h")));
+            if(arguments.containsKey("z"))block.setLayer(Integer.parseInt(arguments.get("z")));
+            MainFrame.world.addTile(block);
         }
         else if(name.equals("blankblock")){
             BlankBlock block = new BlankBlock(Integer.parseInt(arguments.get("x")),
@@ -120,7 +124,7 @@ public class ElementBuilder {
                               Integer.parseInt(arguments.get("h")));
             if(arguments.containsKey("z"))block.setLayer(Integer.parseInt(arguments.get("z")));
             block.setColor(arguments.get("color"));
-            MainFrame.world.addBlock(block);
+            MainFrame.world.addTile(block);
         }
         else if(name.equals("background")){
             Background block = new Background(Integer.parseInt(arguments.get("x")),
@@ -130,6 +134,17 @@ public class ElementBuilder {
                               arguments.get("tex"));
             if(arguments.containsKey("vsp"))block.setVSP(Double.parseDouble(arguments.get("vsp")));
             if(arguments.containsKey("tile"))block.setTiled(Boolean.parseBoolean(arguments.get("tile")));
+            MainFrame.world.addTile(block);
+        }
+        else if(name.equals("tileset")){
+            TileSet block = new TileSet(Integer.parseInt(arguments.get("x")),
+                              Integer.parseInt(arguments.get("y")),
+                              Integer.parseInt(arguments.get("w")),
+                              Integer.parseInt(arguments.get("h")),
+                              arguments.get("tex"));
+            if(arguments.containsKey("z"))block.setLayer(Integer.parseInt(arguments.get("z")));
+            if(arguments.containsKey("u"))block.setU(Integer.parseInt(arguments.get("u")));
+            if(arguments.containsKey("v"))block.setV(Integer.parseInt(arguments.get("v")));
             MainFrame.world.addTile(block);
         }
         else if(name.equals("soundemitter")){

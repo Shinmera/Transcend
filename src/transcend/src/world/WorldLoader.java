@@ -23,10 +23,12 @@ import transcend.Const;
 import transcend.MainFrame;
 
 public class WorldLoader {
-
+    private File loaded = null;
     public WorldLoader(){
         
     }
+
+    public boolean isLoaded(){if(loaded!=null)return true;else return false;}
 
     public boolean saveWorld(File file){
         try{
@@ -41,6 +43,7 @@ public class WorldLoader {
                 pw.println(e.getClass().getName().substring(e.getClass().getName().indexOf(".")+1)+"{");
                 pw.println("x: "+(int)e.getX());
                 pw.println("y: "+(int)e.getY());
+                pw.println("z: "+(int)e.getZ());
                 pw.println("w: "+e.getWidth());
                 pw.println("h: "+e.getHeight());
 
@@ -85,7 +88,7 @@ public class WorldLoader {
                     if(!inBlock&&read.contains("{")){
                         arguments.clear();
                         inBlock = true;
-                        type = read.substring(0,read.indexOf("{")).trim();
+                        type = read.substring(0,read.indexOf("{")).trim().toLowerCase();
                         read="";
                     }
                     if(inBlock){
@@ -117,8 +120,9 @@ public class WorldLoader {
                 }
                 line++;
             }
-        }catch(IOException e){Const.LOGGER.log(Level.SEVERE,"Failed to load World: Read exception",e);}
+        }catch(IOException e){Const.LOGGER.log(Level.SEVERE,"Failed to load World: Read exception",e);return false;}
         Const.LOGGER.info("[World] Loaded "+elementsLoaded+" elements. "+MainFrame.world.blockSize()+" Blocks "+MainFrame.world.entitySize()+" Entities "+MainFrame.world.tileSize()+" Tiles.");
+        loaded = file;
         return true;
     }
 }

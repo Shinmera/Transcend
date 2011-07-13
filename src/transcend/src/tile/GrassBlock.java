@@ -7,18 +7,20 @@
   version: 0.1a
 \**********************/
 
-package block;
+package tile;
 
+import block.HalfBlankBlock;
 import java.io.File;
 import transcend.MainFrame;
 
-public class GrassBlock extends Block{
+public class GrassBlock extends Tile{
 
     public GrassBlock(int x,int y,int w,int h){
         super(x,y,w,h);
         drawable.loadTexture(new File(MainFrame.basedir,"tex"+File.separator+"grass.png"));
         drawable.calcTile(w, h-1);
-        solid=0.5;
+        HalfBlankBlock block = new HalfBlankBlock(x,y+h-16,w,16);
+        MainFrame.world.addBlock(block);
         z=1;
     }
 }

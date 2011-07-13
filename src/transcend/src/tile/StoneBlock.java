@@ -9,15 +9,16 @@
 
 package tile;
 
-import block.GrassBlock;
+import block.Block;
 import java.io.File;
 import transcend.MainFrame;
 
-public class StoneBackBlock extends Tile{
-
-    public StoneBackBlock(int x,int y,int w,int h){
-        super(x,y,w,h);this.z=0;
-        drawable.loadTexture(new File(MainFrame.basedir,"tex"+File.separator+"stone_back.png"));
+public class StoneBlock extends Tile{
+    
+    public StoneBlock(int x,int y,int w,int h){
+        super(x,y,w,h);
+        drawable.loadTexture(new File(MainFrame.basedir,"tex"+File.separator+"stone.png"));
         drawable.calcTile(w, h);
+        z=-1;
     }
 }

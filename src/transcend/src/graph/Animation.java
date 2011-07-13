@@ -69,12 +69,12 @@ public class Animation {
     }
 
     public void calcRelative(){
-        rel_w=texture.getImageWidth()/spritesize;
-        rel_h=texture.getImageHeight()/spritesize;
-        if(start.length!=(int)rel_h){
-            start = new int[(int)rel_h];
-            stop = new int[(int)rel_h];
-            loop = new int[(int)rel_h];
+        rel_w=spritesize/texture.getImageWidth();
+        rel_h=spritesize/texture.getImageHeight();
+        if(start.length!=(int)(1.0/rel_h)){
+            start = new int[(int)(1.0/rel_h)];
+            stop = new int[(int)(1.0/rel_h)];
+            loop = new int[(int)(1.0/rel_h)];
             for(int i=0;i<start.length;i++){start[i]=0;stop[i]=0;loop[i]=0;}
         }
     }
@@ -97,7 +97,8 @@ public class Animation {
     }
 
     public void setZ(int z){this.z=z;}
-
+    public void setU(int u){ind_w=u;}
+    public void setV(int v){ind_h=v;}
     public void setStart(int reel,int pos){start[reel]=pos;}
     public void setStop(int reel,int pos){stop[reel]=pos;}
     public void setLoop(int reel,int pos){loop[reel]=pos;}
@@ -114,6 +115,8 @@ public class Animation {
     }
     public int getReel(){return ind_h;}
     public Texture getTexture(){return texture;}
+    public int getU(){return ind_w;}
+    public int getV(){return ind_h;}
 
     public void update(){
         if(stop[0]<0)return;
@@ -141,19 +144,24 @@ public class Animation {
                 glVertex3i(x, y+h,z);
             glEnd();
         }else{
+            glMatrixMode(GL_TEXTURE);
+                glLoadIdentity();
+                glScaled(tile_w,tile_h,1);
+            glMatrixMode(GL_MODELVIEW);
+
             Color.white.bind();
             glBindTexture(GL_TEXTURE_2D,texture.getTextureID());
             glPushMatrix();
             glTranslatef(x+w/2,y+h/2,z);
             glScalef(direction,1,1);
             glBegin(GL_QUADS);
-                glTexCoord2d(1.0/rel_w*ind_w,1.0/rel_h*(ind_h+1)*tile_h);
+                glTexCoord2d(rel_w*ind_w     ,rel_h*(ind_h+1));
                 glVertex2i(-w/2,-h/2);
-                glTexCoord2d(1.0/rel_w*(ind_w+1)*tile_w,1.0/rel_h*(ind_h+1)*tile_h);
+                glTexCoord2d(rel_w*(ind_w+1) ,rel_h*(ind_h+1));
                 glVertex2i(w/2, -h/2);
-                glTexCoord2d(1.0/rel_w*(ind_w+1)*tile_w,1.0/rel_h*ind_h);
+                glTexCoord2d(rel_w*(ind_w+1) ,rel_h*ind_h);
                 glVertex2i(w/2, h/2);
-                glTexCoord2d(1.0/rel_w*ind_w,1.0/rel_h*ind_h);
+                glTexCoord2d(rel_w*ind_w     ,rel_h*ind_h);
                 glVertex2i(-w/2, h/2);
             glEnd();
             glPopMatrix();

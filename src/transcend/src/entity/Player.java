@@ -19,7 +19,7 @@ import world.Element;
 
 public class Player extends Entity implements KeyboardListener{
     public static final int ELEMENT_ID = 0x2;
-    private final double vxacc=5,vyacc=9,vydcc=0.4,vxdcc=5;
+    private final double vxacc=5,vyacc=10,vydcc=0.4,vxdcc=5;
     private double vx=0,vy=0;
     private Element ground = null,ceiling = null,left = null,right = null;
     private boolean K_LEFT,K_RIGHT,K_SPACE;
@@ -85,12 +85,12 @@ public class Player extends Entity implements KeyboardListener{
             vy-=vydcc;
             if(vy<0){
                 Element temp = check(x+2,y+vy,x+w-2,y+vy);
-                if((temp!=null)&&(temp.y+temp.h-y-vy<temp.h/2)){
+                if((temp!=null)&&(temp.y+temp.h-y-vy<temp.h)){
                     vy=0;
                     y=temp.y+temp.h;
                 }
             }
-        } else if(ground.y+ground.h-y<ground.h/2 && vy<0) {y=ground.y+ground.h;vy = 0;
+        } else if(ground.y+ground.h-y<ground.h && vy<0) {y=ground.y+ground.h;vy = 0;
         } else if(vy<0)vy=0;
         if(left!=null&&vx<0){x-=vx;vx=0;}
         if(right!=null&&vx>0){x-=vx;vx=0;}
@@ -136,8 +136,7 @@ public class Player extends Entity implements KeyboardListener{
     public void keyType(int key) {
         if(MainFrame.pause)return;
         switch(key){
-            case Keyboard.KEY_LEFT:break;
-            case Keyboard.KEY_RIGHT:break;
+            case Keyboard.KEY_R:x=0;y=0;vx=0;vy=0;break;
         }
     }
 }

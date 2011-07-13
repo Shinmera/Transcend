@@ -13,21 +13,12 @@ public class BlankBlock extends Block{
 
     public void draw(){
         if(!MainFrame.editor.getActive())return;
-        Color.white.bind();
+        new Color(1f,1f,1f,0.5f).bind();
         glBegin(GL_QUADS);
             glVertex2d(x,y);
             glVertex2d(x,y+h);
             glVertex2d(x+w,y+h);
             glVertex2d(x+w,y);
         glEnd();
-
-        /*glLineWidth(thickness);
-        glBegin(GL_LINE_LOOP);
-            glColor4f(border.getRed()/255.0f,border.getGreen()/255.0f,border.getBlue()/255.0f,border.getAlpha()/255);
-            glVertex2f(x,y);
-            glVertex2f(x,y+h);
-            glVertex2f(x+w,y+h);
-            glVertex2f(x+w,y);
-        glEnd();*/
     }
 }

@@ -24,6 +24,7 @@ public class BElement {
     public String getName(){return name;}
     public double getX(){return x;}
     public double getY(){return y;}
+    public double getZ(){return z;}
     public double getLayer(){return z;}
     public int getWidth(){return w;}
     public int getHeight(){return h;}

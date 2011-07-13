@@ -13,7 +13,7 @@ public class HalfBlankBlock extends Block{
 
     public void draw(){
         if(!MainFrame.editor.getActive())return;
-        Color.gray.bind();
+        new Color(0.5f,0.5f,0.5f,0.5f).bind();
         glBegin(GL_QUADS);
             glVertex2d(x,y);
             glVertex2d(x,y+h);
