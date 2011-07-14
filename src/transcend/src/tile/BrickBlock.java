@@ -18,6 +18,6 @@ public class BrickBlock extends Tile{
         super(x,y,w,h);
         drawable.loadTexture(new File(MainFrame.basedir,"tex"+File.separator+"brick.png"));
         drawable.calcTile(w, h);
-        depth=1.5f;
+        depth=1.7f;
     }
 }

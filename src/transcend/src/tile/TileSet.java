@@ -36,12 +36,18 @@ public class TileSet extends Tile{
 
     public void setU(int u){drawable.setU(u);}
     public void setV(int v){drawable.setV(v);}
+    public void setS(double s){
+        drawable.setSpritesize(s);
+        drawable.setSize(w,h);
+        drawable.calcRelative();
+    }
 
     public SimpleSet<String, String> getOptions() {
         SimpleSet<String, String> set = new SimpleSet();
         set.put("tex",tileset);
         set.put("u",drawable.getU()+"");
         set.put("v",drawable.getV()+"");
+        set.put("s",drawable.getSpritesize()+"");
         return set;
     }
 }

@@ -1,36 +1,54 @@
-01:16 [TRA-PUBLIC][INFO] [CONST] Loading
+21:56 [TRA-PUBLIC][INFO] [CONST] Loading
 null.transcend.Const.loadRegistry
-01:16 [TRA-PUBLIC][INFO] [InputEventHandler] Loaded layout swiss. 20 keys mapped.
+21:56 [TRA-PUBLIC][INFO] [InputEventHandler] Loaded layout swiss. 20 keys mapped.
 null.event.InputEventHandler.<init>
-01:16 [TRA-PUBLIC][INFO] [MF] Booting up...
+21:56 [TRA-PUBLIC][INFO] [MF] Booting up...
 null.transcend.MainFrame.main
-01:16 [TRA-PUBLIC][INFO] [CONST] Loading
+21:56 [TRA-PUBLIC][INFO] [CONST] Loading
 null.transcend.Const.loadRegistry
-01:16 [TRA-PUBLIC][INFO] LWJGL found 36 display modes.
+21:56 [TRA-PUBLIC][INFO] LWJGL found 36 display modes.
 null.gui.DisplayModeChooser.<init>
-01:16 [TRA-PUBLIC][INFO] [CONST] Saving
+21:56 [TRA-PUBLIC][INFO] [CONST] Saving
 null.transcend.Const.saveRegistry
-01:16 [TRA-PUBLIC][INFO] [CONST] Loading
+21:56 [TRA-PUBLIC][INFO] [CONST] Loading
 null.transcend.Const.loadRegistry
-01:16 [TRA-PUBLIC][INFO] [MF] Initializing...
+21:56 [TRA-PUBLIC][INFO] [MF] Initializing...
 null.transcend.MainFrame.create
-01:16 [TRA-PUBLIC][INFO] [Loader] Loading...
+21:56 [TRA-PUBLIC][INFO] [Loader] Loading...
 null.gui.Loader.run
-01:16 [TRA-PUBLIC][INFO] [Loader] Finished loading. Ready.
+21:56 [TRA-PUBLIC][INFO] [Loader] Finished loading. Ready.
 null.gui.Loader.run
-01:16 [TRA-PUBLIC][INFO] [Loader] Loading...
+21:56 [TRA-PUBLIC][INFO] [Loader] Loading...
 null.gui.Loader.run
-01:16 [TRA-PUBLIC][INFO] [World] Loading World from D:\projects\JAVAPROJECTS\transcend\src\transcend\run\world\test.tw
+21:56 [TRA-PUBLIC][INFO] [World] Loading World from D:\projects\JAVAPROJECTS\transcend\src\transcend\run\world\test.tw
 null.world.WorldLoader.loadWorld
-01:16 [TRA-PUBLIC][INFO] [World] Loaded 73 elements. 52 Blocks 1 Entities 28 Tiles.
+21:56 [TRA-PUBLIC][INFO] [World] Loaded 30 elements. 10 Blocks 1 Entities 20 Tiles.
 null.world.WorldLoader.loadWorld
-01:16 [TRA-PUBLIC][INFO] [Loader] 33%
+21:56 [TRA-PUBLIC][INFO] [Loader] 25%
 null.gui.Loader.run
-01:16 [TRA-PUBLIC][INFO] [Loader] 66%
+21:56 [TRA-PUBLIC][INFO] [Loader] 50%
 null.gui.Loader.run
-01:16 [TRA-PUBLIC][INFO] [Loader] 100%
+21:56 [TRA-PUBLIC][INFO] [Loader] 75%
 null.gui.Loader.run
-01:16 [TRA-PUBLIC][INFO] [Loader] Finished loading. Ready.
+21:56 [TRA-PUBLIC][INFO] [Loader] 100%
 null.gui.Loader.run
-01:17 [TRA-PUBLIC][INFO] [MF] Shutting down...
+21:56 [TRA-PUBLIC][INFO] [Loader] Finished loading. Ready.
+null.gui.Loader.run
+21:57 [TRA-PUBLIC][INFO] [World] Loading World from D:\projects\JAVAPROJECTS\transcend\src\transcend\run\world\test.tw
+null.world.WorldLoader.loadWorld
+21:57 [TRA-PUBLIC][INFO] [World] Loaded 30 elements. 10 Blocks 1 Entities 20 Tiles.
+null.world.WorldLoader.loadWorld
+21:57 [TRA-PUBLIC][INFO] [World] Loading World from D:\projects\JAVAPROJECTS\transcend\src\transcend\run\world\test.tw
+null.world.WorldLoader.loadWorld
+21:57 [TRA-PUBLIC][INFO] [World] Loaded 30 elements. 10 Blocks 1 Entities 20 Tiles.
+null.world.WorldLoader.loadWorld
+21:57 [TRA-PUBLIC][INFO] [World] Loading World from D:\projects\JAVAPROJECTS\transcend\src\transcend\run\world\test.tw
+null.world.WorldLoader.loadWorld
+21:57 [TRA-PUBLIC][INFO] [World] Loaded 30 elements. 10 Blocks 1 Entities 20 Tiles.
+null.world.WorldLoader.loadWorld
+22:31 [TRA-PUBLIC][INFO] [World] Save World to D:\projects\JAVAPROJECTS\transcend\src\transcend\run\world\test.tw
+null.world.WorldLoader.saveWorld
+22:31 [TRA-PUBLIC][INFO] [World] Saved 40 elements.
+null.world.WorldLoader.saveWorld
+22:31 [TRA-PUBLIC][INFO] [MF] Shutting down...
 null.transcend.MainFrame.destroy

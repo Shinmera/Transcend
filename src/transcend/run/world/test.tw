@@ -9,579 +9,311 @@ tex: background0.png
 vsp: 1.0
 }
 
-HalfBlankBlock{
-x: -1600
-y: -80
-z: 5
-w: 1728
-h: 16
-}
-
-HalfBlankBlock{
-x: -1600
-y: -80
-z: 5
-w: 1728
-h: 16
-}
-
-HalfBlankBlock{
-x: -1600
-y: -80
-z: 5
-w: 1728
-h: 16
-}
-
-HalfBlankBlock{
-x: -1600
-y: -80
-z: 5
-w: 1728
-h: 16
-}
-
-GrassBlock{
-x: -1600
-y: -128
+BrickBlock{
+x: -256
+y: -192
 z: 0
-w: 1728
+w: 64
+h: 512
+}
+
+BrickBlock{
+x: -256
+y: 320
+z: 0
+w: 832
 h: 64
 }
 
-HalfBlankBlock{
-x: 64
-y: -208
-z: 5
-w: 640
-h: 16
-}
-
-HalfBlankBlock{
-x: 64
-y: -208
-z: 5
-w: 640
-h: 16
-}
-
-HalfBlankBlock{
-x: 64
-y: -208
-z: 5
-w: 640
-h: 16
-}
-
-HalfBlankBlock{
-x: 64
-y: -208
-z: 5
-w: 640
-h: 16
-}
-
-GrassBlock{
-x: 64
-y: -256
-z: 0
-w: 640
-h: 64
-}
-
-HalfBlankBlock{
-x: 0
-y: 240
-z: 5
-w: 448
-h: 16
-}
-
-HalfBlankBlock{
-x: 0
-y: 240
-z: 5
-w: 448
-h: 16
-}
-
-HalfBlankBlock{
-x: 0
-y: 240
-z: 5
-w: 448
-h: 16
-}
-
-HalfBlankBlock{
-x: 0
-y: 240
-z: 5
-w: 448
-h: 16
-}
-
-GrassBlock{
-x: 0
-y: 192
-z: 0
-w: 448
-h: 64
-}
-
-HalfBlankBlock{
-x: 448
-y: 112
-z: 5
-w: 320
-h: 16
-}
-
-HalfBlankBlock{
-x: 448
-y: 112
-z: 5
-w: 320
-h: 16
-}
-
-HalfBlankBlock{
-x: 448
-y: 112
-z: 5
-w: 320
-h: 16
-}
-
-HalfBlankBlock{
-x: 448
-y: 112
-z: 5
-w: 320
-h: 16
-}
-
-GrassBlock{
-x: 448
-y: 64
-z: 0
-w: 320
-h: 64
-}
-
-HalfBlankBlock{
-x: 640
-y: 48
-z: 5
-w: 704
-h: 16
-}
-
-HalfBlankBlock{
-x: 640
-y: 48
-z: 5
-w: 704
-h: 16
-}
-
-HalfBlankBlock{
-x: 640
-y: 48
-z: 5
-w: 704
-h: 16
-}
-
-HalfBlankBlock{
-x: 640
-y: 48
-z: 5
-w: 704
-h: 16
-}
-
-GrassBlock{
-x: 640
+BrickBlock{
+x: 512
 y: 0
 z: 0
-w: 704
-h: 64
-}
-
-HalfBlankBlock{
-x: -1600
-y: -80
-z: 0
-w: 1728
-h: 16
-}
-
-HalfBlankBlock{
-x: 0
-y: 240
-z: 0
-w: 448
-h: 16
-}
-
-HalfBlankBlock{
-x: 64
-y: -208
-z: 0
-w: 640
-h: 16
-}
-
-HalfBlankBlock{
-x: 448
-y: 112
-z: 0
-w: 320
-h: 16
-}
-
-HalfBlankBlock{
-x: 640
-y: -144
-z: 5
-w: 256
-h: 16
-}
-
-HalfBlankBlock{
-x: 640
-y: -144
-z: 5
-w: 256
-h: 16
-}
-
-HalfBlankBlock{
-x: 640
-y: -144
-z: 5
-w: 256
-h: 16
-}
-
-HalfBlankBlock{
-x: 640
-y: -144
-z: 5
-w: 256
-h: 16
-}
-
-GrassBlock{
-x: 640
-y: -192
-z: 0
-w: 256
-h: 64
-}
-
-HalfBlankBlock{
-x: 512
-y: -16
-z: 5
-w: 192
-h: 16
-}
-
-HalfBlankBlock{
-x: 512
-y: -16
-z: 5
-w: 192
-h: 16
-}
-
-HalfBlankBlock{
-x: 512
-y: -16
-z: 5
-w: 192
-h: 16
-}
-
-HalfBlankBlock{
-x: 512
-y: -16
-z: 5
-w: 192
-h: 16
-}
-
-GrassBlock{
-x: 512
-y: -64
-z: 0
-w: 192
-h: 64
-}
-
-HalfBlankBlock{
-x: 640
-y: -144
-z: 0
-w: 256
-h: 16
-}
-
-HalfBlankBlock{
-x: 512
-y: -16
-z: 0
-w: 192
-h: 16
-}
-
-HalfBlankBlock{
-x: 640
-y: 48
-z: 0
-w: 704
-h: 16
-}
-
-DirtBlock{
-x: -1600
-y: -896
-z: -1
-w: 1728
-h: 832
-}
-
-DirtBlock{
-x: 0
-y: -192
-z: -2
-w: 448
-h: 448
-}
-
-DirtBlock{
-x: 128
-y: -896
-z: -1
-w: 576
-h: 704
-}
-
-DirtBlock{
-x: 640
-y: -896
-z: -2
-w: 256
-h: 768
-}
-
-DirtBlock{
-x: 640
-y: -896
-z: -4
-w: 704
-h: 960
-}
-
-DirtBlock{
-x: 512
-y: -192
-z: -3
-w: 192
-h: 192
-}
-
-DirtBlock{
-x: 448
-y: -192
-z: -5
-w: 320
+w: 64
 h: 320
 }
 
 BrickBlock{
-x: 1344
-y: 0
+x: -192
+y: -192
 z: 0
-w: 576
+w: 1216
 h: 64
-}
-
-BrickBlock{
-x: 1536
-y: 64
-z: -5
-w: 384
-h: 128
 }
 
 BlankBlock{
-x: 1344
-y: 0
-z: -5
-w: 576
+x: -192
+y: -192
+z: 0
+w: 1216
 h: 64
 }
 
-BrickBlock{
-x: 1600
-y: -576
+BlankBlock{
+x: -256
+y: -192
 z: 0
-w: 320
+w: 64
 h: 576
 }
 
-BrickBlock{
-x: 1536
-y: 192
+BlankBlock{
+x: -192
+y: 320
 z: 0
-w: 320
+w: 768
+h: 64
+}
+
+BlankBlock{
+x: 512
+y: 0
+z: 0
+w: 64
+h: 320
+}
+
+BrickBlock{
+x: -192
+y: -128
+z: -4
+w: 704
+h: 448
+}
+
+BrickBlock{
+x: 512
+y: -128
+z: -1
+w: 64
 h: 128
 }
 
 BrickBlock{
-x: 1792
-y: 320
-z: 0
+x: 448
+y: -128
+z: -2
 w: 64
-h: 256
-}
-
-BrickBlock{
-x: 1856
-y: 576
-z: 0
-w: 512
 h: 192
 }
 
 BrickBlock{
-x: 2368
-y: 64
-z: 0
-w: 128
-h: 640
-}
-
-BrickBlock{
-x: 1920
-y: -576
-z: 0
-w: 384
-h: 576
-}
-
-BrickBlock{
-x: 1984
-y: 128
-z: 0
-w: 384
-h: 64
-}
-
-BrickBlock{
-x: 1856
-y: 320
-z: 0
-w: 384
-h: 64
-}
-
-BrickBlock{
-x: 1792
-y: 512
-z: 0
-w: 128
-h: 128
-}
-
-BrickBlock{
-x: 2304
+x: 384
 y: -128
-z: 0
-w: 512
-h: 64
-}
-
-BlankBlock{
-x: 1920
-y: -64
-z: 0
-w: 384
-h: 64
-}
-
-BlankBlock{
-x: 2304
-y: -128
-z: 0
-w: 512
-h: 64
-}
-
-BlankBlock{
-x: 2368
-y: 64
-z: 0
+z: -3
 w: 128
-h: 640
-}
-
-BlankBlock{
-x: 1856
-y: 576
-z: 0
-w: 512
-h: 192
-}
-
-BlankBlock{
-x: 1856
-y: 512
-z: 0
-w: 64
-h: 64
-}
-
-BlankBlock{
-x: 1792
-y: 384
-z: 0
-w: 64
 h: 256
 }
 
-BlankBlock{
-x: 1792
-y: 320
+TileSet{
+x: 128
+y: -128
 z: 0
-w: 448
-h: 64
-}
-
-BlankBlock{
-x: 1536
-y: 192
-z: 0
-w: 320
+w: 128
 h: 128
+tex: tileset1.png
+u: 1
+v: 0
+s: 128.0
 }
 
-BlankBlock{
-x: 1984
-y: 128
+HalfBlankBlock{
+x: 704
+y: 112
+z: 5
+w: 256
+h: 16
+}
+
+GrassBlock{
+x: 704
+y: 64
 z: 0
-w: 384
+w: 256
 h: 64
 }
 
-BrickBlock{
-x: 1856
-y: -64
-z: -5
+DirtBlock{
+x: 704
+y: -128
+z: -1
+w: 256
+h: 256
+}
+
+DirtBlock{
+x: 576
+y: -192
+z: -3
 w: 640
-h: 704
+h: 192
+}
+
+HalfBlankBlock{
+x: 576
+y: -16
+z: 5
+w: 128
+h: 16
+}
+
+GrassBlock{
+x: 576
+y: -64
+z: 0
+w: 128
+h: 64
+}
+
+HalfBlankBlock{
+x: 960
+y: -16
+z: 5
+w: 256
+h: 16
+}
+
+GrassBlock{
+x: 960
+y: -64
+z: 0
+w: 256
+h: 64
+}
+
+DirtBlock{
+x: 1536
+y: -192
+z: -5
+w: 512
+h: 192
+}
+
+HalfBlankBlock{
+x: 1536
+y: -16
+z: 5
+w: 512
+h: 16
+}
+
+GrassBlock{
+x: 1536
+y: -64
+z: 0
+w: 512
+h: 64
+}
+
+DirtBlock{
+x: 2048
+y: -192
+z: -1
+w: 192
+h: 576
+}
+
+HalfBlankBlock{
+x: 2048
+y: 368
+z: 5
+w: 192
+h: 16
+}
+
+GrassBlock{
+x: 2048
+y: 320
+z: -1
+w: 192
+h: 64
+}
+
+StoneBlock{
+x: -1216
+y: -320
+z: 0
+w: 2560
+h: 128
+}
+
+StoneBlock{
+x: -1216
+y: -384
+z: -1
+w: 2560
+h: 64
+}
+
+StoneBlock{
+x: -1216
+y: -448
+z: -2
+w: 2560
+h: 64
+}
+
+StoneBlock{
+x: -1216
+y: -512
+z: -3
+w: 2560
+h: 64
+}
+
+BlankBlock{
+x: -1216
+y: -256
+z: -3
+w: 2880
+h: 64
+}
+
+BlankBlock{
+x: 2560
+y: -256
+z: -3
+w: 128
+h: 64
+}
+
+HalfBlankBlock{
+x: 1664
+y: -208
+z: 5
+w: 896
+h: 16
+}
+
+GrassBlock{
+x: 1664
+y: -256
+z: 0
+w: 896
+h: 64
+}
+
+HalfBlankBlock{
+x: 1984
+y: -336
+z: 5
+w: 512
+h: 16
+}
+
+GrassBlock{
+x: 1984
+y: -384
+z: 0
+w: 512
+h: 64
+}
+
+DirtBlock{
+x: 1344
+y: -512
+z: -1
+w: 1344
+h: 320
 }
 

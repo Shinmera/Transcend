@@ -117,6 +117,7 @@ public class Animation {
     public Texture getTexture(){return texture;}
     public int getU(){return ind_w;}
     public int getV(){return ind_h;}
+    public double getSpritesize(){return spritesize;}
 
     public void update(){
         if(stop[0]<0)return;

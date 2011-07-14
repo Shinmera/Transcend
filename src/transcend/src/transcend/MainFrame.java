@@ -8,21 +8,16 @@
 \**********************/
 
 package transcend;
-import java.util.logging.Logger;
+import particle.ParticlePool;
 import org.newdawn.slick.openal.SoundStore;
 import org.lwjgl.openal.AL;
 import graph.SoundPool;
 import graph.TexturePool;
 import gui.LoadHelper;
 import gui.Loader;
-import gui.GImage;
-import gui.TrueTypeFont;
-import gui.GLabel;
-import gui.GTextField;
 import gui.Editor;
 import org.lwjgl.BufferUtils;
 import java.nio.IntBuffer;
-import gui.GButton;
 import de.matthiasmann.twl.utils.PNGDecoder;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
@@ -62,6 +57,7 @@ public class MainFrame implements KeyboardListener{
     public static final Editor editor = new Editor();
     public static final TexturePool texturePool = new TexturePool();
     public static final SoundPool soundPool = new SoundPool();
+    public static final ParticlePool particlePool = new ParticlePool();
     public static Loader loader;
     public static Player player;
     public static int fps = 60;
@@ -74,7 +70,6 @@ public class MainFrame implements KeyboardListener{
     }
 
     public static void main(String[] args){
-        System.out.println((0x28)+"");
         Const.LOGGER.info("[MF] Booting up...");
         MainFrame mf = new MainFrame();
         try{
@@ -125,8 +120,6 @@ public class MainFrame implements KeyboardListener{
 
         ieh.addKeyboardListener(this);
         player = new Player();
-        int id = world.addEntity(player);
-        camera.follow(id);
         camera.setBoundary(300);
         camera.setPosition(DISPLAY_WIDTH/2,DISPLAY_HEIGHT/2);
 
@@ -183,6 +176,7 @@ public class MainFrame implements KeyboardListener{
         if(!pause){
             world.update();
             camera.update();
+            particlePool.update();
         }
         //Handle input
         ieh.triggerKeyboardEvent();
@@ -204,6 +198,7 @@ public class MainFrame implements KeyboardListener{
             
             camera.camBegin();
                 world.draw();
+                particlePool.draw();
 
                 glEnable(GL_COLOR_LOGIC_OP);
                 glLogicOp(GL_XOR);

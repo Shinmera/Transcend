@@ -19,7 +19,7 @@ import org.lwjgl.input.Mouse;
 import static org.lwjgl.opengl.GL11.*;
 
 public class Editor extends GObject implements MouseListener{
-    private String[] blocks = {"blankblock","halfblankblock","dirtblock","grassblock","stoneblock","brickblock","tileset"};
+    private String[] blocks = {"blankblock","halfblankblock","dirtblock","grassblock","stoneblock","brickblock","tileset","emitter"};
     private boolean active=false;
     private int tilesize=64;
     private int curItem=0;
@@ -116,6 +116,7 @@ public class Editor extends GObject implements MouseListener{
                 args.put("z", curLayer+"");
                 args.put("w", bx+"");
                 args.put("h", by+"");
+                args.put("a", "");
                 MainFrame.elementBuilder.buildElement(blocks[curItem], args);
             }
             x=0;y=0;

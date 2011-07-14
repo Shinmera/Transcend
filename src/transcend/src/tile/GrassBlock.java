@@ -19,8 +19,14 @@ public class GrassBlock extends Tile{
         super(x,y,w,h);
         drawable.loadTexture(new File(MainFrame.basedir,"tex"+File.separator+"grass.png"));
         drawable.calcTile(w, h-1);
-        HalfBlankBlock block = new HalfBlankBlock(x,y+h-16,w,16);
-        MainFrame.world.addBlock(block);
         z=1;
+    }
+
+    public GrassBlock(int x,int y,int w,int h,boolean autoblock){
+        this(x,y,w,h);
+        if(autoblock){
+            HalfBlankBlock block = new HalfBlankBlock(x,y+h-16,w,16);
+            MainFrame.world.addBlock(block);
+        }
     }
 }

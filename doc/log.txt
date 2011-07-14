@@ -165,3 +165,10 @@ GPanel um Namensgebung erweitert.
 [21:30-1:20 13/14.7.2011]
 Weitere kleinere Änderungen.
 Einführung von Keyboard Layouts zur korrekten parsung von text eingabe.
+
+[18:30-22:10 14.7.2011]
+Erweiterung des Keyboard Layouts.
+Einbindung dessen in die GTextField Klasse.
+Zeichnen verschiedener Texturen.
+Begin des Partikel-Systems.
+Boxen Kollision des Spielers perfektioniert.

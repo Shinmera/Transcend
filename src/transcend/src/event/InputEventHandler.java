@@ -120,38 +120,21 @@ public class InputEventHandler {
     }
 
     public String parseKeyToText(int key){
-        /*switch(key){
-            case Keyboard.KEY_8:
-                if(Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) return "(";
-                else                                        return "8";
-            case Keyboard.KEY_9:
-                if(Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) return ")";
-                else                                        return "9";
-            case Keyboard.KEY_7:
-                if(Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) return "/";
-                else                                        return "7";
-            case Keyboard.KEY_PERIOD:
-                if(Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) return ":";
-                else                                        return ".";
-            case Keyboard.KEY_COMMA:
-                if(Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) return ";";
-                else                                        return ",";
-            case Keyboard.KEY_MINUS:
-                if(Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) return "_";
-                else                                        return "-";
-            case Keyboard.KEY_0:
-                if(Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) return "=";
-                else                                        return "0";
-        }*/
-        if(keyMap.containsKey(Keyboard.getKeyName(key))){
-            if(keyMap.get(Keyboard.getKeyName(key)).length()>2&&
-               Keyboard.isKeyDown(Keyboard.KEY_LSHIFT))     return keyMap.get(Keyboard.getKeyName(key)).split(" ")[1];
-            else                                            return keyMap.get(Keyboard.getKeyName(key)).split(" ")[0];
-        }
         if(keyMap.containsKey(key+"")){
-            if(keyMap.get(key+"").length()>2&&
+            if(keyMap.get(key+"").length()>4&&
+               MainFrame.ieh.isKeyDown(Keyboard.KEY_LMENU)&&MainFrame.ieh.isKeyDown(Keyboard.KEY_LCONTROL))
+                                                            return keyMap.get(key+"").split(" ")[2];
+            else if(keyMap.get(key+"").length()>2&&
                Keyboard.isKeyDown(Keyboard.KEY_LSHIFT))     return keyMap.get(key+"").split(" ")[1];
             else                                            return keyMap.get(key+"").split(" ")[0];
+        }
+        if(keyMap.containsKey(Keyboard.getKeyName(key))){
+            if(keyMap.get(Keyboard.getKeyName(key)).length()>4&&
+               MainFrame.ieh.isKeyDown(Keyboard.KEY_LMENU)&&MainFrame.ieh.isKeyDown(Keyboard.KEY_LCONTROL))
+                                                            return keyMap.get(Keyboard.getKeyName(key)).split(" ")[2];
+            else if(keyMap.get(Keyboard.getKeyName(key)).length()>2&&
+               Keyboard.isKeyDown(Keyboard.KEY_LSHIFT))     return keyMap.get(Keyboard.getKeyName(key)).split(" ")[1];
+            else                                            return keyMap.get(Keyboard.getKeyName(key)).split(" ")[0];
         }
         if((key>=0x10&&key<=0x19)||(key>=0x1E&&key<=0x26)||(key>=0x2C&&key<=0x32)||(key>=0x2&&key<=0xB)){
             if(Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)||Keyboard.isKeyDown(Keyboard.KEY_CAPITAL))

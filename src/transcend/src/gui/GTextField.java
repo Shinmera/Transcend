@@ -8,6 +8,7 @@
 \**********************/
 
 package gui;
+import java.util.Arrays;
 import org.lwjgl.input.Mouse;
 import event.MouseListener;
 import org.lwjgl.input.Keyboard;
@@ -17,6 +18,7 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class GTextField extends GLabel implements KeyboardListener,MouseListener{
     private boolean focus=false;
+    int cc=0;
 
     public GTextField(){super();MainFrame.ieh.addKeyboardListener(this);MainFrame.ieh.addMouseListener(this);}
     public GTextField(String text){super();MainFrame.ieh.addKeyboardListener(this);MainFrame.ieh.addMouseListener(this);this.text=text;}
@@ -25,8 +27,21 @@ public class GTextField extends GLabel implements KeyboardListener,MouseListener
         super.sPaint();
 
         fore.bind();
-        font.drawString(x+5, y+h/2-font.getLineHeight()/2, text, 1,1, TrueTypeFont.ALIGN_LEFT);
+        font.drawString(x+5, y+h/2-font.getLineHeight()/2, insertAt("|",cc), 1,1, TrueTypeFont.ALIGN_LEFT);
         glBindTexture(GL_TEXTURE_2D, 0); //release
+    }
+
+    public String insertAt(String t,int c){
+        if(c>=text.length())return text+t;
+        String a = text.substring(0,c);
+        String b = text.substring(c);
+        return a+t+b;
+    }
+    public String removeFrom(int n,int c){
+        if(c>=text.length())return text.substring(0,text.length()-1);
+        char[] a = Arrays.copyOfRange(text.toCharArray(), 0,c);
+        char[] b = Arrays.copyOfRange(text.toCharArray(), c+n,text.length());
+        return new String(a)+new String(b);
     }
 
     public void onConfirm(){}
@@ -36,16 +51,26 @@ public class GTextField extends GLabel implements KeyboardListener,MouseListener
         if(!focus)return;
         switch(key){
             case Keyboard.KEY_BACK:
-                if (text.length() > 0) {text = text.substring(0, text.length() - 1);}
+                if (text.length() > 0) {
+                    if(cc>0){
+                        cc--;
+                        text=removeFrom(1,cc);
+                    }
+                }
                 break;
             case Keyboard.KEY_RETURN:
                 onConfirm();
                 break;
-        }
-        if((key>=0x10&&key<=0x19)||(key>=0x1E&&key<=0x26)||(key>=0x2C&&key<=0x32)||(key>=0x2&&key<=0x9)){
-            if(Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)||Keyboard.isKeyDown(Keyboard.KEY_CAPITAL))
-                text+=Keyboard.getKeyName(key);
-            else text+=Keyboard.getKeyName(key).toLowerCase();
+            case Keyboard.KEY_LEFT:
+                if(cc>0)cc--;
+                break;
+            case Keyboard.KEY_RIGHT:
+                if(cc<text.length())cc++;
+                break;
+            default:
+                text=insertAt(MainFrame.ieh.parseKeyToText(key),cc);
+                cc++;
+                break;
         }
     }
     public void keyReleased(int key) {}

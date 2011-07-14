@@ -32,6 +32,19 @@ public class World {
     public int entitySize(){return entities.size();}
     public int tileSize(){return tiles.size();}
     public int size(){return ids.size();}
+    public void clear(){
+        blocks.clear();
+        entities.clear();
+        tiles.clear();
+        ids.clear();
+    }
+    public void clear(int ID){
+        if(!blocks.containsKey(ID))blocks.clear();
+        if(!entities.containsKey(ID))entities.clear();
+        if(!tiles.containsKey(ID))tiles.clear();
+        ids.clear();
+        ids.add(ID);
+    }
 
     public int getID(int i){return ids.get(i);}
 
@@ -97,13 +110,12 @@ public class World {
     }
 
     public void draw(){
-        for(int j=-5;j<=5;j++){
+        for(int j=-5;j<=0;j++){
             for(int i=0;i<tiles.size();i++){
                 if(tiles.getAt(i).z==j)tiles.getAt(i).draw();
             }
         }
-        
-        for(int j=-5;j<=5;j++){
+        for(int j=-5;j<=0;j++){
             for(int i=0;i<blocks.size();i++){
                 if(blocks.getAt(i).z==j)blocks.getAt(i).draw();
             }
@@ -111,6 +123,17 @@ public class World {
 
         for(int i=0;i<entities.size();i++){
             entities.getAt(i).draw();
+        }
+
+        for(int j=1;j<=5;j++){
+            for(int i=0;i<tiles.size();i++){
+                if(tiles.getAt(i).z==j)tiles.getAt(i).draw();
+            }
+        }
+        for(int j=1;j<=5;j++){
+            for(int i=0;i<blocks.size();i++){
+                if(blocks.getAt(i).z==j)blocks.getAt(i).draw();
+            }
         }
     }
 }

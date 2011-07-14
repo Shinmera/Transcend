@@ -76,6 +76,9 @@ public class WorldLoader {
             BufferedReader in = new BufferedReader(new FileReader(file));
             String read = in.readLine();
             if((read==null)||(!read.equals("#!transcend world file"))){Const.LOGGER.log(Level.SEVERE,"Failed to load World: Invalid header");return false;}
+            MainFrame.world.clear();
+            int id = MainFrame.world.addEntity(MainFrame.player);
+            MainFrame.camera.follow(id);
             while((read = in.readLine()) != null){
                 if(read.contains("#"))read = read.substring(0,read.indexOf("#"));
                 if(read.contains("//"))read = read.substring(0,read.indexOf("//"));

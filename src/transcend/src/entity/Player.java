@@ -9,6 +9,7 @@
 
 package entity;
 
+import org.newdawn.slick.Color;
 import event.KeyboardListener;
 import graph.Animation;
 import java.io.File;
@@ -16,6 +17,7 @@ import org.lwjgl.input.Keyboard;
 import transcend.MainFrame;
 import world.BElement;
 import world.Element;
+import static org.lwjgl.opengl.GL11.*;
 
 public class Player extends Entity implements KeyboardListener{
     public static final int ELEMENT_ID = 0x2;
@@ -42,7 +44,6 @@ public class Player extends Entity implements KeyboardListener{
 
     public void draw(){
         drawable.draw((int)x, (int)y-4, w, h);
-        
     }
 
     public Element check(double ax,double ay,double bx,double by){
@@ -75,10 +76,10 @@ public class Player extends Entity implements KeyboardListener{
         drawable.update();
 
         //HECK
-        if(vy<=0)ground=check(x+2,y,x+w-2,y);else ground=null;
-        if(vy>=0)ceiling=check(x+2,y+h,x+w-2,y+h);else ceiling=null;
-        if(vx<=0)left=check(x,y+2,x,y+h-2,1);else left=null;
-        if(vx>=0)right=check(x+w,y+2,x+w,y+h-2,1);else right=null;
+        if(vy<=0)ground=check(x+3,y,x+w-3,y);else ground=null;
+        if(vy>=0)ceiling=check(x+3,y+h,x+w-3,y+h);else ceiling=null;
+        if(vx<=0)left=check(x+vx,y+3,x+vx,y+h-3,1);else left=null;
+        if(vx>=0)right=check(x+w+vx,y+3,x+w+vx,y+h-3,1);else right=null;
         //if(ground!=null&&check(x+2,y+2,x+w-2,y+2)!=null)ground=null;
         //LIMIT
         if(ground==null){
@@ -92,8 +93,8 @@ public class Player extends Entity implements KeyboardListener{
             }
         } else if(ground.y+ground.h-y<ground.h && vy<0) {y=ground.y+ground.h;vy = 0;
         } else if(vy<0)vy=0;
-        if(left!=null&&vx<0){x-=vx;vx=0;}
-        if(right!=null&&vx>0){x-=vx;vx=0;}
+        if(left!=null&&vx<0){x=left.x+left.w;vx=0;}
+        if(right!=null&&vx>0){x=right.x-w;vx=0;}
         if((ceiling!=null)&&(vy>0&&ceiling.solid>0.5))vy=0;
 
         //INPUT
@@ -102,11 +103,11 @@ public class Player extends Entity implements KeyboardListener{
         if(K_LEFT){
             drawable.setDirection(Animation.DIR_LEFT);
             drawable.setReel(0);
-            vx=-vxacc;
+            if(left==null)vx=-vxacc;
         }else if(K_RIGHT){
             drawable.setDirection(Animation.DIR_RIGHT);
             drawable.setReel(0);
-            vx=vxacc;
+            if(right==null)vx=vxacc;
         }else{
             drawable.setReel(1);
             vx=0;
