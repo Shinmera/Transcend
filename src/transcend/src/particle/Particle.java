@@ -14,13 +14,14 @@ import transcend.MainFrame;
 import static org.lwjgl.opengl.GL11.*;
 
 public class Particle {
-    private double x=0,y=0,z=0,r=0,s=1,vx=0,vy=0;
+    private double x=0,y=0,z=0,r=0,s=0.5,vx=0,vy=0;
     private double life=0,mlife=2;
-    private Color color = new Color(0,0,0,0);
+    private Color color = new Color(255,0,0,255);
+    private int type = ParticleForm.TYPE_GRADIENT_SPHERE_SMOOTH;
 
     public Particle(){}
     public Particle(double x,double y){this.x=x;this.y=y;}
-    public Particle(double x,double y,double r,double s){this.x=x;this.y=y;this.r=r;this.s=s;}
+    public Particle(double x,double y,double vx,double vy){this.x=x;this.y=y;this.vx=vx;this.vy=vy;}
     public Particle(double x,double y,double mlife){this.x=x;this.y=y;this.mlife=mlife;}
     public Particle(double x,double y,double r,double s,double mlife){this.x=x;this.y=y;this.r=r;this.s=s;this.mlife=mlife;}
 
@@ -35,6 +36,7 @@ public class Particle {
     public void setLife(double l){this.life=l;}
     public void setMaxLife(double ml){this.mlife=ml;}
     public void setColor(Color c){this.color=c;}
+    public void setType(int t){this.type=t;}
 
     public double getX(){return x;}
     public double getY(){return y;}
@@ -46,6 +48,7 @@ public class Particle {
     public double getLife(){return life;}
     public double getMaxLife(){return mlife;}
     public Color getColor(){return color;}
+    public int getType(){return type;}
 
     public void update(Emitter e,Force f){
         vx+=f.xacc;
@@ -61,20 +64,19 @@ public class Particle {
     public void update(){
         x+=vx;
         y+=vy;
-        life+=1/MainFrame.fps;
+        life+=1.0/MainFrame.fps;
     }
 
     public void draw(){
-        ParticleForm.gradient_sphere.draw((int)x-4, (int)y-4, 8, 8);
-        /*
         glPushMatrix();
         glTranslated(x,y,0);
         glPushMatrix();
         glRotatef((float)r,0,0,1);
-        glScaled(s,s,1);
+        glScaled(s*(1-(life/mlife)),s*(1-(life/mlife)),1);
         
-        glEnable(GL_COLOR_LOGIC_OP);
-        glLogicOp(GL_AND);
+        ParticleForm.get(type).draw(-4,-4, 8, 8);
+
+        glBlendFunc(GL_DST_COLOR, GL_ONE_MINUS_SRC_ALPHA);
         color.bind();
         glBegin(GL_QUADS);
             glVertex2d(-4,-4);
@@ -82,11 +84,9 @@ public class Particle {
             glVertex2d(+4,+4);
             glVertex2d(-4,+4);
         glEnd();
-        glDisable(GL_COLOR_LOGIC_OP);
+        glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
         
         glPopMatrix();
         glPopMatrix();
-         * 
-         */
     }
 }

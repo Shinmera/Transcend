@@ -19,3 +19,9 @@ STARTED ON 14.7.2011
 00:57 - Derpy Hooves: brilliant
 00:57 - Seagoon: fun
 
+--->17.6. Working on the particle system.
+20:50 - Derpy Hooves: so
+20:50 - Derpy Hooves: http://www.opengl.org/sdk/docs/man/xhtml/glBlendFunc.xml
+20:51 - Derpy Hooves: this is pretty cool eh
+20:51 - Derpy Hooves: but uhm.
+20:51 - Derpy Hooves: which fucking combination has the effect I want?

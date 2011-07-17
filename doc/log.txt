@@ -172,3 +172,11 @@ Einbindung dessen in die GTextField Klasse.
 Zeichnen verschiedener Texturen.
 Begin des Partikel-Systems.
 Boxen Kollision des Spielers perfektioniert.
+
+[15:00-17:00 15.7.2011]
+Weiterführung des Partikel-Systems.
+
+[15:00- 16.7.2011]
+Animieren des ersten Gegners.
+EnemyB1 hinzugefügt.
+Editor um Block/Entity modus erweitert.

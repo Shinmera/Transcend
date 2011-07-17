@@ -79,10 +79,13 @@ public class GTextField extends GLabel implements KeyboardListener,MouseListener
     public void mousePressed(int button) {}
     public void mouseType(int button) {
         if(Mouse.getX()>x&&Mouse.getY()>y&&
-                Mouse.getX()<x+w&&Mouse.getY()<y+h)
+                Mouse.getX()<x+w&&Mouse.getY()<y+h){
+            MainFrame.pause=true;
             focus=true;
-        else
+        } else {
+            if(focus)MainFrame.pause=false;
             focus=false;
+        }
     }
     public void mouseReleased(int button) {}
 

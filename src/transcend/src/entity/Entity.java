@@ -20,12 +20,11 @@ public class Entity extends Element{
     public static final int STATUS_ATTACK = 0x3;
     public static final int STATUS_DEFEND = 0x4;
 
-    public double atk,def;
+    public double atk,def,vx,vy;
     public int status;
     
-    public Entity(){
-        
-    }
+    public Entity(){}
+
     public double getAttack(){return atk;}
     public double getDefense(){return def;}
     public int getStatus(){return status;}
@@ -33,4 +32,12 @@ public class Entity extends Element{
     public void setAttack(double atk){this.atk=atk;}
     public void setDefense(double def){this.def=def;}
     public void setStatus(int status){this.status=status;}
+
+    public void update(){
+        drawable.update();
+    }
+
+    public void draw(){
+        drawable.draw((int)x,(int)y,w,h);
+    }
 }

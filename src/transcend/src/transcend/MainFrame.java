@@ -8,7 +8,6 @@
 \**********************/
 
 package transcend;
-import particle.ParticlePool;
 import org.newdawn.slick.openal.SoundStore;
 import org.lwjgl.openal.AL;
 import graph.SoundPool;
@@ -57,7 +56,6 @@ public class MainFrame implements KeyboardListener{
     public static final Editor editor = new Editor();
     public static final TexturePool texturePool = new TexturePool();
     public static final SoundPool soundPool = new SoundPool();
-    public static final ParticlePool particlePool = new ParticlePool();
     public static Loader loader;
     public static Player player;
     public static int fps = 60;
@@ -134,6 +132,8 @@ public class MainFrame implements KeyboardListener{
         //LOAD MENU
         loader.setHelper(new MenuLoader());
         loader.start();
+
+        editor.setActive(true);
     }
 
     public void initGL() {
@@ -169,14 +169,13 @@ public class MainFrame implements KeyboardListener{
 
     public void update() {
         if(!worldLoader.isLoaded()){
-            loader.setHelper(new LoadHelper(){public void load(){worldLoader.loadWorld(new File("world"+File.separator+"test.tw"));}});
+            loader.setHelper(new LoadHelper(){public void load(){worldLoader.loadWorld(new File("world"+File.separator+"particles.tw"));}});
             loader.start();
         }
         //Hook to world loop
         if(!pause){
             world.update();
             camera.update();
-            particlePool.update();
         }
         //Handle input
         ieh.triggerKeyboardEvent();
@@ -198,21 +197,22 @@ public class MainFrame implements KeyboardListener{
             
             camera.camBegin();
                 world.draw();
-                particlePool.draw();
 
-                glEnable(GL_COLOR_LOGIC_OP);
-                glLogicOp(GL_XOR);
-                Color.white.bind();
-                glLineWidth(0.5f);
-                glBegin(GL_LINES);
-                    glVertex2i(-50,0);
-                    glVertex2i(50,0);
-                glEnd();
-                glBegin(GL_LINES);
-                    glVertex2i(0,50);
-                    glVertex2i(0,-50);
-                glEnd();
-                glDisable(GL_COLOR_LOGIC_OP);
+                if(editor.getActive()){
+                    glEnable(GL_COLOR_LOGIC_OP);
+                    glLogicOp(GL_XOR);
+                    Color.white.bind();
+                    glLineWidth(0.5f);
+                    glBegin(GL_LINES);
+                        glVertex2i(-50,0);
+                        glVertex2i(50,0);
+                    glEnd();
+                    glBegin(GL_LINES);
+                        glVertex2i(0,50);
+                        glVertex2i(0,-50);
+                    glEnd();
+                    glDisable(GL_COLOR_LOGIC_OP);
+                }
             camera.camEnd();
 
             glPopMatrix();
@@ -289,6 +289,15 @@ public class MainFrame implements KeyboardListener{
         } finally {
             is.close();
         }
+    }
+
+    public static void glCircle2d(double x,double y,double r){
+        glBegin(GL_LINE_LOOP);
+            for(int i = 0; i < 100; i++) {
+                double angle = i*2*Math.PI/100;
+                glVertex2d(x + (Math.cos(angle) * r), y + (Math.sin(angle) * r));
+            }
+        glEnd();
     }
 
     private void blurScreen(){

@@ -9,7 +9,6 @@
 
 package entity;
 
-import org.newdawn.slick.Color;
 import event.KeyboardListener;
 import graph.Animation;
 import java.io.File;
@@ -17,12 +16,10 @@ import org.lwjgl.input.Keyboard;
 import transcend.MainFrame;
 import world.BElement;
 import world.Element;
-import static org.lwjgl.opengl.GL11.*;
 
 public class Player extends Entity implements KeyboardListener{
     public static final int ELEMENT_ID = 0x2;
     private final double vxacc=5,vyacc=10,vydcc=0.4,vxdcc=5;
-    private double vx=0,vy=0;
     private Element ground = null,ceiling = null,left = null,right = null;
     private boolean K_LEFT,K_RIGHT,K_SPACE;
 

@@ -28,7 +28,7 @@ public class TexturePool {
     }
 
     public Texture reloadTexture(String name,File f){
-        if(!f.exists())return null;
+        if(!f.exists()){Const.LOGGER.warning("Trying to load non-existant texture '"+name+"'.");return null;}
 
         try{
             String extension = f.getName().substring(f.getName().indexOf(".")+1);

@@ -9,12 +9,8 @@
 
 package graph;
 import org.newdawn.slick.opengl.Texture;
-import org.newdawn.slick.opengl.TextureLoader;
 import org.newdawn.slick.Color;
-import transcend.Const;
 import transcend.MainFrame;
-import java.util.logging.Level;
-import java.io.FileInputStream;
 import java.io.File;
 import static org.lwjgl.opengl.GL11.*;
 
@@ -105,6 +101,7 @@ public class Animation {
     public void setStart(int[] pos){start=pos;}
     public void setStop(int[] pos){stop=pos;}
     public void setLoop(int[] pos){loop=pos;}
+    public void setPPS(int pps){this.pps=pps;}
 
     public void setDirection(int dir){direction=dir;}
 
@@ -118,15 +115,19 @@ public class Animation {
     public int getU(){return ind_w;}
     public int getV(){return ind_h;}
     public double getSpritesize(){return spritesize;}
+    public int getPPS(){return pps;}
 
     public void update(){
         if(stop[0]<0)return;
-        
+        counter++;
         if(counter>MainFrame.fps/pps){
             counter=0;
-            if(ind_w<stop[ind_h])ind_w++;else ind_w=loop[ind_h];
+            if(ind_w<stop[ind_h])ind_w++;
+            else{
+                if(loop[ind_h]>=0)ind_w=loop[ind_h];
+                else setReel(-1*loop[ind_h]);
+            }
         }
-        counter++;
     }
     
     public void draw(){}

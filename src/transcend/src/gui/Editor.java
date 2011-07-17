@@ -19,11 +19,15 @@ import org.lwjgl.input.Mouse;
 import static org.lwjgl.opengl.GL11.*;
 
 public class Editor extends GObject implements MouseListener{
+    public static final int MODE_BLOCKS = 0;
+    public static final int MODE_ENTITIES = 1;
     private String[] blocks = {"blankblock","halfblankblock","dirtblock","grassblock","stoneblock","brickblock","tileset","emitter"};
+    private String[] entities = {"enemyb1"};
     private boolean active=false;
     private int tilesize=64;
     private int curItem=0;
     private int curLayer=0;
+    private int mode=MODE_ENTITIES;
 
     public void paint(){
         if(!active)return;
@@ -48,7 +52,7 @@ public class Editor extends GObject implements MouseListener{
         }
         }
 
-        if(x!=0&&y!=0){
+        if(x!=0&&y!=0&&mode==MODE_BLOCKS){
             glEnable(GL_COLOR_LOGIC_OP);
             glLogicOp(GL_XOR);
 
@@ -68,10 +72,12 @@ public class Editor extends GObject implements MouseListener{
     public int getTilesize(){ return tilesize;}
     public void setItem(int i){curItem=i;}
     public int getItem(){return curItem;}
-    public String getItemName(int i){return blocks[i];}
-    public int getItemCount(){return blocks.length;}
+    public String getItemName(int i){if(mode==MODE_BLOCKS)return blocks[i];else return entities[i];}
+    public int getItemCount(){if(mode==MODE_BLOCKS)return blocks.length;else return entities.length;}
     public int getCurLayer(){return curLayer;}
     public void setCurLayer(int i){curLayer=i;}
+    public void setMode(int m){mode=m;curItem=0;}
+    public int getMode(){return mode;}
 
     public void mouseMoved(int x, int y) {}
 
@@ -117,7 +123,8 @@ public class Editor extends GObject implements MouseListener{
                 args.put("w", bx+"");
                 args.put("h", by+"");
                 args.put("a", "");
-                MainFrame.elementBuilder.buildElement(blocks[curItem], args);
+                if(mode==MODE_BLOCKS)MainFrame.elementBuilder.buildElement(blocks[curItem], args);
+                else MainFrame.elementBuilder.buildElement(entities[curItem], args);
             }
             x=0;y=0;
         }

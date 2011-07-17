@@ -44,19 +44,9 @@ public class SoundEmitter extends Tile{
     public void draw(){
         if(!MainFrame.editor.getActive())return;
         Color.red.bind();
-        glBegin(GL_LINE_LOOP);
-        for(int i = 0; i < 100; i++) {
-            double angle = i*2*Math.PI/100;
-            glVertex2d(playable.getX() + (Math.cos(angle) * playable.getFar()), playable.getY() + (Math.sin(angle) * playable.getFar()));
-        }
-        glEnd();
+        MainFrame.glCircle2d(playable.getX(),playable.getY(),playable.getFar());
         Color.blue.bind();
-        glBegin(GL_LINE_LOOP);
-        for(int i = 0; i < 100; i++) {
-            double angle = i*2*Math.PI/100;
-            glVertex2d(playable.getX() + (Math.cos(angle) * playable.getNear()), playable.getY() + (Math.sin(angle) * playable.getNear()));
-        }
-        glEnd();
+        MainFrame.glCircle2d(playable.getX(),playable.getY(),playable.getNear());
     }
 
     public void setOptions(HashMap<String,String> options){

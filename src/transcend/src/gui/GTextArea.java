@@ -40,31 +40,26 @@ public class GTextArea extends GLabel implements KeyboardListener,MouseListener{
     public int getLines(){return text.split("\n").length;}
     public int getPosition(int c,int r){
         String[] text = this.text.split("\n");
-        int n=c;
+        int n=c;if(r>getLines())r=getLines()-1;
         for(int i=0;i<r;i++)n+=text[i].length();
         return n;
     }
     public String insertAt(String t,int c,int r){
-        if(getPosition(c,r)>=text.length())return text+t;
-        String[] text = this.text.split("\n");
-        String a = text[r].substring(0,c);
-        String b = text[r].substring(c);
-        text[r] = a+t+b;
-        return Toolkit.implode(text,"\n");
+        return insertAt(t,getPosition(c,r));
     }
     public String insertAt(String t,int i){
+        if(i<0)return t+text;
         if(i>=text.length())return text+t;
         String a = text.substring(0,i);
         String b = text.substring(i);
         return a+t+b;
     }
+    
     public String removeFrom(int n,int c,int r){
-        String text = this.text.split("\n")[r];
-        char[] a = Arrays.copyOfRange(text.toCharArray(), 0,c);
-        char[] b = Arrays.copyOfRange(text.toCharArray(), c+n,text.length());
-        return new String(a)+new String(b);
+        return removeFrom(n,getPosition(c,r));
     }
     public String removeFrom(int n,int i){
+        if(i<0)return text;
         if(i+n>=text.length())return text.substring(0,text.length()-n);
         char[] a = Arrays.copyOfRange(text.toCharArray(), 0,i);
         char[] b = Arrays.copyOfRange(text.toCharArray(), i+n,text.length());
@@ -82,11 +77,11 @@ public class GTextArea extends GLabel implements KeyboardListener,MouseListener{
                 if (text.length() > 0) {
                     if(cc>0){
                         cc--;
-                        text=removeFrom(1,getPosition(cc,cr));
+                        text=removeFrom(1,cc,cr);
                     } else if (cr > 0) {
                         cr--;
-                        cc=getLine(cr).length();
-                        text=removeFrom(1,getPosition(cc,cr));
+                        cc=getLine(cr).length()-1;
+                        text=removeFrom(1,cc,cr);
                     }
                 }
                 break;
@@ -108,6 +103,10 @@ public class GTextArea extends GLabel implements KeyboardListener,MouseListener{
                     cc=0;
                 }
                 break;
+            case Keyboard.KEY_UP:
+                if(cr>0)cr--;break;
+            case Keyboard.KEY_DOWN:
+                if(cr<getLines())cr++;break;
             default:
                 text=insertAt(MainFrame.ieh.parseKeyToText(key),cc,cr);
                 cc++;

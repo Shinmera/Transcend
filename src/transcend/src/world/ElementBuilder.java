@@ -17,11 +17,14 @@ import tile.Background;
 import NexT.util.ClassPathHacker;
 import NexT.util.ConfigManager;
 import NexT.util.SimpleSet;
+import NexT.util.Toolkit;
 import block.*;
+import entity.EnemyB1;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.logging.Level;
+import org.newdawn.slick.Color;
 import particle.Emitter;
 import tile.BrickBlock;
 import tile.SoundEmitter;
@@ -130,7 +133,20 @@ public class ElementBuilder {
             if(args.containsKey("mlife"))block.setMaxLife(Double.parseDouble(args.get("mlife")));
             if(args.containsKey("mpart"))block.setMaxParticles(Integer.parseInt(args.get("mpart")));
             if(args.containsKey("spray"))block.setSpray(Integer.parseInt(args.get("spray")));
-            MainFrame.particlePool.addEmitter(block);
+            if(args.containsKey("avg_diver"))block.setAverageDiversity(Double.parseDouble(args.get("avg_diver")));
+            if(args.containsKey("avg_size"))block.setAverageSize(Double.parseDouble(args.get("avg_size")));
+            if(args.containsKey("avg_mlife"))block.setAverageMaxLife(Double.parseDouble(args.get("avg_mlife")));
+            if(args.containsKey("avg_mlife_diver"))block.setAverageMaxLifeDiversity(Double.parseDouble(args.get("avg_mlife_diver")));
+            if(args.containsKey("avg_type"))block.setAverageType(Integer.parseInt(args.get("avg_type")));
+            if(args.containsKey("color")){
+                java.awt.Color c = Toolkit.toColor(args.get("color"));
+                block.setColor(new Color(c.getRed(),c.getGreen(),c.getBlue(),c.getAlpha()));
+            }
+            MainFrame.world.addEmitter(block);
+        }
+        else if(name.equals("enemyb1")){
+            EnemyB1 entity = new EnemyB1(Double.parseDouble(args.get("x")),Double.parseDouble(args.get("y")));
+            MainFrame.world.addEntity(entity);
         }
         //ATTEMPT TO DYNAMICALLY LOAD BLOCK
         else{

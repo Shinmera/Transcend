@@ -1,0 +1,56 @@
+#!transcend world file
+BlankBlock{
+x: -64
+y: -128
+z: 5
+w: 128
+h: 64
+}
+
+Emitter{
+x: 128
+y: -128
+z: 0
+w: 0
+h: 0
+mlife: -1.0
+mpart: 100
+spray: 1
+avg_diver: 1.0
+avg_size: 3.0
+avg_mlife: 1.0
+avg_mlife_diver: 1.0
+}
+
+Emitter{
+x: 256
+y: -128
+z: 0
+w: 0
+h: 0
+mlife: -1.0
+mpart: 200
+spray: 1
+color: 255,255,0
+avg_diver: 1.0
+avg_size: 7.0
+avg_mlife: 2.0
+avg_mlife_diver: 1.0
+}
+
+Emitter{
+x: 512
+y: -128
+z: 0
+w: 0
+h: 0
+mlife: -1.0
+mpart: 100
+spray: 1
+color: 0,255,0
+avg_diver: 5.0
+avg_size: 5.0
+avg_mlife: 1.0
+avg_mlife_diver: 1.0
+}
+
