@@ -9,21 +9,25 @@
 
 package entity;
 
+import event.Event;
+import event.EventListener;
 import event.KeyboardListener;
 import graph.Animation;
 import java.io.File;
+import java.util.HashMap;
 import org.lwjgl.input.Keyboard;
 import transcend.MainFrame;
 import world.BElement;
 import world.Element;
 
-public class Player extends Entity implements KeyboardListener{
+public class Player extends Entity implements KeyboardListener,EventListener{
     public static final int ELEMENT_ID = 0x2;
     private final double vxacc=5,vyacc=10,vydcc=0.4,vxdcc=5;
     private Element ground = null,ceiling = null,left = null,right = null;
     private boolean K_LEFT,K_RIGHT,K_SPACE;
 
-    public Player(){
+    public Player(){}
+    public void init(){
         MainFrame.ieh.addKeyboardListener(this);
         x=10;y=10;w=64;h=64;
 
@@ -33,6 +37,7 @@ public class Player extends Entity implements KeyboardListener{
 
         drawable.loadTexture(new File(MainFrame.basedir,"tex"+File.separator+"dash_walk_right.png"),start,stop,loop);
         drawable.setReel(1);
+        MainFrame.eh.registerEvent(Event.ENTITY_SEE, 0, this);
     }
 
     public String getInfo(){
@@ -136,5 +141,12 @@ public class Player extends Entity implements KeyboardListener{
         switch(key){
             case Keyboard.KEY_R:x=0;y=0;vx=0;vy=0;break;
         }
+    }
+
+    public void onEvent(int event, int identifier, HashMap<String, String> arguments) {
+        System.out.println("[PLAYER] received signal "+event+" from ["+identifier+"].");
+    }
+
+    public void onAnonymousEvent(int event, HashMap<String, String> arguments) {
     }
 }

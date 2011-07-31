@@ -21,7 +21,7 @@ public class Entity extends Element{
     public static final int STATUS_DEFEND = 0x4;
 
     public double atk,def,vx,vy;
-    public int status;
+    public int status=STATUS_NONE;
     
     public Entity(){}
 

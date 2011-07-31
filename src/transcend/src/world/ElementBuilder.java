@@ -20,6 +20,7 @@ import NexT.util.SimpleSet;
 import NexT.util.Toolkit;
 import block.*;
 import entity.EnemyB1;
+import gui.CameraPath;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -142,11 +143,16 @@ public class ElementBuilder {
                 java.awt.Color c = Toolkit.toColor(args.get("color"));
                 block.setColor(new Color(c.getRed(),c.getGreen(),c.getBlue(),c.getAlpha()));
             }
-            MainFrame.world.addEmitter(block);
+            MainFrame.world.addTile(block);
         }
         else if(name.equals("enemyb1")){
             EnemyB1 entity = new EnemyB1(Double.parseDouble(args.get("x")),Double.parseDouble(args.get("y")));
             MainFrame.world.addEntity(entity);
+        }
+        else if(name.equals("camerapath")){
+            CameraPath path = new CameraPath();
+            path.setOptions(args);
+            MainFrame.world.addTile(path,args.get("name"));
         }
         //ATTEMPT TO DYNAMICALLY LOAD BLOCK
         else{

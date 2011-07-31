@@ -13,7 +13,7 @@ import NexT.util.SimpleSet;
 import block.Block;
 import entity.Entity;
 import java.util.ArrayList;
-import particle.Emitter;
+import java.util.HashMap;
 import tile.Tile;
 import transcend.Const;
 
@@ -22,7 +22,7 @@ public class World {
     SimpleSet<Integer,Block> blocks     = new SimpleSet<Integer,Block>();
     SimpleSet<Integer,Entity> entities  = new SimpleSet<Integer,Entity>();
     SimpleSet<Integer,Tile> tiles       = new SimpleSet<Integer,Tile>();
-    SimpleSet<Integer,Emitter> emitters = new SimpleSet<Integer,Emitter>();
+    HashMap<String,Integer> index       = new HashMap<String,Integer>();
 
     public World(){}
 
@@ -33,22 +33,23 @@ public class World {
     public int blockSize(){return blocks.size();}
     public int entitySize(){return entities.size();}
     public int tileSize(){return tiles.size();}
-    public int emitterSize(){return emitters.size();}
     public int size(){return ids.size();}
     public void clear(){
         blocks.clear();
         entities.clear();
         tiles.clear();
-        emitters.clear();
         ids.clear();
+        index.clear();
     }
 
     public int getID(int i){return ids.get(i);}
+    public int getID(String name){if(index.containsKey(name))return index.get(name);else return -1;}
 
     public int addBlock(Block block){
         int nID=0;if(ids.size()>0)nID=ids.get(ids.size()-1)+1;
         ids.add(nID);
         block.wID=nID;
+        block.init();
         blocks.put(nID, block);
         return nID;
     }
@@ -57,6 +58,7 @@ public class World {
         int nID=0;if(ids.size()>0)nID=ids.get(ids.size()-1)+1;
         ids.add(nID);
         entity.wID=nID;
+        entity.init();
         entities.put(nID, entity);
         return nID;
     }
@@ -65,15 +67,38 @@ public class World {
         int nID=0;if(ids.size()>0)nID=ids.get(ids.size()-1)+1;
         ids.add(nID);
         tile.wID=nID;
+        tile.init();
         tiles.put(nID, tile);
         return nID;
     }
 
-    public int addEmitter(Emitter e){
+    public int addBlock(Block block,String name){
         int nID=0;if(ids.size()>0)nID=ids.get(ids.size()-1)+1;
         ids.add(nID);
-        e.wID=nID;
-        emitters.put(nID, e);
+        block.wID=nID;
+        block.init();
+        blocks.put(nID, block);
+        index.put(name, nID);
+        return nID;
+    }
+
+    public int addEntity(Entity entity,String name){
+        int nID=0;if(ids.size()>0)nID=ids.get(ids.size()-1)+1;
+        ids.add(nID);
+        entity.wID=nID;
+        entity.init();
+        entities.put(nID, entity);
+        index.put(name, nID);
+        return nID;
+    }
+
+    public int addTile(Tile tile,String name){
+        int nID=0;if(ids.size()>0)nID=ids.get(ids.size()-1)+1;
+        ids.add(nID);
+        tile.wID=nID;
+        tile.init();
+        tiles.put(nID, tile);
+        index.put(name, nID);
         return nID;
     }
 
@@ -86,13 +111,21 @@ public class World {
     public boolean isBlock(int identifier){return blocks.containsKey(identifier);}
     public boolean isEntity(int identifier){return entities.containsKey(identifier);}
     public boolean isTile(int identifier){return tiles.containsKey(identifier);}
-    public boolean isEmitter(int identifier){return emitters.containsKey(identifier);}
+    public boolean contains(String name){return index.containsKey(name);}
+    public boolean contains(int identifier){return ids.contains(identifier);}
 
     public BElement getByID(int identifier){
         if(blocks.containsKey(identifier))return blocks.get(identifier);
         if(entities.containsKey(identifier))return entities.get(identifier);
         if(tiles.containsKey(identifier))return tiles.get(identifier);
-        if(emitters.containsKey(identifier))return emitters.get(identifier);
+        return null;
+    }
+
+    public BElement getByName(String name){
+        int identifier = getID(name);
+        if(blocks.containsKey(identifier))return blocks.get(identifier);
+        if(entities.containsKey(identifier))return entities.get(identifier);
+        if(tiles.containsKey(identifier))return tiles.get(identifier);
         return null;
     }
     
@@ -100,7 +133,13 @@ public class World {
         if(blocks.containsKey(identifier)){blocks.remove(identifier);ids.remove((Object)identifier);}
         if(entities.containsKey(identifier)){entities.remove(identifier);ids.remove((Object)identifier);}
         if(tiles.containsKey(identifier)){tiles.remove(identifier);ids.remove((Object)identifier);}
-        if(emitters.containsKey(identifier)){emitters.remove(identifier);ids.remove((Object)identifier);}
+    }
+
+    public void delByName(String name){
+        int identifier = getID(name);
+        if(blocks.containsKey(identifier)){blocks.remove(identifier);ids.remove((Object)identifier);}
+        if(entities.containsKey(identifier)){entities.remove(identifier);ids.remove((Object)identifier);}
+        if(tiles.containsKey(identifier)){tiles.remove(identifier);ids.remove((Object)identifier);}
     }
 
     public void update(){
@@ -114,10 +153,6 @@ public class World {
 
         for(int i=0;i<entities.size();i++){
             entities.getAt(i).update();
-        }
-
-        for(int i=0;i<emitters.size();i++){
-            emitters.getAt(i).update();
         }
     }
 
@@ -135,12 +170,6 @@ public class World {
 
         for(int i=0;i<entities.size();i++){
             entities.getAt(i).draw();
-        }
-
-        for(int j=-5;j<=5;j++){
-            for(int i=0;i<emitters.size();i++){
-                if(emitters.getAt(i).z==j)emitters.getAt(i).draw();
-            }
         }
 
         for(int j=1;j<=5;j++){

@@ -176,7 +176,22 @@ Boxen Kollision des Spielers perfektioniert.
 [15:00-17:00 15.7.2011]
 Weiterführung des Partikel-Systems.
 
-[15:00- 16.7.2011]
+[15:00-18:00 16.7.2011]
 Animieren des ersten Gegners.
 EnemyB1 hinzugefügt.
 Editor um Block/Entity modus erweitert.
+
+[23:00-1:00 17/18.7.2011]
+Beheben von bugs im EventHandler.
+CameraPath klasse hinzugefügt.
+
+[18:30-20:10 20.7.2011]
+EnemyB1 erweitert.
+Animation erweitert um Abspielrichtung. (Animationen können rückwärts abgespielt werden)
+
+[15:30- 23.7.2011]
+Vektor klasse hinzugefügt.
+Emitter nach Tile migriert.
+CameraPath fertiggestellt.
+World Element Index hinzugefügt.
+GameEvent Klasse hinzugefügt.

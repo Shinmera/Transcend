@@ -9,45 +9,41 @@
 
 package event;
 
-import NexT.util.OptionSet;
+import NexT.util.SimpleSet;
 import java.util.ArrayList;
 import java.util.HashMap;
-import world.World;
+import transcend.MainFrame;
 
 public class EventHandler {
-    OptionSet<Integer,ArrayList<Integer>> events = new OptionSet<Integer,ArrayList<Integer>>();
-    World world;
-
-    public EventHandler(){world = null;}
-    public EventHandler(World world){this.world = world;}
+    SimpleSet<EventListener,ArrayList<Integer>> events = new SimpleSet<EventListener,ArrayList<Integer>>();
 
     /**
      * Register an event for the specified object.
      * @param event The type of event to register.
      * @param priority The priority of the event call.
-     * @param identifier A reference pointer to the object.
+     * @param listener The object to send data to.
      */
-    public void registerEvent(int event,int priority,int identifier){
-        if(!events.containsKey(identifier))events.put(identifier, new ArrayList<Integer>());
-        if(!events.containsValue(identifier,event))events.add(identifier, event);
+    public void registerEvent(int event,int priority,EventListener listener){
+        if(!events.containsKey(listener))events.put(listener, new ArrayList<Integer>());
+        if(!events.get(listener).contains(event))events.get(listener).add(event);
     }
 
     /**
      * Unregisters an event for the specified object.
      * @param event The type of event to unregister.
-     * @param identifier A reference pointer to the object.
+     * @param listener The listener to remove.
      */
-    public void unregisterEvent(int event,int identifier){
-        if(events.containsKey(identifier)&&events.containsValue(identifier,event))
-            events.get(identifier).remove(events.get(identifier).indexOf(event));
+    public void unregisterEvent(int event,EventListener listener){
+        if(events.containsKey(listener)&&events.get(listener).contains(event))
+            events.get(listener).remove((Integer)event);
     }
 
     /**
      * Unregisters all events for the specified object.
-     * @param identifier A reference pointer to the object.
+     * @param listener The listener to remove.
      */
-    public void unregisterAllEvents(int identifier){
-        if(events.containsKey(identifier))events.remove(identifier);
+    public void unregisterAllEvents(EventListener listener){
+        if(events.containsKey(listener))events.remove(listener);
     }
 
     /**
@@ -59,8 +55,8 @@ public class EventHandler {
      */
     public void triggerEvent(int event,int identifier,HashMap<String,String> arguments){
         for(int i=0;i<events.size();i++){
-            if(events.containsValue(events.getKey(i),event)){
-                ((EventListener)world.getByID(events.getKey(i))).onEvent(event,identifier,arguments);
+            if(events.getAt(i).contains(event)){
+                events.getKey(i).onEvent(event,identifier,arguments);
             }
         }
     }
@@ -73,8 +69,8 @@ public class EventHandler {
      */
     public void triggerAnonymousEvent(int event,HashMap<String,String> arguments){
         for(int i=0;i<events.size();i++){
-            if(events.containsValue(events.getKey(i),event)){
-                ((EventListener)world.getByID(events.getKey(i))).onAnonymousEvent(event,arguments);
+            if(events.getAt(i).contains(event)){
+                events.getKey(i).onAnonymousEvent(event,arguments);
             }
         }
     }
@@ -87,7 +83,7 @@ public class EventHandler {
      * @param arguments Pass additional arguments.
      */
     public void triggerSpecificEvent(int event,int from, int to,HashMap<String,String> arguments){
-        ((EventListener)world.getByID(to)).onEvent(event, from,arguments);
+        ((EventListener)MainFrame.world.getByID(to)).onEvent(event, from,arguments);
     }
 
     /**
@@ -97,6 +93,6 @@ public class EventHandler {
      * @param arguments Pass additional arguments.
      */
     public void triggerAnonymousSpecificEvent(int event,int to,HashMap<String,String> arguments){
-        ((EventListener)world.getByID(to)).onAnonymousEvent(event,arguments);
+        ((EventListener)MainFrame.world.getByID(to)).onAnonymousEvent(event,arguments);
     }
 }

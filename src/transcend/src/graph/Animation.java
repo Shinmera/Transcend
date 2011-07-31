@@ -17,6 +17,8 @@ import static org.lwjgl.opengl.GL11.*;
 public class Animation {
     public static final int DIR_LEFT = -1;
     public static final int DIR_RIGHT = 1;
+    public static final int PLAY_FORWARD = 1;
+    public static final int PLAY_BACKWARD = -1;
 
     private boolean init = false;
     private Texture texture = null;
@@ -30,7 +32,9 @@ public class Animation {
     private int[] start = {0};
     private int[] stop = {0};
     private int[] loop = {0};
+    private int[] loop2 = {0};
     private int direction = DIR_RIGHT;
+    private int play = PLAY_FORWARD;
     private double tile_w = 1;
     private double tile_h = 1;
     private int w=64,h=64,z=0;
@@ -56,11 +60,16 @@ public class Animation {
     }
 
     public boolean loadTexture(File f,int[] start,int[] stop,int[] loop){
-        if(!f.exists())return false;
-        texture = MainFrame.texturePool.loadTexture(f.getName(), f);
+        if(!loadTexture(f))return false;
         setStart(start);
         setStop(stop);
         setLoop(loop);
+        return true;
+    }
+
+    public boolean loadTexture(File f,int[] start,int[] stop,int[] loop,int[] loop2){
+        if(!loadTexture(f,start,stop,loop))return false;
+        setLoop2(loop2);
         return true;
     }
 
@@ -71,7 +80,8 @@ public class Animation {
             start = new int[(int)(1.0/rel_h)];
             stop = new int[(int)(1.0/rel_h)];
             loop = new int[(int)(1.0/rel_h)];
-            for(int i=0;i<start.length;i++){start[i]=0;stop[i]=0;loop[i]=0;}
+            loop2= new int[(int)(1.0/rel_h)];
+            for(int i=0;i<start.length;i++){start[i]=0;stop[i]=0;loop[i]=0;loop2[i]=0;}
         }
     }
 
@@ -98,17 +108,21 @@ public class Animation {
     public void setStart(int reel,int pos){start[reel]=pos;}
     public void setStop(int reel,int pos){stop[reel]=pos;}
     public void setLoop(int reel,int pos){loop[reel]=pos;}
+    public void setLoop2(int reel,int pos){loop2[reel]=pos;}
     public void setStart(int[] pos){start=pos;}
     public void setStop(int[] pos){stop=pos;}
     public void setLoop(int[] pos){loop=pos;}
+    public void setLoop2(int[] pos){loop2=pos;}
     public void setPPS(int pps){this.pps=pps;}
 
     public void setDirection(int dir){direction=dir;}
+    public void setPlay(int play){this.play=play;}
 
     public void setReel(int index){
         if(index==ind_h)return;
         ind_h=index;
-        counter=start[ind_h];
+        if(play==PLAY_FORWARD)counter=start[ind_h];
+        else counter=stop[ind_h];
     }
     public int getReel(){return ind_h;}
     public Texture getTexture(){return texture;}
@@ -122,10 +136,20 @@ public class Animation {
         counter++;
         if(counter>MainFrame.fps/pps){
             counter=0;
-            if(ind_w<stop[ind_h])ind_w++;
-            else{
-                if(loop[ind_h]>=0)ind_w=loop[ind_h];
-                else setReel(-1*loop[ind_h]);
+            if(play==PLAY_FORWARD){
+                if(ind_w<stop[ind_h])ind_w++;
+                else{
+                    if(loop[ind_h]>=0)ind_w=loop[ind_h];
+                    else if(loop[ind_h]==-999) setReel(0);
+                    else setReel(-1*loop[ind_h]);
+                }
+            }else{
+                if(ind_w>start[ind_h])ind_w--;
+                else{
+                    if(loop2[ind_h]>=0)ind_w=loop2[ind_h];
+                    else if(loop2[ind_h]==-999) setReel(0);
+                    else setReel(-1*loop2[ind_h]);
+                }
             }
         }
     }

@@ -9,6 +9,7 @@
 
 package gui;
 
+import world.BElement;
 import entity.Entity;
 import transcend.MainFrame;
 import static org.lwjgl.opengl.GL11.*;
@@ -27,7 +28,7 @@ public class Camera {
 
     public void update(){
         if(entityID>-1){
-            Entity e = (Entity)MainFrame.world.getByID(entityID);
+            BElement e = MainFrame.world.getByID(entityID);
             if(boundary>-1){
                 if(e.x>x+(MainFrame.DISPLAY_WIDTH/2-boundary)/zoom)x=e.x-(MainFrame.DISPLAY_WIDTH/2-boundary)/zoom;
                 if(e.x<x-(MainFrame.DISPLAY_WIDTH/2-boundary)/zoom)x=e.x+(MainFrame.DISPLAY_WIDTH/2-boundary)/zoom;

@@ -32,9 +32,12 @@ public class Editor extends GObject implements MouseListener{
     public void paint(){
         if(!active)return;
 
+        glEnable(GL_COLOR_LOGIC_OP);
+        glLogicOp(GL_XOR);
+        Color.gray.bind();
+
         {
-        Color.black.bind();
-        glLineWidth(0.5f);
+        glLineWidth(0.1f);
         double t=this.tilesize*MainFrame.camera.getZoom();
         double y=MainFrame.camera.getRelativeY()*MainFrame.camera.getZoom();
         for(double i=t-y%t;i<MainFrame.DISPLAY_HEIGHT;i+=t){//t-(y-Math.floor(y/t)*t)
@@ -53,17 +56,14 @@ public class Editor extends GObject implements MouseListener{
         }
 
         if(x!=0&&y!=0&&mode==MODE_BLOCKS){
-            glEnable(GL_COLOR_LOGIC_OP);
-            glLogicOp(GL_XOR);
-
             Color.white.bind();
             glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
             // OpenGL window coordinates are different from GDI's
             glRecti(x, y, Mouse.getX(), Mouse.getY());
             glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
-            glDisable(GL_COLOR_LOGIC_OP);
         }
+            glDisable(GL_COLOR_LOGIC_OP);
     }
 
     public void setActive(boolean a){active=a;}

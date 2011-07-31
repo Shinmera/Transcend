@@ -12,11 +12,11 @@ package particle;
 import NexT.util.SimpleSet;
 import java.util.ArrayList;
 import org.newdawn.slick.Color;
+import tile.Tile;
 import transcend.MainFrame;
-import world.BElement;
 import world.Element;
 
-public class Emitter extends BElement{
+public class Emitter extends Tile{
     ArrayList<Force> forces = new ArrayList();
     ArrayList<Particle> particles = new ArrayList();
     private double life=-1,mlife=-1;

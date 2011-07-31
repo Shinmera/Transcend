@@ -8,6 +8,8 @@
 \**********************/
 
 package transcend;
+import gui.CameraPath;
+import event.EventHandler;
 import org.newdawn.slick.openal.SoundStore;
 import org.lwjgl.openal.AL;
 import graph.SoundPool;
@@ -52,6 +54,7 @@ public class MainFrame implements KeyboardListener{
     public static final WorldLoader worldLoader = new WorldLoader();
     public static final ElementBuilder elementBuilder = new ElementBuilder();
     public static final InputEventHandler ieh = new InputEventHandler();
+    public static final EventHandler eh = new EventHandler();
     public static final Camera camera = new Camera();
     public static final Editor editor = new Editor();
     public static final TexturePool texturePool = new TexturePool();
@@ -155,6 +158,7 @@ public class MainFrame implements KeyboardListener{
         glDisable(GL_DEPTH_TEST);
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+        glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
         
         //2D Scene
         glViewport(0,0,DISPLAY_WIDTH,DISPLAY_HEIGHT);
@@ -169,8 +173,15 @@ public class MainFrame implements KeyboardListener{
 
     public void update() {
         if(!worldLoader.isLoaded()){
-            loader.setHelper(new LoadHelper(){public void load(){worldLoader.loadWorld(new File("world"+File.separator+"particles.tw"));}});
+            loader.setHelper(new LoadHelper(){public void load(){worldLoader.loadWorld(new File("world"+File.separator+"various.tw"));}});
             loader.start();
+        }else{
+            if(world.contains("testpath")){
+            CameraPath path = (CameraPath)world.getByName("testpath");
+            if(path.isStopped())path.start();
+            camera.follow(world.getID("testpath"));
+            camera.setBoundary(-1);
+            }
         }
         //Hook to world loop
         if(!pause){
