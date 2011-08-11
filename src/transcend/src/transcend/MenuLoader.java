@@ -14,7 +14,6 @@ import org.lwjgl.opengl.Display;
 import org.newdawn.slick.Color;
 import gui.*;
 import static transcend.MainFrame.*;
-import static org.lwjgl.opengl.GL11.*;
 
 public class MenuLoader extends LoadHelper{
     public void load(){
@@ -66,14 +65,7 @@ public class MenuLoader extends LoadHelper{
                 editor.setTilesize(Integer.parseInt(getText()));
             }
         };
-        GLabel l_speed = new GLabel(""){
-            public void paint(){
-                if(!isVisible())return;
-                getForeground().bind();
-                getFont().drawString(10,DISPLAY_HEIGHT-20,player.getInfo(), 1,1, TrueTypeFont.ALIGN_LEFT);
-                glBindTexture(GL_TEXTURE_2D, 0); //release
-            }
-        };
+        GLabel l_speed = new GLabel("");
         final GLabel l_zoom = new GLabel(camera.getZoom()+"");
         GButton b_zoomin = new GButton("+"){
             public void onHold(){
@@ -114,6 +106,21 @@ public class MenuLoader extends LoadHelper{
                 worldLoader.loadWorld(new File("world"+File.separator+t_file.getText()));
             }
         };
+        GRadioButton r_blocks = new GRadioButton(p_editor,"Blocks"){
+            public void onPress(){
+                super.onPress();
+                MainFrame.editor.setMode(Editor.MODE_BLOCKS);
+            }
+        };
+        GRadioButton r_entities = new GRadioButton(p_editor,"Entities"){
+            public void onPress(){
+                super.onPress();
+                MainFrame.editor.setMode(Editor.MODE_ENTITIES);
+            }
+        };;
+        if(MainFrame.editor.getMode()==Editor.MODE_BLOCKS)r_blocks.setActivated(true);
+        else r_entities.setActivated(true); 
+
         GLabel l_blockdesc = new GLabel("Block:",GLabel.ALIGN_LEFT);
         l_blockdesc.setBorder(new Color(0,0,0,0),0);
         l_blockdesc.setBackground(new Color(1,1,1,0.5f));
@@ -136,32 +143,36 @@ public class MenuLoader extends LoadHelper{
         b_settings.setBounds(10,45,100,30);
         GImage i_logo = new GImage("logo.png");
         i_logo.setBounds(DISPLAY_WIDTH/2-250,DISPLAY_HEIGHT-106-50,500,106);
+        l_speed.setBounds(10,DISPLAY_HEIGHT-20,400,15);
 
 
         b_save.setBounds(10,10,100,30);
         b_load.setBounds(10,45,100,30);
         t_file.setBounds(10,80,100,15);
 
-        l_zoomdesc.setBounds(10,p_editor.getHeight()-15-10,100,15);
-        b_zoomin.setBounds(10,p_editor.getHeight()-15-30,15,15);
-        b_zoomout.setBounds(30,p_editor.getHeight()-15-30,15,15);
-        l_zoom.setBounds(50,p_editor.getHeight()-15-30,60,15);
+        r_blocks.setBounds(20,p_editor.getHeight()-15-10,100,15);
+        r_entities.setBounds(80,p_editor.getHeight()-15-10,100,15);
 
-        l_layerdesc.setBounds(10,p_editor.getHeight()-15-50,100,15);
-        b_layerp.setBounds(10,p_editor.getHeight()-15-70,15,15);
-        b_layerm.setBounds(30,p_editor.getHeight()-15-70,15,15);
-        l_layer.setBounds(50,p_editor.getHeight()-15-70,60,15);
+        l_zoomdesc.setBounds(10,p_editor.getHeight()-15-30,100,15);
+        b_zoomin.setBounds(10,p_editor.getHeight()-15-50,15,15);
+        b_zoomout.setBounds(30,p_editor.getHeight()-15-50,15,15);
+        l_zoom.setBounds(50,p_editor.getHeight()-15-50,60,15);
 
-        l_blockdesc.setBounds(10,p_editor.getHeight()-15-90,100,15);
-        b_prev.setBounds(10,p_editor.getHeight()-15-110,15,15);
-        b_next.setBounds(30,p_editor.getHeight()-15-110,15,15);
-        l_block.setBounds(50,p_editor.getHeight()-15-110,60,15);
+        l_layerdesc.setBounds(10,p_editor.getHeight()-15-70,100,15);
+        b_layerp.setBounds(10,p_editor.getHeight()-15-90,15,15);
+        b_layerm.setBounds(30,p_editor.getHeight()-15-90,15,15);
+        l_layer.setBounds(50,p_editor.getHeight()-15-90,60,15);
 
-        l_tilesdesc.setBounds(10,p_editor.getHeight()-15-130,100,15);
-        t_tiles.setBounds(10,p_editor.getHeight()-15-150,100,15);
+        l_blockdesc.setBounds(10,p_editor.getHeight()-15-110,100,15);
+        b_prev.setBounds(10,p_editor.getHeight()-15-130,15,15);
+        b_next.setBounds(30,p_editor.getHeight()-15-130,15,15);
+        l_block.setBounds(50,p_editor.getHeight()-15-130,60,15);
 
-        l_argsdesc.setBounds(10,p_editor.getHeight()-15-170,100,15);
-        t_args.setBounds(10,p_editor.getHeight()-15-230,100,55);
+        l_tilesdesc.setBounds(10,p_editor.getHeight()-15-150,100,15);
+        t_tiles.setBounds(10,p_editor.getHeight()-15-170,100,15);
+
+        l_argsdesc.setBounds(10,p_editor.getHeight()-15-190,100,15);
+        t_args.setBounds(10,p_editor.getHeight()-15-250,100,55);
 
         menu.add(b_quit);
         menu.add(b_editor);
@@ -186,9 +197,11 @@ public class MenuLoader extends LoadHelper{
         p_editor.add(l_zoomdesc);
         p_editor.add(l_argsdesc);
         p_editor.add(t_args,"args");
+        p_editor.add(r_blocks,"r_blocks");
+        p_editor.add(r_entities,"r_entities");
         hid.add(editor,"editor");
         hid.add(p_editor,"p_editor");
-        hid.add(l_speed);
+        hid.add(l_speed,"hidinfo");
         hid.setVisible(true);
     }
 }

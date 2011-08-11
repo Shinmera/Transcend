@@ -35,6 +35,7 @@ public class GPanel extends GObject{
         return regs.getAt(i);
     }
 
+    public int size(){return regs.size();}
     public int getHeight(){return h;}
     public int getWidth(){return w;}
     public int getX(){return x;}

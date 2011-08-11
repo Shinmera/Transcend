@@ -24,7 +24,7 @@ public class Player extends Entity implements KeyboardListener,EventListener{
     public static final int ELEMENT_ID = 0x2;
     private final double vxacc=5,vyacc=10,vydcc=0.4,vxdcc=5;
     private Element ground = null,ceiling = null,left = null,right = null;
-    private boolean K_LEFT,K_RIGHT,K_SPACE;
+    private boolean K_LEFT,K_RIGHT,K_SPACE,K_SHIFT,K_TAB,K_W;
 
     public Player(){}
     public void init(){
@@ -38,6 +38,8 @@ public class Player extends Entity implements KeyboardListener,EventListener{
         drawable.loadTexture(new File(MainFrame.basedir,"tex"+File.separator+"dash_walk_right.png"),start,stop,loop);
         drawable.setReel(1);
         MainFrame.eh.registerEvent(Event.ENTITY_SEE, 0, this);
+        MainFrame.eh.registerEvent(Event.ENTITY_ATTACK, 0, this);
+        MainFrame.eh.registerEvent(Event.ENTITY_BLOCK, 0, this);
     }
 
     public String getInfo(){
@@ -46,19 +48,6 @@ public class Player extends Entity implements KeyboardListener,EventListener{
 
     public void draw(){
         drawable.draw((int)x, (int)y-4, w, h);
-    }
-
-    public Element check(double ax,double ay,double bx,double by){
-        Element e=null;
-        for(int i=0;i<MainFrame.world.size();i++){
-            BElement bel = MainFrame.world.getByID(MainFrame.world.getID(i));Element el = null;
-            if(!bel.isBaseElement())el=(Element)bel;
-            if((el!=null)&&(el.checkInside(ax,ay)||el.checkInside(bx,by))){
-                e=el;
-                break;
-            }
-        }
-        return e;
     }
 
     public Element check(double ax,double ay,double bx,double by,double minSolid){
@@ -80,9 +69,6 @@ public class Player extends Entity implements KeyboardListener,EventListener{
         //HECK
         if(vy<=0)ground=check(x+3,y,x+w-3,y);else ground=null;
         if(vy>=0)ceiling=check(x+3,y+h,x+w-3,y+h);else ceiling=null;
-        if(vx<=0)left=check(x+vx,y+3,x+vx,y+h-3,1);else left=null;
-        if(vx>=0)right=check(x+w+vx,y+3,x+w+vx,y+h-3,1);else right=null;
-        //if(ground!=null&&check(x+2,y+2,x+w-2,y+2)!=null)ground=null;
         //LIMIT
         if(ground==null){
             vy-=vydcc;
@@ -95,9 +81,12 @@ public class Player extends Entity implements KeyboardListener,EventListener{
             }
         } else if(ground.y+ground.h-y<ground.h && vy<0) {y=ground.y+ground.h;vy = 0;
         } else if(vy<0)vy=0;
+        if((ceiling!=null)&&(vy>0&&ceiling.solid>0.5)){vy=0;y=ceiling.y-h-1;}
+        
+        if(vx<=0)left=check(x+vx,y+3,x+vx,y+h-3,1);else left=null;
+        if(vx>=0)right=check(x+w+vx,y+3,x+w+vx,y+h-3,1);else right=null;
         if(left!=null&&vx<0){x=left.x+left.w;vx=0;}
         if(right!=null&&vx>0){x=right.x-w;vx=0;}
-        if((ceiling!=null)&&(vy>0&&ceiling.solid>0.5))vy=0;
 
         //INPUT
         if(K_SPACE&&ground!=null&&vy==0)vy+=vyacc;
@@ -114,6 +103,9 @@ public class Player extends Entity implements KeyboardListener,EventListener{
             drawable.setReel(1);
             vx=0;
         }
+        if(K_W){
+            MainFrame.eh.triggerEvent(Event.PLAYER_ATTACK, wID, null);
+        }
 
         //EVALUATE
         x+=vx;
@@ -126,14 +118,20 @@ public class Player extends Entity implements KeyboardListener,EventListener{
         case Keyboard.KEY_LEFT: K_LEFT=true;break;
         case Keyboard.KEY_RIGHT: K_RIGHT=true;break;
         case Keyboard.KEY_SPACE: K_SPACE=true;break;
+        case Keyboard.KEY_LSHIFT: K_SHIFT=true;break;
+        case Keyboard.KEY_TAB: K_TAB=true;break;
+        case Keyboard.KEY_W: K_W=true;break;
         }
     }
     public void keyReleased(int key) {
         if(MainFrame.pause)return;
         switch(key){
-            case Keyboard.KEY_SPACE:K_SPACE=false;break;
-            case Keyboard.KEY_LEFT:K_LEFT=false;break;
-            case Keyboard.KEY_RIGHT:K_RIGHT=false;break;
+        case Keyboard.KEY_SPACE:K_SPACE=false;break;
+        case Keyboard.KEY_LEFT:K_LEFT=false;break;
+        case Keyboard.KEY_RIGHT:K_RIGHT=false;break;
+        case Keyboard.KEY_LSHIFT: K_SHIFT=false;break;
+        case Keyboard.KEY_TAB: K_TAB=false;break;
+        case Keyboard.KEY_W: K_W=false;break;
         }
     }
     public void keyType(int key) {

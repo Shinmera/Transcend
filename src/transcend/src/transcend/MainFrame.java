@@ -141,7 +141,7 @@ public class MainFrame implements KeyboardListener{
 
     public void initGL() {
         //2D Initialization
-       	glClearColor(0,0,0,0);
+       	glClearColor(0.1f,0.1f,0.2f,0);
         glClearAccum(0,0,0,0);
         glClearDepth(1);
         glEnable(GL_COLOR_MATERIAL);
@@ -159,6 +159,8 @@ public class MainFrame implements KeyboardListener{
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
         glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
+        glEnable(GL_POINT_SMOOTH);
+        glHint(GL_POINT_SMOOTH_HINT, GL_NICEST);
         
         //2D Scene
         glViewport(0,0,DISPLAY_WIDTH,DISPLAY_HEIGHT);
@@ -175,13 +177,6 @@ public class MainFrame implements KeyboardListener{
         if(!worldLoader.isLoaded()){
             loader.setHelper(new LoadHelper(){public void load(){worldLoader.loadWorld(new File("world"+File.separator+"various.tw"));}});
             loader.start();
-        }else{
-            if(world.contains("testpath")){
-            CameraPath path = (CameraPath)world.getByName("testpath");
-            if(path.isStopped())path.start();
-            camera.follow(world.getID("testpath"));
-            camera.setBoundary(-1);
-            }
         }
         //Hook to world loop
         if(!pause){
@@ -304,6 +299,15 @@ public class MainFrame implements KeyboardListener{
 
     public static void glCircle2d(double x,double y,double r){
         glBegin(GL_LINE_LOOP);
+            for(int i = 0; i < 100; i++) {
+                double angle = i*2*Math.PI/100;
+                glVertex2d(x + (Math.cos(angle) * r), y + (Math.sin(angle) * r));
+            }
+        glEnd();
+    }
+
+    public static void glFCircle2d(double x,double y,double r){
+        glBegin(GL_POLYGON);
             for(int i = 0; i < 100; i++) {
                 double angle = i*2*Math.PI/100;
                 glVertex2d(x + (Math.cos(angle) * r), y + (Math.sin(angle) * r));

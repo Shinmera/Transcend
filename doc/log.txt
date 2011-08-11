@@ -189,9 +189,33 @@ CameraPath klasse hinzugefügt.
 EnemyB1 erweitert.
 Animation erweitert um Abspielrichtung. (Animationen können rückwärts abgespielt werden)
 
-[15:30- 23.7.2011]
+[15:30-19:00 23.7.2011]
 Vektor klasse hinzugefügt.
 Emitter nach Tile migriert.
 CameraPath fertiggestellt.
 World Element Index hinzugefügt.
 GameEvent Klasse hinzugefügt.
+
+[16:15-18:00 6.8.2011]
+AI Klasse hinzugefügt.
+
+[16:00-18:00 7.8.2011]
+AI Klasse erweitert.
+GRadioButton hinzugefügt.
+Editor erweitert.
+
+[19:00-21:00 7.8.2011]
+AI sanitized.
+AI tests durchgeführt.
+Pläne zur erweiterung der AI ausgelegt.
+
+[16:50-17:50 8.8.2011]
+AI erweitert.
+Profiling durchgeführt.
+Ladebildschirm verbessert.
+
+[13:30-16:00 9.8.2011]
+Renoise tests.
+
+[13:10- 10.8.2011]
+AI verbessert.

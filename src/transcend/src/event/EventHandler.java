@@ -50,13 +50,13 @@ public class EventHandler {
      * Induce the event chain. If called the Handler will process the event and
      * call the right objects and functions.
      * @param event The type of event to trigger.
-     * @param identifier A reference pointer to the sending object.
+     * @param wID A reference pointer to the sending object.
      * @param arguments Pass additional arguments.
      */
-    public void triggerEvent(int event,int identifier,HashMap<String,String> arguments){
+    public void triggerEvent(int event,int wID,HashMap<String,String> arguments){
         for(int i=0;i<events.size();i++){
             if(events.getAt(i).contains(event)){
-                events.getKey(i).onEvent(event,identifier,arguments);
+                events.getKey(i).onEvent(event,wID,arguments);
             }
         }
     }
@@ -65,7 +65,7 @@ public class EventHandler {
      * Induce the event chain. If called the Handler will process the event and
      * call the right objects and functions.
      * @param event The type of event to trigger.
-     * @param identifier A reference pointer to the sending object.
+     * @param wID A reference pointer to the sending object.
      */
     public void triggerAnonymousEvent(int event,HashMap<String,String> arguments){
         for(int i=0;i<events.size();i++){
@@ -78,12 +78,12 @@ public class EventHandler {
     /**
      * Trigger an event for a specific object.
      * @param event The type of event to trigger.
-     * @param from A reference pointer to the sending object.
+     * @param wID A reference pointer to the sending object.
      * @param to A reference pointer to the receiving object.
      * @param arguments Pass additional arguments.
      */
-    public void triggerSpecificEvent(int event,int from, int to,HashMap<String,String> arguments){
-        ((EventListener)MainFrame.world.getByID(to)).onEvent(event, from,arguments);
+    public void triggerSpecificEvent(int event,int wID, int to,HashMap<String,String> arguments){
+        ((EventListener)MainFrame.world.getByID(to)).onEvent(event, wID,arguments);
     }
 
     /**

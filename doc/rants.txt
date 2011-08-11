@@ -25,3 +25,31 @@ STARTED ON 14.7.2011
 20:51 - Derpy Hooves: this is pretty cool eh
 20:51 - Derpy Hooves: but uhm.
 20:51 - Derpy Hooves: which fucking combination has the effect I want?
+
+--->7.8. Working on the AI.
+21:15 - Derpy Hooves: ok...
+21:15 - Derpy Hooves: something's wrong with my distance calculation
+21:16 - Derpy Hooves: for whatever reason, the distance from the left side of the object is always smaller than the one from the right side of the object
+21:16 - Derpy Hooves: to the goal
+21:16 - gingerale: Heh
+21:16 - gingerale: Good luck finding where you made a mistake ^^
+21:17 - Derpy Hooves: :I
+21:17 - Derpy Hooves: I can't brain today
+21:17 - Derpy Hooves: I have the dumb
+21:19 - Derpy Hooves: it all looks perfectly fine to me
+21:20 - Derpy Hooves: ffffffuuuu
+21:20 - Derpy Hooves: uuuuuuuu
+21:20 - Derpy Hooves: uuuu
+21:20 - Derpy Hooves: u.
+21:20 - Derpy Hooves: u
+[...]
+22:02 - gingerale: Why do you do the dist - adist anyways? What's wrong with just taking adist since it is the new distance anyways?
+22:02 - gingerale: And just take the min out of those
+22:02 - Derpy Hooves: because......
+22:02 - Derpy Hooves: uhm.
+22:02 - Derpy Hooves: idk.
+[...]
+22:04 - Derpy Hooves: yeees brilliant!
+22:04 - Derpy Hooves: it works!
+22:04 - Derpy Hooves: IT WORKS
+22:04 - Derpy Hooves: HUAHAHAHAAA

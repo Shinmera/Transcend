@@ -3,16 +3,103 @@ BlankBlock{
 x: -64
 y: -128
 z: 5
-w: 128
+w: 512
 h: 64
 }
 
-CameraPath{
-name: testpath
-0:0 0
-1:64 0
-2:128 128
-3:128 512
-4:0 512
-5:-64 -64
+BlankBlock{
+x: -320
+y: -192
+z: 0
+w: 384
+h: 64
 }
+
+BlankBlock{
+x: -512
+y: -384
+z: 0
+w: 384
+h: 64
+}
+
+BlankBlock{
+x: -256
+y: -576
+z: 0
+w: 768
+h: 64
+}
+
+BlankBlock{
+x: 448
+y: -512
+z: 0
+w: 64
+h: 704
+}
+
+BlankBlock{
+x: -1088
+y: -576
+z: 0
+w: 832
+h: 128
+}
+
+BlankBlock{
+x: -1152
+y: -576
+z: 0
+w: 64
+h: 704
+}
+
+BlankBlock{
+x: -1088
+y: -448
+z: 0
+w: 320
+h: 192
+}
+
+BlankBlock{
+x: -768
+y: -448
+z: 0
+w: 128
+h: 128
+}
+
+BlankBlock{
+x: -1088
+y: -256
+z: 0
+w: 128
+h: 128
+}
+
+BlankBlock{
+x: -832
+y: -64
+z: 0
+w: 384
+h: 64
+}
+
+BlankBlock{
+x: -512
+y: 64
+z: 0
+w: 320
+h: 64
+}
+
+BlankBlock{
+x: -768
+y: 192
+z: 0
+w: 320
+h: 64
+}
+

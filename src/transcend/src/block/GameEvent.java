@@ -23,7 +23,7 @@ public class GameEvent extends Block implements EventListener{
     public static int EVENT_ADVANCE_WORLD = 0x03;
 
     private int type = EVENT_NONE;
-    private String world_to = "";
+    private String to = "";
 
     public GameEvent(){
         MainFrame.eh.registerEvent(Event.PLAYER_TOUCH, 9,this);
@@ -40,19 +40,32 @@ public class GameEvent extends Block implements EventListener{
     }
 
     public void loadTexture(){
-        if(type==EVENT_SWITCH_WORLD)drawable.loadTexture(new File(MainFrame.basedir,"tex"+File.separator+"portal.png"));
+        if(type==EVENT_SWITCH_WORLD){
+            drawable.loadTexture(new File(MainFrame.basedir,"tex"+File.separator+"portal.png"));
+            drawable.setSpritesize(128);
+            drawable.calcTile(128, 128);
+            drawable.setSize(128,128);
+        }
         
     }
 
+    public void setAdvancer(String adv){
+        to=adv;
+    }
+
     public void update(){
-        
+        if(type!=GameEvent.EVENT_NONE)drawable.update();
+    }
+
+    public void draw(){
+        if(type!=GameEvent.EVENT_NONE)drawable.draw((int)x,(int)y);
     }
 
     public void onEvent(int event, int identifier, HashMap<String, String> arguments) {
         if(event==Event.PLAYER_TOUCH&&arguments.get("wID").equals(wID)){
-            if(type==EVENT_SWITCH_WORLD&&!world_to.equals("")){
+            if(type==EVENT_SWITCH_WORLD&&!to.equals("")){
                 MainFrame.loader.setHelper(new LoadHelper(){
-                    public void load(){MainFrame.worldLoader.loadWorld(new File(MainFrame.basedir,"world"+File.separator+world_to));}
+                    public void load(){MainFrame.worldLoader.loadWorld(new File(MainFrame.basedir,"world"+File.separator+to));}
                 });
             }
         }

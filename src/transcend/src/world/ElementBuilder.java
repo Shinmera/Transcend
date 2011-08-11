@@ -20,6 +20,7 @@ import NexT.util.SimpleSet;
 import NexT.util.Toolkit;
 import block.*;
 import entity.EnemyB1;
+import entity.EnemyC1;
 import gui.CameraPath;
 import java.io.File;
 import java.io.IOException;
@@ -149,10 +150,18 @@ public class ElementBuilder {
             EnemyB1 entity = new EnemyB1(Double.parseDouble(args.get("x")),Double.parseDouble(args.get("y")));
             MainFrame.world.addEntity(entity);
         }
+        else if(name.equals("enemyc1")){
+            EnemyC1 entity = new EnemyC1(Double.parseDouble(args.get("x")),Double.parseDouble(args.get("y")));
+            MainFrame.world.addEntity(entity);
+        }
         else if(name.equals("camerapath")){
             CameraPath path = new CameraPath();
             path.setOptions(args);
             MainFrame.world.addTile(path,args.get("name"));
+        }
+        else if(name.equals("gameevent")){
+            GameEvent event = new GameEvent(Integer.parseInt(args.get("x")),Integer.parseInt(args.get("y")),Integer.parseInt(args.get("type")));
+            MainFrame.world.addBlock(event);
         }
         //ATTEMPT TO DYNAMICALLY LOAD BLOCK
         else{

@@ -44,6 +44,9 @@ public class World {
 
     public int getID(int i){return ids.get(i);}
     public int getID(String name){if(index.containsKey(name))return index.get(name);else return -1;}
+    public Object[] getBlockList(){return blocks.getList().toArray();}
+    public Object[] getEntityList(){return entities.getList().toArray();}
+    public Object[] getTileList(){return tiles.getList().toArray();}
 
     public int addBlock(Block block){
         int nID=0;if(ids.size()>0)nID=ids.get(ids.size()-1)+1;
@@ -108,38 +111,38 @@ public class World {
         if(element.ELEMENT_ID>=Tile.ELEMENT_ID)addTile((Tile)element);
     }
 
-    public boolean isBlock(int identifier){return blocks.containsKey(identifier);}
-    public boolean isEntity(int identifier){return entities.containsKey(identifier);}
-    public boolean isTile(int identifier){return tiles.containsKey(identifier);}
+    public boolean isBlock(int wID){return blocks.containsKey(wID);}
+    public boolean isEntity(int wID){return entities.containsKey(wID);}
+    public boolean isTile(int wID){return tiles.containsKey(wID);}
     public boolean contains(String name){return index.containsKey(name);}
-    public boolean contains(int identifier){return ids.contains(identifier);}
+    public boolean contains(int wID){return ids.contains(wID);}
 
-    public BElement getByID(int identifier){
-        if(blocks.containsKey(identifier))return blocks.get(identifier);
-        if(entities.containsKey(identifier))return entities.get(identifier);
-        if(tiles.containsKey(identifier))return tiles.get(identifier);
+    public BElement getByID(int wID){
+        if(blocks.containsKey(wID))return blocks.get(wID);
+        if(entities.containsKey(wID))return entities.get(wID);
+        if(tiles.containsKey(wID))return tiles.get(wID);
         return null;
     }
 
     public BElement getByName(String name){
-        int identifier = getID(name);
-        if(blocks.containsKey(identifier))return blocks.get(identifier);
-        if(entities.containsKey(identifier))return entities.get(identifier);
-        if(tiles.containsKey(identifier))return tiles.get(identifier);
+        int wID = getID(name);
+        if(blocks.containsKey(wID))return blocks.get(wID);
+        if(entities.containsKey(wID))return entities.get(wID);
+        if(tiles.containsKey(wID))return tiles.get(wID);
         return null;
     }
     
-    public void delByID(int identifier){
-        if(blocks.containsKey(identifier)){blocks.remove(identifier);ids.remove((Object)identifier);}
-        if(entities.containsKey(identifier)){entities.remove(identifier);ids.remove((Object)identifier);}
-        if(tiles.containsKey(identifier)){tiles.remove(identifier);ids.remove((Object)identifier);}
+    public void delByID(int wID){
+        if(blocks.containsKey(wID)){blocks.remove(wID);ids.remove((Object)wID);}
+        if(entities.containsKey(wID)){entities.remove(wID);ids.remove((Object)wID);}
+        if(tiles.containsKey(wID)){tiles.remove(wID);ids.remove((Object)wID);}
     }
 
     public void delByName(String name){
-        int identifier = getID(name);
-        if(blocks.containsKey(identifier)){blocks.remove(identifier);ids.remove((Object)identifier);}
-        if(entities.containsKey(identifier)){entities.remove(identifier);ids.remove((Object)identifier);}
-        if(tiles.containsKey(identifier)){tiles.remove(identifier);ids.remove((Object)identifier);}
+        int wID = getID(name);
+        if(blocks.containsKey(wID)){blocks.remove(wID);ids.remove((Object)wID);}
+        if(entities.containsKey(wID)){entities.remove(wID);ids.remove((Object)wID);}
+        if(tiles.containsKey(wID)){tiles.remove(wID);ids.remove((Object)wID);}
     }
 
     public void update(){

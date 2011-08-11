@@ -1,32 +1,32 @@
-15:29 [TRA-PUBLIC][INFO] [CONST] Loading
+14:09 [TRA-PUBLIC][INFO] [CONST] Loading
 null.transcend.Const.loadRegistry
-15:29 [TRA-PUBLIC][INFO] [InputEventHandler] Loaded layout swiss. 20 keys mapped.
+14:09 [TRA-PUBLIC][INFO] [InputEventHandler] Loaded layout swiss. 20 keys mapped.
 null.event.InputEventHandler.<init>
-15:29 [TRA-PUBLIC][INFO] [MF] Booting up...
+14:09 [TRA-PUBLIC][INFO] [MF] Booting up...
 null.transcend.MainFrame.main
-15:29 [TRA-PUBLIC][INFO] [CONST] Loading
+14:09 [TRA-PUBLIC][INFO] [CONST] Loading
 null.transcend.Const.loadRegistry
-15:29 [TRA-PUBLIC][INFO] LWJGL found 36 display modes.
+14:09 [TRA-PUBLIC][INFO] LWJGL found 36 display modes.
 null.gui.DisplayModeChooser.<init>
-15:29 [TRA-PUBLIC][INFO] [CONST] Saving
+14:09 [TRA-PUBLIC][INFO] [CONST] Saving
 null.transcend.Const.saveRegistry
-15:29 [TRA-PUBLIC][INFO] [CONST] Loading
+14:09 [TRA-PUBLIC][INFO] [CONST] Loading
 null.transcend.Const.loadRegistry
-15:29 [TRA-PUBLIC][INFO] [MF] Initializing...
+14:09 [TRA-PUBLIC][INFO] [MF] Initializing...
 null.transcend.MainFrame.create
-15:29 [TRA-PUBLIC][INFO] [Loader] Loading...
+14:09 [TRA-PUBLIC][INFO] [Loader] Loading...
 null.gui.Loader.run
-15:29 [TRA-PUBLIC][INFO] [Loader] Finished loading. Ready.
+14:09 [TRA-PUBLIC][INFO] [Loader] Finished loading. Ready.
 null.gui.Loader.run
-15:29 [TRA-PUBLIC][INFO] [Loader] Loading...
+14:09 [TRA-PUBLIC][INFO] [Loader] Loading...
 null.gui.Loader.run
-15:29 [TRA-PUBLIC][INFO] [World] Loading World from D:\projects\JAVAPROJECTS\transcend\src\transcend\run\world\various.tw
+14:09 [TRA-PUBLIC][INFO] [World] Loading World from D:\projects\JAVAPROJECTS\transcend\src\transcend\run\world\various.tw
 null.world.WorldLoader.loadWorld
-15:29 [TRA-PUBLIC][INFO] [World] Loaded 2 elements. 1 Blocks 1 Entities 1 Tiles.
+14:09 [TRA-PUBLIC][INFO] [World] Loaded 13 elements. 13 Blocks 1 Entities 0 Tiles.
 null.world.WorldLoader.loadWorld
-15:29 [TRA-PUBLIC][INFO] [Loader] 100%
+14:09 [TRA-PUBLIC][INFO] [Loader] 100%
 null.gui.Loader.run
-15:29 [TRA-PUBLIC][INFO] [Loader] Finished loading. Ready.
+14:09 [TRA-PUBLIC][INFO] [Loader] Finished loading. Ready.
 null.gui.Loader.run
-15:29 [TRA-PUBLIC][INFO] [MF] Shutting down...
+14:11 [TRA-PUBLIC][INFO] [MF] Shutting down...
 null.transcend.MainFrame.destroy

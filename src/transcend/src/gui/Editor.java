@@ -9,6 +9,7 @@
 
 package gui;
 
+import javax.swing.JOptionPane;
 import NexT.util.Toolkit;
 import world.BElement;
 import java.util.HashMap;
@@ -21,8 +22,8 @@ import static org.lwjgl.opengl.GL11.*;
 public class Editor extends GObject implements MouseListener{
     public static final int MODE_BLOCKS = 0;
     public static final int MODE_ENTITIES = 1;
-    private String[] blocks = {"blankblock","halfblankblock","dirtblock","grassblock","stoneblock","brickblock","tileset","emitter"};
-    private String[] entities = {"enemyb1"};
+    private String[] blocks = {"blankblock","halfblankblock","dirtblock","grassblock","stoneblock","brickblock","tileset","emitter","gameevent"};
+    private String[] entities = {"enemyb1","enemyc1"};
     private boolean active=false;
     private int tilesize=64;
     private int curItem=0;
@@ -123,7 +124,10 @@ public class Editor extends GObject implements MouseListener{
                 args.put("w", bx+"");
                 args.put("h", by+"");
                 args.put("a", "");
-                if(mode==MODE_BLOCKS)MainFrame.elementBuilder.buildElement(blocks[curItem], args);
+                if(mode==MODE_BLOCKS){
+                    if(blocks[curItem].equals("gameevent"))args.put("type",JOptionPane.showInputDialog("GameEvent Type? 0=none, 1=switch world, 2=switch camera, 3=progress world"));
+                    MainFrame.elementBuilder.buildElement(blocks[curItem], args);
+                }
                 else MainFrame.elementBuilder.buildElement(entities[curItem], args);
             }
             x=0;y=0;
@@ -132,9 +136,12 @@ public class Editor extends GObject implements MouseListener{
             BElement e=null;
             double x = Mouse.getX()/MainFrame.camera.getZoom() + MainFrame.camera.getRelativeX();
             double y = Mouse.getY()/MainFrame.camera.getZoom() + MainFrame.camera.getRelativeY();
-            for(int i=MainFrame.world.size()-1;i>=0;i--){
-                if(MainFrame.world.getByID(MainFrame.world.getID(i)).checkInside(x,y)){
-                    e=MainFrame.world.getByID(MainFrame.world.getID(i));
+            Object[] ids = new Object[0];
+            if(mode==MODE_BLOCKS)ids = Toolkit.joinArray(MainFrame.world.getBlockList(),MainFrame.world.getTileList());
+            if(mode==MODE_ENTITIES)ids = MainFrame.world.getEntityList();
+            for(int i=ids.length-1;i>=0;i--){
+                if(MainFrame.world.getByID((Integer)ids[i]).checkInside(x,y)){
+                    e=MainFrame.world.getByID((Integer)ids[i]);
                     break;
                 }
             }

@@ -21,11 +21,13 @@ import graph.Animation;
 import static org.lwjgl.opengl.GL11.*;
 
 public class Loader{
+    public static final int DELAY_TIMER = 2;
     private boolean loading=false;
     private String current="";
     private Animation drawable = new Animation();
     private LoadHelper helper = null;
     private TrueTypeFont font = new TrueTypeFont(new Font("Arial", Font.BOLD, 20),false);
+    private int delay = 0;
 
     public Loader(){
         drawable.loadTexture(new File(MainFrame.basedir,"data"+File.separator+"load.png"));
@@ -44,6 +46,7 @@ public class Loader{
 
     public void run(){
         if(!loading)return;
+        if(delay<DELAY_TIMER){delay++;return;}
         if (helper!=null) {
             Const.LOGGER.info("[Loader] Loading...");
             helper.load();
@@ -64,6 +67,7 @@ public class Loader{
     public void start(){
         LoadingList.get().setDeferredLoading(true);
         loading = true;
+        delay = 0;
     }
 
     public void draw(){

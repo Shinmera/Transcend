@@ -130,6 +130,7 @@ public class Animation {
     public int getV(){return ind_h;}
     public double getSpritesize(){return spritesize;}
     public int getPPS(){return pps;}
+    public boolean isLoaded(){return texture!=null;}
 
     public void update(){
         if(stop[0]<0)return;

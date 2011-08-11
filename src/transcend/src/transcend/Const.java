@@ -12,6 +12,7 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.logging.FileHandler;
@@ -36,6 +37,7 @@ public class Const {
 
     //OBJECT
     public static final Logger LOGGER                   = Logger.getLogger("TRA-PUBLIC");
+    public static final Random RAND                     = new Random();
 
     public HashMap<String,String> registry              = new HashMap();
 

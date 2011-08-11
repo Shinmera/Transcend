@@ -9,6 +9,8 @@
 
 package entity;
 
+import block.Block;
+import transcend.MainFrame;
 import world.Element;
 
 public class Entity extends Element{
@@ -17,11 +19,14 @@ public class Entity extends Element{
     public static final int STATUS_NONE = 0x0;
     public static final int STATUS_IDLE = 0x1;
     public static final int STATUS_MOVE = 0x2;
-    public static final int STATUS_ATTACK = 0x3;
-    public static final int STATUS_DEFEND = 0x4;
+    public static final int STATUS_JUMP = 0x3;
+    public static final int STATUS_ATTACK = 0x4;
+    public static final int STATUS_DEFEND = 0x5;
+    public static final int STATUS_DIE = 0xF;
 
     public double atk,def,vx,vy;
     public int status=STATUS_NONE;
+    public Block ground;
     
     public Entity(){}
 
@@ -39,5 +44,18 @@ public class Entity extends Element{
 
     public void draw(){
         drawable.draw((int)x,(int)y,w,h);
+    }
+
+    public Element check(double ax,double ay,double bx,double by){
+        Element e=null;
+        Object[] blockIDs = MainFrame.world.getBlockList();
+        for(int i=0;i<blockIDs.length;i++){
+            Block block = (Block)MainFrame.world.getByID((Integer)blockIDs[i]);
+            if(block.checkInside(ax,ay)||block.checkInside(bx,by)){
+                e=block;
+                break;
+            }
+        }
+        return e;
     }
 }

@@ -14,7 +14,6 @@ import graph.Animation;
 import java.io.File;
 import java.util.HashMap;
 import transcend.MainFrame;
-import world.BElement;
 import world.Element;
 
 public class EnemyB1 extends Entity implements EventListener{
@@ -50,22 +49,8 @@ public class EnemyB1 extends Entity implements EventListener{
         drawable.draw((int)x,(int)y-4,w,h);
     }
 
-    public Element check(double ax,double ay,double bx,double by){
-        Element e=null;
-        for(int i=0;i<MainFrame.world.size();i++){
-            BElement bel = MainFrame.world.getByID(MainFrame.world.getID(i));Element el = null;
-            if(!bel.isBaseElement())el=(Element)bel;
-            if((el!=null)&&(el.checkInside(ax,ay)||el.checkInside(bx,by))){
-                e=el;
-                break;
-            }
-        }
-        return e;
-    }
-
     public void update(){
         drawable.update();
-
         if(vy<=0)ground=check(x+3,y,x+w-3,y);else ground=null;
         if(ground==null){
             vy-=vydcc;
