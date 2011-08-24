@@ -9,6 +9,7 @@
 
 package gui;
 
+import graph.AbstractGraph;
 import NexT.util.Vector;
 import NexT.util.Toolkit;
 import java.util.HashMap;
@@ -125,9 +126,9 @@ public class CameraPath extends Tile{
                 glEnd();
             }
             Color.red.bind();
-            MainFrame.glCircle2d(path.get(i).getX(),path.get(i).getY(), 2);
+            AbstractGraph.glCircle2d(path.get(i).getX(),path.get(i).getY(), 2);
         }
         Color.blue.bind();
-        MainFrame.glCircle2d(x,y,3);
+        AbstractGraph.glCircle2d(x,y,3);
     }
 }

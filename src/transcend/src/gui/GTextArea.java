@@ -32,6 +32,10 @@ public class GTextArea extends GLabel implements KeyboardListener,MouseListener{
         glBindTexture(GL_TEXTURE_2D, 0); //release
     }
 
+    public void append(String s){
+        text=text+s;
+    }
+
     public String getLine(int n){
         String[] text = this.text.split("\n");
         if(n<text.length)return text[n];

@@ -9,23 +9,125 @@
 
 package transcend;
 
+import gui.HPowerBar;
 import java.io.File;
-import org.lwjgl.opengl.Display;
 import org.newdawn.slick.Color;
 import gui.*;
 import static transcend.MainFrame.*;
 
 public class MenuLoader extends LoadHelper{
     public void load(){
-        GPanel p_editor = new GPanel(0,10,130,DISPLAY_HEIGHT-20){
-            public void paint(){if(editor.getActive())super.paint();}
-        };
-        p_editor.setBackground(new Color(255,255,255,150));
+        constructMainPane();
+        constructPausePane();
+        constructEditorPane();
+        constructLoadPane();
+        constructSettingsPane();
+        constructHelpPane();
+        constructHUDPane();
+        GImage i_logo = new GImage("logo.png");
+        i_logo.setBounds(DISPLAY_WIDTH/2-250,DISPLAY_HEIGHT-106-50,500,106);
+        menu.add(i_logo);
+    }
 
-        final GLabel l_block = new GLabel(editor.getItemName(editor.getItem()));
+    private void constructMainPane(){
+        int panel_width=(int)(DISPLAY_WIDTH/100.0*25.0);
+        GPanel p_main = new GPanel(DISPLAY_WIDTH/2-panel_width/2,0,panel_width,DISPLAY_HEIGHT-200);
+
         GButton b_quit = new GButton("Quit"){
             public void onRelease(){destroy();}
         };
+
+        GButton b_start = new GButton("Start Game"){
+            public void onRelease(){
+                menu.get("p_main").setVisible(false);
+                loader.setHelper(new LoadHelper(){public void load(){
+                    worldLoader.loadWorld(new File("world"+File.separator+"intro.tw"));
+                }});
+                loader.start();
+            }
+        };
+
+        GButton b_load = new GButton("Load Game"){
+            public void onRelease(){
+                menu.get("p_main").setVisible(false);
+                menu.get("p_load").setVisible(true);
+            }
+        };
+
+        GButton b_help = new GButton("Help"){
+            public void onRelease(){
+                menu.get("p_main").setVisible(false);
+                menu.get("p_help").setVisible(true);
+            }
+        };
+
+        GButton b_settings = new GButton("Settings"){
+            public void onRelease(){
+                menu.get("p_main").setVisible(false);
+                menu.get("p_settings").setVisible(true);
+            }
+        };
+
+        b_quit.autoBounds(p_main, 0, 10, panel_width, 30);
+        b_start.autoBounds(p_main, 0, p_main.getHeight()-40, panel_width, 30);
+        b_load.autoBounds(p_main, 0, p_main.getHeight()-80, panel_width, 30);
+        b_help.autoBounds(p_main, 0, p_main.getHeight()-130, panel_width, 30);
+        b_settings.autoBounds(p_main, 0, p_main.getHeight()-170, panel_width, 30);
+
+
+
+        p_main.setBackground(new Color(255,255,255,150));
+        p_main.add(b_quit);
+        p_main.add(b_load);
+        p_main.add(b_settings);
+        p_main.add(b_help);
+        p_main.add(b_start);
+        p_main.setVisible(false);
+
+        menu.add(p_main,"p_main");
+    }
+
+    private void constructSettingsPane(){
+        int panel_width=(int)(DISPLAY_WIDTH/100.0*50.0);
+        GPanel p_settings  = new GPanel(DISPLAY_WIDTH/2-panel_width/2,0,panel_width,DISPLAY_HEIGHT-200);
+
+        GButton b_return = new GButton("Return"){
+            public void onRelease(){
+                menu.get("p_main").setVisible(true);
+                menu.get("p_settings").setVisible(false);
+            }
+        };
+
+        b_return.autoBounds(p_settings, 0, 10, panel_width, 30);
+
+        p_settings.setBackground(new Color(255,255,255,150));
+        p_settings.add(b_return);
+
+        menu.add(p_settings,"p_settings");
+    }
+
+    private void constructHelpPane(){
+        int panel_width=(int)(DISPLAY_WIDTH/100.0*50.0);
+        GPanel p_help  = new GPanel(DISPLAY_WIDTH/2-panel_width/2,0,panel_width,DISPLAY_HEIGHT-200);
+
+        GButton b_return = new GButton("Return"){
+            public void onRelease(){
+                menu.get("p_main").setVisible(true);
+                menu.get("p_help").setVisible(false);
+            }
+        };
+
+        b_return.autoBounds(p_help, 0, 10, panel_width, 30);
+
+        p_help.setBackground(new Color(255,255,255,150));
+        p_help.add(b_return);
+
+        menu.add(p_help,"p_help");
+    }
+
+    private void constructPausePane(){
+        int panel_width=(int)(DISPLAY_WIDTH/100.0*25.0);
+        GPanel p_pause  = new GPanel(DISPLAY_WIDTH/2-panel_width/2,0,panel_width,DISPLAY_HEIGHT-200);
         GButton b_editor = new GButton("Toggle Editor"){
             public void onRelease(){if(editor.getActive()){
                 editor.setActive(false);this.setBackground(Color.red);
@@ -33,19 +135,107 @@ public class MenuLoader extends LoadHelper{
                 editor.setActive(true);this.setBackground(Color.green);
             }}
         };
-        GButton b_settings = new GButton("Settings"){
+        //LOAD BUTTON
+        GButton b_load = new GButton("Load Game"){
             public void onRelease(){
-                if(DisplayModeChooser.showDialog("Display Mode")){
-                    CONST.loadRegistry();
-                    DISPLAY_WIDTH=Display.getDisplayMode().getWidth();
-                    DISPLAY_HEIGHT=Display.getDisplayMode().getHeight();
-                    fps=CONST.gInteger("FPS");
-                    ACSIZE=CONST.gInteger("ANTIALIAS");
-                    hid.setBounds(0,0,DISPLAY_WIDTH,DISPLAY_HEIGHT);
-                    menu.setBounds(0,0,DISPLAY_WIDTH,DISPLAY_HEIGHT);
+                menu.get("p_pause").setVisible(false);
+                menu.get("p_load").setVisible(true);
+            }
+        };
+        //QUIT BUTTON (Main Menu)
+        GButton b_quit = new GButton("Quit to Menu"){
+            public void onRelease(){
+                MainFrame.worldLoader.loadWorld(new File(basedir,"world"+File.separator+"menu.tw"));
+                editor.setVisible(false);
+                hud.setVisible(false);
+                menu.get("p_pause").setVisible(false);
+                menu.get("p_main").setVisible(true);
+            }
+        };
+        //RETURN BUTTON
+        GButton b_return = new GButton("Return to Game"){
+            public void onRelease(){
+                menu.setVisible(false);
+                hud.setVisible(true);
+                unpause();
+            }
+        };
+
+        b_editor.setBackground(Color.green);
+        b_editor.autoBounds(p_pause, 0, 100, panel_width, 30);
+        b_return.autoBounds(p_pause, 0, p_pause.getHeight()-40, panel_width, 30);
+        b_load.autoBounds(p_pause, 0,   p_pause.getHeight()-80, panel_width, 30);
+        b_quit.autoBounds(p_pause, 0,   p_pause.getHeight()-120, panel_width, 30);
+
+
+        p_pause.setBackground(new Color(255,255,255,150));
+        p_pause.add(b_editor);
+        p_pause.add(b_return);
+        p_pause.add(b_load);
+        p_pause.add(b_quit);
+
+        menu.add(p_pause,"p_pause");
+    }
+
+    private void constructLoadPane(){
+        int panel_width=(int)(DISPLAY_WIDTH/100.0*50.0);
+        GPanel p_load  = new GPanel(DISPLAY_WIDTH/2-panel_width/2,0,panel_width,DISPLAY_HEIGHT-200){
+            public void setVisible(boolean visible){
+                super.setVisible(visible);
+                ((GList)this.get("list")).clear();
+                File[] saves = new File(basedir,"world"+File.separator+"save"+File.separator).listFiles();
+                for(int i=0;i<saves.length;i++){
+                    if(!saves[i].isDirectory())((GList)this.get("list")).addListElement(saves[i].getName());
                 }
             }
         };
+
+
+        GList l_loads = new GList(){};
+        GButton b_load = new GButton("Load"){
+            public void onRelease(){
+                final String name = ((GList)((GPanel)menu.get("p_load")).get("list")).getSelected();
+                loader.setHelper(new LoadHelper(){public void load(){
+                    worldLoader.loadGame(new File(basedir,"world"+File.separator+"save"+File.separator+name));
+                }});
+                loader.start();
+            }
+        };
+        GButton b_return = new GButton("Return"){
+            public void onRelease(){
+                menu.get("p_pause").setVisible(true);
+                menu.get("p_load").setVisible(false);
+            }
+        };
+        
+        l_loads.autoBounds(p_load, 0, p_load.getHeight()-(DISPLAY_HEIGHT-200-50), panel_width, DISPLAY_HEIGHT-200-50);
+        b_load.autoBounds(p_load, 0, 10, panel_width/2-5, 30);
+        b_return.autoBounds(p_load, panel_width/2+5, 10, panel_width/2-5, 30);
+
+        p_load.setBackground(new Color(255,255,255,150));
+        p_load.add(l_loads,"list");
+        p_load.add(b_load);
+        p_load.add(b_return);
+
+        menu.add(p_load,"p_load");
+    }
+
+
+    private void constructEditorPane(){
+        GPanel p_editor = new GPanel(0,10,130,DISPLAY_HEIGHT-20){
+            public void paint(){if(editor.getActive())super.paint();}
+            public void setVisible(boolean visible){
+                super.setVisible(visible);
+                GTextField file = (GTextField)get("t_file");
+                if(file!=null&&worldLoader.isLoaded()){
+                    file.setText(worldLoader.getLoaded().getName());
+                }
+            }
+        };
+        p_editor.setBackground(new Color(255,255,255,150));
+
+        final GLabel l_block = new GLabel(editor.getItemName(editor.getItem()));
+
         GButton b_prev = new GButton("<"){
             public void onRelease(){
                 editor.setItem(editor.getItem()-1);
@@ -95,7 +285,7 @@ public class MenuLoader extends LoadHelper{
             }
         };
         final GTextArea t_args = new GTextArea("");
-        final GTextField t_file = new GTextField("test.tw");
+        final GTextField t_file = new GTextField("");
         GButton b_save = new GButton("Save"){
             public void onRelease(){
                 worldLoader.saveWorld(new File("world"+File.separator+t_file.getText()));
@@ -119,7 +309,7 @@ public class MenuLoader extends LoadHelper{
             }
         };;
         if(MainFrame.editor.getMode()==Editor.MODE_BLOCKS)r_blocks.setActivated(true);
-        else r_entities.setActivated(true); 
+        else r_entities.setActivated(true);
 
         GLabel l_blockdesc = new GLabel("Block:",GLabel.ALIGN_LEFT);
         l_blockdesc.setBorder(new Color(0,0,0,0),0);
@@ -137,14 +327,7 @@ public class MenuLoader extends LoadHelper{
         l_argsdesc.setBorder(new Color(0,0,0,0),0);
         l_argsdesc.setBackground(new Color(1,1,1,0.5f));
 
-        b_editor.setBackground(Color.red);
-        b_quit.setBounds(10, 10, 100, 30);
-        b_editor.setBounds(10,80,100, 30);
-        b_settings.setBounds(10,45,100,30);
-        GImage i_logo = new GImage("logo.png");
-        i_logo.setBounds(DISPLAY_WIDTH/2-250,DISPLAY_HEIGHT-106-50,500,106);
         l_speed.setBounds(10,DISPLAY_HEIGHT-20,400,15);
-
 
         b_save.setBounds(10,10,100,30);
         b_load.setBounds(10,45,100,30);
@@ -174,13 +357,10 @@ public class MenuLoader extends LoadHelper{
         l_argsdesc.setBounds(10,p_editor.getHeight()-15-190,100,15);
         t_args.setBounds(10,p_editor.getHeight()-15-250,100,55);
 
-        menu.add(b_quit);
-        menu.add(b_editor);
-        menu.add(b_settings);
-        menu.add(i_logo);
+
         p_editor.add(b_save);
         p_editor.add(b_load);
-        p_editor.add(t_file);
+        p_editor.add(t_file,"t_file");
         p_editor.add(t_tiles);
         p_editor.add(l_tilesdesc);
         p_editor.add(b_prev);
@@ -199,9 +379,15 @@ public class MenuLoader extends LoadHelper{
         p_editor.add(t_args,"args");
         p_editor.add(r_blocks,"r_blocks");
         p_editor.add(r_entities,"r_entities");
-        hid.add(editor,"editor");
-        hid.add(p_editor,"p_editor");
-        hid.add(l_speed,"hidinfo");
-        hid.setVisible(true);
+        hud.add(editor,"editor");
+        hud.add(p_editor,"p_editor");
+        hud.add(l_speed,"hidinfo");
+        hud.setVisible(true);
+    }
+
+    public void constructHUDPane(){
+        HPowerBar powerBar = new HPowerBar();
+        powerBar.setBounds(DISPLAY_WIDTH-380-10,10,380,64);
+        hud.add(powerBar);
     }
 }

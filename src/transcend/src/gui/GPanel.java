@@ -9,6 +9,7 @@
 
 package gui;
 import NexT.util.SimpleSet;
+import static org.lwjgl.opengl.GL11.*;
 
 public class GPanel extends GObject{
     private SimpleSet<String,GObject> regs = new SimpleSet<String,GObject>();

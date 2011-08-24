@@ -33,6 +33,7 @@ public class Entity extends Element{
     public double getAttack(){return atk;}
     public double getDefense(){return def;}
     public int getStatus(){return status;}
+    public Block getGround(){return ground;}
 
     public void setAttack(double atk){this.atk=atk;}
     public void setDefense(double def){this.def=def;}
@@ -46,7 +47,7 @@ public class Entity extends Element{
         drawable.draw((int)x,(int)y,w,h);
     }
 
-    public Element check(double ax,double ay,double bx,double by){
+    public static Element check(double ax,double ay,double bx,double by){
         Element e=null;
         Object[] blockIDs = MainFrame.world.getBlockList();
         for(int i=0;i<blockIDs.length;i++){

@@ -11,6 +11,7 @@ package tile;
 
 import NexT.util.SimpleSet;
 import java.io.File;
+import java.util.HashMap;
 import transcend.MainFrame;
 
 public class TileSet extends Tile{
@@ -34,6 +35,8 @@ public class TileSet extends Tile{
         depth=1;
     }
 
+    public TileSet() {depth=1;z=0;}
+
     public void setU(int u){drawable.setU(u);}
     public void setV(int v){drawable.setV(v);}
     public void setS(double s){
@@ -49,5 +52,15 @@ public class TileSet extends Tile{
         set.put("v",drawable.getV()+"");
         set.put("s",drawable.getSpritesize()+"");
         return set;
+    }
+
+    public void setOptions(HashMap<String,String> args){
+        super.setOptions(args);
+        if(args.containsKey("tex")){
+            tileset = args.get("tex");
+            drawable.loadTexture(new File(MainFrame.basedir,"tex"+File.separator+args.get("tex")));
+            drawable.setSize(w,h);
+            drawable.calcRelative();
+        }
     }
 }

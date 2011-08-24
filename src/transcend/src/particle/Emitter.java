@@ -10,7 +10,10 @@
 package particle;
 
 import NexT.util.SimpleSet;
+import NexT.util.Toolkit;
+import graph.AbstractGraph;
 import java.util.ArrayList;
+import java.util.HashMap;
 import org.newdawn.slick.Color;
 import tile.Tile;
 import transcend.MainFrame;
@@ -96,7 +99,7 @@ public class Emitter extends Tile{
         for(int i=0;i<particles.size();i++)particles.get(i).draw();
         if(MainFrame.editor.getActive()){
             Color.red.bind();
-            MainFrame.glCircle2d(x, y, 5);
+            AbstractGraph.glCircle2d(x, y, 5);
         }
     }
 
@@ -113,6 +116,23 @@ public class Emitter extends Tile{
         set.put("avg_type",avg_type+"");
         return set;
     }
+
+    public void setOptions(HashMap<String,String> args){
+        super.setOptions(args);
+            if(args.containsKey("mlife"))setMaxLife(Double.parseDouble(args.get("mlife")));
+            if(args.containsKey("mpart"))setMaxParticles(Integer.parseInt(args.get("mpart")));
+            if(args.containsKey("spray"))setSpray(Integer.parseInt(args.get("spray")));
+            if(args.containsKey("avg_diver"))setAverageDiversity(Double.parseDouble(args.get("avg_diver")));
+            if(args.containsKey("avg_size"))setAverageSize(Double.parseDouble(args.get("avg_size")));
+            if(args.containsKey("avg_mlife"))setAverageMaxLife(Double.parseDouble(args.get("avg_mlife")));
+            if(args.containsKey("avg_mlife_diver"))setAverageMaxLifeDiversity(Double.parseDouble(args.get("avg_mlife_diver")));
+            if(args.containsKey("avg_type"))setAverageType(Integer.parseInt(args.get("avg_type")));
+            if(args.containsKey("color")){
+                java.awt.Color c = Toolkit.toColor(args.get("color"));
+                setColor(new Color(c.getRed(),c.getGreen(),c.getBlue(),c.getAlpha()));
+            }
+    }
+
 
     public boolean checkInside(Element e){
         if(checkInside(e.getX(),e.getY()))return true;

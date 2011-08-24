@@ -11,6 +11,7 @@ package tile;
 
 import NexT.util.SimpleSet;
 import java.io.File;
+import java.util.HashMap;
 import transcend.MainFrame;
 import world.Element;
 
@@ -56,7 +57,19 @@ public class Background extends Tile{
         SimpleSet<String,String> set = new SimpleSet();
         set.put("tex",tex);
         set.put("vsp",vsp+"");
+        set.put("tile",tile+"");
         return set;
+    }
+
+    public void setOptions(HashMap<String,String> options){
+        super.setOptions(options);
+        if(options.containsKey("tex")){
+            drawable.loadTexture(new File(MainFrame.basedir,"tex"+File.separator+options.get("tex")));
+            drawable.setSpritesize(drawable.getTexture().getImageWidth());
+            drawable.calcTile(w, h);
+        }
+        if(options.containsKey("tile"))setTiled(Boolean.parseBoolean(options.get("tile")));
+        if(options.containsKey("vsp"))setVSP(Double.parseDouble(options.get("vsp")));
     }
 
     public void draw(){

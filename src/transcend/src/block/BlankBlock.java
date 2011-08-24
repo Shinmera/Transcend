@@ -11,6 +11,10 @@ public class BlankBlock extends Block{
         solid=1;z=5;
     }
 
+    public BlankBlock() {
+        solid=1;z=5;
+    }
+    
     public void draw(){
         if(!MainFrame.editor.getActive())return;
         new Color(1f,1f,1f,0.5f).bind();

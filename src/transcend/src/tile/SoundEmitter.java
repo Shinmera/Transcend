@@ -9,6 +9,7 @@
 
 package tile;
 
+import graph.AbstractGraph;
 import org.newdawn.slick.Color;
 import NexT.util.SimpleSet;
 import graph.Sound;
@@ -44,12 +45,13 @@ public class SoundEmitter extends Tile{
     public void draw(){
         if(!MainFrame.editor.getActive())return;
         Color.red.bind();
-        MainFrame.glCircle2d(playable.getX(),playable.getY(),playable.getFar());
+        AbstractGraph.glCircle2d(playable.getX(),playable.getY(),playable.getFar());
         Color.blue.bind();
-        MainFrame.glCircle2d(playable.getX(),playable.getY(),playable.getNear());
+        AbstractGraph.glCircle2d(playable.getX(),playable.getY(),playable.getNear());
     }
 
     public void setOptions(HashMap<String,String> options){
+        super.setOptions(options);
         if(options.containsKey("far"))playable.setFar(Double.parseDouble(options.get("far")));
         if(options.containsKey("near"))playable.setNear(Double.parseDouble(options.get("near")));
         if(options.containsKey("music"))playable.setMusic(Boolean.parseBoolean(options.get("music")));

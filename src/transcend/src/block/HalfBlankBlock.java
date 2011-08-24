@@ -11,6 +11,10 @@ public class HalfBlankBlock extends Block{
         solid=0.5;z=5;
     }
 
+    public HalfBlankBlock() {
+        solid=0.5;z=5;
+    }
+
     public void draw(){
         if(!MainFrame.editor.getActive())return;
         new Color(0.5f,0.5f,0.5f,0.5f).bind();
@@ -20,14 +24,5 @@ public class HalfBlankBlock extends Block{
             glVertex2d(x+w,y+h);
             glVertex2d(x+w,y);
         glEnd();
-
-        /*glLineWidth(thickness);
-        glBegin(GL_LINE_LOOP);
-            glColor4f(border.getRed()/255.0f,border.getGreen()/255.0f,border.getBlue()/255.0f,border.getAlpha()/255);
-            glVertex2f(x,y);
-            glVertex2f(x,y+h);
-            glVertex2f(x+w,y+h);
-            glVertex2f(x+w,y);
-        glEnd();*/
     }
 }

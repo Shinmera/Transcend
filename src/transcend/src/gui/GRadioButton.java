@@ -8,6 +8,7 @@
 \**********************/
 
 package gui;
+import graph.AbstractGraph;
 import org.newdawn.slick.Color;
 import event.MouseListener;
 import transcend.MainFrame;
@@ -40,8 +41,8 @@ public class GRadioButton extends GButton{
     public void paint(){
         if(!visible)return;
         Color.white.bind();
-        MainFrame.glCircle2d(x, y+6, 6);
-        if(activated)MainFrame.glFCircle2d(x, y+6, 4);
+        AbstractGraph.glCircle2d(x, y+6, 6);
+        if(activated)AbstractGraph.glFCircle2d(x, y+6, 4);
         fore.bind();
         if(fontAlign==ALIGN_LEFT)font.drawString(x+10, y+h/2-font.getLineHeight()/2, text, 1,1,ALIGN_LEFT);
         if(fontAlign==ALIGN_CENTER)font.drawString(x+10+w/2, y+h/2-font.getLineHeight()/2, text, 1,1,ALIGN_CENTER);

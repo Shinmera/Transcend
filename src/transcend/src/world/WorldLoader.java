@@ -10,15 +10,21 @@
 package world;
 
 import NexT.util.SimpleSet;
+import NexT.util.Toolkit;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.io.Reader;
 import java.util.HashMap;
 import java.util.logging.Level;
+import java.util.zip.GZIPInputStream;
+import java.util.zip.GZIPOutputStream;
 import transcend.Const;
 import transcend.MainFrame;
 
@@ -28,7 +34,52 @@ public class WorldLoader {
         
     }
 
+    public File getLoaded(){return loaded;}
     public boolean isLoaded(){if(loaded!=null)return true;else return false;}
+
+    public boolean saveGame(File file){
+        Const.LOGGER.info("[World] Save Game State to "+file.getAbsolutePath());
+        StringBuilder buf = new StringBuilder();
+        //INSERT PLAYER STATE
+
+        buf.append("world=").append(loaded.getName()).append(";");
+        SimpleSet<String,String> playerState = MainFrame.player.getStateData();
+        for(int i=0;i<playerState.size();i++)
+            buf.append(playerState.getKey(i)).append("=").append(playerState.getAt(i)).append(";");
+
+        //ENCRYPT
+        try {
+            FileOutputStream out = new FileOutputStream(file);
+            GZIPOutputStream gzip = new GZIPOutputStream(out);
+            gzip.write(buf.toString().getBytes());
+            gzip.flush();
+            gzip.close();
+        } catch (Exception e) {Const.LOGGER.log(Level.SEVERE,"Failed to save Game State: Write Exception",e);return false;}
+        return true;
+    }
+
+    public boolean loadGame(File file){
+        if(!file.exists())return false;
+        HashMap<String,String> arguments = new HashMap<String,String>();
+        try{
+            Const.LOGGER.info("[World] Loading Game State from "+file.getAbsolutePath());
+
+            GZIPInputStream in = new GZIPInputStream(new FileInputStream(file));
+            Reader decoder = new InputStreamReader(in);
+            BufferedReader br = new BufferedReader(decoder);
+            StringBuilder buf = new StringBuilder();
+
+            //DECRYPT
+            String read="";
+            while((read=br.readLine())!=null)buf.append(read+"\n");
+            //SET PLAYER STATE
+            HashMap<String,String> map = Toolkit.stringToMap(buf.toString(),";","=");
+            loadWorld(new File(MainFrame.basedir,"world"+File.separator+map.get("world")));
+            MainFrame.player.setStateData(map);
+            
+        }catch(Exception e){Const.LOGGER.log(Level.SEVERE,"Failed to load Game State: Read exception",e);return false;}
+        return true;
+    }
 
     public boolean saveWorld(File file){
         try{

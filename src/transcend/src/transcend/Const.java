@@ -15,7 +15,6 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 import java.util.TreeMap;
-import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -29,14 +28,14 @@ public class Const {
     public static final int     DISPLAY_WIDTH           = 640;
 
     //DOUBLES
-    public static final double  VERSION                 = 0.03;
+    public static final double  VERSION                 = 0.04;
 
     //STRINGS
     public static final String  MAINTAINER              = "NexT";
     public static final String  DEVELOPER               = "Shinmera";
 
     //OBJECT
-    public static final Logger LOGGER                   = Logger.getLogger("TRA-PUBLIC");
+    public static final Logger LOGGER                   = Logger.getLogger("+");
     public static final Random RAND                     = new Random();
 
     public HashMap<String,String> registry              = new HashMap();

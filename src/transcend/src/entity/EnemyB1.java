@@ -8,6 +8,7 @@
 \**********************/
 
 package entity;
+import NexT.util.SimpleSet;
 import event.Event;
 import event.EventListener;
 import graph.Animation;

@@ -217,5 +217,49 @@ Ladebildschirm verbessert.
 [13:30-16:00 9.8.2011]
 Renoise tests.
 
-[13:10- 10.8.2011]
+[13:10-18:00 10.8.2011]
 AI verbessert.
+Spritesheet für EnemyC1 erstellt.
+Animation für EnemyC1 eingebunden.
+
+[22:55-00:30 11/12.8.2011]
+MovingBlock hinzugefügt.
+
+[11:30-13:20 12.8.2011]
+ComplexBlock hinzugefügt.
+Tesselation eingeführt.
+
+[13:40-16:00 12.8.2011]
+Ray Klasse hinzugefügt.
+Line Klasse hinzugefügt.
+Ray Casting Implementation eingeführt.
+
+[13:30-20:00 14.8.2011]
+Kollisionsverfahren verbessert.
+Versions Migration auf 0.04.
+
+[16:30-22:00 16.8.2011]
+Menu verbessert.
+GList hinzugefügt.
+GObject verbessert.
+
+[22:00-23:40 18.8.2011]
+GList vollendet.
+Menu erweitert.
+
+[13:00-18:00 19.8.2011]
+WorldLoader um saveGame und loadGame erweitert.
+MenuLoader erweitert.
+Ladeverhalten verbessert.
+GameEvent bugs behoben.
+
+[12:15-18:00 20.8.2011]
+Cleanup.
+
+[14:30- 24.8.2011]
+AbstractGraph erweitert.
+Cleanup.
+Form hinzugefügt.
+GBar hinzugefügt.
+hid Packet hinzugefügt.
+PowerBar hinzugefügt.

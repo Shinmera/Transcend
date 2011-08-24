@@ -9,6 +9,8 @@
 
 package gui;
 
+import org.lwjgl.util.Point;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import NexT.util.Toolkit;
 import world.BElement;
@@ -22,16 +24,18 @@ import static org.lwjgl.opengl.GL11.*;
 public class Editor extends GObject implements MouseListener{
     public static final int MODE_BLOCKS = 0;
     public static final int MODE_ENTITIES = 1;
-    private String[] blocks = {"blankblock","halfblankblock","dirtblock","grassblock","stoneblock","brickblock","tileset","emitter","gameevent"};
+    private String[] blocks = {"blankblock","halfblankblock","tileblock","movingblock","complexblock","gameevent","tileset","emitter"};
     private String[] entities = {"enemyb1","enemyc1"};
     private boolean active=false;
+    private boolean inComplex=false;
+    private ArrayList<Point> complexPoints = new ArrayList<Point>();
     private int tilesize=64;
     private int curItem=0;
     private int curLayer=0;
     private int mode=MODE_ENTITIES;
 
     public void paint(){
-        if(!active)return;
+        if(!visible||!active)return;
 
         glEnable(GL_COLOR_LOGIC_OP);
         glLogicOp(GL_XOR);
@@ -63,8 +67,14 @@ public class Editor extends GObject implements MouseListener{
             glRecti(x, y, Mouse.getX(), Mouse.getY());
             glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
+            glBegin(GL_LINE_LOOP);
+                for(int i=0;i<complexPoints.size();i++){
+                    glVertex2i(complexPoints.get(i).getX(),complexPoints.get(i).getY());
+                }
+            glEnd();
+
         }
-            glDisable(GL_COLOR_LOGIC_OP);
+        glDisable(GL_COLOR_LOGIC_OP);
     }
 
     public void setActive(boolean a){active=a;}
@@ -86,9 +96,11 @@ public class Editor extends GObject implements MouseListener{
 
     public void mouseType(int button) {
         if(!active||!visible)return;
-        if(button==0){
+        if(Mouse.getX()<100)return;//temp fix for editor plate.
+        if(button==0&&!inComplex){
             x=Mouse.getX();
             y=Mouse.getY();
+            if((mode==MODE_BLOCKS)&&(blocks[curItem]=="complexblock"))inComplex=true;
         }
     }
 
@@ -101,38 +113,9 @@ public class Editor extends GObject implements MouseListener{
 
     public void mouseReleased(int button) {
         if(!active||!visible)return;
-        if(button==0){
-            x/=MainFrame.camera.getZoom();
-            y/=MainFrame.camera.getZoom();
-            x+=MainFrame.camera.getRelativeX();
-            y+=MainFrame.camera.getRelativeY();
-            int bx=(int) (Mouse.getX()/MainFrame.camera.getZoom() + MainFrame.camera.getRelativeX())-x;
-            int by=(int) (Mouse.getY()/MainFrame.camera.getZoom() + MainFrame.camera.getRelativeY())-y;
-            if(bx<0){bx*=-1;x-=bx;}
-            if(by<0){by*=-1;y-=by;}
-            if(by<tilesize)by=tilesize;
-            bx=roundSampled(bx,tilesize);
-            by=roundSampled(by,tilesize);
-            x=roundSampled(x,tilesize);
-            y=roundSampled(y,tilesize);
+        if(Mouse.getX()<100)return;//temp fix for editor plate.
 
-            if(bx>0&&by>0){
-                HashMap<String,String> args = Toolkit.stringToMap(((GTextArea)((GPanel)MainFrame.hid.get("p_editor")).get("args")).getText());
-                args.put("x", x+"");
-                args.put("y", y+"");
-                args.put("z", curLayer+"");
-                args.put("w", bx+"");
-                args.put("h", by+"");
-                args.put("a", "");
-                if(mode==MODE_BLOCKS){
-                    if(blocks[curItem].equals("gameevent"))args.put("type",JOptionPane.showInputDialog("GameEvent Type? 0=none, 1=switch world, 2=switch camera, 3=progress world"));
-                    MainFrame.elementBuilder.buildElement(blocks[curItem], args);
-                }
-                else MainFrame.elementBuilder.buildElement(entities[curItem], args);
-            }
-            x=0;y=0;
-        }
-        if(button==1){
+        if(button==1&&!inComplex){
             BElement e=null;
             double x = Mouse.getX()/MainFrame.camera.getZoom() + MainFrame.camera.getRelativeX();
             double y = Mouse.getY()/MainFrame.camera.getZoom() + MainFrame.camera.getRelativeY();
@@ -148,6 +131,67 @@ public class Editor extends GObject implements MouseListener{
             if(e!=null){
                 MainFrame.world.delByID(e.wID);
             }
+        }
+
+        if(button==0&&inComplex){
+            int x = Mouse.getX();
+            int y = Mouse.getY();
+            complexPoints.add(new Point(x,y));
+            return;
+        }
+        if(button==0||(button==1&&inComplex)){
+            x/=MainFrame.camera.getZoom();
+            y/=MainFrame.camera.getZoom();
+            x+=MainFrame.camera.getRelativeX();
+            y+=MainFrame.camera.getRelativeY();
+            int bx=(int) (Mouse.getX()/MainFrame.camera.getZoom() + MainFrame.camera.getRelativeX())-x;
+            int by=(int) (Mouse.getY()/MainFrame.camera.getZoom() + MainFrame.camera.getRelativeY())-y;
+            if(bx<0){bx*=-1;x-=bx;}
+            if(by<0){by*=-1;y-=by;}
+            if(by<tilesize)by=tilesize;
+            bx=roundSampled(bx,tilesize);
+            by=roundSampled(by,tilesize);
+            x=roundSampled(x,tilesize);
+            y=roundSampled(y,tilesize);
+
+            if(bx>0&&by>0){
+                HashMap<String,String> args = new HashMap<String,String>();
+                args.putAll(Toolkit.stringToMap(((GTextArea)((GPanel)MainFrame.hud.get("p_editor")).get("args")).getText()));
+                if(inComplex){
+                    if(complexPoints.size()<3)return;//not enough points.
+                    for(int i=0;i<complexPoints.size();i++){
+                        int tx=complexPoints.get(i).getX(),ty=complexPoints.get(i).getY();
+                        tx/=MainFrame.camera.getZoom();
+                        ty/=MainFrame.camera.getZoom();
+                        tx+=MainFrame.camera.getRelativeX();
+                        ty+=MainFrame.camera.getRelativeY();
+                        args.put("p"+Toolkit.unifyNumberString(i,3)+"x",tx+"");
+                        args.put("p"+Toolkit.unifyNumberString(i,3)+"y",ty+"");
+                    }
+                    complexPoints.clear();
+                    inComplex=false;
+                }
+                args.put("x", x+"");
+                args.put("y", y+"");
+                args.put("z", curLayer+"");
+                args.put("w", bx+"");
+                args.put("h", by+"");
+                args.put("a", "");
+                if(mode==MODE_BLOCKS){
+                    if(blocks[curItem].equals("gameevent")){
+                        args.put("type",JOptionPane.showInputDialog("GameEvent Type? 0=none, 1=switch world, 2=switch camera, 3=progress world, 4=save game"));
+                        args.put("advance",JOptionPane.showInputDialog("Advance Argument"));
+                    }
+                    if(blocks[curItem].equals("tileblock")&&!((GTextArea)((GPanel)MainFrame.hud.get("p_editor")).get("args")).getText().contains("tex=")){
+                        String tex = JOptionPane.showInputDialog("Texture File");
+                        args.put("tex",tex);
+                        ((GTextArea)((GPanel)MainFrame.hud.get("p_editor")).get("args")).append("tex="+tex);
+                    }
+                    MainFrame.elementBuilder.buildElement(blocks[curItem], args);
+                }
+                else MainFrame.elementBuilder.buildElement(entities[curItem], args);
+            }
+            x=0;y=0;
         }
     }
 

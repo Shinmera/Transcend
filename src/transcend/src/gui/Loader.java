@@ -11,7 +11,6 @@ package gui;
 import org.newdawn.slick.Color;
 import java.awt.Font;
 import transcend.Const;
-import java.io.IOException;
 import java.util.logging.Level;
 import org.newdawn.slick.loading.DeferredResource;
 import org.newdawn.slick.loading.LoadingList;

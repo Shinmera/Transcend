@@ -10,9 +10,6 @@
 package world;
 
 import tile.ColorBlock;
-import tile.StoneBlock;
-import tile.GrassBlock;
-import tile.DirtBlock;
 import tile.Background;
 import NexT.util.ClassPathHacker;
 import NexT.util.ConfigManager;
@@ -28,8 +25,8 @@ import java.util.HashMap;
 import java.util.logging.Level;
 import org.newdawn.slick.Color;
 import particle.Emitter;
-import tile.BrickBlock;
 import tile.SoundEmitter;
+import tile.TileBlock;
 import tile.TileSet;
 import transcend.Const;
 import transcend.MainFrame;
@@ -38,9 +35,7 @@ public class ElementBuilder {
     HashMap<String,Class> elements = new HashMap<String,Class>();
     SimpleSet<String,String> elementData = new SimpleSet<String,String>();
 
-    public ElementBuilder(){
-        
-    }
+    public ElementBuilder(){}
 
     public boolean loadElement(String name){
         if(elements.containsKey(name))return true;
@@ -75,83 +70,65 @@ public class ElementBuilder {
     public void buildElement(String name,HashMap<String,String> args){
         name = name.trim().toLowerCase();
         //HARD CODED BLOCKS
-        if(name.equals("dirtblock")){
-            DirtBlock block = new DirtBlock(Integer.parseInt(args.get("x")),Integer.parseInt(args.get("y")),Integer.parseInt(args.get("w")),Integer.parseInt(args.get("h")));
-            if(args.containsKey("z"))block.setLayer(Integer.parseInt(args.get("z")));
+        if(name.equals("tileblock")){
+            TileBlock block = new TileBlock();
+            block.setOptions(args);
             MainFrame.world.addTile(block);
         }
-        else if(name.equals("grassblock")){
-            GrassBlock block = new GrassBlock(Integer.parseInt(args.get("x")),Integer.parseInt(args.get("y")),Integer.parseInt(args.get("w")),Integer.parseInt(args.get("h")),args.containsKey("a"));
-            if(args.containsKey("z"))block.setLayer(Integer.parseInt(args.get("z")));
-            MainFrame.world.addTile(block);
+        else if(name.equals("movingblock")){
+            MovingBlock block = new MovingBlock();
+            block.setOptions(args);
+            MainFrame.world.addBlock(block);
         }
-        else if(name.equals("stoneblock")){
-            StoneBlock block = new StoneBlock(Integer.parseInt(args.get("x")),Integer.parseInt(args.get("y")),Integer.parseInt(args.get("w")),Integer.parseInt(args.get("h")));
-            if(args.containsKey("z"))block.setLayer(Integer.parseInt(args.get("z")));
-            MainFrame.world.addTile(block);
-        }
-        else if(name.equals("brickblock")){
-            BrickBlock block = new BrickBlock(Integer.parseInt(args.get("x")),Integer.parseInt(args.get("y")),Integer.parseInt(args.get("w")),Integer.parseInt(args.get("h")));
-            if(args.containsKey("z"))block.setLayer(Integer.parseInt(args.get("z")));
-            MainFrame.world.addTile(block);
+        else if(name.equals("complexblock")){
+            ComplexBlock block = new ComplexBlock();
+            block.setOptions(args);
+            block.determineCoordinates();
+            MainFrame.world.addBlock(block);
         }
         else if(name.equals("blankblock")){
-            BlankBlock block = new BlankBlock(Integer.parseInt(args.get("x")),Integer.parseInt(args.get("y")),Integer.parseInt(args.get("w")),Integer.parseInt(args.get("h")));
-            if(args.containsKey("z"))block.setLayer(Integer.parseInt(args.get("z")));
+            BlankBlock block = new BlankBlock();
+            block.setOptions(args);
             MainFrame.world.addBlock(block);
         }
         else if(name.equals("halfblankblock")){
-            HalfBlankBlock block = new HalfBlankBlock(Integer.parseInt(args.get("x")),Integer.parseInt(args.get("y")),Integer.parseInt(args.get("w")),Integer.parseInt(args.get("h")));
-            if(args.containsKey("z"))block.setLayer(Integer.parseInt(args.get("z")));
+            HalfBlankBlock block = new HalfBlankBlock();
+            block.setOptions(args);
             MainFrame.world.addBlock(block);
         }
         else if(name.equals("colorblock")){
-            ColorBlock block = new ColorBlock(Integer.parseInt(args.get("x")),Integer.parseInt(args.get("y")),Integer.parseInt(args.get("w")),Integer.parseInt(args.get("h")));
-            if(args.containsKey("z"))block.setLayer(Integer.parseInt(args.get("z")));
-            block.setColor(args.get("color"));
+            ColorBlock block = new ColorBlock();
+            block.setOptions(args);
             MainFrame.world.addTile(block);
         }
         else if(name.equals("background")){
-            Background block = new Background(Integer.parseInt(args.get("x")),Integer.parseInt(args.get("y")),Integer.parseInt(args.get("w")),Integer.parseInt(args.get("h")),args.get("tex"));
-            if(args.containsKey("vsp"))block.setVSP(Double.parseDouble(args.get("vsp")));
-            if(args.containsKey("tile"))block.setTiled(Boolean.parseBoolean(args.get("tile")));
+            Background block = new Background();
+            block.setOptions(args);
             MainFrame.world.addTile(block);
         }
         else if(name.equals("tileset")){
-            TileSet block = new TileSet(Integer.parseInt(args.get("x")),Integer.parseInt(args.get("y")),Integer.parseInt(args.get("w")),Integer.parseInt(args.get("h")),args.get("tex"));
-            if(args.containsKey("z"))block.setLayer(Integer.parseInt(args.get("z")));
-            if(args.containsKey("u"))block.setU(Integer.parseInt(args.get("u")));
-            if(args.containsKey("v"))block.setV(Integer.parseInt(args.get("v")));
-            if(args.containsKey("s"))block.setS(Double.parseDouble(args.get("s")));
+            TileSet block = new TileSet();
+            block.setOptions(args);
             MainFrame.world.addTile(block);
         }
         else if(name.equals("soundemitter")){
-            SoundEmitter block = new SoundEmitter(Integer.parseInt(args.get("x")),Integer.parseInt(args.get("y")));
+            SoundEmitter block = new SoundEmitter();
             block.setOptions(args);
             MainFrame.world.addTile(block);
         }
         else if(name.equals("emitter")){
-            Emitter block = new Emitter(Double.parseDouble(args.get("x")),Double.parseDouble(args.get("y")));
-            if(args.containsKey("mlife"))block.setMaxLife(Double.parseDouble(args.get("mlife")));
-            if(args.containsKey("mpart"))block.setMaxParticles(Integer.parseInt(args.get("mpart")));
-            if(args.containsKey("spray"))block.setSpray(Integer.parseInt(args.get("spray")));
-            if(args.containsKey("avg_diver"))block.setAverageDiversity(Double.parseDouble(args.get("avg_diver")));
-            if(args.containsKey("avg_size"))block.setAverageSize(Double.parseDouble(args.get("avg_size")));
-            if(args.containsKey("avg_mlife"))block.setAverageMaxLife(Double.parseDouble(args.get("avg_mlife")));
-            if(args.containsKey("avg_mlife_diver"))block.setAverageMaxLifeDiversity(Double.parseDouble(args.get("avg_mlife_diver")));
-            if(args.containsKey("avg_type"))block.setAverageType(Integer.parseInt(args.get("avg_type")));
-            if(args.containsKey("color")){
-                java.awt.Color c = Toolkit.toColor(args.get("color"));
-                block.setColor(new Color(c.getRed(),c.getGreen(),c.getBlue(),c.getAlpha()));
-            }
+            Emitter block = new Emitter();
+            block.setOptions(args);
             MainFrame.world.addTile(block);
         }
         else if(name.equals("enemyb1")){
-            EnemyB1 entity = new EnemyB1(Double.parseDouble(args.get("x")),Double.parseDouble(args.get("y")));
+            EnemyB1 entity = new EnemyB1();
+            entity.setOptions(args);
             MainFrame.world.addEntity(entity);
         }
         else if(name.equals("enemyc1")){
-            EnemyC1 entity = new EnemyC1(Double.parseDouble(args.get("x")),Double.parseDouble(args.get("y")));
+            EnemyC1 entity = new EnemyC1();
+            entity.setOptions(args);
             MainFrame.world.addEntity(entity);
         }
         else if(name.equals("camerapath")){
@@ -160,8 +137,9 @@ public class ElementBuilder {
             MainFrame.world.addTile(path,args.get("name"));
         }
         else if(name.equals("gameevent")){
-            GameEvent event = new GameEvent(Integer.parseInt(args.get("x")),Integer.parseInt(args.get("y")),Integer.parseInt(args.get("type")));
-            MainFrame.world.addBlock(event);
+            GameEvent block = new GameEvent();
+            block.setOptions(args);
+            MainFrame.world.addBlock(block);
         }
         //ATTEMPT TO DYNAMICALLY LOAD BLOCK
         else{

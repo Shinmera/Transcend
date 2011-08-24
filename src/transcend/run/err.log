@@ -1,32 +1,32 @@
-14:09 [TRA-PUBLIC][INFO] [CONST] Loading
+19:09 [+][INFO] [CONST] Loading
 null.transcend.Const.loadRegistry
-14:09 [TRA-PUBLIC][INFO] [InputEventHandler] Loaded layout swiss. 20 keys mapped.
+19:09 [+][INFO] [InputEventHandler] Loaded layout swiss. 20 keys mapped.
 null.event.InputEventHandler.<init>
-14:09 [TRA-PUBLIC][INFO] [MF] Booting up...
+19:09 [+][INFO] [MF] Booting up...
 null.transcend.MainFrame.main
-14:09 [TRA-PUBLIC][INFO] [CONST] Loading
+19:09 [+][INFO] [CONST] Loading
 null.transcend.Const.loadRegistry
-14:09 [TRA-PUBLIC][INFO] LWJGL found 36 display modes.
+19:09 [+][INFO] LWJGL found 36 display modes.
 null.gui.DisplayModeChooser.<init>
-14:09 [TRA-PUBLIC][INFO] [CONST] Saving
+19:09 [+][INFO] [CONST] Saving
 null.transcend.Const.saveRegistry
-14:09 [TRA-PUBLIC][INFO] [CONST] Loading
+19:09 [+][INFO] [CONST] Loading
 null.transcend.Const.loadRegistry
-14:09 [TRA-PUBLIC][INFO] [MF] Initializing...
+19:09 [+][INFO] [MF] Initializing...
 null.transcend.MainFrame.create
-14:09 [TRA-PUBLIC][INFO] [Loader] Loading...
+19:09 [+][INFO] [Loader] Loading...
 null.gui.Loader.run
-14:09 [TRA-PUBLIC][INFO] [Loader] Finished loading. Ready.
+19:09 [+][INFO] [Loader] Finished loading. Ready.
 null.gui.Loader.run
-14:09 [TRA-PUBLIC][INFO] [Loader] Loading...
+19:09 [+][INFO] [Loader] Loading...
 null.gui.Loader.run
-14:09 [TRA-PUBLIC][INFO] [World] Loading World from D:\projects\JAVAPROJECTS\transcend\src\transcend\run\world\various.tw
+19:09 [+][INFO] [World] Loading World from D:\projects\JAVAPROJECTS\transcend\src\transcend\run\world\various.tw
 null.world.WorldLoader.loadWorld
-14:09 [TRA-PUBLIC][INFO] [World] Loaded 13 elements. 13 Blocks 1 Entities 0 Tiles.
+19:09 [+][INFO] [World] Loaded 16 elements. 16 Blocks 1 Entities 0 Tiles.
 null.world.WorldLoader.loadWorld
-14:09 [TRA-PUBLIC][INFO] [Loader] 100%
+19:09 [+][INFO] [Loader] 100%
 null.gui.Loader.run
-14:09 [TRA-PUBLIC][INFO] [Loader] Finished loading. Ready.
+19:09 [+][INFO] [Loader] Finished loading. Ready.
 null.gui.Loader.run
-14:11 [TRA-PUBLIC][INFO] [MF] Shutting down...
+19:10 [+][INFO] [MF] Shutting down...
 null.transcend.MainFrame.destroy

@@ -9,6 +9,8 @@
 
 package tile;
 
+import NexT.util.SimpleSet;
+import java.util.HashMap;
 import NexT.util.Toolkit;
 import org.newdawn.slick.Color;
 import static org.lwjgl.opengl.GL11.*;
@@ -20,6 +22,8 @@ public class ColorBlock extends Tile{
     public ColorBlock(int x,int y,int w,int h){
         super(x,y,w,h);
     }
+
+    public ColorBlock() {}
 
     public void setColor(int r,int g,int b){
         c = new Color(r,g,b);
@@ -42,14 +46,15 @@ public class ColorBlock extends Tile{
             glVertex2d(x+w,y+h);
             glVertex2d(x+w,y);
         glEnd();
-
-        /*glLineWidth(thickness);
-        glBegin(GL_LINE_LOOP);
-            glColor4f(border.getRed()/255.0f,border.getGreen()/255.0f,border.getBlue()/255.0f,border.getAlpha()/255);
-            glVertex2f(x,y);
-            glVertex2f(x,y+h);
-            glVertex2f(x+w,y+h);
-            glVertex2f(x+w,y);
-        glEnd();*/
+    }
+    
+    public void setOptions(HashMap<String,String> options){
+        super.setOptions(options);
+        if(options.containsKey("color"))setColor(options.get("far"));
+    }
+    public SimpleSet<String,String> getOptions(){
+        SimpleSet<String,String> s = new SimpleSet();
+        s.put("color",c.hashCode()+"");
+        return s;
     }
 }

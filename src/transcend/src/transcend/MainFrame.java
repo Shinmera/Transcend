@@ -8,7 +8,8 @@
 \**********************/
 
 package transcend;
-import gui.CameraPath;
+import graph.AbstractGraph;
+import NexT.util.Toolkit;
 import event.EventHandler;
 import org.newdawn.slick.openal.SoundStore;
 import org.lwjgl.openal.AL;
@@ -46,8 +47,6 @@ import static transcend.Jitter.j;
 import static transcend.Jitter.jps;
 
 public class MainFrame implements KeyboardListener{
-    public static int DISPLAY_WIDTH = Const.DISPLAY_WIDTH;
-    public static int DISPLAY_HEIGHT= Const.DISPLAY_HEIGHT;
     public static final Const CONST = new Const();
     public static final File basedir = new File(".");
     public static final World world = new World();
@@ -59,18 +58,23 @@ public class MainFrame implements KeyboardListener{
     public static final Editor editor = new Editor();
     public static final TexturePool texturePool = new TexturePool();
     public static final SoundPool soundPool = new SoundPool();
-    public static Loader loader;
-    public static Player player;
+    public static final Player player = new Player();
+    public static int DISPLAY_WIDTH = Const.DISPLAY_WIDTH;
+    public static int DISPLAY_HEIGHT= Const.DISPLAY_HEIGHT;
     public static int fps = 60;
     public static int ACSIZE = 2;
-    public static GPanel menu,hid;
     public static boolean pause = false;
+    public static GPanel menu,hud;
+    public static Loader loader;
 
     static{
         System.setProperty("org.lwjgl.librarypath",new File(new File(basedir, "native"), LWJGLUtil.getPlatformName()).getAbsolutePath());
     }
 
     public static void main(String[] args){
+        Toolkit.printMenu("><Transcend Engine v"+Const.VERSION+"\n"+
+                          "(c)2011 "+Const.MAINTAINER+" developed by "+Const.DEVELOPER+"\n"+
+                          "http://www.tymoon.eu", "/", 1, null);
         Const.LOGGER.info("[MF] Booting up...");
         MainFrame mf = new MainFrame();
         try{
@@ -118,19 +122,17 @@ public class MainFrame implements KeyboardListener{
 
     public void initGame(){
         loader = new Loader();
-
         ieh.addKeyboardListener(this);
-        player = new Player();
         camera.setBoundary(300);
         camera.setPosition(DISPLAY_WIDTH/2,DISPLAY_HEIGHT/2);
 
-        hid = new GPanel(0,0,DISPLAY_WIDTH,DISPLAY_HEIGHT);
-        hid.setBackground(new Color(0,0,0,0));
-        ieh.addMouseListener(editor);
-        hid.setVisible(true);
+        hud = new GPanel(0,0,DISPLAY_WIDTH,DISPLAY_HEIGHT);
+        hud.setBackground(new Color(0,0,0,0));
+        hud.setVisible(true);
 
         menu = new GPanel(0,0,DISPLAY_WIDTH,DISPLAY_HEIGHT);
         menu.setBackground(new Color(0,0,0,150));
+        ieh.addMouseListener(editor);
 
         //LOAD MENU
         loader.setHelper(new MenuLoader());
@@ -174,8 +176,11 @@ public class MainFrame implements KeyboardListener{
     }
 
     public void update() {
+        //Load default world
         if(!worldLoader.isLoaded()){
-            loader.setHelper(new LoadHelper(){public void load(){worldLoader.loadWorld(new File("world"+File.separator+"various.tw"));}});
+            loader.setHelper(new LoadHelper(){public void load(){
+                worldLoader.loadWorld(new File("world"+File.separator+"various.tw"));
+            }});
             loader.start();
         }
         //Hook to world loop
@@ -204,21 +209,8 @@ public class MainFrame implements KeyboardListener{
             camera.camBegin();
                 world.draw();
 
-                if(editor.getActive()){
-                    glEnable(GL_COLOR_LOGIC_OP);
-                    glLogicOp(GL_XOR);
-                    Color.white.bind();
-                    glLineWidth(0.5f);
-                    glBegin(GL_LINES);
-                        glVertex2i(-50,0);
-                        glVertex2i(50,0);
-                    glEnd();
-                    glBegin(GL_LINES);
-                        glVertex2i(0,50);
-                        glVertex2i(0,-50);
-                    glEnd();
-                    glDisable(GL_COLOR_LOGIC_OP);
-                }
+                if(editor.getActive())
+                    AbstractGraph.glCross2d(0,0,50);
             camera.camEnd();
 
             glPopMatrix();
@@ -226,7 +218,7 @@ public class MainFrame implements KeyboardListener{
         }
         glAccum(GL_RETURN, 1.0f);
 
-        hid.paint();
+        hud.paint();
         menu.paint();
     }
 
@@ -252,8 +244,8 @@ public class MainFrame implements KeyboardListener{
         }
     }
 
-    public void pause(){pause=true;}
-    public void unpause(){pause=false;}
+    public static void pause(){pause=true;}
+    public static void unpause(){pause=false;}
 
     public void keyPressed(int key) {}
     public void keyReleased(int key) {
@@ -267,10 +259,13 @@ public class MainFrame implements KeyboardListener{
         case Keyboard.KEY_ESCAPE:
         case Keyboard.KEY_DELETE:
             if(!menu.isVisible()){
-                blurScreen();
                 menu.setVisible(true);
+                menu.get("p_main").setVisible(false);
+                menu.get("p_load").setVisible(false);
+                menu.get("p_settings").setVisible(false);
+                menu.get("p_help").setVisible(false);
                 pause();
-            }else{
+            }else if(!menu.get("p_main").isVisible()){
                 menu.setVisible(false);
                 unpause();
             }
@@ -295,48 +290,5 @@ public class MainFrame implements KeyboardListener{
         } finally {
             is.close();
         }
-    }
-
-    public static void glCircle2d(double x,double y,double r){
-        glBegin(GL_LINE_LOOP);
-            for(int i = 0; i < 100; i++) {
-                double angle = i*2*Math.PI/100;
-                glVertex2d(x + (Math.cos(angle) * r), y + (Math.sin(angle) * r));
-            }
-        glEnd();
-    }
-
-    public static void glFCircle2d(double x,double y,double r){
-        glBegin(GL_POLYGON);
-            for(int i = 0; i < 100; i++) {
-                double angle = i*2*Math.PI/100;
-                glVertex2d(x + (Math.cos(angle) * r), y + (Math.sin(angle) * r));
-            }
-        glEnd();
-    }
-
-    private void blurScreen(){
-        /*render();
-        blurTexture.bind();
-        glCopyTexImage2D(GL_TEXTURE_2D,0,GL_RGB,0,0,DISPLAY_WIDTH, DISPLAY_HEIGHT,0);
-        glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
-        glBindTexture(GL_TEXTURE_2D,0);
-
-        InputStream in = new ByteArrayInputStream(blurTexture.getTextureData());
-        BufferedImage image = new BufferedImage(DISPLAY_WIDTH, DISPLAY_HEIGHT,BufferedImage.TYPE_INT_RGB);
-        try{image = ImageIO.read(in);
-        ImageIO.write(image, "png", new File("out.png"));}catch(Exception ex){ex.printStackTrace();}
-        
-        final BufferedImage img = image;
-        JFrame previewFrame = new JFrame("Image Preview"){
-            public void paint(Graphics g){
-                Graphics2D g2 = (Graphics2D)g;
-                g2.setBackground(java.awt.Color.yellow);
-                g2.clearRect(0, 0, getWidth(), getHeight());
-                g2.drawImage(img, null, 0,0);
-            }
-        };
-        previewFrame.setSize(DISPLAY_WIDTH, DISPLAY_HEIGHT);
-        previewFrame.setVisible(true);*/
     }
 }
