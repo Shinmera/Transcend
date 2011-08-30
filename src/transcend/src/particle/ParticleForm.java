@@ -23,9 +23,9 @@ public class ParticleForm {
     public static final Animation gradient_sphere_light = new Animation();
 
     static{
-        gradient_sphere.loadTexture(new File(MainFrame.basedir,"tex"+File.separator+"particle.png"));
-        gradient_sphere_smooth.loadTexture(new File(MainFrame.basedir,"tex"+File.separator+"particle2.png"));
-        gradient_sphere_light.loadTexture(new File(MainFrame.basedir,"tex"+File.separator+"particle3.png"));
+        gradient_sphere.loadTexture(MainFrame.fileStorage.getFile("particle.png"));
+        gradient_sphere_smooth.loadTexture(MainFrame.fileStorage.getFile("particle2.png"));
+        gradient_sphere_light.loadTexture(MainFrame.fileStorage.getFile("particle3.png"));
     }
 
     public static Animation get(int type){

@@ -74,6 +74,7 @@ public class Animation {
     }
 
     public void calcRelative(){
+        if(texture==null)return;
         rel_w=spritesize/texture.getImageWidth();
         rel_h=spritesize/texture.getImageHeight();
         if(start.length!=(int)(1.0/rel_h)){

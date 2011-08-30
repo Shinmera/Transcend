@@ -29,12 +29,12 @@ public class Loader{
     private int delay = 0;
 
     public Loader(){
-        drawable.loadTexture(new File(MainFrame.basedir,"data"+File.separator+"load.png"));
+        drawable.loadTexture(MainFrame.fileStorage.getFile("load.png"));
         drawable.setSpritesize(drawable.getTexture().getImageWidth());
         drawable.calcTile(drawable.getTexture().getImageWidth(),drawable.getTexture().getImageHeight());
     }
     public Loader(LoadHelper helper){
-        drawable.loadTexture(new File(MainFrame.basedir,"data"+File.separator+"load.png"));
+        drawable.loadTexture(MainFrame.fileStorage.getFile("load.png"));
         drawable.setSpritesize(drawable.getTexture().getImageWidth());
         drawable.calcTile(drawable.getTexture().getImageWidth(),drawable.getTexture().getImageHeight());
         this.helper=helper;

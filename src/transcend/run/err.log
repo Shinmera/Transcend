@@ -1,32 +1,38 @@
-19:09 [+][INFO] [CONST] Loading
+20:59 [+][INFO] [CONST] Loading
 null.transcend.Const.loadRegistry
-19:09 [+][INFO] [InputEventHandler] Loaded layout swiss. 20 keys mapped.
+20:59 [+][INFO] [InputEventHandler] Loaded layout swiss. 20 keys mapped.
 null.event.InputEventHandler.<init>
-19:09 [+][INFO] [MF] Booting up...
+20:59 [+][INFO] [FileStorage] Initial indexing...
+null.transcend.FileStorage.<init>
+20:59 [+][INFO] [FileStorage] indexing .
+null.transcend.FileStorage.indexFolder
+20:59 [+][INFO] [FileStorage] indexing data
+null.transcend.FileStorage.indexFolder
+20:59 [+][INFO] [FileStorage] indexing native
+null.transcend.FileStorage.indexFolder
+20:59 [+][INFO] [FileStorage] indexing linux
+null.transcend.FileStorage.indexFolder
+20:59 [+][INFO] [FileStorage] indexing macosx
+null.transcend.FileStorage.indexFolder
+20:59 [+][INFO] [FileStorage] indexing solaris
+null.transcend.FileStorage.indexFolder
+20:59 [+][INFO] [FileStorage] indexing windows
+null.transcend.FileStorage.indexFolder
+20:59 [+][INFO] [FileStorage] indexing shaders
+null.transcend.FileStorage.indexFolder
+20:59 [+][INFO] [FileStorage] indexing snd
+null.transcend.FileStorage.indexFolder
+20:59 [+][INFO] [FileStorage] indexing tex
+null.transcend.FileStorage.indexFolder
+20:59 [+][INFO] [FileStorage] indexing world
+null.transcend.FileStorage.indexFolder
+20:59 [+][INFO] [FileStorage] indexing elements
+null.transcend.FileStorage.indexFolder
+20:59 [+][INFO] [FileStorage] indexing save
+null.transcend.FileStorage.indexFolder
+20:59 [+][INFO] [MF] Booting up...
 null.transcend.MainFrame.main
-19:09 [+][INFO] [CONST] Loading
+20:59 [+][INFO] [CONST] Loading
 null.transcend.Const.loadRegistry
-19:09 [+][INFO] LWJGL found 36 display modes.
+20:59 [+][INFO] LWJGL found 36 display modes.
 null.gui.DisplayModeChooser.<init>
-19:09 [+][INFO] [CONST] Saving
-null.transcend.Const.saveRegistry
-19:09 [+][INFO] [CONST] Loading
-null.transcend.Const.loadRegistry
-19:09 [+][INFO] [MF] Initializing...
-null.transcend.MainFrame.create
-19:09 [+][INFO] [Loader] Loading...
-null.gui.Loader.run
-19:09 [+][INFO] [Loader] Finished loading. Ready.
-null.gui.Loader.run
-19:09 [+][INFO] [Loader] Loading...
-null.gui.Loader.run
-19:09 [+][INFO] [World] Loading World from D:\projects\JAVAPROJECTS\transcend\src\transcend\run\world\various.tw
-null.world.WorldLoader.loadWorld
-19:09 [+][INFO] [World] Loaded 16 elements. 16 Blocks 1 Entities 0 Tiles.
-null.world.WorldLoader.loadWorld
-19:09 [+][INFO] [Loader] 100%
-null.gui.Loader.run
-19:09 [+][INFO] [Loader] Finished loading. Ready.
-null.gui.Loader.run
-19:10 [+][INFO] [MF] Shutting down...
-null.transcend.MainFrame.destroy

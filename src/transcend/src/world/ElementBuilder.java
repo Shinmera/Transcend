@@ -40,7 +40,7 @@ public class ElementBuilder {
     public boolean loadElement(String name){
         if(elements.containsKey(name))return true;
         try {
-            File f = new File(MainFrame.basedir + "world" + File.separator + "elements" + File.separator + name);
+            File f = MainFrame.fileStorage.getFile(name);
             ClassPathHacker.addFile(f);
             f = new File(f.getAbsolutePath()+".cfg");
             if(!f.exists()){

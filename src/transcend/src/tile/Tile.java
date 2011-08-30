@@ -31,7 +31,7 @@ public class Tile extends BElement{
         drawable.draw((int)x,(int)y,w,h);
         if(depth!=0&&z!=0){
             if(z<0)new Color(0f,0f,0f,(float)(-z/10.0*depth)).bind();
-            if(z>0)new Color(1f,1f,1f,(float)(z/10.0*depth)).bind();
+            //if(z>0)new Color(1f,1f,1f,(float)(z/10.0*depth)).bind();
             glBegin(GL_QUADS);
                 glVertex2d(x,y);
                 glVertex2d(x+w,y);

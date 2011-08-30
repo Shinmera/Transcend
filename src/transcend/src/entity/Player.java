@@ -18,7 +18,6 @@ import event.EventListener;
 import event.KeyboardListener;
 import graph.AbstractGraph;
 import graph.Animation;
-import java.io.File;
 import java.util.HashMap;
 import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.Color;
@@ -40,7 +39,7 @@ public class Player extends Entity implements KeyboardListener,EventListener{
         int[] start = {0,0};
         int[] loop = {0,0};
 
-        drawable.loadTexture(new File(MainFrame.basedir,"tex"+File.separator+"dash_walk_right.png"),start,stop,loop);
+        drawable.loadTexture(MainFrame.fileStorage.getFile("dash_walk_right.png"),start,stop,loop);
         drawable.setReel(1);
         MainFrame.eh.registerEvent(Event.ENTITY_SEE, 0, this);
         MainFrame.eh.registerEvent(Event.ENTITY_ATTACK, 0, this);

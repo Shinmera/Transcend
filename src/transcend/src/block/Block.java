@@ -9,7 +9,9 @@
 
 package block;
 
+import java.util.HashMap;
 import world.Element;
+import transcend.MainFrame;
 
 public class Block extends Element{
     public static final int ELEMENT_ID = 0x51;
@@ -28,4 +30,9 @@ public class Block extends Element{
     public boolean getMoveable(){return moveable;}
 
     public void setMoveable(boolean m){this.moveable = m; }
+
+    public void setOptions(HashMap<String,String> options){
+        super.setOptions(options);
+        if(options.containsKey("tex"))MainFrame.elementBuilder.buildElement("tileblock", options);
+    }
 }

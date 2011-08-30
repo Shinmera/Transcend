@@ -24,22 +24,19 @@ public class Background extends Tile{
     public Background(int x,int y,int w,int h,String tex){
         this.x=x;this.y=y;this.z=-5;this.w=w;this.h=h;
         this.tex=tex;
-        drawable.loadTexture(new File(MainFrame.basedir,"tex"+File.separator+tex));
+        drawable.loadTexture(MainFrame.fileStorage.getFile("tex/"+tex));
         drawable.setSpritesize(drawable.getTexture().getImageWidth());
         drawable.calcTile(w, h);
     }
 
     public Background(int x,int y,int z,int w,int h,String tex){
-        this.x=x;this.y=y;this.z=z;this.w=w;this.h=h;
-        this.tex=tex;
-        drawable.loadTexture(new File(MainFrame.basedir,"tex"+File.separator+tex));
-        drawable.setSpritesize(drawable.getTexture().getImageWidth());
-        drawable.calcTile(w, h);
+        this(x,y,w,h,tex);
+        this.z=z;
     }
 
     public void setTexture(String tex){
         this.tex=tex;
-        drawable.loadTexture(new File(MainFrame.basedir,"tex"+File.separator+tex));
+        drawable.loadTexture(MainFrame.fileStorage.getFile("tex/"+tex));
         drawable.setSpritesize(drawable.getTexture().getImageWidth());
         drawable.calcTile(w, h);
     }
@@ -64,9 +61,7 @@ public class Background extends Tile{
     public void setOptions(HashMap<String,String> options){
         super.setOptions(options);
         if(options.containsKey("tex")){
-            drawable.loadTexture(new File(MainFrame.basedir,"tex"+File.separator+options.get("tex")));
-            drawable.setSpritesize(drawable.getTexture().getImageWidth());
-            drawable.calcTile(w, h);
+            setTexture(options.get("tex"));
         }
         if(options.containsKey("tile"))setTiled(Boolean.parseBoolean(options.get("tile")));
         if(options.containsKey("vsp"))setVSP(Double.parseDouble(options.get("vsp")));

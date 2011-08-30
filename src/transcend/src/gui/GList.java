@@ -116,7 +116,6 @@ public class GList extends GLabel implements MouseListener{
                     glVertex2d(x,       y+i*elementHeight);
             glEnd();
             font.drawString(x+10,y+(int)((i+0.5)*elementHeight), list.get(i+start), 1,1);
-            glBindTexture(GL_TEXTURE_2D, 0); //release
         }
     }
 }

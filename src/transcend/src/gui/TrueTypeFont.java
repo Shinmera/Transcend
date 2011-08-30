@@ -384,6 +384,7 @@ public class TrueTypeFont {
 			}
 		}
 		GL11.glEnd();
+                GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
 	}
 	public static int loadImage(BufferedImage bufferedImage) {
 	    try {

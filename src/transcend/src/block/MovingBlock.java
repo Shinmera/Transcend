@@ -20,6 +20,7 @@ import static org.lwjgl.opengl.GL11.*;
 public class MovingBlock extends Block{
     private double vx=0,vy=0;
     private int cameraPath=-1;
+    private String tex="";
 
     public MovingBlock(int x,int y,int w,int h){
         super(x,y,w,h);
@@ -34,7 +35,8 @@ public class MovingBlock extends Block{
     public MovingBlock() {}
 
     public void loadTexture(String s){
-        drawable.loadTexture(new File(MainFrame.basedir,"tex"+File.separator+s));
+        tex=s;
+        drawable.loadTexture(MainFrame.fileStorage.getFile(s));
     }
 
     public void setVX(double vx){this.vx=vx;}
@@ -82,12 +84,14 @@ public class MovingBlock extends Block{
     public void setOptions(HashMap<String,String> args){
         if(args.containsKey("vx"))setVX(Double.parseDouble(args.get("vx")));
         if(args.containsKey("vy"))setVY(Double.parseDouble(args.get("vy")));
+        if(args.containsKey("tex"))loadTexture(args.get("tex"));
         super.setOptions(args);
     }
     public SimpleSet<String,String> getOptions(){
         SimpleSet<String,String> set = new SimpleSet<String,String>();
         set.put("vx", vx+"");
         set.put("vy", vy+"");
+        set.put("tex", tex);
         return set;
     }
 }

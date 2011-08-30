@@ -10,7 +10,6 @@
 package tile;
 
 import NexT.util.SimpleSet;
-import java.io.File;
 import java.util.HashMap;
 import transcend.MainFrame;
 
@@ -21,7 +20,7 @@ public class TileBlock extends Tile{
     public TileBlock(int x,int y,int w,int h,String tex){
         super(x,y,w,h);
         this.tex=tex;
-        drawable.loadTexture(new File(MainFrame.basedir,"tex"+File.separator+tex));
+        drawable.loadTexture(MainFrame.fileStorage.getFile("tex/"+tex));
         drawable.calcTile(w, h);
     }
 
@@ -29,8 +28,9 @@ public class TileBlock extends Tile{
         super.setOptions(options);
         if(options.containsKey("tex")){
             this.tex=tex;
-            drawable.loadTexture(new File(MainFrame.basedir,"tex"+File.separator+options.get("tex")));
+            drawable.loadTexture(MainFrame.fileStorage.getFile("tex/"+options.get("tex")));
             drawable.calcTile(w, h);
+            
         }
     }
 

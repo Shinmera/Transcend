@@ -256,10 +256,23 @@ GameEvent bugs behoben.
 [12:15-18:00 20.8.2011]
 Cleanup.
 
-[14:30- 24.8.2011]
+[14:30-20:00 24.8.2011]
 AbstractGraph erweitert.
 Cleanup.
 Form hinzugefügt.
 GBar hinzugefügt.
 hid Packet hinzugefügt.
 PowerBar hinzugefügt.
+
+[11:00-18:00 27.8.2011]
+InkBlock hinzugefügt.
+InkBlock animation erstellt.
+Game Design studiert.
+FileStorage indexing service hinzugefügt.
+Dateien nach FileStorage migriert.
+
+[16:00-22:00 28.8.2011]
+Math parser implementiert,
+Script sprache ausgelegt.
+
+[17:30- 29.8.2011]

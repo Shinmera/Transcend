@@ -46,13 +46,13 @@ public class GameEvent extends Block implements EventListener{
 
     public void loadTexture(){
         if(type==EVENT_SWITCH_WORLD){
-            drawable.loadTexture(new File(MainFrame.basedir,"tex"+File.separator+"portal.png"));
+            drawable.loadTexture(MainFrame.fileStorage.getFile("portal"));
             drawable.setSpritesize(128);
             drawable.calcTile(128, 128);
             drawable.setSize(128,128);
         }
         if(type==EVENT_SAVE_WORLD){
-            drawable.loadTexture(new File(MainFrame.basedir,"tex"+File.separator+"savepoint.png"));
+            drawable.loadTexture(MainFrame.fileStorage.getFile("savepoint"));
             drawable.setSpritesize(128);
             drawable.calcTile(128, 128);
             drawable.setSize(128,128);
@@ -88,13 +88,13 @@ public class GameEvent extends Block implements EventListener{
         if(event==Event.PLAYER_TOUCH){
             if(type==EVENT_SWITCH_WORLD&&!to.equals("")){
                 MainFrame.loader.setHelper(new LoadHelper(){
-                    public void load(){MainFrame.worldLoader.loadWorld(new File(MainFrame.basedir,"world"+File.separator+to));}
+                    public void load(){MainFrame.worldLoader.loadWorld(MainFrame.fileStorage.getFile("world/"+to));}
                 });
             }
         }
         if(event==Event.PLAYER_ATTACK&&MainFrame.player.ground.wID==wID){
             if(type==EVENT_SAVE_WORLD&&!to.equals("")){
-                MainFrame.worldLoader.saveGame(new File(MainFrame.basedir,"world"+File.separator+"save"+File.separator+to));
+                MainFrame.worldLoader.saveGame(MainFrame.fileStorage.getFile("save/"+to));
             }
         }
     }

@@ -74,7 +74,7 @@ public class WorldLoader {
             while((read=br.readLine())!=null)buf.append(read+"\n");
             //SET PLAYER STATE
             HashMap<String,String> map = Toolkit.stringToMap(buf.toString(),";","=");
-            loadWorld(new File(MainFrame.basedir,"world"+File.separator+map.get("world")));
+            loadWorld(MainFrame.fileStorage.getFile("world/"+map.get("world")));
             MainFrame.player.setStateData(map);
             
         }catch(Exception e){Const.LOGGER.log(Level.SEVERE,"Failed to load Game State: Read exception",e);return false;}

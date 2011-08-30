@@ -25,8 +25,11 @@ public class Event {
     public static final int ENTITY_BLOCK    = 0x14;
     public static final int ENTITY_DIE      = 0x1F;
 
-    public static final int BLOCK_MOVE      = 0x21;
-    public static final int BLOCK_DESTROY   = 0x22;
+    public static final int BLOCK_MOVE      = 0x20;
+    public static final int BLOCK_DESTROY   = 0x21;
+
+    public static final int AREA_CLEAR      = 0x30;
+    public static final int AREA_INFECT     = 0x31;
 
     public static final int LEVEL_HIGH      = 2;
     public static final int LEVEL_MIDDLE    = 1;

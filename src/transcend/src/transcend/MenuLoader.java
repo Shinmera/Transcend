@@ -145,7 +145,7 @@ public class MenuLoader extends LoadHelper{
         //QUIT BUTTON (Main Menu)
         GButton b_quit = new GButton("Quit to Menu"){
             public void onRelease(){
-                MainFrame.worldLoader.loadWorld(new File(basedir,"world"+File.separator+"menu.tw"));
+                MainFrame.worldLoader.loadWorld(MainFrame.fileStorage.getFile("menu.tw"));
                 editor.setVisible(false);
                 hud.setVisible(false);
                 menu.get("p_pause").setVisible(false);
@@ -196,7 +196,7 @@ public class MenuLoader extends LoadHelper{
             public void onRelease(){
                 final String name = ((GList)((GPanel)menu.get("p_load")).get("list")).getSelected();
                 loader.setHelper(new LoadHelper(){public void load(){
-                    worldLoader.loadGame(new File(basedir,"world"+File.separator+"save"+File.separator+name));
+                    worldLoader.loadGame(MainFrame.fileStorage.getFile("save/"+name));
                 }});
                 loader.start();
             }

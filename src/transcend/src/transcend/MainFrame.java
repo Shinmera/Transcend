@@ -58,6 +58,7 @@ public class MainFrame implements KeyboardListener{
     public static final Editor editor = new Editor();
     public static final TexturePool texturePool = new TexturePool();
     public static final SoundPool soundPool = new SoundPool();
+    public static final FileStorage fileStorage = new FileStorage();
     public static final Player player = new Player();
     public static int DISPLAY_WIDTH = Const.DISPLAY_WIDTH;
     public static int DISPLAY_HEIGHT= Const.DISPLAY_HEIGHT;
@@ -212,6 +213,7 @@ public class MainFrame implements KeyboardListener{
                 if(editor.getActive())
                     AbstractGraph.glCross2d(0,0,50);
             camera.camEnd();
+            glBindTexture(GL_TEXTURE_2D, 0); //release
 
             glPopMatrix();
             glAccum(GL_ACCUM, 1.0f / ACSIZE);

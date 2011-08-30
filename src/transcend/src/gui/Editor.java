@@ -32,7 +32,7 @@ public class Editor extends GObject implements MouseListener{
     private int tilesize=64;
     private int curItem=0;
     private int curLayer=0;
-    private int mode=MODE_ENTITIES;
+    private int mode=MODE_BLOCKS;
 
     public void paint(){
         if(!visible||!active)return;

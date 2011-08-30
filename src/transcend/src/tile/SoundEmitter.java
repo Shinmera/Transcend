@@ -57,7 +57,7 @@ public class SoundEmitter extends Tile{
         if(options.containsKey("music"))playable.setMusic(Boolean.parseBoolean(options.get("music")));
         if(options.containsKey("loop"))playable.setLooping(Boolean.parseBoolean(options.get("loop")));
         if(options.containsKey("snd")){
-            playable.loadSound(new File(MainFrame.basedir,"snd"+File.separator+options.get("snd")),playable.isMusic());
+            playable.loadSound(MainFrame.fileStorage.getFile(options.get("snd")),playable.isMusic());
             file=options.get("snd");
         }
     }

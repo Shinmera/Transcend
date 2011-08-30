@@ -19,17 +19,14 @@ public class TileSet extends Tile{
 
     public TileSet(int x,int y,int w,int h,String tileset){
         super(x,y,w,h);this.z=0;this.tileset=tileset;
-        drawable.loadTexture(new File(MainFrame.basedir,"tex"+File.separator+tileset));
+        drawable.loadTexture(MainFrame.fileStorage.getFile("tex/"+tileset));
         drawable.setSize(w,h);
         drawable.calcRelative();
         depth=1;
     }
 
     public TileSet(int x,int y,int w,int h,String tileset,int u,int v){
-        super(x,y,w,h);this.z=0;this.tileset=tileset;
-        drawable.loadTexture(new File(MainFrame.basedir,"tex"+File.separator+tileset));
-        drawable.setSize(w,h);
-        drawable.calcRelative();
+        this(x,y,w,h,tileset);
         drawable.setU(u);
         drawable.setV(v);
         depth=1;
@@ -58,7 +55,7 @@ public class TileSet extends Tile{
         super.setOptions(args);
         if(args.containsKey("tex")){
             tileset = args.get("tex");
-            drawable.loadTexture(new File(MainFrame.basedir,"tex"+File.separator+args.get("tex")));
+            drawable.loadTexture(MainFrame.fileStorage.getFile("tex/"+args.get("tex")));
             drawable.setSize(w,h);
             drawable.calcRelative();
         }
