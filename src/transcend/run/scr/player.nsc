@@ -1,0 +1,5 @@
+#NexT/script
+vxacc = 5
+vyacc = 10
+vydcc = 0.4
+vxdcc = 5

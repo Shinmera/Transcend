@@ -35,6 +35,7 @@ public class MovingBlock extends Block{
     public MovingBlock() {}
 
     public void loadTexture(String s){
+        if(s.length()==0)return;
         tex=s;
         drawable.loadTexture(MainFrame.fileStorage.getFile(s));
     }

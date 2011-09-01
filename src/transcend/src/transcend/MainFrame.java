@@ -8,6 +8,8 @@
 \**********************/
 
 package transcend;
+import NexT.repo.Repository;
+import NexT.script.ScriptManager;
 import graph.AbstractGraph;
 import NexT.util.Toolkit;
 import event.EventHandler;
@@ -59,6 +61,8 @@ public class MainFrame implements KeyboardListener{
     public static final TexturePool texturePool = new TexturePool();
     public static final SoundPool soundPool = new SoundPool();
     public static final FileStorage fileStorage = new FileStorage();
+    public static final ScriptManager scriptManager = new ScriptManager();
+    public static final Repository repo = new Repository();
     public static final Player player = new Player();
     public static int DISPLAY_WIDTH = Const.DISPLAY_WIDTH;
     public static int DISPLAY_HEIGHT= Const.DISPLAY_HEIGHT;
@@ -84,7 +88,7 @@ public class MainFrame implements KeyboardListener{
             mf.create();
             mf.run();
         }
-        catch(Exception ex){Const.LOGGER.log(Level.SEVERE,"Error in main thread!",ex);}
+        catch(Exception ex){Const.LOGGER.log(Level.SEVERE,"[MF] Error in main thread!",ex);}
         finally{mf.destroy();}
     }
 
@@ -104,7 +108,8 @@ public class MainFrame implements KeyboardListener{
         DISPLAY_HEIGHT=Display.getDisplayMode().getHeight();
         fps=CONST.gInteger("FPS");
         ACSIZE=CONST.gInteger("ANTIALIAS");
-
+        try{repo.setURL(new URL(CONST.gString("REPO")));}
+        catch(Exception e){Const.LOGGER.log(Level.SEVERE, "[MF] Repo URL malformed. Check the constants!",e);}
         Keyboard.create();
         Mouse.setGrabbed(false);
         Mouse.create();

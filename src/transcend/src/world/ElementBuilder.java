@@ -96,6 +96,11 @@ public class ElementBuilder {
             block.setOptions(args);
             MainFrame.world.addBlock(block);
         }
+        else if(name.equals("water")){
+            Water block = new Water();
+            block.setOptions(args);
+            MainFrame.world.addBlock(block);
+        }
         else if(name.equals("colorblock")){
             ColorBlock block = new ColorBlock();
             block.setOptions(args);

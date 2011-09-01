@@ -24,7 +24,7 @@ import static org.lwjgl.opengl.GL11.*;
 public class Editor extends GObject implements MouseListener{
     public static final int MODE_BLOCKS = 0;
     public static final int MODE_ENTITIES = 1;
-    private String[] blocks = {"blankblock","halfblankblock","tileblock","movingblock","complexblock","gameevent","tileset","emitter"};
+    private String[] blocks = {"blankblock","halfblankblock","tileblock","movingblock","complexblock","gameevent","water","emitter"};
     private String[] entities = {"enemyb1","enemyc1"};
     private boolean active=false;
     private boolean inComplex=false;

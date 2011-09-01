@@ -9,6 +9,7 @@
 
 package entity;
 
+import NexT.util.Vector;
 import block.Block;
 import transcend.MainFrame;
 import world.Element;

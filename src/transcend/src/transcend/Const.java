@@ -99,6 +99,7 @@ public class Const {
         registry.put("FORCED_W","0");
         registry.put("FORCED_H","0");
         registry.put("LAYOUT","swiss");
+        registry.put("REPO","http://repo.tymoon.eu/v2/transcend");
     }
 
     public String gString(String key){

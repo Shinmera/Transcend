@@ -1,38 +1,70 @@
-20:59 [+][INFO] [CONST] Loading
+21:32 [+][INFO] [CONST] Loading
 null.transcend.Const.loadRegistry
-20:59 [+][INFO] [InputEventHandler] Loaded layout swiss. 20 keys mapped.
+21:32 [+][INFO] [InputEventHandler] Loaded layout swiss. 20 keys mapped.
 null.event.InputEventHandler.<init>
-20:59 [+][INFO] [FileStorage] Initial indexing...
+21:32 [+][INFO] [FileStorage] Initial indexing...
 null.transcend.FileStorage.<init>
-20:59 [+][INFO] [FileStorage] indexing .
+21:32 [+][INFO] [FileStorage] indexing .
 null.transcend.FileStorage.indexFolder
-20:59 [+][INFO] [FileStorage] indexing data
+21:32 [+][INFO] [FileStorage] indexing data
 null.transcend.FileStorage.indexFolder
-20:59 [+][INFO] [FileStorage] indexing native
+21:32 [+][INFO] [FileStorage] indexing native
 null.transcend.FileStorage.indexFolder
-20:59 [+][INFO] [FileStorage] indexing linux
+21:32 [+][INFO] [FileStorage] indexing linux
 null.transcend.FileStorage.indexFolder
-20:59 [+][INFO] [FileStorage] indexing macosx
+21:32 [+][INFO] [FileStorage] indexing macosx
 null.transcend.FileStorage.indexFolder
-20:59 [+][INFO] [FileStorage] indexing solaris
+21:32 [+][INFO] [FileStorage] indexing solaris
 null.transcend.FileStorage.indexFolder
-20:59 [+][INFO] [FileStorage] indexing windows
+21:32 [+][INFO] [FileStorage] indexing windows
 null.transcend.FileStorage.indexFolder
-20:59 [+][INFO] [FileStorage] indexing shaders
+21:32 [+][INFO] [FileStorage] indexing scr
 null.transcend.FileStorage.indexFolder
-20:59 [+][INFO] [FileStorage] indexing snd
+21:32 [+][INFO] [FileStorage] indexing shaders
 null.transcend.FileStorage.indexFolder
-20:59 [+][INFO] [FileStorage] indexing tex
+21:32 [+][INFO] [FileStorage] indexing snd
 null.transcend.FileStorage.indexFolder
-20:59 [+][INFO] [FileStorage] indexing world
+21:32 [+][INFO] [FileStorage] indexing tex
 null.transcend.FileStorage.indexFolder
-20:59 [+][INFO] [FileStorage] indexing elements
+21:32 [+][INFO] [FileStorage] indexing world
 null.transcend.FileStorage.indexFolder
-20:59 [+][INFO] [FileStorage] indexing save
+21:32 [+][INFO] [FileStorage] indexing elements
 null.transcend.FileStorage.indexFolder
-20:59 [+][INFO] [MF] Booting up...
+21:32 [+][INFO] [FileStorage] indexing save
+null.transcend.FileStorage.indexFolder
+21:32 [+][INFO] [MF] Booting up...
 null.transcend.MainFrame.main
-20:59 [+][INFO] [CONST] Loading
+21:32 [+][INFO] [CONST] Loading
 null.transcend.Const.loadRegistry
-20:59 [+][INFO] LWJGL found 36 display modes.
+21:32 [+][INFO] LWJGL found 36 display modes.
 null.gui.DisplayModeChooser.<init>
+21:32 [+][INFO] [CONST] Saving
+null.transcend.Const.saveRegistry
+21:32 [+][INFO] [CONST] Loading
+null.transcend.Const.loadRegistry
+21:32 [+][INFO] [MF] Initializing...
+null.transcend.MainFrame.create
+21:32 [+][INFO] [Loader] Loading...
+null.gui.Loader.run
+21:32 [+][INFO] [Loader] Finished loading. Ready.
+null.gui.Loader.run
+21:32 [+][INFO] [Loader] Loading...
+null.gui.Loader.run
+21:32 [+][INFO] [World] Loading World from D:\projects\JAVAPROJECTS\transcend\src\transcend\run\world\various.tw
+null.world.WorldLoader.loadWorld
+21:32 [+][INFO] [World] Loaded 14 elements. 14 Blocks 1 Entities 1 Tiles.
+null.world.WorldLoader.loadWorld
+21:32 [+][INFO] [Loader] 100%
+null.gui.Loader.run
+21:32 [+][INFO] [Loader] Finished loading. Ready.
+null.gui.Loader.run
+21:32 [+][INFO] [World] Save World to D:\projects\JAVAPROJECTS\transcend\src\transcend\run\world\various.tw
+null.world.WorldLoader.saveWorld
+21:32 [+][INFO] [World] Saved 16 elements.
+null.world.WorldLoader.saveWorld
+21:33 [+][INFO] [World] Save World to D:\projects\JAVAPROJECTS\transcend\src\transcend\run\world\various.tw
+null.world.WorldLoader.saveWorld
+21:33 [+][INFO] [World] Saved 16 elements.
+null.world.WorldLoader.saveWorld
+21:33 [+][INFO] [MF] Shutting down...
+null.transcend.MainFrame.destroy

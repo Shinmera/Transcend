@@ -9,7 +9,6 @@
 
 package transcend;
 
-import gui.HPowerBar;
 import java.io.File;
 import org.newdawn.slick.Color;
 import gui.*;
@@ -328,6 +327,8 @@ public class MenuLoader extends LoadHelper{
         l_argsdesc.setBackground(new Color(1,1,1,0.5f));
 
         l_speed.setBounds(10,DISPLAY_HEIGHT-20,400,15);
+        l_speed.setBorder(new Color(0,0,0,0),0);
+        l_speed.setBackground(new Color(0,0,0,0));
 
         b_save.setBounds(10,10,100,30);
         b_load.setBounds(10,45,100,30);

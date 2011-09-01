@@ -92,7 +92,7 @@ public class GameEvent extends Block implements EventListener{
                 });
             }
         }
-        if(event==Event.PLAYER_ATTACK&&MainFrame.player.ground.wID==wID){
+        if((event==Event.PLAYER_ATTACK)&&(MainFrame.player.ground!=null)&&(MainFrame.player.ground.wID==wID)){
             if(type==EVENT_SAVE_WORLD&&!to.equals("")){
                 MainFrame.worldLoader.saveGame(MainFrame.fileStorage.getFile("save/"+to));
             }

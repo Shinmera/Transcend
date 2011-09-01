@@ -275,4 +275,19 @@ Dateien nach FileStorage migriert.
 Math parser implementiert,
 Script sprache ausgelegt.
 
-[17:30- 29.8.2011]
+[17:30-20:00 29.8.2011]
+Script sprache angefangen.
+
+[20:00-22:30 30.8.2011]
+Script sprache weitergeführt.
+
+[14:30-17:00 31.8.2011]
+Script sprache fertiggestellt.
+Eingebunden in Transcend.
+Bugs behoben.
+
+[20:00-23:30 1.9.2011]
+NexT/Repo entwickelt.
+Repo in Transcend eingebunden.
+Menu bug behoben.
+Player Kollisionserkennung verbessert.

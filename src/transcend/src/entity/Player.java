@@ -21,37 +21,49 @@ import graph.Animation;
 import java.util.HashMap;
 import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.Color;
-import transcend.MainFrame;
+import static transcend.MainFrame.*;
 import world.Element;
 
 public class Player extends Entity implements KeyboardListener,EventListener{
+    public static final int FORM_HUMAN = 0x00;
+    public static final int FORM_PONY = 0x01;
+    public static final int FORM_MOUSE = 0x02;
+    public static final int FORM_EAGLE = 0x03;
+    public static final int FORM_DOLPHIN = 0x04;
+
     public static final int ELEMENT_ID = 0x2;
-    private final double vxacc=5,vyacc=10,vydcc=0.4,vxdcc=5;
     private Element ceiling = null,left = null,right = null;
     private boolean K_LEFT,K_RIGHT,K_SPACE,K_SHIFT,K_TAB,K_W;
+    private double power=100;
+    private int lifes=5;
+    private int form=FORM_HUMAN;
 
     public Player(){}
     public void init(){
-        MainFrame.ieh.addKeyboardListener(this);
+        ieh.addKeyboardListener(this);
+        scriptManager.loadScript(fileStorage.getFile("scr/player"));
         x=10;y=10;w=64;h=64;
 
         int[] stop = {16,0};
         int[] start = {0,0};
         int[] loop = {0,0};
 
-        drawable.loadTexture(MainFrame.fileStorage.getFile("dash_walk_right.png"),start,stop,loop);
+        drawable.loadTexture(fileStorage.getFile("dash_walk_right.png"),start,stop,loop);
         drawable.setReel(1);
-        MainFrame.eh.registerEvent(Event.ENTITY_SEE, 0, this);
-        MainFrame.eh.registerEvent(Event.ENTITY_ATTACK, 0, this);
-        MainFrame.eh.registerEvent(Event.ENTITY_BLOCK, 0, this);
+        eh.registerEvent(Event.ENTITY_SEE, 0, this);
+        eh.registerEvent(Event.ENTITY_ATTACK, 0, this);
+        eh.registerEvent(Event.ENTITY_BLOCK, 0, this);
     }
 
     public Element getLeft(){return left;}
     public Element getRight(){return right;}
+    public double getPower(){return power;}
+    public int getLifes(){return lifes;}
+    public int getForm(){return form;}
 
     public void draw(){
         drawable.draw((int)x-w/2, (int)y-4, w, h);
-        if(MainFrame.editor.getActive()){
+        if(editor.getActive()){
             if(ground!=null)ground.draw();
             if(left!=null)left.draw();
             if(right!=null)right.draw();
@@ -66,12 +78,12 @@ public class Player extends Entity implements KeyboardListener,EventListener{
         //GROUND
         if(((ground=(Block)check(x-w/2+3,y+1,x+w/2-3,y+1))!=null || (ground=(Block)check(x-w/2+3,y+vy  ,x+w/2-3,y+vy))!=null) && vy<0){
             vy=0;
-            Vector v = ground.getCollisionPoint(new Ray(x,y+h,0,0,-1,0));
-            if(v!=null){
-                y=v.getY();
-            }
+            Vector v = ground.getCollisionPoint(new Ray(x+w/2-3,y+h,0,0,-1,0));
+            if(v!=null)y=v.getY();else
+            v = ground.getCollisionPoint(new Ray(x-w/2+3,y+h,0,0,-1,0));
+            if(v!=null)y=v.getY();
         }else{
-            vy-=vydcc;
+            vy-=Double.parseDouble(scriptManager.getScript("player").getVariable("vydcc"));
         }
         //CEILING
         if((ceiling=(Block)check(x-w/2+3,y+h  ,x+w/2-3,y+h))!=null&&vy>0){
@@ -105,23 +117,26 @@ public class Player extends Entity implements KeyboardListener,EventListener{
         }
 
         //INPUT
-        if(K_SPACE&&ground!=null&&vy==0){vy+=vyacc;}
+        if(K_SPACE&&ground!=null&&vy==0){vy+=Double.parseDouble(scriptManager.getScript("player").getVariable("vyacc"));}
         
         if(K_LEFT){
             drawable.setDirection(Animation.DIR_LEFT);
             drawable.setReel(0);
-            if(left==null)vx=-vxacc;
+            if(left==null)vx=-Double.parseDouble(scriptManager.getScript("player").getVariable("vxacc"));
         }else if(K_RIGHT){
             drawable.setDirection(Animation.DIR_RIGHT);
             drawable.setReel(0);
-            if(right==null)vx=vxacc;
+            if(right==null)vx=Double.parseDouble(scriptManager.getScript("player").getVariable("vxacc"));
         }else{
             drawable.setReel(1);
             vx=0;
         }
         if(K_W){
-            MainFrame.eh.triggerEvent(Event.PLAYER_ATTACK, wID, null);
+            eh.triggerEvent(Event.PLAYER_ATTACK, wID, null);
+            health-=0.1;
         }
+
+        if((left!=null&&right!=null)||(ground!=null&&ceiling!=null))die();
 
         //EVALUATE
         x+=vx;
@@ -143,11 +158,12 @@ public class Player extends Entity implements KeyboardListener,EventListener{
     }
 
     public void die(){
-        
+        System.out.println("DEATH");
+        x=0;y=0;vx=0;vy=0;
     }
 
     public void keyPressed(int key) {
-        if(MainFrame.pause)return;
+        if(pause)return;
         switch(key){
         case Keyboard.KEY_LEFT: K_LEFT=true;break;
         case Keyboard.KEY_RIGHT: K_RIGHT=true;break;
@@ -158,7 +174,7 @@ public class Player extends Entity implements KeyboardListener,EventListener{
         }
     }
     public void keyReleased(int key) {
-        if(MainFrame.pause)return;
+        if(pause)return;
         switch(key){
         case Keyboard.KEY_SPACE:K_SPACE=false;break;
         case Keyboard.KEY_LEFT:K_LEFT=false;break;
@@ -169,9 +185,9 @@ public class Player extends Entity implements KeyboardListener,EventListener{
         }
     }
     public void keyType(int key) {
-        if(MainFrame.pause)return;
+        if(pause)return;
         switch(key){
-            case Keyboard.KEY_R:if(MainFrame.editor.getActive()){x=0;y=0;vx=0;vy=0;}break;
+            case Keyboard.KEY_R:if(editor.getActive()){x=0;y=0;vx=0;vy=0;}break;
         }
     }
 

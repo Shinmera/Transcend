@@ -24,13 +24,20 @@ public class TileBlock extends Tile{
         drawable.calcTile(w, h);
     }
 
+    public void setTexture(String tex){
+        if(tex.length()==0)return;
+        this.tex=tex;
+        drawable.loadTexture(MainFrame.fileStorage.getFile("tex/"+tex));
+        drawable.calcTile(w, h);
+    }
+
     public void setOptions(HashMap<String,String> options){
         super.setOptions(options);
         if(options.containsKey("tex")){
-            this.tex=tex;
-            drawable.loadTexture(MainFrame.fileStorage.getFile("tex/"+options.get("tex")));
-            drawable.calcTile(w, h);
-            
+            if(options.get("tex").length()==0)MainFrame.world.delByID(wID);
+            setTexture(options.get("tex"));
+        }else{
+            MainFrame.world.delByID(wID);
         }
     }
 

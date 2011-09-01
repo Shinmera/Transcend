@@ -163,7 +163,6 @@ public class Animation {
     public void draw(int x,int y,int w,int h){
         if(!init){calcRelative();init=true;}
         if(texture==null){
-            new Color(1.0f,0.0f,0.0f,1.0f).bind();
 
             glBegin(GL_QUADS);
                 glVertex3i(x, y,z);
@@ -193,7 +192,13 @@ public class Animation {
                 glVertex2i(-w/2, h/2);
             glEnd();
             glPopMatrix();
+
             glBindTexture(GL_TEXTURE_2D, 0); //release
+
+            glMatrixMode(GL_TEXTURE);
+                glLoadIdentity();
+                glScaled(1,1,1);
+            glMatrixMode(GL_MODELVIEW);
         }
     }
 }
