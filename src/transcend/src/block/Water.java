@@ -13,10 +13,15 @@ import NexT.util.SimpleSet;
 import NexT.util.Toolkit;
 import java.util.HashMap;
 import org.newdawn.slick.Color;
+import world.Element;
 
 public class Water extends Block{
     private double viscosity = 0.8;
     private Color color = new Color(50,50,220,100);
+
+    public Water(){
+        solid=0.2;
+    }
 
     public void setViscosity(double v){viscosity=v;}
     public void setColor(Color c){color=c;}

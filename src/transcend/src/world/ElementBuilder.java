@@ -9,27 +9,20 @@
 
 package world;
 
-import tile.ColorBlock;
-import tile.Background;
-import NexT.util.ClassPathHacker;
-import NexT.util.ConfigManager;
-import NexT.util.SimpleSet;
-import NexT.util.Toolkit;
-import block.*;
-import entity.EnemyB1;
-import entity.EnemyC1;
-import gui.CameraPath;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.logging.Level;
-import org.newdawn.slick.Color;
+import NexT.util.ClassPathHacker;
+import NexT.util.ConfigManager;
+import NexT.util.SimpleSet;
+import gui.CameraPath;
 import particle.Emitter;
-import tile.SoundEmitter;
-import tile.TileBlock;
-import tile.TileSet;
 import transcend.Const;
 import transcend.MainFrame;
+import block.*;
+import entity.*;
+import tile.*;
 
 public class ElementBuilder {
     HashMap<String,Class> elements = new HashMap<String,Class>();
@@ -145,6 +138,11 @@ public class ElementBuilder {
             GameEvent block = new GameEvent();
             block.setOptions(args);
             MainFrame.world.addBlock(block);
+        }
+        else if(name.equals("daycycle")){
+            DayCycle block = new DayCycle();
+            block.setOptions(args);
+            MainFrame.world.addTile(block,"daycycle");
         }
         //ATTEMPT TO DYNAMICALLY LOAD BLOCK
         else{

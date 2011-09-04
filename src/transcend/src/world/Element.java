@@ -14,7 +14,7 @@ import graph.Animation;
 public class Element extends BElement{
     public static final int ELEMENT_ID = 0x0;
     public Animation drawable = new Animation();
-    public double solid=0.0;
+    public double solid=1.0;
     public double health=100;
     
     public Element(){}

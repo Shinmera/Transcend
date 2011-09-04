@@ -53,7 +53,7 @@ public class Entity extends Element{
         Object[] blockIDs = MainFrame.world.getBlockList();
         for(int i=0;i<blockIDs.length;i++){
             Block block = (Block)MainFrame.world.getByID((Integer)blockIDs[i]);
-            if(block.checkInside(ax,ay)||block.checkInside(bx,by)){
+            if((block.checkInside(ax,ay)||block.checkInside(bx,by))&&block.solid>0.2){
                 e=block;
                 break;
             }

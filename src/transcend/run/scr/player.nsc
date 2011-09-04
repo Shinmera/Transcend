@@ -1,5 +1,21 @@
 #NexT/script
-vxacc = 5
-vyacc = 10
+vxacc = 0.02
+vyacc = 10.0
 vydcc = 0.4
-vxdcc = 5
+vxdcc = 5.0
+vxlim = 10.0
+
+start0= {0,0}
+stop0 = {16,0}
+loop0 = {0,0}
+loop20= {0,0}
+
+width = {64}
+height= {64}
+
+defun getVXAcc{
+	if vx >= vxlim {
+		return vxlim
+	}
+	return (+ vxacc 0 vx )
+}

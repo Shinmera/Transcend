@@ -29,7 +29,6 @@ import java.net.URL;
 import java.io.IOException;
 import org.newdawn.slick.Color;
 import gui.Camera;
-import org.lwjgl.LWJGLUtil;
 import event.KeyboardListener;
 import entity.Player;
 import world.ElementBuilder;
@@ -43,12 +42,21 @@ import org.lwjgl.input.Mouse;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.LWJGLException;
+import org.lwjgl.LWJGLUtil;
 import java.util.logging.Level;
 import static org.lwjgl.opengl.GL11.*;
 import static transcend.Jitter.j;
 import static transcend.Jitter.jps;
 
 public class MainFrame implements KeyboardListener{
+    static{
+        System.setProperty("org.lwjgl.librarypath",new File(new File(new File("."), "native"), LWJGLUtil.getPlatformName()).getAbsolutePath());
+        Toolkit.printMenu("><Transcend Engine v"+Const.VERSION+"\n"+
+                          "(c)2011 "+Const.MAINTAINER+" developed by "+Const.DEVELOPER+"\n"+
+                          "http://www.tymoon.eu", "/", 1, null);
+        Const.LOGGER.info("[MF] Booting up...");
+    }
+
     public static final Const CONST = new Const();
     public static final File basedir = new File(".");
     public static final World world = new World();
@@ -72,15 +80,7 @@ public class MainFrame implements KeyboardListener{
     public static GPanel menu,hud;
     public static Loader loader;
 
-    static{
-        System.setProperty("org.lwjgl.librarypath",new File(new File(basedir, "native"), LWJGLUtil.getPlatformName()).getAbsolutePath());
-    }
-
     public static void main(String[] args){
-        Toolkit.printMenu("><Transcend Engine v"+Const.VERSION+"\n"+
-                          "(c)2011 "+Const.MAINTAINER+" developed by "+Const.DEVELOPER+"\n"+
-                          "http://www.tymoon.eu", "/", 1, null);
-        Const.LOGGER.info("[MF] Booting up...");
         MainFrame mf = new MainFrame();
         try{
             if(!DisplayModeChooser.showDialog("Display Mode"))System.exit(0);
@@ -127,6 +127,7 @@ public class MainFrame implements KeyboardListener{
     }
 
     public void initGame(){
+        Const.LOGGER.info("[MF] initGame");
         loader = new Loader();
         ieh.addKeyboardListener(this);
         camera.setBoundary(300);
@@ -148,6 +149,7 @@ public class MainFrame implements KeyboardListener{
     }
 
     public void initGL() {
+        Const.LOGGER.info("[MF] initGL");
         //2D Initialization
        	glClearColor(0.1f,0.1f,0.2f,0);
         glClearAccum(0,0,0,0);
@@ -200,33 +202,41 @@ public class MainFrame implements KeyboardListener{
     }
 
     public void render() {
+        glLoadIdentity();
         IntBuffer viewport = BufferUtils.createIntBuffer(16);
         glGetInteger(GL_VIEWPORT, viewport);
 
-        glClear(GL_ACCUM_BUFFER_BIT);
-        for (int jitter = 0; jitter < ACSIZE; jitter++) {
+        if(ACSIZE>1){
+            glClear(GL_ACCUM_BUFFER_BIT);
+            for (int jitter = 0; jitter < ACSIZE; jitter++) {
+                glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+                glPushMatrix();
+                glTranslatef(j[jps[ACSIZE]][jitter].x * 4.5f / viewport.get(2),
+                             j[jps[ACSIZE]][jitter].y * 4.5f / viewport.get(3), 0.0f);
+
+                renderScene();
+
+                glPopMatrix();
+                glAccum(GL_ACCUM, 1.0f / ACSIZE);
+            }
+            glAccum(GL_RETURN, 1.0f);
+        }else{
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-            glPushMatrix();
-            glTranslatef(j[jps[ACSIZE]][jitter].x * 4.5f / viewport.get(2),
-                    j[jps[ACSIZE]][jitter].y * 4.5f / viewport.get(3), 0.0f);
-
-            Color.white.bind();
-            
-            camera.camBegin();
-                world.draw();
-
-                if(editor.getActive())
-                    AbstractGraph.glCross2d(0,0,50);
-            camera.camEnd();
-            glBindTexture(GL_TEXTURE_2D, 0); //release
-
-            glPopMatrix();
-            glAccum(GL_ACCUM, 1.0f / ACSIZE);
+            renderScene();
         }
-        glAccum(GL_RETURN, 1.0f);
 
         hud.paint();
         menu.paint();
+    }
+
+    public void renderScene(){
+        Color.white.bind();
+        camera.camBegin();
+            world.draw();
+
+            if(editor.getActive())AbstractGraph.glCross2d(0,0,50);
+        camera.camEnd();
+        glBindTexture(GL_TEXTURE_2D, 0); //release
     }
 
     public void run() {

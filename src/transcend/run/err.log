@@ -1,70 +1,66 @@
-21:32 [+][INFO] [CONST] Loading
+23:07 [+][INFO] [MF] Booting up...
+null.transcend.MainFrame.<clinit>
+23:07 [+][INFO] [CONST] Loading
 null.transcend.Const.loadRegistry
-21:32 [+][INFO] [InputEventHandler] Loaded layout swiss. 20 keys mapped.
+23:07 [+][INFO] [InputEventHandler] Loaded layout swiss. 20 keys mapped.
 null.event.InputEventHandler.<init>
-21:32 [+][INFO] [FileStorage] Initial indexing...
+23:07 [+][INFO] [FileStorage] Initial indexing...
 null.transcend.FileStorage.<init>
-21:32 [+][INFO] [FileStorage] indexing .
+23:07 [+][INFO] [FileStorage] indexing .
 null.transcend.FileStorage.indexFolder
-21:32 [+][INFO] [FileStorage] indexing data
+23:07 [+][INFO] [FileStorage] indexing data
 null.transcend.FileStorage.indexFolder
-21:32 [+][INFO] [FileStorage] indexing native
+23:07 [+][INFO] [FileStorage] indexing native
 null.transcend.FileStorage.indexFolder
-21:32 [+][INFO] [FileStorage] indexing linux
+23:07 [+][INFO] [FileStorage] indexing linux
 null.transcend.FileStorage.indexFolder
-21:32 [+][INFO] [FileStorage] indexing macosx
+23:07 [+][INFO] [FileStorage] indexing macosx
 null.transcend.FileStorage.indexFolder
-21:32 [+][INFO] [FileStorage] indexing solaris
+23:07 [+][INFO] [FileStorage] indexing solaris
 null.transcend.FileStorage.indexFolder
-21:32 [+][INFO] [FileStorage] indexing windows
+23:07 [+][INFO] [FileStorage] indexing windows
 null.transcend.FileStorage.indexFolder
-21:32 [+][INFO] [FileStorage] indexing scr
+23:07 [+][INFO] [FileStorage] indexing scr
 null.transcend.FileStorage.indexFolder
-21:32 [+][INFO] [FileStorage] indexing shaders
+23:07 [+][INFO] [FileStorage] indexing shaders
 null.transcend.FileStorage.indexFolder
-21:32 [+][INFO] [FileStorage] indexing snd
+23:07 [+][INFO] [FileStorage] indexing snd
 null.transcend.FileStorage.indexFolder
-21:32 [+][INFO] [FileStorage] indexing tex
+23:07 [+][INFO] [FileStorage] indexing tex
 null.transcend.FileStorage.indexFolder
-21:32 [+][INFO] [FileStorage] indexing world
+23:07 [+][INFO] [FileStorage] indexing world
 null.transcend.FileStorage.indexFolder
-21:32 [+][INFO] [FileStorage] indexing elements
+23:07 [+][INFO] [FileStorage] indexing elements
 null.transcend.FileStorage.indexFolder
-21:32 [+][INFO] [FileStorage] indexing save
+23:07 [+][INFO] [FileStorage] indexing save
 null.transcend.FileStorage.indexFolder
-21:32 [+][INFO] [MF] Booting up...
-null.transcend.MainFrame.main
-21:32 [+][INFO] [CONST] Loading
+23:07 [+][INFO] [CONST] Loading
 null.transcend.Const.loadRegistry
-21:32 [+][INFO] LWJGL found 36 display modes.
+23:07 [+][INFO] LWJGL found 36 display modes.
 null.gui.DisplayModeChooser.<init>
-21:32 [+][INFO] [CONST] Saving
+23:07 [+][INFO] [CONST] Saving
 null.transcend.Const.saveRegistry
-21:32 [+][INFO] [CONST] Loading
+23:07 [+][INFO] [CONST] Loading
 null.transcend.Const.loadRegistry
-21:32 [+][INFO] [MF] Initializing...
+23:07 [+][INFO] [MF] Initializing...
 null.transcend.MainFrame.create
-21:32 [+][INFO] [Loader] Loading...
+23:07 [+][INFO] [MF] initGL
+null.transcend.MainFrame.initGL
+23:07 [+][INFO] [MF] initGame
+null.transcend.MainFrame.initGame
+23:07 [+][INFO] [Loader] Loading...
 null.gui.Loader.run
-21:32 [+][INFO] [Loader] Finished loading. Ready.
+23:07 [+][INFO] [Loader] Finished loading. Ready.
 null.gui.Loader.run
-21:32 [+][INFO] [Loader] Loading...
+23:07 [+][INFO] [Loader] Loading...
 null.gui.Loader.run
-21:32 [+][INFO] [World] Loading World from D:\projects\JAVAPROJECTS\transcend\src\transcend\run\world\various.tw
+23:07 [+][INFO] [World] Loading World from D:\projects\JAVAPROJECTS\transcend\src\transcend\run\world\various.tw
 null.world.WorldLoader.loadWorld
-21:32 [+][INFO] [World] Loaded 14 elements. 14 Blocks 1 Entities 1 Tiles.
+23:07 [+][INFO] [World] Loaded 15 elements. 15 Blocks 1 Entities 1 Tiles.
 null.world.WorldLoader.loadWorld
-21:32 [+][INFO] [Loader] 100%
+23:07 [+][INFO] [Loader] 100%
 null.gui.Loader.run
-21:32 [+][INFO] [Loader] Finished loading. Ready.
+23:07 [+][INFO] [Loader] Finished loading. Ready.
 null.gui.Loader.run
-21:32 [+][INFO] [World] Save World to D:\projects\JAVAPROJECTS\transcend\src\transcend\run\world\various.tw
-null.world.WorldLoader.saveWorld
-21:32 [+][INFO] [World] Saved 16 elements.
-null.world.WorldLoader.saveWorld
-21:33 [+][INFO] [World] Save World to D:\projects\JAVAPROJECTS\transcend\src\transcend\run\world\various.tw
-null.world.WorldLoader.saveWorld
-21:33 [+][INFO] [World] Saved 16 elements.
-null.world.WorldLoader.saveWorld
-21:33 [+][INFO] [MF] Shutting down...
+23:07 [+][INFO] [MF] Shutting down...
 null.transcend.MainFrame.destroy

@@ -291,3 +291,11 @@ NexT/Repo entwickelt.
 Repo in Transcend eingebunden.
 Menu bug behoben.
 Player Kollisionserkennung verbessert.
+
+[16:00-21:00 2.9.2011]
+NexT/Repo erweitert.
+NexT/Script erweitert und optimiert.
+Anti-aliasing bug behoben.
+Player erweitert.
+Engine auf version 0.10 migriert.
+DayCycle hinzugefügt.

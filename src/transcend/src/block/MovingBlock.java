@@ -32,7 +32,7 @@ public class MovingBlock extends Block{
         this.vx=vx;this.vy=vy;
     }
 
-    public MovingBlock() {}
+    public MovingBlock() {solid=1;}
 
     public void loadTexture(String s){
         if(s.length()==0)return;

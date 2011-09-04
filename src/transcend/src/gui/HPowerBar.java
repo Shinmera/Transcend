@@ -9,6 +9,7 @@
 
 package gui;
 
+import graph.AbstractGraph;
 import org.newdawn.slick.Color;
 import transcend.MainFrame;
 import graph.Form;
@@ -47,6 +48,11 @@ public class HPowerBar extends GImage{
             glTranslated(x+255+60,y+25,0);
             powerBar.paint();
         glPopMatrix();
+
+        Color.white.bind();
+        for(int i=MainFrame.player.getLifes();i>0;i--){
+            AbstractGraph.glFCircle2d(x+320-i*15, y+43, 3.5);
+        }
 
         super.paint();
     }
