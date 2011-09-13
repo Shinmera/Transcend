@@ -1,66 +1,66 @@
-23:07 [+][INFO] [MF] Booting up...
+19:43 [+][INFO] [MF] Booting up...
 null.transcend.MainFrame.<clinit>
-23:07 [+][INFO] [CONST] Loading
+19:43 [+][INFO] [CONST] Loading
 null.transcend.Const.loadRegistry
-23:07 [+][INFO] [InputEventHandler] Loaded layout swiss. 20 keys mapped.
+19:43 [+][INFO] [InputEventHandler] Loaded layout swiss. 20 keys mapped.
 null.event.InputEventHandler.<init>
-23:07 [+][INFO] [FileStorage] Initial indexing...
+19:43 [+][INFO] [FileStorage] Initial indexing...
 null.transcend.FileStorage.<init>
-23:07 [+][INFO] [FileStorage] indexing .
+19:43 [+][INFO] [FileStorage] indexing .
 null.transcend.FileStorage.indexFolder
-23:07 [+][INFO] [FileStorage] indexing data
+19:43 [+][INFO] [FileStorage] indexing data
 null.transcend.FileStorage.indexFolder
-23:07 [+][INFO] [FileStorage] indexing native
+19:43 [+][INFO] [FileStorage] indexing native
 null.transcend.FileStorage.indexFolder
-23:07 [+][INFO] [FileStorage] indexing linux
+19:43 [+][INFO] [FileStorage] indexing linux
 null.transcend.FileStorage.indexFolder
-23:07 [+][INFO] [FileStorage] indexing macosx
+19:43 [+][INFO] [FileStorage] indexing macosx
 null.transcend.FileStorage.indexFolder
-23:07 [+][INFO] [FileStorage] indexing solaris
+19:43 [+][INFO] [FileStorage] indexing solaris
 null.transcend.FileStorage.indexFolder
-23:07 [+][INFO] [FileStorage] indexing windows
+19:43 [+][INFO] [FileStorage] indexing windows
 null.transcend.FileStorage.indexFolder
-23:07 [+][INFO] [FileStorage] indexing scr
+19:43 [+][INFO] [FileStorage] indexing scr
 null.transcend.FileStorage.indexFolder
-23:07 [+][INFO] [FileStorage] indexing shaders
+19:43 [+][INFO] [FileStorage] indexing shaders
 null.transcend.FileStorage.indexFolder
-23:07 [+][INFO] [FileStorage] indexing snd
+19:43 [+][INFO] [FileStorage] indexing snd
 null.transcend.FileStorage.indexFolder
-23:07 [+][INFO] [FileStorage] indexing tex
+19:43 [+][INFO] [FileStorage] indexing tex
 null.transcend.FileStorage.indexFolder
-23:07 [+][INFO] [FileStorage] indexing world
+19:43 [+][INFO] [FileStorage] indexing world
 null.transcend.FileStorage.indexFolder
-23:07 [+][INFO] [FileStorage] indexing elements
+19:43 [+][INFO] [FileStorage] indexing elements
 null.transcend.FileStorage.indexFolder
-23:07 [+][INFO] [FileStorage] indexing save
+19:43 [+][INFO] [FileStorage] indexing save
 null.transcend.FileStorage.indexFolder
-23:07 [+][INFO] [CONST] Loading
+19:43 [+][INFO] [CONST] Loading
 null.transcend.Const.loadRegistry
-23:07 [+][INFO] LWJGL found 36 display modes.
+19:43 [+][INFO] LWJGL found 36 display modes.
 null.gui.DisplayModeChooser.<init>
-23:07 [+][INFO] [CONST] Saving
+19:43 [+][INFO] [CONST] Saving
 null.transcend.Const.saveRegistry
-23:07 [+][INFO] [CONST] Loading
+19:43 [+][INFO] [CONST] Loading
 null.transcend.Const.loadRegistry
-23:07 [+][INFO] [MF] Initializing...
+19:43 [+][INFO] [MF] Initializing...
 null.transcend.MainFrame.create
-23:07 [+][INFO] [MF] initGL
+19:43 [+][INFO] [MF] initGL
 null.transcend.MainFrame.initGL
-23:07 [+][INFO] [MF] initGame
+19:43 [+][INFO] [MF] initGame
 null.transcend.MainFrame.initGame
-23:07 [+][INFO] [Loader] Loading...
+19:43 [+][INFO] [Loader] Loading...
 null.gui.Loader.run
-23:07 [+][INFO] [Loader] Finished loading. Ready.
+19:43 [+][INFO] [Loader] Finished loading. Ready.
 null.gui.Loader.run
-23:07 [+][INFO] [Loader] Loading...
+19:43 [+][INFO] [Loader] Loading...
 null.gui.Loader.run
-23:07 [+][INFO] [World] Loading World from D:\projects\JAVAPROJECTS\transcend\src\transcend\run\world\various.tw
+19:43 [+][INFO] [World] Loading World from D:\projects\JAVAPROJECTS\transcend\src\transcend\run\world\various.tw
 null.world.WorldLoader.loadWorld
-23:07 [+][INFO] [World] Loaded 15 elements. 15 Blocks 1 Entities 1 Tiles.
+19:43 [+][INFO] [World] Loaded 15 elements. 15 Blocks 1 Entities 1 Tiles.
 null.world.WorldLoader.loadWorld
-23:07 [+][INFO] [Loader] 100%
+19:43 [+][INFO] [Loader] 100%
 null.gui.Loader.run
-23:07 [+][INFO] [Loader] Finished loading. Ready.
+19:43 [+][INFO] [Loader] Finished loading. Ready.
 null.gui.Loader.run
-23:07 [+][INFO] [MF] Shutting down...
+19:45 [+][INFO] [MF] Shutting down...
 null.transcend.MainFrame.destroy

@@ -1,5 +1,5 @@
 #NexT/script
-vxacc = 0.02
+vxacc = 0.2
 vyacc = 10.0
 vydcc = 0.4
 vxdcc = 5.0
@@ -15,7 +15,9 @@ height= {64}
 
 defun getVXAcc{
 	if vx >= vxlim {
-		return vxlim
+		return (+ vxlim 0 )
+	}else{
+		return (+ vxacc 0 vx )
 	}
 	return (+ vxacc 0 vx )
 }

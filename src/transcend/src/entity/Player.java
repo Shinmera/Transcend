@@ -9,8 +9,6 @@
 
 package entity;
 
-import NexT.err.InvalidArgumentCountException;
-import NexT.err.MissingOperandException;
 import NexT.script.Var;
 import NexT.util.Ray;
 import NexT.util.SimpleSet;
@@ -23,8 +21,6 @@ import event.KeyboardListener;
 import graph.AbstractGraph;
 import graph.Animation;
 import java.util.HashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.Color;
 import static transcend.MainFrame.*;
@@ -116,7 +112,6 @@ public class Player extends Entity implements KeyboardListener,EventListener{
 
         //INPUT
         if(K_SPACE&&ground!=null&&vy==0){vy+=(Double)scriptManager.s("player").v("vyacc").get();}
-
         scriptManager.s("player").setVariable("vx", new Var(Var.TYPE_DOUBLE,Toolkit.p(vx)+""));
         double vxacc = (Double) scriptManager.s("player").eval("getVXAcc",null).get();
 
