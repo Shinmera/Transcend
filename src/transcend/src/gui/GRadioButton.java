@@ -10,7 +10,6 @@
 package gui;
 import graph.AbstractGraph;
 import org.newdawn.slick.Color;
-import event.MouseListener;
 import transcend.MainFrame;
 import static org.lwjgl.opengl.GL11.*;
 
@@ -18,7 +17,7 @@ public class GRadioButton extends GButton{
     private boolean activated = false;
     private GPanel parent;
 
-    public GRadioButton(GPanel parent){this.parent=parent;fontAlign=GLabel.ALIGN_LEFT;MainFrame.ieh.addMouseListener(this);}
+    public GRadioButton(GPanel parent){super();this.parent=parent;fontAlign=GLabel.ALIGN_LEFT;MainFrame.ieh.addMouseListener(this);}
     public GRadioButton(GPanel parent,String text){this(parent);this.text=text;}
     public GRadioButton(GPanel parent,String text,boolean activated){this(parent,text);this.activated=activated;}
 

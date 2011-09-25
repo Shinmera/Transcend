@@ -35,6 +35,7 @@ public class HPowerBar extends GImage{
     }
 
     public void paint(){
+        if(!isVisible())return;
         healthBar.setValue(MainFrame.player.getHealth());
         powerBar.setValue(MainFrame.player.getPower());
         

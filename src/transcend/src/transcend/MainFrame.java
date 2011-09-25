@@ -8,6 +8,7 @@
 \**********************/
 
 package transcend;
+import graph.FontPool;
 import NexT.repo.Repository;
 import NexT.script.ScriptManager;
 import graph.AbstractGraph;
@@ -68,6 +69,7 @@ public class MainFrame implements KeyboardListener{
     public static final Editor editor = new Editor();
     public static final TexturePool texturePool = new TexturePool();
     public static final SoundPool soundPool = new SoundPool();
+    public static final FontPool fontPool = new FontPool();
     public static final FileStorage fileStorage = new FileStorage();
     public static final ScriptManager scriptManager = new ScriptManager();
     public static final Repository repo = new Repository();
@@ -160,6 +162,7 @@ public class MainFrame implements KeyboardListener{
         glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
         glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
         glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
         
         //glDisable(GL_DITHER);
         glDisable(GL_LIGHTING);

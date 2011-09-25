@@ -9,6 +9,7 @@
 
 package gui;
 
+import transcend.MainFrame;
 import java.awt.Font;
 import org.newdawn.slick.Color;
 import static org.lwjgl.opengl.GL11.*;
@@ -24,24 +25,24 @@ public class GLabel extends GObject{
     int fontWeight = Font.PLAIN;
     int fontAlign = ALIGN_CENTER;
     Color fore = new Color(0,0,0,255);
-    TrueTypeFont font = new TrueTypeFont(new Font(fontType, fontWeight, fontSize),false);
+    TrueTypeFont font;
 
-    public GLabel(){}
-    public GLabel(String text){this.text=text;}
-    public GLabel(String text,int align){this.text=text;this.fontAlign=align;}
+    public GLabel(){font=MainFrame.fontPool.loadFont(fontType,fontWeight,fontSize);}
+    public GLabel(String text){this();this.text=text;}
+    public GLabel(String text,int align){this(text);this.fontAlign=align;}
     
     public void setFont(Font f){this.font=new TrueTypeFont(f,false);}
     public void setFontWeight(int weight){
         this.fontWeight = weight;
-        font = new TrueTypeFont(new Font(fontType, fontWeight, fontSize),false);
+        setFont(new Font(fontType, fontWeight, fontSize));
     }
     public void setFontSize(int size){
         this.fontSize = size;
-        font = new TrueTypeFont(new Font(fontType, fontWeight, fontSize),false);
+        setFont(new Font(fontType, fontWeight, fontSize));
     }
     public void setFontType(String type){
         this.fontType = type;
-        font = new TrueTypeFont(new Font(fontType, fontWeight, fontSize),false);
+        setFont(new Font(fontType, fontWeight, fontSize));
     }
     public void setText(String text){
         this.text = text;

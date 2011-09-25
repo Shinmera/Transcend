@@ -299,3 +299,29 @@ Anti-aliasing bug behoben.
 Player erweitert.
 Engine auf version 0.10 migriert.
 DayCycle hinzugefügt.
+
+[21:30-23:00 14.9.2011]
+FORK|Master->Game
+Migration zu 1.10
+Block und Tile Klassen um States erweitert.
+
+[12:00-14:00 21.9.2011]
+Math Klasse zu Var erweitert.
+Var Klasse um fix() und NULL erweitert.
+Script nach neuen Var und Math spezifikationen migriert.
+Toolkit erweitert.
+
+[22:00-24:00 21.9.2011]
+Script System verbessert und bugs behoben.
+
+[16:00-18:10 23.9.2011]
+FontPool hinzugefügt.
+GUI Elemente migriert.
+Bugs im Script System behoben.
+
+[20:00-24:00 25.9.2011]
+Symbole für die Formen erstellt.
+HFormSelector Klasse hinzugefügt und eingebunden.
+Camera shutter hinzugefügt.
+Speichern und Laden von Formen hinzugefügt.
+Bewegungsberechnung des Spielers in Skriptsprache umgeschrieben.

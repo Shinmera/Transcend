@@ -103,7 +103,7 @@ public class GameEvent extends Block implements EventListener{
     }
 
     public SimpleSet<String, String> getOptions() {
-        SimpleSet<String, String> set = new SimpleSet<String,String>();
+        SimpleSet<String, String> set = super.getOptions();
         set.put("type", type+"");
         set.put("advance",to+"");
         return set;

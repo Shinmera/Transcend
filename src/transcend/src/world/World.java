@@ -48,6 +48,10 @@ public class World {
     public Object[] getEntityList(){return entities.getList().toArray();}
     public Object[] getTileList(){return tiles.getList().toArray();}
 
+    public double getDistance(int a,int b){
+        return Math.sqrt(Math.pow(getByID(a).x-getByID(b).x,2)+Math.pow(getByID(a).y-getByID(b).y,2));
+    }
+
     public int addBlock(Block block){
         int nID=0;if(ids.size()>0)nID=ids.get(ids.size()-1)+1;
         ids.add(nID);

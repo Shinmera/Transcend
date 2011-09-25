@@ -89,7 +89,7 @@ public class MovingBlock extends Block{
         super.setOptions(args);
     }
     public SimpleSet<String,String> getOptions(){
-        SimpleSet<String,String> set = new SimpleSet<String,String>();
+        SimpleSet<String,String> set = super.getOptions();
         set.put("vx", vx+"");
         set.put("vy", vy+"");
         set.put("tex", tex);

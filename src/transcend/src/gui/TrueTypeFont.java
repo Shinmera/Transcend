@@ -149,6 +149,22 @@ public class TrueTypeFont {
 
 	}
 
+        //Klems : in case the current font can't draw a char, we look in the system for the first capable font
+        private Font getFontFromChar(char ch) {
+            if (font.canDisplay(ch)) {
+		return font;
+            } else {
+		for (Font currentFont : getFonts()) {
+			if (currentFont.canDisplay(ch)) {
+				//Don't forget to derive the new font to match this.font size
+				return currentFont.deriveFont(font.getSize2D());
+			}
+		}
+            }
+            //Worst case scenario :
+            return font;
+        }
+
 	private void createSet( char[] customCharsArray ) {
 		// If there are custom chars then I expand the font texture twice
 		if	(customCharsArray != null && customCharsArray.length > 0) {

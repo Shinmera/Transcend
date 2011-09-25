@@ -42,7 +42,7 @@ public class TileBlock extends Tile{
     }
 
     public SimpleSet<String,String> getOptions(){
-        SimpleSet<String,String> set = new SimpleSet<String,String>();
+        SimpleSet<String,String> set = super.getOptions();
         set.put("tex",tex);
         return set;
     }

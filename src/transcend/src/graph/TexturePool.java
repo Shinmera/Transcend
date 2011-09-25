@@ -28,14 +28,14 @@ public class TexturePool {
     }
 
     public Texture reloadTexture(String name,File f){
-        if(!f.exists()){Const.LOGGER.warning("Trying to load non-existant texture '"+name+"'.");return null;}
-
+        if(!f.exists()){Const.LOGGER.warning("[TexturePool] Trying to load non-existant texture '"+name+"'.");return null;}
+        Const.LOGGER.info("[TexturePool] Reloading "+name+" at "+f.getAbsolutePath());
         try{
             String extension = f.getName().substring(f.getName().indexOf(".")+1);
             Texture texture = TextureLoader.getTexture(extension.toUpperCase(), new FileInputStream(f));
             textures.put(name, texture);
             return texture;
-        }catch(Exception e){Const.LOGGER.log(Level.SEVERE,"Failed to load texture at "+f.getAbsolutePath()+".",e);return null;}
+        }catch(Exception e){Const.LOGGER.log(Level.SEVERE,"[TexturePool] Failed to load texture at "+f.getAbsolutePath()+".",e);return null;}
     }
 
     public boolean isLoaded(String name){

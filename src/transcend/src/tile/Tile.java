@@ -9,23 +9,38 @@
 
 package tile;
 
+import transcend.MainFrame;
+import event.Event;
+import event.EventListener;
+import NexT.util.SimpleSet;
+import java.util.HashMap;
 import graph.Animation;
 import org.newdawn.slick.Color;
 import world.BElement;
 import static org.lwjgl.opengl.GL11.*;
 
-public class Tile extends BElement{
+public class Tile extends BElement implements EventListener{
     public static final int ELEMENT_ID = 0x101;
+    public static final int STATUS_CLEAN = 0x00;
+    public static final int STATUS_INFECTED = 0x01;
+    public static final int STATUS_CLEANING = 0x02;
     public float depth = 1;
     public Animation drawable = new Animation();
+    private int status = STATUS_CLEAN;
+    private int cleancount = 0;
 
-    public Tile(){}
+    public Tile(){
+        MainFrame.eh.registerEvent(Event.AREA_CLEAR, 1, this);
+        MainFrame.eh.registerEvent(Event.AREA_INFECT, 1, this);
+    }
     public Tile(int x,int y,int w,int h){
         this.x=x;this.y=y;this.w=w;this.h=h;
     }
 
     public void setDepth(float depth){this.depth=depth;}
     public float getDepth(){return depth;}
+    public void setStatus(int status){this.status=status;if(status==STATUS_INFECTED)cleancount=255;else cleancount=0;}
+    public int getStatus(){return status;}
 
     public void draw(){
         drawable.draw((int)x,(int)y,w,h);
@@ -39,5 +54,39 @@ public class Tile extends BElement{
                 glVertex2d(x,y+h);
             glEnd();
         }
+        if(status==STATUS_CLEANING||status==STATUS_INFECTED){
+            if(status==STATUS_CLEANING)cleancount--;
+            if(cleancount<=0)setStatus(STATUS_CLEAN);
+            new Color(0,0,0,cleancount).bind();
+            glBegin(GL_QUADS);
+                glVertex2d(x,y);
+                glVertex2d(x+w,y);
+                glVertex2d(x+w,y+h);
+                glVertex2d(x,y+h);
+            glEnd();
+        }
     }
+
+    public void setOptions(HashMap<String,String> options){
+        super.setOptions(options);
+        if(options.containsKey("status"))setStatus(Integer.parseInt(options.get("status")));
+    }
+    public SimpleSet<String,String> getOptions(){
+        SimpleSet<String,String> o = new SimpleSet<String,String>();
+        o.put("status", status+"");
+        return o;
+    }
+
+    public void onEvent(int event, int identifier, HashMap<String, String> arguments) {
+        if(event==Event.AREA_CLEAR){
+            if(MainFrame.world.getDistance(wID, identifier)<=Double.parseDouble(arguments.get("radius")))
+                setStatus(STATUS_CLEANING);
+        }
+        if(event==Event.AREA_INFECT){
+            if(MainFrame.world.getDistance(wID, identifier)<=Double.parseDouble(arguments.get("radius")))
+                setStatus(STATUS_INFECTED);
+        }
+    }
+
+    public void onAnonymousEvent(int event, HashMap<String, String> arguments) {}
 }

@@ -28,7 +28,7 @@ public class Const {
     public static final int     DISPLAY_WIDTH           = 640;
 
     //DOUBLES
-    public static final double  VERSION                 = 0.10;
+    public static final double  VERSION                 = 1.10;
 
     //STRINGS
     public static final String  MAINTAINER              = "NexT";

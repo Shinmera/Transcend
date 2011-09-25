@@ -1,8 +1,8 @@
 #NexT/script
-vxacc = 0.2
+vxacc = 0.4
 vyacc = 10.0
 vydcc = 0.4
-vxdcc = 5.0
+vxdcc = 1.0
 vxlim = 10.0
 
 start0= {0,0}
@@ -14,10 +14,29 @@ width = {64}
 height= {64}
 
 defun getVXAcc{
-	if vx >= vxlim {
-		return (+ vxlim 0 )
-	}else{
-		return (+ vxacc 0 vx )
-	}
-	return (+ vxacc 0 vx )
+    if k_left == 1 {
+        if vx <= (* vxlim -1 ) {
+            return (* vxlim -1 )
+        }
+        if vx > 0 {
+            return (- vx (* 2 vxacc ) )
+        }
+        return (- vx vxacc )
+    }
+    if k_right == 1 {
+        if vx >= vxlim {
+            return vxlim
+        }
+        if vx < 0 {
+            return (+ vx (* 2 vxacc ) )
+        }
+        return (+ vx vxacc )
+    }
+    if vx > 1 {
+        return (- vx vxdcc )
+    }
+    if vx < -1 {
+        return (+ vx vxdcc )
+    }
+    return 0.0
 }

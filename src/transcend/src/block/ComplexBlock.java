@@ -90,7 +90,7 @@ public class ComplexBlock extends Block{
     }
     
     public SimpleSet<String,String> getOptions(){
-        SimpleSet<String,String> o = new SimpleSet<String,String>();
+        SimpleSet<String,String> o = super.getOptions();
         for(int i=0;i<vertices.size();i++){
             o.put("p"+Toolkit.unifyNumberString(i,3)+"x",vertices.get(i).getX()+"");
             o.put("p"+Toolkit.unifyNumberString(i,3)+"y",vertices.get(i).getY()+"");

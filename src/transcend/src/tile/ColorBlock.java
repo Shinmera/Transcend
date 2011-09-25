@@ -53,7 +53,7 @@ public class ColorBlock extends Tile{
         if(options.containsKey("color"))setColor(options.get("far"));
     }
     public SimpleSet<String,String> getOptions(){
-        SimpleSet<String,String> s = new SimpleSet();
+        SimpleSet<String,String> s = super.getOptions();
         s.put("color",c.hashCode()+"");
         return s;
     }

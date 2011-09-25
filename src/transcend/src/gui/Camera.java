@@ -19,6 +19,8 @@ public class Camera {
     private double x = 0,y = 0;
     private double boundary = -1;
     private double zoom = 1;
+    private int shaketimer = 0;
+    private int shakeamount = 10;
 
     public Camera(){}
     
@@ -38,10 +40,17 @@ public class Camera {
                 x=e.x;
                 y=e.y;
             }
+            if(shaketimer>0){
+                x+=Math.round(Math.random()*shakeamount)-shakeamount/2;
+                y+=Math.round(Math.random()*shakeamount)-shakeamount/2;
+                shaketimer--;
+            }
         }
     }
 
+    public void shake(int steps){shaketimer=steps;}
     public void setPosition(int x,int y){this.x=x;this.y=y;}
+    public void setShakeAmount(int amount){shakeamount=amount;}
 
     public double getX(){return x;}
     public double getY(){return y;}

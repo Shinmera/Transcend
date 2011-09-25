@@ -39,7 +39,7 @@ public class InkBlock extends Tile implements EventListener{
     }
 
     public SimpleSet<String,String> getOptions(){
-        SimpleSet<String,String> set = new SimpleSet<String,String>();
+        SimpleSet<String,String> set = super.getOptions();
         return set;
     }
 

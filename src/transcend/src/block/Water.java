@@ -44,7 +44,7 @@ public class Water extends Block{
     }
 
     public SimpleSet<String,String> getOptions(){
-        SimpleSet<String,String> set = new SimpleSet<String,String>();
+        SimpleSet<String,String> set = super.getOptions();
         set.put("viscosity",viscosity+"");
         set.put("color",color.getRed()+","+color.getGreen()+","+color.getBlue());
         return set;

@@ -14,7 +14,6 @@ import transcend.Const;
 import java.util.logging.Level;
 import org.newdawn.slick.loading.DeferredResource;
 import org.newdawn.slick.loading.LoadingList;
-import java.io.File;
 import transcend.MainFrame;
 import graph.Animation;
 import static org.lwjgl.opengl.GL11.*;
@@ -25,18 +24,17 @@ public class Loader{
     private String current="";
     private Animation drawable = new Animation();
     private LoadHelper helper = null;
-    private TrueTypeFont font = new TrueTypeFont(new Font("Arial", Font.BOLD, 20),false);
+    private TrueTypeFont font;
     private int delay = 0;
 
     public Loader(){
+        font = MainFrame.fontPool.loadFont(new Font("Arial", Font.BOLD, 20));
         drawable.loadTexture(MainFrame.fileStorage.getFile("load.png"));
         drawable.setSpritesize(drawable.getTexture().getImageWidth());
         drawable.calcTile(drawable.getTexture().getImageWidth(),drawable.getTexture().getImageHeight());
     }
     public Loader(LoadHelper helper){
-        drawable.loadTexture(MainFrame.fileStorage.getFile("load.png"));
-        drawable.setSpritesize(drawable.getTexture().getImageWidth());
-        drawable.calcTile(drawable.getTexture().getImageWidth(),drawable.getTexture().getImageHeight());
+        this();
         this.helper=helper;
     }
 

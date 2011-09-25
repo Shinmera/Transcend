@@ -43,7 +43,7 @@ public class TileSet extends Tile{
     }
 
     public SimpleSet<String, String> getOptions() {
-        SimpleSet<String, String> set = new SimpleSet();
+        SimpleSet<String, String> set = super.getOptions();
         set.put("tex",tileset);
         set.put("u",drawable.getU()+"");
         set.put("v",drawable.getV()+"");

@@ -39,8 +39,8 @@ public class SoundPool {
     }
 
     public Audio reloadSound(String name,File f,boolean asStream){
-        if(!f.exists())return null;
-
+        if(!f.exists()){Const.LOGGER.warning("[SoundPool] Trying to load non-existant texture '"+name+"'.");return null;}
+        Const.LOGGER.info("[SoundPool] Reloading "+name+" at "+f.getAbsolutePath());
         try{
             String extension = f.getName().substring(f.getName().indexOf(".")+1);
             Audio audio;
@@ -48,7 +48,7 @@ public class SoundPool {
             else audio = AudioLoader.getAudio(extension.toUpperCase(), new FileInputStream(f));
             sounds.put(name, audio);
             return audio;
-        }catch (IOException ex) {Const.LOGGER.log(Level.SEVERE,"Failed to load sound at "+f.getAbsolutePath()+".",ex);return null;}
+        }catch (IOException ex) {Const.LOGGER.log(Level.SEVERE,"[SoundPool] Failed to load sound at "+f.getAbsolutePath()+".",ex);return null;}
     }
 
     public boolean isLoaded(String name){
