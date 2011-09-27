@@ -125,138 +125,138 @@ WorldLoader um eine Save funktion erweitert.
 World uID bug behoben.
 Editor um remove Funktion erweitert.
 
-[17:40-19:00 1.7.2011]
+[17:40-19:00 1.7.2011] 1:20
 Problem mit dem Editor und der Zoom Funktion behoben.
 GImage hinzugefügt.
 Background Klasse angefangen.
 Logo Konzipiert und eingebunden.
 
-[22:30-1:50 2/3.7.2011]
+[22:30-1:50 2/3.7.2011] 3:20
 Background System revidiert.
 Tile System hinzugefügt.
 BElement System hinzugefügt.
 Loading System angefangen.
 
-[10:40-12:40 3.7.2011]
+[10:40-12:40 3.7.2011] 2:00
 Loading System erweitert.
 Intelligentes Texturen System eingebunden.
 SoundPool und TexturePool Klassen hinzugefügt und ins MainFrame eingebunden.
 
-[17:50-18:10 3.7.2011]
+[17:50-18:10 3.7.2011] 0:30
 Sound Klasse hinzugefügt.
 Loading Screen erweitert.
 
-[22:30-23:50 3.7.2011]
+[22:30-23:50 3.7.2011] 1:20
 SoundPool und Sound Klasse verändert um den Konflikt zu entfernen.
 
-[19:30-23:30 12.7.2011]
+[19:30-23:30 12.7.2011] 4:00
 Bugs in WorldLoader, ElementBuilder, Loader, GPanel behoben.
 Automatische schatierung von Tiles auf grund ihrer Z-Ebene hinzugefügt.
 Editor Panel auf eigene Ebene gesetzt und einfacher verfügbar gemacht.
 Steuerung des Players verbessert.
 BrickBlock hinzugefügt.
 
-[13:20-15:50 13.7.2011]
+[13:20-15:50 13.7.2011] 2:30
 TileSet Klasse hinzugefügt.
 Menu-Aufbereitung in extra Klasse verschoben.
 GTextArea Klasse hinzugefügt.
 GPanel um Namensgebung erweitert.
 
-[21:30-1:20 13/14.7.2011]
+[21:30-1:20 13/14.7.2011] 3:50
 Weitere kleinere Änderungen.
 Einführung von Keyboard Layouts zur korrekten parsung von text eingabe.
 
-[18:30-22:10 14.7.2011]
+[18:30-22:10 14.7.2011] 3:40
 Erweiterung des Keyboard Layouts.
 Einbindung dessen in die GTextField Klasse.
 Zeichnen verschiedener Texturen.
 Begin des Partikel-Systems.
 Boxen Kollision des Spielers perfektioniert.
 
-[15:00-17:00 15.7.2011]
+[15:00-17:00 15.7.2011] 2:00
 Weiterführung des Partikel-Systems.
 
-[15:00-18:00 16.7.2011]
+[15:00-18:00 16.7.2011] 3:00
 Animieren des ersten Gegners.
 EnemyB1 hinzugefügt.
 Editor um Block/Entity modus erweitert.
 
-[23:00-1:00 17/18.7.2011]
+[23:00-1:00 17/18.7.2011] 2:00
 Beheben von bugs im EventHandler.
 CameraPath klasse hinzugefügt.
 
-[18:30-20:10 20.7.2011]
+[18:30-20:10 20.7.2011] 1:40
 EnemyB1 erweitert.
 Animation erweitert um Abspielrichtung. (Animationen können rückwärts abgespielt werden)
 
-[15:30-19:00 23.7.2011]
+[15:30-19:00 23.7.2011] 3:30
 Vektor klasse hinzugefügt.
 Emitter nach Tile migriert.
 CameraPath fertiggestellt.
 World Element Index hinzugefügt.
 GameEvent Klasse hinzugefügt.
 
-[16:15-18:00 6.8.2011]
+[16:15-18:00 6.8.2011] 1:45
 AI Klasse hinzugefügt.
 
-[16:00-18:00 7.8.2011]
+[16:00-18:00 7.8.2011] 2:00
 AI Klasse erweitert.
 GRadioButton hinzugefügt.
 Editor erweitert.
 
-[19:00-21:00 7.8.2011]
+[19:00-21:00 7.8.2011] 2:00
 AI sanitized.
 AI tests durchgeführt.
 Pläne zur erweiterung der AI ausgelegt.
 
-[16:50-17:50 8.8.2011]
+[16:50-17:50 8.8.2011] 1:00
 AI erweitert.
 Profiling durchgeführt.
 Ladebildschirm verbessert.
 
-[13:30-16:00 9.8.2011]
+[13:30-16:00 9.8.2011] 2:30
 Renoise tests.
 
-[13:10-18:00 10.8.2011]
+[13:10-18:00 10.8.2011] 4:50
 AI verbessert.
 Spritesheet für EnemyC1 erstellt.
 Animation für EnemyC1 eingebunden.
 
-[22:55-00:30 11/12.8.2011]
+[22:55-00:30 11/12.8.2011] 1:35
 MovingBlock hinzugefügt.
 
-[11:30-13:20 12.8.2011]
+[11:30-13:20 12.8.2011] 1:50
 ComplexBlock hinzugefügt.
 Tesselation eingeführt.
 
-[13:40-16:00 12.8.2011]
+[13:40-16:00 12.8.2011] 2:20
 Ray Klasse hinzugefügt.
 Line Klasse hinzugefügt.
 Ray Casting Implementation eingeführt.
 
-[13:30-20:00 14.8.2011]
+[13:30-20:00 14.8.2011] 6:30
 Kollisionsverfahren verbessert.
 Versions Migration auf 0.04.
 
-[16:30-22:00 16.8.2011]
+[16:30-22:00 16.8.2011] 5:30
 Menu verbessert.
 GList hinzugefügt.
 GObject verbessert.
 
-[22:00-23:40 18.8.2011]
+[22:00-23:40 18.8.2011] 1:40
 GList vollendet.
 Menu erweitert.
 
-[13:00-18:00 19.8.2011]
+[13:00-18:00 19.8.2011] 5:00
 WorldLoader um saveGame und loadGame erweitert.
 MenuLoader erweitert.
 Ladeverhalten verbessert.
 GameEvent bugs behoben.
 
-[12:15-18:00 20.8.2011]
+[12:15-18:00 20.8.2011] 5:45
 Cleanup.
 
-[14:30-20:00 24.8.2011]
+[14:30-20:00 24.8.2011] 5:30
 AbstractGraph erweitert.
 Cleanup.
 Form hinzugefügt.
@@ -264,35 +264,35 @@ GBar hinzugefügt.
 hid Packet hinzugefügt.
 PowerBar hinzugefügt.
 
-[11:00-18:00 27.8.2011]
+[11:00-18:00 27.8.2011] 7:00
 InkBlock hinzugefügt.
 InkBlock animation erstellt.
 Game Design studiert.
 FileStorage indexing service hinzugefügt.
 Dateien nach FileStorage migriert.
 
-[16:00-22:00 28.8.2011]
+[16:00-22:00 28.8.2011] 6:00
 Math parser implementiert,
 Script sprache ausgelegt.
 
-[17:30-20:00 29.8.2011]
+[17:30-20:00 29.8.2011] 2:30
 Script sprache angefangen.
 
-[20:00-22:30 30.8.2011]
+[20:00-22:30 30.8.2011] 2:30
 Script sprache weitergeführt.
 
-[14:30-17:00 31.8.2011]
+[14:30-17:00 31.8.2011] 2:30
 Script sprache fertiggestellt.
 Eingebunden in Transcend.
 Bugs behoben.
 
-[20:00-23:30 1.9.2011]
+[20:00-23:30 1.9.2011] 3:30
 NexT/Repo entwickelt.
 Repo in Transcend eingebunden.
 Menu bug behoben.
 Player Kollisionserkennung verbessert.
 
-[16:00-21:00 2.9.2011]
+[16:00-21:00 2.9.2011] 5:00
 NexT/Repo erweitert.
 NexT/Script erweitert und optimiert.
 Anti-aliasing bug behoben.
@@ -300,28 +300,38 @@ Player erweitert.
 Engine auf version 0.10 migriert.
 DayCycle hinzugefügt.
 
-[21:30-23:00 14.9.2011]
+[21:30-23:00 14.9.2011] 1:30
 FORK|Master->Game
 Migration zu 1.10
 Block und Tile Klassen um States erweitert.
 
-[12:00-14:00 21.9.2011]
+[12:00-14:00 21.9.2011] 2:00
 Math Klasse zu Var erweitert.
 Var Klasse um fix() und NULL erweitert.
 Script nach neuen Var und Math spezifikationen migriert.
 Toolkit erweitert.
 
-[22:00-24:00 21.9.2011]
+[22:00-24:00 21.9.2011] 2:00
 Script System verbessert und bugs behoben.
 
-[16:00-18:10 23.9.2011]
+[16:00-18:10 23.9.2011] 2:10
 FontPool hinzugefügt.
 GUI Elemente migriert.
 Bugs im Script System behoben.
 
-[20:00-24:00 25.9.2011]
+[20:00-24:00 25.9.2011] 4:00
 Symbole für die Formen erstellt.
 HFormSelector Klasse hinzugefügt und eingebunden.
 Camera shutter hinzugefügt.
 Speichern und Laden von Formen hinzugefügt.
 Bewegungsberechnung des Spielers in Skriptsprache umgeschrieben.
+
+[14:25-21:00 27.9.2011] 6:35
+HFormSelector verbessert.
+Dynamisches Key Mapping hinzugefügt.
+Layout "lefty" und "righty" implementiert.
+Player um renn-modus erweitert.
+Enemy abstraktions Klasse hinzugefügt.
+Math umgeschrieben um höhere Kompatibilität mit Var zu erreichen.
+Mixed arrays in Var ermöglicht.
+Multi-dimensionale Arrays in Var ermöglicht.

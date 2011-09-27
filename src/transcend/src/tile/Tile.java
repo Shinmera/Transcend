@@ -9,6 +9,7 @@
 
 package tile;
 
+import graph.AbstractGraph;
 import transcend.MainFrame;
 import event.Event;
 import event.EventListener;
@@ -39,20 +40,19 @@ public class Tile extends BElement implements EventListener{
 
     public void setDepth(float depth){this.depth=depth;}
     public float getDepth(){return depth;}
-    public void setStatus(int status){this.status=status;if(status==STATUS_INFECTED)cleancount=255;else cleancount=0;}
+    public void setStatus(int status){this.status=status;cleancount=255;}
     public int getStatus(){return status;}
 
     public void draw(){
         drawable.draw((int)x,(int)y,w,h);
         if(depth!=0&&z!=0){
-            if(z<0)new Color(0f,0f,0f,(float)(-z/10.0*depth)).bind();
-            //if(z>0)new Color(1f,1f,1f,(float)(z/10.0*depth)).bind();
-            glBegin(GL_QUADS);
-                glVertex2d(x,y);
-                glVertex2d(x+w,y);
-                glVertex2d(x+w,y+h);
-                glVertex2d(x,y+h);
-            glEnd();
+            if(z<0){
+                new Color(0f,0f,0f,(float)(-z/7.0*depth)).bind();
+                //if(z>0)new Color(1f,1f,1f,(float)(z/10.0*depth)).bind();
+                AbstractGraph.glRectangle2d(x, y, w, h);
+                new Color(1f,1f,1f,(float)(z/10.0*depth)).bind();
+                AbstractGraph.glRectangle2d(x, y, w, h);
+            }
         }
         if(status==STATUS_CLEANING||status==STATUS_INFECTED){
             if(status==STATUS_CLEANING)cleancount--;

@@ -23,6 +23,7 @@ public class InputEventHandler {
     private ArrayList<Integer> downKeys = new ArrayList();
     private ArrayList<Integer> downButtons = new ArrayList();
     private SimpleSet<String,String> keyMap = new SimpleSet();
+    private SimpleSet<String,String> playerMap = new SimpleSet();
     private boolean lockKeyboard=false,lockMouse=false;
 
     public InputEventHandler(){
@@ -31,6 +32,17 @@ public class InputEventHandler {
         if(!man.loadConfig(MainFrame.CONST.gString("LAYOUT")+".kl")) Const.LOGGER.warning("[InputEventHandler] Failed to load layout '"+MainFrame.CONST.gString("LAYOUT")+"'!");
         else                                                         Const.LOGGER.info("[InputEventHandler] Loaded layout "+MainFrame.CONST.gString("LAYOUT")+". "+man.output().size()+" keys mapped.");
         keyMap=man.output().asSimpleSet();
+        
+        if(!man.loadConfig(MainFrame.CONST.gString("PLAYOUT")+".kl"))Const.LOGGER.warning("[InputEventHandler] Failed to load layout '"+MainFrame.CONST.gString("PLAYOUT")+"'!");
+        else                                                         Const.LOGGER.info("[InputEventHandler] Loaded layout "+MainFrame.CONST.gString("PLAYOUT")+". "+man.output().size()+" keys mapped.");
+        playerMap=man.output().asSimpleSet();
+    }
+
+    public SimpleSet<String,String> getPlayerMap(){
+        return playerMap;
+    }
+    public int getPlayerKey(String name){
+        return Integer.parseInt(playerMap.get(name));
     }
 
     public void lockKeyboard(boolean b){lockKeyboard=b;}

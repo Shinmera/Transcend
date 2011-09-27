@@ -60,4 +60,19 @@ public class Entity extends Element{
         }
         return e;
     }
+
+    public static Entity checkEntity(int wID,double ax,double ay,double bx,double by){
+        Entity e=null;
+        Object[] entIDs = MainFrame.world.getEntityList();
+        for(int i=0;i<entIDs.length;i++){
+            if((Integer)entIDs[i]!=wID){
+                Entity block = (Entity)MainFrame.world.getByID((Integer)entIDs[i]);
+                if((block.checkInside(ax,ay)||block.checkInside(bx,by))){
+                    e=block;
+                    break;
+                }
+            }
+        }
+        return e;
+    }
 }

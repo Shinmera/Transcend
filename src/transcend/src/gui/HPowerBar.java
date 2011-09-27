@@ -24,7 +24,7 @@ public class HPowerBar extends GImage{
         Form form = Form.getSquare(0, 0, 58, 22, 58, 22, 58, 0);
         form.setAlign(Form.ALIGN_RIGHT);
         healthBar.setForm(form);
-        healthBar.setWidth(250);
+        healthBar.setWidth(256);
         healthBar.setVisible(true);
         form = Form.getRectangle(0, 12);
         form.setAlign(Form.ALIGN_RIGHT);

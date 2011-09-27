@@ -18,6 +18,7 @@ import transcend.MainFrame;
 
 public class HFormSelector extends GObject implements KeyboardListener{
     int index = 0;
+    double scroll = 0;
     GImage[] images = new GImage[5];
     ArrayList<Integer> available = new ArrayList<Integer>();
 
@@ -67,6 +68,10 @@ public class HFormSelector extends GObject implements KeyboardListener{
                 setVisible(false);
                 MainFrame.player.setForm(available.get(index));
                 break;
+            case Keyboard.KEY_TAB:
+                setVisible(false);
+                MainFrame.player.setForm(available.get(index));
+                break;
         }
     }
 
@@ -74,10 +79,14 @@ public class HFormSelector extends GObject implements KeyboardListener{
         if(!visible)return;
         new Color(0,0,0,0.5f).bind();
         AbstractGraph.glRectangle2d(x,y, w, h);
+        Color.black.bind();
+        AbstractGraph.glRectangle2d(x,h/2-100, w,200);
         for(int i=0;i<available.size();i++){
-            images[available.get(i)].setBounds((int)Math.round(w/2.0+(i-index)*150.0)-75, h/2-100,200,200);
+            images[available.get(i)].setBounds((int)Math.round(w/2.0+i*150-scroll*150.0)-75, h/2-100,200,200);
             images[available.get(i)].paint();
         }
+        if(scroll<index)scroll+=0.1;
+        if(scroll>index)scroll-=0.1;
         Color.white.bind();
         AbstractGraph.glSquare2d(w/2-10, h/2-90, w/2, h/2-90, w/2+10, h/2-90, w/2, h/2-75);
     }

@@ -1,36 +1,49 @@
 #NexT/script
-vxacc = 0.4
+vxacc = {0.4,0.0,0.0,0.0,0.0}
+vxracc= {0.8,0.0,0.0,0.0,0.0}
 vyacc = 10.0
 vydcc = 0.4
 vxdcc = 1.0
-vxlim = 10.0
+vxlim = {10.0,0.0,0.0,0.0,0.0}
+vxrlim= {15.0,0.0,0.0,0.0,0.0}
 
-start0= {0,0}
-stop0 = {16,0}
-loop0 = {0,0}
-loop20= {0,0}
+start = {{0,0},{0,0}}
+stop  = {{16,0},{16,0}}
+loop  = {{0,0},{0,0}}
+loop2 = {{0,0},{0,0}}
+start1= {0,0}
+stop1 = {16,0}
+loop1 = {0,0}
+loop21= {0,0}
 
-width = {64}
-height= {64}
+width = {64,64}
+height= {64,64}
 
 defun getVXAcc{
+    vxlimc = (< vxlim form )
+    vxaccc = (< vxacc form )
+    if k_run == 1 {
+        vxlimc = (< vxrlim form )
+        vxaccc = (< vxracc form )
+    }
+    
     if k_left == 1 {
-        if vx <= (* vxlim -1 ) {
-            return (* vxlim -1 )
+        if vx <= (* vxlimc -1 ) {
+            return (* vxlimc -1 )
         }
         if vx > 0 {
-            return (- vx (* 2 vxacc ) )
+            return (- vx (* 2 vxaccc ) )
         }
-        return (- vx vxacc )
+        return (- vx vxaccc )
     }
     if k_right == 1 {
-        if vx >= vxlim {
-            return vxlim
+        if vx >= vxlimc {
+            return vxlimc
         }
         if vx < 0 {
-            return (+ vx (* 2 vxacc ) )
+            return (+ vx (* 2 vxaccc ) )
         }
-        return (+ vx vxacc )
+        return (+ vx vxaccc )
     }
     if vx > 1 {
         return (- vx vxdcc )

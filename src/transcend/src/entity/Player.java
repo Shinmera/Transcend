@@ -27,17 +27,16 @@ import static transcend.MainFrame.*;
 import world.Element;
 
 public class Player extends Entity implements KeyboardListener,EventListener{
-    public static final int FORM_HUMAN = 0x00;
-    public static final int FORM_MOUSE = 0x01;
-    public static final int FORM_PONY = 0x02;
-    public static final int FORM_DOLPHIN = 0x03;
-    public static final int FORM_EAGLE = 0x04;
+    public static final int FORM_HUMAN = 0;
+    public static final int FORM_MOUSE = 1;
+    public static final int FORM_PONY = 2;
+    public static final int FORM_DOLPHIN = 3;
+    public static final int FORM_EAGLE = 4;
 
     public static final int ELEMENT_ID = 0x2;
-    private Element ceiling = null,left = null,right = null,heart = null;
-    private boolean K_LEFT,K_RIGHT,K_UP,K_DOWN,K_SPACE,
-                    K_CTRL,K_SHIFT,K_TAB,
-                    K_W,K_A,K_S,K_D,K_Q,K_E;
+    private Element ceiling = null,left = null,right = null;
+    private Entity  heart = null;
+    private boolean K_LEFT,K_RIGHT,K_UP,K_DOWN,K_JUMP,K_RUN,K_SWITCH,K_ATTACK,K_USE,K_MAP;
     private double power=100;
     private int lifes=5;
     private int form=FORM_HUMAN;
@@ -47,9 +46,9 @@ public class Player extends Entity implements KeyboardListener,EventListener{
     public Player(){
         unlocked[FORM_HUMAN]=true;
         unlocked[FORM_MOUSE]=true;
-        unlocked[FORM_PONY]=true;
-        unlocked[FORM_DOLPHIN]=true;
-        unlocked[FORM_EAGLE]=true;
+        unlocked[FORM_PONY]=false;
+        unlocked[FORM_DOLPHIN]=false;
+        unlocked[FORM_EAGLE]=false;
     }
     public void init(){
         ieh.addKeyboardListener(this);
@@ -78,29 +77,31 @@ public class Player extends Entity implements KeyboardListener,EventListener{
         scriptManager.s("player").setVariable("k_right",new Var(Var.TYPE_BOOLEAN,K_RIGHT+""));
         scriptManager.s("player").setVariable("k_up",new Var(Var.TYPE_BOOLEAN,K_UP+""));
         scriptManager.s("player").setVariable("k_down",new Var(Var.TYPE_BOOLEAN,K_DOWN+""));
-        scriptManager.s("player").setVariable("k_space",new Var(Var.TYPE_BOOLEAN,K_SPACE+""));
-        scriptManager.s("player").setVariable("k_shift",new Var(Var.TYPE_BOOLEAN,K_SHIFT+""));
-        scriptManager.s("player").setVariable("k_tab",new Var(Var.TYPE_BOOLEAN,K_TAB+""));
-        scriptManager.s("player").setVariable("k_ctrl",new Var(Var.TYPE_BOOLEAN,K_CTRL+""));
-        scriptManager.s("player").setVariable("k_e",new Var(Var.TYPE_BOOLEAN,K_E+""));
-        scriptManager.s("player").setVariable("k_q",new Var(Var.TYPE_BOOLEAN,K_Q+""));
-        scriptManager.s("player").setVariable("k_w",new Var(Var.TYPE_BOOLEAN,K_W+""));
-        scriptManager.s("player").setVariable("k_a",new Var(Var.TYPE_BOOLEAN,K_A+""));
-        scriptManager.s("player").setVariable("k_s",new Var(Var.TYPE_BOOLEAN,K_S+""));
-        scriptManager.s("player").setVariable("k_d",new Var(Var.TYPE_BOOLEAN,K_D+""));
+        scriptManager.s("player").setVariable("k_run",new Var(Var.TYPE_BOOLEAN,K_RUN+""));
+        scriptManager.s("player").setVariable("k_use",new Var(Var.TYPE_BOOLEAN,K_USE+""));
+        scriptManager.s("player").setVariable("k_map",new Var(Var.TYPE_BOOLEAN,K_MAP+""));
+        scriptManager.s("player").setVariable("k_switch",new Var(Var.TYPE_BOOLEAN,K_SWITCH+""));
+        scriptManager.s("player").setVariable("k_jump",new Var(Var.TYPE_BOOLEAN,K_JUMP+""));
+        scriptManager.s("player").setVariable("k_attack",new Var(Var.TYPE_BOOLEAN,K_ATTACK+""));
         scriptManager.s("player").setVariable("x", new Var(Var.TYPE_DOUBLE,x+""));
         scriptManager.s("player").setVariable("y", new Var(Var.TYPE_DOUBLE,y+""));
         scriptManager.s("player").setVariable("vx", new Var(Var.TYPE_DOUBLE,vx+""));
         scriptManager.s("player").setVariable("vy", new Var(Var.TYPE_DOUBLE,vy+""));
         scriptManager.s("player").setVariable("form", new Var(Var.TYPE_INTEGER,form+""));
+        scriptManager.s("player").setVariable("power", new Var(Var.TYPE_DOUBLE,power+""));
+        scriptManager.s("player").setVariable("lifes", new Var(Var.TYPE_INTEGER,lifes+""));
     }
 
     public void update(){
         drawable.update();
 
         //HEART
-        if((heart=(Block)check(x-w/2+3,y+h/2,y+w/2-3,y+h/2))!=null){
-        }
+        Entity heart2;
+        if((heart2=checkEntity(wID,x-w/2+3,y+h/2,y+w/2-3,y+h/2))!=null){
+            if((heart==null)||(heart2.wID!=heart.wID)){
+                eh.triggerSpecificEvent(Event.PLAYER_TOUCH, wID,  heart2.wID, null);
+            }
+        }else heart=null;
         //GROUND
         if(((ground=(Block)check(x-w/2+3,y+1,x+w/2-3,y+1))!=null || (ground=(Block)check(x-w/2+3,y+vy  ,x+w/2-3,y+vy))!=null) && vy<0){
             vy=0;
@@ -143,7 +144,7 @@ public class Player extends Entity implements KeyboardListener,EventListener{
         }
 
         //INPUT
-        if(K_SPACE&&ground!=null&&vy==0){vy+=(Double)scriptManager.s("player").v("vyacc").get();}
+        if(K_JUMP&&ground!=null&&vy==0){vy+=(Double)scriptManager.s("player").v("vyacc").get();}
 
         updateScriptVars();
         double vxacc = scriptManager.s("player").eval("getVXAcc",null).fix();
@@ -158,7 +159,7 @@ public class Player extends Entity implements KeyboardListener,EventListener{
             drawable.setReel(1);
             vx=0;
         }
-        if(K_W){
+        if(K_ATTACK){
             eh.triggerEvent(Event.PLAYER_ATTACK, wID, null);
             health-=0.1;
         }
@@ -166,7 +167,7 @@ public class Player extends Entity implements KeyboardListener,EventListener{
 
         if((left!=null&&right!=null)/*||(ground!=null&&ceiling!=null)*/)die();
 
-        if(K_TAB)hud.get("formselector").setVisible(true);
+        if(K_SWITCH)hud.get("formselector").setVisible(true);
 
         //EVALUATE
         x+=vx;
@@ -186,46 +187,36 @@ public class Player extends Entity implements KeyboardListener,EventListener{
 
     public void keyPressed(int key) {
         if(pause)return;
-        switch(key){
-        case Keyboard.KEY_LEFT: K_LEFT=true;break;
-        case Keyboard.KEY_RIGHT: K_RIGHT=true;break;
-        case Keyboard.KEY_UP: K_UP=true;break;
-        case Keyboard.KEY_DOWN: K_DOWN=true;break;
-        case Keyboard.KEY_SPACE: K_SPACE=true;break;
-        case Keyboard.KEY_LSHIFT: K_SHIFT=true;break;
-        case Keyboard.KEY_LCONTROL: K_CTRL=true;break;
-        case Keyboard.KEY_TAB: K_TAB=true;break;
-        case Keyboard.KEY_W: K_W=true;break;
-        case Keyboard.KEY_A: K_A=true;break;
-        case Keyboard.KEY_S: K_S=true;break;
-        case Keyboard.KEY_D: K_D=true;break;
-        case Keyboard.KEY_Q: K_Q=true;break;
-        case Keyboard.KEY_E: K_E=true;break;
-        }
+        if(key==ieh.getPlayerKey("LEFT"))K_LEFT=true;
+        else if(key == ieh.getPlayerKey("RIGHT"))K_RIGHT=true;
+        else if(key==ieh.getPlayerKey("UP"))K_UP=true;
+        else if(key==ieh.getPlayerKey("DOWN"))K_DOWN=true;
+        else if(key==ieh.getPlayerKey("ATTACK"))K_ATTACK=true;
+        else if(key==ieh.getPlayerKey("MAP"))K_MAP=true;
+        else if(key==ieh.getPlayerKey("USE"))K_USE=true;
+        else if(key==ieh.getPlayerKey("RUN"))K_RUN=true;
+        else if(key==ieh.getPlayerKey("JUMP"))K_JUMP=true;
+        else if(key==ieh.getPlayerKey("SWITCH"))K_SWITCH=true;
     }
     public void keyReleased(int key) {
         if(pause)return;
-        switch(key){
-        case Keyboard.KEY_LEFT:K_LEFT=false;break;
-        case Keyboard.KEY_RIGHT:K_RIGHT=false;break;
-        case Keyboard.KEY_UP: K_UP=true;break;
-        case Keyboard.KEY_DOWN: K_DOWN=true;break;
-        case Keyboard.KEY_SPACE:K_SPACE=false;break;
-        case Keyboard.KEY_LSHIFT: K_SHIFT=false;break;
-        case Keyboard.KEY_LCONTROL: K_CTRL=true;break;
-        case Keyboard.KEY_TAB: K_TAB=false;break;
-        case Keyboard.KEY_W: K_W=true;break;
-        case Keyboard.KEY_A: K_A=true;break;
-        case Keyboard.KEY_S: K_S=true;break;
-        case Keyboard.KEY_D: K_D=true;break;
-        case Keyboard.KEY_Q: K_Q=true;break;
-        case Keyboard.KEY_E: K_E=true;break;
-        }
+        if(key==ieh.getPlayerKey("LEFT"))K_LEFT=false;
+        else if(key == ieh.getPlayerKey("RIGHT"))K_RIGHT=false;
+        else if(key==ieh.getPlayerKey("UP"))K_UP=false;
+        else if(key==ieh.getPlayerKey("DOWN"))K_DOWN=false;
+        else if(key==ieh.getPlayerKey("ATTACK"))K_ATTACK=false;
+        else if(key==ieh.getPlayerKey("MAP"))K_MAP=false;
+        else if(key==ieh.getPlayerKey("USE"))K_USE=false;
+        else if(key==ieh.getPlayerKey("RUN"))K_RUN=false;
+        else if(key==ieh.getPlayerKey("JUMP"))K_JUMP=false;
+        else if(key==ieh.getPlayerKey("SWITCH"))K_SWITCH=false;
     }
     public void keyType(int key) {
         if(pause)return;
         switch(key){
-            case Keyboard.KEY_Q:eh.triggerEvent(Event.AREA_CLEAR, wID, null);break;
+            case Keyboard.KEY_Q:
+                HashMap<String,String> map = new HashMap<String,String>();map.put("radius", "512");
+                eh.triggerEvent(Event.AREA_CLEAR, wID,map);break;
             case Keyboard.KEY_R:if(editor.getActive()){x=0;y=0;vx=0;vy=0;}break;
         }
     }
@@ -247,12 +238,13 @@ public class Player extends Entity implements KeyboardListener,EventListener{
     public boolean[] getFormUnlockedState(){return unlocked;}
 
     public void setForm(int form){
-        K_TAB=false;
+        K_SWITCH=false;
         this.form=form;
         //switch animation
-        drawable.loadTexture(fileStorage.getFile("player"+form),(int[])scriptManager.s("player").v("start"+form).get(),
-                                                                (int[])scriptManager.s("player").v("stop"+form).get(),
-                                                                (int[])scriptManager.s("player").v("loop"+form).get());
+        drawable.loadTexture(fileStorage.getFile("player"+form),(int[])((Var[])scriptManager.s("player").v("start").get())[form].get(),
+                                                                (int[])((Var[])scriptManager.s("player").v("stop") .get())[form].get(),
+                                                                (int[])((Var[])scriptManager.s("player").v("loop") .get())[form].get(),
+                                                                (int[])((Var[])scriptManager.s("player").v("loop2").get())[form].get());
         drawable.setReel(0);
         w=((int[])scriptManager.s("player").v("width").get())[form];
         h=((int[])scriptManager.s("player").v("height").get())[form];
