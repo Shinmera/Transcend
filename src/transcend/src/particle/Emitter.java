@@ -20,8 +20,9 @@ import transcend.MainFrame;
 import world.Element;
 
 public class Emitter extends Tile{
-    ArrayList<Force> forces = new ArrayList();
-    ArrayList<Particle> particles = new ArrayList();
+    ArrayList<Force> forces = new ArrayList<Force>();
+    ArrayList<VaryingForce> varforces = new ArrayList<VaryingForce>();
+    ArrayList<Particle> particles = new ArrayList<Particle>();
     private double life=-1,mlife=-1;
     private int mpart=100,spray=1;
     private Color color;
@@ -64,6 +65,10 @@ public class Emitter extends Tile{
     public void delForce(Force f){forces.remove(f);}
     public void clearForces(){forces.clear();}
 
+    public void addVarForce(VaryingForce f){varforces.add(f);}
+    public void delVarForce(VaryingForce f){varforces.remove(f);}
+    public void clearVarForces(){varforces.clear();}
+
     public void addParticle(Particle p){particles.add(p);}
     public void delParticle(Particle p){particles.remove(p);}
     public void clearParticles(){particles.clear();}
@@ -71,13 +76,19 @@ public class Emitter extends Tile{
     public Force getTotalForce(){
         Force ret = new Force();
         for(int i=0;i<forces.size();i++)ret=ret.add(forces.get(i));
-        ret.xacc+=(Math.random()-0.5)/1000;
-        ret.yacc+=(Math.random()-0.5)/1000;
+        ret.add(new Force((Math.random()-0.5)/1000,(Math.random()-0.5)/1000));
         return ret;
     }
 
     public void update(){
-        for(int i=0;i<particles.size();i++)particles.get(i).update(this,getTotalForce());
+        Force total = getTotalForce();
+        for(int i=0;i<particles.size();i++){
+            Force f = total;
+            for(int j=0;j<varforces.size();j++){
+                f.add(new Force(varforces.get(j).getXACC(particles.get(i)),varforces.get(j).getXACC(particles.get(i))));
+            }
+            particles.get(i).update(this,f);
+        }
 
         if(mlife>0)life+=1.0/MainFrame.fps;
         if(life>mlife)MainFrame.world.delByID(wID);

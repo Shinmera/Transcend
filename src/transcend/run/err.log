@@ -1,94 +1,104 @@
-22:25 [+][INFO] [MF] Booting up...
+20:24 [+][INFO] [MF] Booting up...
 null.transcend.MainFrame.<clinit>
-22:25 [+][INFO] [CONST] Loading
+20:24 [+][INFO] [CONST] Loading
 null.transcend.Const.loadRegistry
-22:25 [+][INFO] [InputEventHandler] Loaded layout swiss. 20 keys mapped.
+20:24 [+][INFO] [InputEventHandler] Loaded layout swiss. 20 keys mapped.
 null.event.InputEventHandler.<init>
-22:25 [+][INFO] [InputEventHandler] Loaded layout lefty. 10 keys mapped.
+20:24 [+][INFO] [InputEventHandler] Loaded layout lefty. 10 keys mapped.
 null.event.InputEventHandler.<init>
-22:25 [+][INFO] [FileStorage] Initial indexing...
+20:24 [+][INFO] [FileStorage] Initial indexing...
 null.transcend.FileStorage.<init>
-22:25 [+][INFO] [FileStorage] indexing .
+20:24 [+][INFO] [FileStorage] indexing .
 null.transcend.FileStorage.indexFolder
-22:25 [+][INFO] [FileStorage] indexing data
+20:24 [+][INFO] [FileStorage] indexing data
 null.transcend.FileStorage.indexFolder
-22:25 [+][INFO] [FileStorage] indexing native
+20:24 [+][INFO] [FileStorage] indexing native
 null.transcend.FileStorage.indexFolder
-22:25 [+][INFO] [FileStorage] indexing linux
+20:24 [+][INFO] [FileStorage] indexing linux
 null.transcend.FileStorage.indexFolder
-22:25 [+][INFO] [FileStorage] indexing macosx
+20:24 [+][INFO] [FileStorage] indexing macosx
 null.transcend.FileStorage.indexFolder
-22:25 [+][INFO] [FileStorage] indexing solaris
+20:24 [+][INFO] [FileStorage] indexing solaris
 null.transcend.FileStorage.indexFolder
-22:25 [+][INFO] [FileStorage] indexing windows
+20:24 [+][INFO] [FileStorage] indexing windows
 null.transcend.FileStorage.indexFolder
-22:25 [+][INFO] [FileStorage] indexing scr
+20:24 [+][INFO] [FileStorage] indexing scr
 null.transcend.FileStorage.indexFolder
-22:25 [+][INFO] [FileStorage] indexing shaders
+20:24 [+][INFO] [FileStorage] indexing shaders
 null.transcend.FileStorage.indexFolder
-22:25 [+][INFO] [FileStorage] indexing snd
+20:24 [+][INFO] [FileStorage] indexing snd
 null.transcend.FileStorage.indexFolder
-22:25 [+][INFO] [FileStorage] indexing tex
+20:24 [+][INFO] [FileStorage] indexing tex
 null.transcend.FileStorage.indexFolder
-22:25 [+][INFO] [FileStorage] indexing world
+20:24 [+][INFO] [FileStorage] indexing world
 null.transcend.FileStorage.indexFolder
-22:25 [+][INFO] [FileStorage] indexing elements
+20:24 [+][INFO] [FileStorage] indexing elements
 null.transcend.FileStorage.indexFolder
-22:25 [+][INFO] [FileStorage] indexing save
+20:24 [+][INFO] [FileStorage] indexing save
 null.transcend.FileStorage.indexFolder
-22:25 [+][INFO] [CONST] Loading
+20:24 [+][INFO] [CONST] Loading
 null.transcend.Const.loadRegistry
-22:25 [+][INFO] LWJGL found 36 display modes.
+20:24 [+][INFO] LWJGL found 36 display modes.
 null.gui.DisplayModeChooser.<init>
-22:25 [+][INFO] [CONST] Saving
+20:24 [+][INFO] [CONST] Saving
 null.transcend.Const.saveRegistry
-22:25 [+][INFO] [CONST] Loading
+20:24 [+][INFO] [CONST] Loading
 null.transcend.Const.loadRegistry
-22:25 [+][INFO] [MF] Initializing...
+20:24 [+][INFO] [MF] Initializing...
 null.transcend.MainFrame.create
-22:25 [+][INFO] [MF] initGL
+20:24 [+][INFO] [MF] initGL
 null.transcend.MainFrame.initGL
-22:25 [+][INFO] [MF] initGame
+20:24 [+][INFO] [MF] initGame
 null.transcend.MainFrame.initGame
-22:25 [+][INFO] [FontPool] Reloading Arial Bold 20
+20:24 [+][INFO] [FontPool] Reloading Arial Bold 20
 null.graph.FontPool.reloadFont
-22:25 [+][INFO] [TexturePool] Reloading load.png at D:\projects\JAVAPROJECTS\transcend\src\transcend\run\.\data\load.png
+20:24 [+][INFO] [TexturePool] Reloading load.png at D:\projects\JAVAPROJECTS\transcend\src\transcend\run\.\data\load.png
 null.graph.TexturePool.reloadTexture
-22:25 [+][INFO] [Loader] Loading...
+20:24 [+][INFO] [Loader] Loading...
 null.gui.Loader.run
-22:25 [+][INFO] [FontPool] Reloading Arial 12
+20:24 [+][INFO] [FontPool] Reloading Arial 12
 null.graph.FontPool.reloadFont
-22:25 [+][INFO] [TexturePool] Reloading health_bar.png at D:\projects\JAVAPROJECTS\transcend\src\transcend\run\.\tex\health_bar.png
+20:24 [+][INFO] [TexturePool] Reloading health_bar.png at D:\projects\JAVAPROJECTS\transcend\src\transcend\run\.\tex\health_bar.png
 null.graph.TexturePool.reloadTexture
-22:25 [+][INFO] [TexturePool] Reloading form_human.png at D:\projects\JAVAPROJECTS\transcend\src\transcend\run\.\tex\form_human.png
+20:24 [+][INFO] [TexturePool] Reloading form_human.png at D:\projects\JAVAPROJECTS\transcend\src\transcend\run\.\tex\form_human.png
 null.graph.TexturePool.reloadTexture
-22:25 [+][INFO] [TexturePool] Reloading form_mouse.png at D:\projects\JAVAPROJECTS\transcend\src\transcend\run\.\tex\form_mouse.png
+20:24 [+][INFO] [TexturePool] Reloading form_mouse.png at D:\projects\JAVAPROJECTS\transcend\src\transcend\run\.\tex\form_mouse.png
 null.graph.TexturePool.reloadTexture
-22:25 [+][INFO] [TexturePool] Reloading form_pony.png at D:\projects\JAVAPROJECTS\transcend\src\transcend\run\.\tex\form_pony.png
+20:24 [+][INFO] [TexturePool] Reloading form_pony.png at D:\projects\JAVAPROJECTS\transcend\src\transcend\run\.\tex\form_pony.png
 null.graph.TexturePool.reloadTexture
-22:25 [+][INFO] [TexturePool] Reloading form_dolphin.png at D:\projects\JAVAPROJECTS\transcend\src\transcend\run\.\tex\form_dolphin.png
+20:24 [+][INFO] [TexturePool] Reloading form_dolphin.png at D:\projects\JAVAPROJECTS\transcend\src\transcend\run\.\tex\form_dolphin.png
 null.graph.TexturePool.reloadTexture
-22:25 [+][INFO] [TexturePool] Reloading form_eagle.png at D:\projects\JAVAPROJECTS\transcend\src\transcend\run\.\tex\form_eagle.png
+20:24 [+][INFO] [TexturePool] Reloading form_eagle.png at D:\projects\JAVAPROJECTS\transcend\src\transcend\run\.\tex\form_eagle.png
 null.graph.TexturePool.reloadTexture
-22:25 [+][INFO] [TexturePool] Reloading logo.png at D:\projects\JAVAPROJECTS\transcend\src\transcend\run\.\tex\logo.png
+20:24 [+][INFO] [TexturePool] Reloading logo.png at D:\projects\JAVAPROJECTS\transcend\src\transcend\run\.\tex\logo.png
 null.graph.TexturePool.reloadTexture
-22:25 [+][INFO] [Loader] Finished loading. Ready.
+20:24 [+][INFO] [Loader] 14%
 null.gui.Loader.run
-22:25 [+][INFO] [Loader] Loading...
+20:24 [+][INFO] [Loader] 28%
 null.gui.Loader.run
-22:25 [+][INFO] [World] Loading World from D:\projects\JAVAPROJECTS\transcend\src\transcend\run\world\various.tw
+20:24 [+][INFO] [Loader] 42%
+null.gui.Loader.run
+20:24 [+][INFO] [Loader] 57%
+null.gui.Loader.run
+20:24 [+][INFO] [Loader] 71%
+null.gui.Loader.run
+20:24 [+][INFO] [Loader] 85%
+null.gui.Loader.run
+20:24 [+][INFO] [Loader] 100%
+null.gui.Loader.run
+20:24 [+][INFO] [Loader] Finished loading. Ready.
+null.gui.Loader.run
+20:24 [+][INFO] [Loader] Loading...
+null.gui.Loader.run
+20:24 [+][INFO] [World] Loading World from D:\projects\JAVAPROJECTS\transcend\src\transcend\run\world\various.tw
 null.world.WorldLoader.loadWorld
-22:25 [+][INFO] [TexturePool] Reloading player0.png at D:\projects\JAVAPROJECTS\transcend\src\transcend\run\.\tex\player0.png
+20:24 [+][INFO] [TexturePool] Reloading player0.png at D:\projects\JAVAPROJECTS\transcend\src\transcend\run\.\tex\player0.png
 null.graph.TexturePool.reloadTexture
-22:25 [+][INFO] [TexturePool] Reloading savepoint.png at D:\projects\JAVAPROJECTS\transcend\src\transcend\run\.\tex\savepoint.png
+20:24 [+][INFO] [TexturePool] Reloading savepoint.png at D:\projects\JAVAPROJECTS\transcend\src\transcend\run\.\tex\savepoint.png
 null.graph.TexturePool.reloadTexture
-22:25 [+][INFO] [World] Loaded 15 elements. 15 Blocks 1 Entities 1 Tiles.
+20:24 [+][INFO] [World] Loaded 15 elements. 15 Blocks 1 Entities 1 Tiles.
 null.world.WorldLoader.loadWorld
-22:25 [+][INFO] [Loader] 100%
+20:24 [+][INFO] [Loader] Finished loading. Ready.
 null.gui.Loader.run
-22:25 [+][INFO] [Loader] Finished loading. Ready.
-null.gui.Loader.run
-22:25 [+][INFO] [TexturePool] Reloading dirt.png at D:\projects\JAVAPROJECTS\transcend\src\transcend\run\.\tex\dirt.png
-null.graph.TexturePool.reloadTexture
-22:25 [+][INFO] [MF] Shutting down...
+20:24 [+][INFO] [MF] Shutting down...
 null.transcend.MainFrame.destroy

@@ -115,6 +115,10 @@ public class Animation {
     public void setLoop(int[] pos){loop=pos;}
     public void setLoop2(int[] pos){loop2=pos;}
     public void setPPS(int pps){this.pps=pps;}
+    public void setRelW(double w){rel_w=w;}
+    public void setRelH(double h){rel_h=h;}
+    public void setTileW(double w){tile_w=w;}
+    public void setTileH(double h){tile_h=h;}
 
     public void setDirection(int dir){direction=dir;}
     public void setPlay(int play){this.play=play;}

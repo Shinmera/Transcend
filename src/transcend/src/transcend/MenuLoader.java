@@ -25,9 +25,8 @@ public class MenuLoader extends LoadHelper{
         constructHelpPane();
         constructHUDPane();
         hud.setVisible(true);
-        hud.get("formselector").setVisible(false);
-        GImage i_logo = new GImage("logo.png");
-        i_logo.setBounds(DISPLAY_WIDTH/2-250,DISPLAY_HEIGHT-106-50,500,106);
+        GImage i_logo = new GImage("logo");
+        i_logo.setBounds(DISPLAY_WIDTH/2-256,DISPLAY_HEIGHT-128-50,512,128);
         menu.add(i_logo);
     }
 
@@ -390,7 +389,7 @@ public class MenuLoader extends LoadHelper{
 
     public void constructHUDPane(){
         HPowerBar powerBar = new HPowerBar();
-        powerBar.setBounds(DISPLAY_WIDTH-380-10,10,380,64);
+        powerBar.setBounds(DISPLAY_WIDTH-400,10,512,64);
         GLabel score = new GLabel(){
             public void paint() {
                 setText("Score: "+player.getScore());
@@ -404,8 +403,8 @@ public class MenuLoader extends LoadHelper{
         score.setBorder(new Color(0,0,0,0), 0);
         score.setBounds(20, DISPLAY_HEIGHT-30-20, 200, 30);
         HFormSelector formsel = new HFormSelector();
+        hud.add(formsel,"formselector");
         hud.add(score,"score");
         hud.add(powerBar,"powerbar");
-        hud.add(formsel,"formselector");
     }
 }

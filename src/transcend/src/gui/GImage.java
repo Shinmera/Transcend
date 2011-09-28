@@ -1,6 +1,5 @@
 /**********************\
-  file: Expression file is undefined on line 2, column 11 in Templates/Classes/Class.java.
-  package: gui
+  file: GImage.java  package: gui
   author: Nick
   team: NexT
   license: -
@@ -17,12 +16,15 @@ public class GImage extends GObject{
 
     public GImage(String file){
         drawable.loadTexture(MainFrame.fileStorage.getFile(file));
-        drawable.setSpritesize(drawable.getTexture().getImageWidth());
+        //drawable.setSpritesize(drawable.getTexture().getImageWidth());
     }
 
     public void setBounds(int x,int y,int w,int h){
         super.setBounds(x,y,w,h);
-        drawable.calcTile(w, h);
+        drawable.setRelH(1);
+        drawable.setRelW(1);
+        drawable.setTileH(1);
+        drawable.setTileW(w/64);
     }
 
     public void paint(){

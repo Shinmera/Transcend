@@ -167,8 +167,6 @@ public class Player extends Entity implements KeyboardListener,EventListener{
 
         if((left!=null&&right!=null)/*||(ground!=null&&ceiling!=null)*/)die();
 
-        if(K_SWITCH)hud.get("formselector").setVisible(true);
-
         //EVALUATE
         x+=vx;
         y+=vy;

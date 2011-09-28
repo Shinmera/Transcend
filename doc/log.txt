@@ -335,3 +335,9 @@ Enemy abstraktions Klasse hinzugefügt.
 Math umgeschrieben um höhere Kompatibilität mit Var zu erreichen.
 Mixed arrays in Var ermöglicht.
 Multi-dimensionale Arrays in Var ermöglicht.
+
+[17:30-18:30 28.9.2011] 1:00
+VaryingForce zum Partikel System hinzugefügt.
+Attractor zum Partikel System hinzugefügt.
+Probleme von GImage skalierung teilweise behoben.
+HFormSelector umgeschrieben.

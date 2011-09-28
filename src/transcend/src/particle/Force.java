@@ -10,8 +10,8 @@
 package particle;
 
 public class Force {
-    public double xacc,yacc,multi;
-    public double randomfactor;
+    double xacc,yacc,multi;
+    double randomfactor;
 
     public Force(){randomfactor=Math.random();}
     public Force(double multi){this();this.multi=multi;}
@@ -31,4 +31,13 @@ public class Force {
         ret.multi=multi*f.multi;
         return ret;
     }
+
+    public double getXACC(){return xacc;}
+    public double getYACC(){return yacc;}
+    public double getMultiplier(){return multi;}
+    public double getRandomFactor(){return randomfactor;}
+    public void setXACC(double xacc){this.xacc=xacc;}
+    public void setYACC(double yacc){this.yacc=yacc;}
+    public void setMultiplier(double multi){this.multi=multi;}
+    public void setRandomFactor(double random){randomfactor=random;}
 }

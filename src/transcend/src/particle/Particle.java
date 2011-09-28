@@ -51,8 +51,8 @@ public class Particle {
     public int getType(){return type;}
 
     public void update(Emitter e,Force f){
-        vx+=f.xacc;
-        vy+=f.yacc;
+        vx+=f.getXACC();
+        vy+=f.getYACC();
         update(e);
     }
 

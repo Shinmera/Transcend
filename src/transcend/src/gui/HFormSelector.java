@@ -24,8 +24,8 @@ public class HFormSelector extends GObject implements KeyboardListener{
 
     public HFormSelector(){
         w=MainFrame.DISPLAY_WIDTH;
-        h=MainFrame.DISPLAY_HEIGHT;
-        x=0;y=0;
+        h=MainFrame.DISPLAY_HEIGHT/10;
+        x=0;y=MainFrame.DISPLAY_HEIGHT-h;
         images[0] = new GImage("form_human");
         images[1] = new GImage("form_mouse");
         images[2] = new GImage("form_pony");
@@ -45,10 +45,10 @@ public class HFormSelector extends GObject implements KeyboardListener{
     public void setVisible(boolean visible){
         super.setVisible(visible);
         if(visible){
-            MainFrame.pause();
+            //MainFrame.pause();
             detectForms();
         }else{
-            MainFrame.unpause();
+            //MainFrame.unpause();
         }
     }
     public void keyPressed(int key){}
@@ -56,38 +56,22 @@ public class HFormSelector extends GObject implements KeyboardListener{
     public void keyReleased(int key){
         if(!visible)return;
         switch(key){
-            case Keyboard.KEY_LEFT:
-                index--;
-                if(index<0)index=available.size()-1;
-                break;
-            case Keyboard.KEY_RIGHT:
-                index++;
-                if(index>=available.size())index=0;
-                break;
-            case Keyboard.KEY_SPACE:
-                setVisible(false);
-                MainFrame.player.setForm(available.get(index));
-                break;
-            case Keyboard.KEY_TAB:
-                setVisible(false);
-                MainFrame.player.setForm(available.get(index));
-                break;
+            case Keyboard.KEY_1:if(available.contains(0))index=0;break;
+            case Keyboard.KEY_2:if(available.contains(1))index=1;break;
+            case Keyboard.KEY_3:if(available.contains(2))index=2;break;
+            case Keyboard.KEY_4:if(available.contains(3))index=3;break;
+            case Keyboard.KEY_5:if(available.contains(4))index=4;break;
         }
     }
 
     public void paint(){
         if(!visible)return;
-        new Color(0,0,0,0.5f).bind();
-        AbstractGraph.glRectangle2d(x,y, w, h);
-        Color.black.bind();
-        AbstractGraph.glRectangle2d(x,h/2-100, w,200);
         for(int i=0;i<available.size();i++){
-            images[available.get(i)].setBounds((int)Math.round(w/2.0+i*150-scroll*150.0)-75, h/2-100,200,200);
-            images[available.get(i)].paint();
+            images[available.get(i)].setBounds(w/2+(i-available.size()/2)*h,y,h,h);
+            if(i!=index)images[available.get(i)].paint();
         }
-        if(scroll<index)scroll+=0.1;
-        if(scroll>index)scroll-=0.1;
-        Color.white.bind();
-        AbstractGraph.glSquare2d(w/2-10, h/2-90, w/2, h/2-90, w/2+10, h/2-90, w/2, h/2-75);
+        new Color(0,0,0,0.5f).bind();
+        AbstractGraph.glRectangle2d(x,y,w,h);
+        images[available.get(index)].paint();
     }
 }
