@@ -78,4 +78,9 @@ public class BElement {
         if(hits>0)return r.getPoint(hits);
         return null;
     }
+
+    public double getDistanceTo(BElement e){
+        if(e==null)return Double.MAX_VALUE;
+        return Math.sqrt(Math.pow(x-e.getX(), 2)+Math.pow(y-e.getY(),2));
+    }
 }

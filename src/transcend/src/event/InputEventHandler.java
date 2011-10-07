@@ -73,7 +73,7 @@ public class InputEventHandler {
     }
 
     public void triggerMouseEvent(){
-        if(!Mouse.isInsideWindow())return;
+        if(!Mouse.isInsideWindow()||!Mouse.isCreated())return;
         if(lockMouse)return;
         
         if(Mouse.isButtonDown(0)){
@@ -108,7 +108,7 @@ public class InputEventHandler {
     }
 
     public void triggerKeyboardEvent(){
-        if(lockKeyboard)return;
+        if(lockKeyboard||!Keyboard.isCreated())return;
             while(Keyboard.next()){
                 int key = Keyboard.getEventKey();
                 if(Keyboard.getEventKeyState()){

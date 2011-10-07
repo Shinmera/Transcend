@@ -341,3 +341,7 @@ VaryingForce zum Partikel System hinzugefügt.
 Attractor zum Partikel System hinzugefügt.
 Probleme von GImage skalierung teilweise behoben.
 HFormSelector umgeschrieben.
+
+[20:45-21:30 30.9.2011]
+update() und render() Funktionen in unabhängige Threads verschoben.
+Setback punkte implementiert.

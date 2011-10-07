@@ -12,7 +12,6 @@ package entity;
 import NexT.script.Var;
 import NexT.util.Ray;
 import NexT.util.SimpleSet;
-import NexT.util.Toolkit;
 import NexT.util.Vector;
 import block.Block;
 import event.Event;
@@ -34,14 +33,14 @@ public class Player extends Entity implements KeyboardListener,EventListener{
     public static final int FORM_EAGLE = 4;
 
     public static final int ELEMENT_ID = 0x2;
-    private Element ceiling = null,left = null,right = null;
-    private Entity  heart = null;
+    private Element ceiling = null,left = null,right = null,heart = null;
     private boolean K_LEFT,K_RIGHT,K_UP,K_DOWN,K_JUMP,K_RUN,K_SWITCH,K_ATTACK,K_USE,K_MAP;
     private double power=100;
     private int lifes=5;
     private int form=FORM_HUMAN;
     private boolean[] unlocked = new boolean[5];
     private int score=100;
+    private double backX=0,backY=0;
 
     public Player(){
         unlocked[FORM_HUMAN]=true;
@@ -96,10 +95,12 @@ public class Player extends Entity implements KeyboardListener,EventListener{
         drawable.update();
 
         //HEART
-        Entity heart2;
-        if((heart2=checkEntity(wID,x-w/2+3,y+h/2,y+w/2-3,y+h/2))!=null){
+        Element heart2;
+        if((heart2=check(x-w/2+3,y+h/2,y+w/2-3,y+h/2))!=null){
             if((heart==null)||(heart2.wID!=heart.wID)){
                 eh.triggerSpecificEvent(Event.PLAYER_TOUCH, wID,  heart2.wID, null);
+                System.out.println("TOUCH "+heart2.wID);
+                heart=heart2;
             }
         }else heart=null;
         //GROUND
@@ -113,7 +114,7 @@ public class Player extends Entity implements KeyboardListener,EventListener{
             vy-=(Double)scriptManager.s("player").v("vydcc").get();
         }
         //CEILING
-        if((ceiling=(Block)check(x-w/2+3,y+h  ,x+w/2-3,y+h))!=null&&vy>0){
+        if((ceiling=check(x-w/2+3,y+h  ,x+w/2-3,y+h))!=null&&vy>0){
             if(ceiling.solid>0.5){
                 vy=0;
                 Vector v = ceiling.getCollisionPoint(new Ray(x,y,0,0,1,0));
@@ -123,7 +124,7 @@ public class Player extends Entity implements KeyboardListener,EventListener{
             }
         }
         //SIDES
-        if((left=(Block)check(x-w/2-1+vx,y+h/2+3,x-w/2-1+vx,y+h-3))!=null&&vx<0){
+        if((left=check(x-w/2-1+vx,y+h/2+3,x-w/2-1+vx,y+h-3))!=null&&vx<0){
             if(left.solid>0.5){
                 vx=0;
                 Vector v = left.getCollisionPoint(new Ray(x,y,0,-1,0,0));
@@ -133,7 +134,7 @@ public class Player extends Entity implements KeyboardListener,EventListener{
             }
         }
 
-        if((right=(Block)check(x+w/2+vx,y+h/2+3,x+w/2+1+vx,y+h-3))!=null&&vx>0){
+        if((right=check(x+w/2+vx,y+h/2+3,x+w/2+1+vx,y+h-3))!=null&&vx>0){
             if(right.solid>0.5){
                 vx=0;
                 Vector v = right.getCollisionPoint(new Ray(x,y,0,1,0,0));
@@ -173,13 +174,17 @@ public class Player extends Entity implements KeyboardListener,EventListener{
     }
 
     public void die(){
-        System.out.println("DEATH");
-        x=0;y=0;vx=0;vy=0;
+        vx=0;vy=0;
         lifes--;
         if(lifes<=0){
+            System.out.println("DEATH");
             //FIXME ADD SETBACK
         }else{
-            
+            System.out.println("SETBACK");
+            health=100;
+            x=backX;
+            y=backY;
+            status=STATUS_IDLE;
         }
     }
 
@@ -223,6 +228,12 @@ public class Player extends Entity implements KeyboardListener,EventListener{
         if(event==Event.ENTITY_DIE){
             score+=Integer.parseInt(arguments.get("points"));
         }
+        if(event==Event.ENTITY_ATTACK){
+            Entity ent = (Entity)world.getByID(identifier);
+            if(getDistanceTo(ent)<=(w+h)/4){
+                camera.shake(15);
+            }
+        }
     }
 
     public void onAnonymousEvent(int event, HashMap<String, String> arguments) {}
@@ -234,6 +245,7 @@ public class Player extends Entity implements KeyboardListener,EventListener{
     public int getForm(){return form;}
     public int getScore(){return score;}
     public boolean[] getFormUnlockedState(){return unlocked;}
+    public void setSetbackPoint(double x,double y){backX=x;backY=y;}
 
     public void setForm(int form){
         K_SWITCH=false;
@@ -267,6 +279,8 @@ public class Player extends Entity implements KeyboardListener,EventListener{
     public void setStateData(HashMap<String,String> set){
         x=Double.parseDouble(set.get("px"));
         y=Double.parseDouble(set.get("py"));
+        backX=Double.parseDouble(set.get("px"));
+        backY=Double.parseDouble(set.get("py"));
         health=Double.parseDouble(set.get("ph"));
         power=Double.parseDouble(set.get("pp"));
         lifes=Integer.parseInt(set.get("pl"));

@@ -81,6 +81,7 @@ public class MainFrame implements KeyboardListener{
     public static boolean pause = false;
     public static GPanel menu,hud;
     public static Loader loader;
+    private Updater updater = new Updater();
 
     public static void main(String[] args){
         MainFrame mf = new MainFrame();
@@ -117,6 +118,7 @@ public class MainFrame implements KeyboardListener{
         Mouse.create();
         initGL();
         initGame();
+        updater.start();
     }
 
     public static void destroy() {
@@ -188,7 +190,7 @@ public class MainFrame implements KeyboardListener{
 
     public void update() {
         //Load default world
-        if(!worldLoader.isLoaded()){
+        if(!worldLoader.isLoaded()&&!loader.isLoading()){
             loader.setHelper(new LoadHelper(){public void load(){
                 worldLoader.loadWorld(new File("world"+File.separator+"various.tw"));
             }});
@@ -250,7 +252,6 @@ public class MainFrame implements KeyboardListener{
                     loader.run();
                 }else{
                     render();
-                    update();
                 }
                 SoundStore.get().poll(1000/fps);
                 glFlush();
@@ -293,6 +294,15 @@ public class MainFrame implements KeyboardListener{
         }
     }
     public void keyType(int key) {}
+
+    class Updater extends Thread{
+        public void run(){
+            while(!isInterrupted()){
+                update();
+                try{Thread.sleep(1000/60);}catch(Exception ex){Const.LOGGER.log(Level.WARNING,"Updater thread failed!",ex);}
+            }
+        }
+    }
 
 
 

@@ -31,9 +31,9 @@ public class XLogger extends Handler{
 
     public String sformat(LogRecord record) {
         if(record.getThrown()==null)
-            return sdf.format(record.getMillis())+" ["+record.getLoggerName()+"]["+record.getLevel().getName()+"] "+record.getMessage();
+            return sdf.format(record.getMillis())+" ["+record.getLevel().getName()+"]"+record.getMessage();
         else{
-            System.out.println(sdf.format(record.getMillis())+" ["+record.getLoggerName()+"]["+record.getLevel().getName()+"] "+record.getMessage()
+            System.out.println(sdf.format(record.getMillis())+" ["+record.getLevel().getName()+"]"+record.getMessage()
                 +"\n"+record.getResourceBundleName()+"."+record.getSourceClassName()+"."+record.getSourceMethodName()+": ");
             record.getThrown().printStackTrace();
             return "";
@@ -43,10 +43,10 @@ public class XLogger extends Handler{
     public String format(LogRecord record) {
         if(record.getLevel()==null)record.setLevel(Level.INFO);
         if(record.getThrown()==null)
-            return sdf.format(record.getMillis())+" ["+record.getLoggerName()+"]["+record.getLevel().getName()+"] "+record.getMessage()
+            return sdf.format(record.getMillis())+" ["+record.getLevel().getName()+"]"+record.getMessage()
                 +"\n"+record.getResourceBundleName()+"."+record.getSourceClassName()+"."+record.getSourceMethodName();
         else
-            return sdf.format(record.getMillis())+" ["+record.getLoggerName()+"]["+record.getLevel().getName()+"] "+record.getMessage()
+            return sdf.format(record.getMillis())+" ["+record.getLevel().getName()+"]"+record.getMessage()
                 +"\n"+record.getResourceBundleName()+"."+record.getSourceClassName()+"."+record.getSourceMethodName()+": "
                 +record.getThrown().getMessage();
     }

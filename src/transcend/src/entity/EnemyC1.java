@@ -132,6 +132,7 @@ public class EnemyC1 extends Entity implements EventListener{
         if(event==Event.PLAYER_ATTACK){
             if(ai.getGoalDist()<=64){
                 health-=0.01;
+                MainFrame.eh.triggerEvent(Event.ENTITY_ATTACK, wID, null);
             }
         }
     }

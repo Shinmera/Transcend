@@ -140,7 +140,7 @@ public class Animation {
     public void update(){
         if(stop[0]<0)return;
         counter++;
-        if(counter>MainFrame.fps/pps){
+        if(counter>60/pps){
             counter=0;
             if(play==PLAY_FORWARD){
                 if(ind_w<stop[ind_h])ind_w++;

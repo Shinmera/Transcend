@@ -20,11 +20,12 @@ import transcend.MainFrame;
 import static org.lwjgl.opengl.GL11.*;
 
 public class GameEvent extends Block implements EventListener{
-    public static int EVENT_NONE = 0x00;
-    public static int EVENT_SWITCH_WORLD = 0x01;
-    public static int EVENT_SWITCH_CAMERA = 0x02;
-    public static int EVENT_ADVANCE_WORLD = 0x03;
-    public static int EVENT_SAVE_WORLD = 0x04;
+    public static final int EVENT_NONE = 0x00;
+    public static final int EVENT_SWITCH_WORLD = 0x01;
+    public static final int EVENT_SWITCH_CAMERA = 0x02;
+    public static final int EVENT_ADVANCE_WORLD = 0x03;
+    public static final int EVENT_SAVE_WORLD = 0x04;
+    public static final int EVENT_QUICKSAVE = 0x05;
 
     private int type = EVENT_NONE;
     private String to = "";
@@ -35,7 +36,7 @@ public class GameEvent extends Block implements EventListener{
     }
     public GameEvent(int type){
         this();
-        this.type=type;
+        setType(type);
         loadTexture();
     }
     public GameEvent(int x,int y,int type){
@@ -62,7 +63,10 @@ public class GameEvent extends Block implements EventListener{
     }
 
     public void setAdvancer(String adv){to=adv;}
-    public void setType(int type){this.type=type;}
+    public void setType(int type){
+        this.type=type;
+        if(type==EVENT_QUICKSAVE)solid=0;
+    }
 
     public String getAdvancer(){return to;}
     public int getType(){return type;}
@@ -75,7 +79,7 @@ public class GameEvent extends Block implements EventListener{
     public void draw(){
         if(type!=GameEvent.EVENT_NONE)drawable.draw((int)x,(int)y);
         if(!MainFrame.editor.getActive())return;
-        new Color(1f,1f,1f,0.5f).bind();
+        new Color(0.2f,0.2f,1f,0.5f).bind();
         glBegin(GL_QUADS);
             glVertex2d(x,y);
             glVertex2d(x,y+h);
@@ -91,10 +95,14 @@ public class GameEvent extends Block implements EventListener{
                     public void load(){MainFrame.worldLoader.loadWorld(MainFrame.fileStorage.getFile("world/"+to));}
                 });
             }
+            if(type==EVENT_QUICKSAVE){
+                MainFrame.player.setSetbackPoint(MainFrame.player.getX(),MainFrame.player.getY());
+            }
         }
         if((event==Event.PLAYER_ATTACK)&&(MainFrame.player.ground!=null)&&(MainFrame.player.ground.wID==wID)){
             if(type==EVENT_SAVE_WORLD&&!to.equals("")){
                 MainFrame.worldLoader.saveGame(MainFrame.fileStorage.getFile("save/"+to));
+                MainFrame.player.setSetbackPoint(MainFrame.player.getX(),MainFrame.player.getY());
             }
         }
     }
