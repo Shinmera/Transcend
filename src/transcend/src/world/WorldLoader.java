@@ -25,6 +25,7 @@ import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
+import org.newdawn.slick.Color;
 import transcend.Const;
 import transcend.MainFrame;
 
@@ -87,24 +88,33 @@ public class WorldLoader {
             OutputStreamWriter fw = new OutputStreamWriter(new FileOutputStream(file),"UTF-8");
             PrintWriter pw = new PrintWriter(fw);
             pw.println("#!transcend world file");
+            pw.println("world{");
+            pw.println("bgc: "+MainFrame.getClearColor().getRed()+
+                              ","+MainFrame.getClearColor().getGreen()+
+                              ","+MainFrame.getClearColor().getBlue()+
+                              ","+MainFrame.getClearColor().getAlpha());
+            if(MainFrame.camera.getFollowing()==-1)
+                 pw.println("camera: fixed "+MainFrame.camera.getZoom());
+            else pw.println("camera: follow "+MainFrame.camera.getZoom());
+            pw.println("}");
 
             for(int i=0;i<MainFrame.world.size();i++){
                 BElement e = MainFrame.world.getByID(MainFrame.world.getID(i));
                 if(!e.getClass().getName().equals("entity.Player")){
-                pw.println(e.getClass().getName().substring(e.getClass().getName().indexOf(".")+1)+"{");
-                pw.println("x: "+(int)e.getX());
-                pw.println("y: "+(int)e.getY());
-                pw.println("z: "+(int)e.getZ());
-                pw.println("w: "+e.getWidth());
-                pw.println("h: "+e.getHeight());
-
-                SimpleSet s = e.getOptions();
-                if(s!=null){
-                    for(int j=0;j<s.size();j++)
-                        pw.println(s.getKey(j)+": "+s.getAt(j));
-                }
-
-                pw.println("}\n");
+                    SimpleSet s = e.getOptions();
+                    if((s!=null)&&(!s.containsKey("nosave"))){
+                        pw.println(e.getClass().getName().substring(e.getClass().getName().indexOf(".")+1)+"{");
+                        pw.println("x: "+(int)e.getX());
+                        pw.println("y: "+(int)e.getY());
+                        pw.println("z: "+(int)e.getZ());
+                        pw.println("w: "+e.getWidth());
+                        pw.println("h: "+e.getHeight());
+                        if(s!=null){
+                            for(int j=0;j<s.size();j++)
+                                pw.println(s.getKey(j)+": "+s.getAt(j));
+                        }
+                        pw.println("}\n");
+                    }
                 }
             }
             pw.flush();
@@ -155,9 +165,10 @@ public class WorldLoader {
                         if(read.length() != 0){ //value.
                             if(!inMulti){
                                 if(!read.contains(":")){Const.LOGGER.log(Level.SEVERE, "Failed to load World: Parse error on line {0}", line);return false;}
-                                String key = read.substring(0,read.indexOf(":"));
-                                String val = read.substring(read.indexOf(":")+1);
-                                arguments.put(key.trim(), val.trim());
+                                String key = read.substring(0,read.indexOf(":")).trim();
+                                String val = read.substring(read.indexOf(":")+1).trim();
+                                if(val.equals("null"))val=null;
+                                arguments.put(key, val);
                             }
                         }
 
@@ -167,6 +178,17 @@ public class WorldLoader {
                                 MainFrame.player.setPosition(Integer.parseInt(arguments.get("x")),
                                                              Integer.parseInt(arguments.get("y")));
                                 
+                            }else if(type.equals("world")){
+                                if(arguments.containsKey("bgc")){
+                                    java.awt.Color c = Toolkit.toColor(arguments.get("bgc"));
+                                    MainFrame.setClearColor(new Color(c.getRed(),c.getGreen(),c.getBlue(),c.getAlpha()));
+                                }
+                                if(arguments.containsKey("camera")){
+                                    String[] cam = arguments.get("camera").split(" ");
+                                    if(cam[0].equals("fixed"))MainFrame.camera.follow(-1);
+                                    if(cam[0].equals("follow"))MainFrame.camera.follow(MainFrame.player.wID);
+                                    if(Toolkit.isNumeric(cam[1]))MainFrame.camera.setZoom(MainFrame.camera.getZoom()*Double.parseDouble(cam[1]));
+                                }
                             }else
                                 MainFrame.elementBuilder.buildElement(type, arguments);
                         }

@@ -28,7 +28,7 @@ public class Const {
     public static final int     DISPLAY_WIDTH           = 640;
 
     //DOUBLES
-    public static final double  VERSION                 = 1.10;
+    public static final double  VERSION                 = 1.35;
 
     //STRINGS
     public static final String  MAINTAINER              = "NexT";
@@ -95,6 +95,7 @@ public class Const {
 
     public void setDefaults(){
         registry.put("FPS","60");
+        registry.put("UPS","60");
         registry.put("ANTIALIAS","2");
         registry.put("FORCED_W","0");
         registry.put("FORCED_H","0");

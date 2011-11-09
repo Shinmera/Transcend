@@ -8,6 +8,7 @@
 \**********************/
 
 package gui;
+import graph.AbstractGraph;
 import org.newdawn.slick.Color;
 import java.awt.Font;
 import transcend.Const;
@@ -26,6 +27,8 @@ public class Loader{
     private LoadHelper helper = null;
     private TrueTypeFont font;
     private int delay = 0;
+    private float fader = 1;
+    private boolean display = true;
 
     public Loader(){
         font = MainFrame.fontPool.loadFont(new Font("Arial", Font.BOLD, 20));
@@ -40,6 +43,8 @@ public class Loader{
 
     public void setHelper(LoadHelper helper){this.helper=helper;}
     public boolean isLoading(){return loading;}
+    public boolean isDisplayed(){return display;}
+    public void setDisplayed(boolean b){display=b;}
 
     public void run(){
         if(!loading)return;
@@ -64,19 +69,22 @@ public class Loader{
     public void start(){
         LoadingList.get().setDeferredLoading(true);
         loading = true;
+        fader = 1;
         delay = 0;
     }
 
     public void draw(){
-        if(!loading)return;
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        Color.white.bind();
+        if(fader<=0||!display)return;
+        new Color(0.0f*fader,0.0f*fader,0.0f*fader,fader).bind();
+        AbstractGraph.glRectangle2d(0,0,MainFrame.DISPLAY_WIDTH,MainFrame.DISPLAY_HEIGHT);
         drawable.draw(MainFrame.DISPLAY_WIDTH/2-drawable.getTexture().getImageWidth()/2,
                 MainFrame.DISPLAY_HEIGHT/2-drawable.getTexture().getImageHeight()/2,
-                drawable.getTexture().getImageWidth(),drawable.getTexture().getImageHeight());
+                drawable.getTexture().getImageWidth(),drawable.getTexture().getImageHeight(),
+                new Color(1.0f*fader,1.0f*fader,1.0f*fader,fader));
         font.drawString(MainFrame.DISPLAY_WIDTH/2,
                 MainFrame.DISPLAY_HEIGHT/2-font.getLineHeight()/2-drawable.getTexture().getImageHeight()/2,
                 current, 1,1,TrueTypeFont.ALIGN_CENTER);
-        
+
+        if(!loading)fader-=0.005;
     }
 }

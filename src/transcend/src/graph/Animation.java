@@ -84,6 +84,7 @@ public class Animation {
             loop2= new int[(int)(1.0/rel_h)];
             for(int i=0;i<start.length;i++){start[i]=0;stop[i]=0;loop[i]=0;loop2[i]=0;}
         }
+        init=true;
     }
 
     public void calcTile(){calcTile(w,h);}
@@ -115,8 +116,8 @@ public class Animation {
     public void setLoop(int[] pos){loop=pos;}
     public void setLoop2(int[] pos){loop2=pos;}
     public void setPPS(int pps){this.pps=pps;}
-    public void setRelW(double w){rel_w=w;}
-    public void setRelH(double h){rel_h=h;}
+    public void setRelW(double w){rel_w=w;init=true;}
+    public void setRelH(double h){rel_h=h;init=true;}
     public void setTileW(double w){tile_w=w;}
     public void setTileH(double h){tile_h=h;}
 
@@ -124,10 +125,10 @@ public class Animation {
     public void setPlay(int play){this.play=play;}
 
     public void setReel(int index){
-        if(index==ind_h)return;
+        if(ind_h==index)return;
         ind_h=index;
-        if(play==PLAY_FORWARD)counter=start[ind_h];
-        else counter=stop[ind_h];
+        if(play==PLAY_FORWARD)ind_w=start[ind_h];
+        else                  ind_w=stop[ind_h];
     }
     public int getReel(){return ind_h;}
     public Texture getTexture(){return texture;}
@@ -163,11 +164,12 @@ public class Animation {
     public void draw(){}
 
     public void draw(int x,int y){draw(x,y,w,h);}
-
     public void draw(int x,int y,int w,int h){
+        draw(x,y,w,h,Color.white);
+    }
+    public void draw(int x,int y,int w,int h,Color c){
         if(!init){calcRelative();init=true;}
         if(texture==null){
-
             glBegin(GL_QUADS);
                 glVertex3i(x, y,z);
                 glVertex3i(x+w, y,z);
@@ -180,7 +182,7 @@ public class Animation {
                 glScaled(tile_w,tile_h,1);
             glMatrixMode(GL_MODELVIEW);
 
-            Color.white.bind();
+            if(c!=null)c.bind();
             glBindTexture(GL_TEXTURE_2D,texture.getTextureID());
             glPushMatrix();
             glTranslatef(x+w/2,y+h/2,z);

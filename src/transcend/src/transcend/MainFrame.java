@@ -74,13 +74,16 @@ public class MainFrame implements KeyboardListener{
     public static final ScriptManager scriptManager = new ScriptManager();
     public static final Repository repo = new Repository();
     public static final Player player = new Player();
+    public static final int[][] DEFAULT_DIM = {{1280,960},{1280,720},{1280,800}};//4:3 16:9 16:10
     public static int DISPLAY_WIDTH = Const.DISPLAY_WIDTH;
     public static int DISPLAY_HEIGHT= Const.DISPLAY_HEIGHT;
-    public static int fps = 60;
+    public static double DISPLAY_ASPECT= DISPLAY_WIDTH/DISPLAY_HEIGHT;
+    public static int fps = 60, ups = 60;
     public static int ACSIZE = 2;
     public static boolean pause = false;
     public static GPanel menu,hud;
     public static Loader loader;
+    private static Color clearcolor = new Color(0.2f,0.2f,0.2f);
     private Updater updater = new Updater();
 
     public static void main(String[] args){
@@ -107,9 +110,11 @@ public class MainFrame implements KeyboardListener{
         });
         Display.setTitle("Transcend - v"+Const.VERSION);
         Display.create();
-        DISPLAY_WIDTH=Display.getDisplayMode().getWidth();
+        DISPLAY_WIDTH =Display.getDisplayMode().getWidth();
         DISPLAY_HEIGHT=Display.getDisplayMode().getHeight();
+        DISPLAY_ASPECT=DISPLAY_WIDTH/(DISPLAY_HEIGHT+0.0);
         fps=CONST.gInteger("FPS");
+        ups=CONST.gInteger("UPS");
         ACSIZE=CONST.gInteger("ANTIALIAS");
         try{repo.setURL(new URL(CONST.gString("REPO")));}
         catch(Exception e){Const.LOGGER.log(Level.SEVERE, "[MF] Repo URL malformed. Check the constants!",e);}
@@ -123,10 +128,14 @@ public class MainFrame implements KeyboardListener{
 
     public static void destroy() {
         Const.LOGGER.info("[MF] Shutting down...");
-        Mouse.destroy();
-        Keyboard.destroy();
-        Display.destroy();
-        AL.destroy();
+        try{
+            Mouse.destroy();
+            Keyboard.destroy();
+            Display.destroy();
+            AL.destroy();
+        }catch(Exception ex){//Apparently shit can go bonkers in this.
+            Const.LOGGER.log(Level.SEVERE,"Couldn't clean up properly!",ex);
+        }
         System.exit(0);
     }
 
@@ -135,14 +144,20 @@ public class MainFrame implements KeyboardListener{
         loader = new Loader();
         ieh.addKeyboardListener(this);
         camera.setBoundary(300);
-        camera.setPosition(DISPLAY_WIDTH/2,DISPLAY_HEIGHT/2);
+        camera.setPosition(0,0);
+        double zoom = 1.0;
+        if(DISPLAY_ASPECT==4.0/3.0)           zoom = DISPLAY_WIDTH / (DEFAULT_DIM[0][0] + 0.0);
+        else if(DISPLAY_ASPECT == 16.0 / 9.0) zoom = DISPLAY_WIDTH / (DEFAULT_DIM[1][0] + 0.0);
+        else if(DISPLAY_ASPECT == 16.0 / 10.0)zoom = DISPLAY_WIDTH / (DEFAULT_DIM[2][0] + 0.0);
+        else                                  zoom = DISPLAY_WIDTH / (DEFAULT_DIM[2][0] + 0.0);
+        camera.setZoom(zoom*camera.getZoom());
 
         hud = new GPanel(0,0,DISPLAY_WIDTH,DISPLAY_HEIGHT);
         hud.setBackground(new Color(0,0,0,0));
         hud.setVisible(true);
 
         menu = new GPanel(0,0,DISPLAY_WIDTH,DISPLAY_HEIGHT);
-        menu.setBackground(new Color(0,0,0,150));
+        menu.setBackground(new Color(0,0,0,0));
         ieh.addMouseListener(editor);
 
         //LOAD MENU
@@ -155,10 +170,9 @@ public class MainFrame implements KeyboardListener{
     public void initGL() {
         Const.LOGGER.info("[MF] initGL");
         //2D Initialization
-       	glClearColor(0.1f,0.1f,0.2f,0);
+       	glClearColor(clearcolor.getRed(),clearcolor.getGreen(),clearcolor.getBlue(),clearcolor.getAlpha());
         glClearAccum(0,0,0,0);
-        glClearDepth(1);
-        glEnable(GL_COLOR_MATERIAL);
+        glClearDepth(1);        glEnable(GL_COLOR_MATERIAL);
         glEnable(GL_TEXTURE_2D);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
         glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
@@ -192,7 +206,7 @@ public class MainFrame implements KeyboardListener{
         //Load default world
         if(!worldLoader.isLoaded()&&!loader.isLoading()){
             loader.setHelper(new LoadHelper(){public void load(){
-                worldLoader.loadWorld(new File("world"+File.separator+"various.tw"));
+                worldLoader.loadWorld(new File("world"+File.separator+"intro.tw"));
             }});
             loader.start();
         }
@@ -246,27 +260,36 @@ public class MainFrame implements KeyboardListener{
 
     public void run() {
         while(!Display.isCloseRequested()) {
-            if(Display.isVisible()) {
-                if(loader.isLoading()){
+            try{
+                if(Display.isVisible()) {
+                    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+                    if(loader.isLoading()){loader.run();
+                    }else{render();}
                     loader.draw();
-                    loader.run();
-                }else{
-                    render();
+                    SoundStore.get().poll(1000/fps);
+                    glFlush();
+                }else {
+                    if(Display.isDirty())render();
+                    try {Thread.sleep(100);}
+                    catch(InterruptedException ex) {Const.LOGGER.info("Failed thread sync.");}
                 }
-                SoundStore.get().poll(1000/fps);
-                glFlush();
-            }else {
-                if(Display.isDirty())render();
-                try {Thread.sleep(100);}
-                catch(InterruptedException ex) {Const.LOGGER.info("Failed thread sync.");}
+                Display.update();
+                Display.sync(fps);
+            }catch(Throwable ex){
+                Const.LOGGER.log(Level.SEVERE,"Exception in main run loop! Attempting to continue... ",ex);
             }
-            Display.update();
-            Display.sync(fps);
         }
     }
 
     public static void pause(){pause=true;}
     public static void unpause(){pause=false;}
+    public static Color getClearColor(){return clearcolor;}
+    public static void setClearColor(Color c){
+        clearcolor=c;
+        glClearColor(c.getRed()/255.0f,c.getGreen()/255.0f,c.getBlue()/255.0f,c.getAlpha()/255.0f);
+        glClearAccum(0,0,0,0);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    }
 
     public void keyPressed(int key) {}
     public void keyReleased(int key) {
@@ -298,8 +321,12 @@ public class MainFrame implements KeyboardListener{
     class Updater extends Thread{
         public void run(){
             while(!isInterrupted()){
-                update();
-                try{Thread.sleep(1000/60);}catch(Exception ex){Const.LOGGER.log(Level.WARNING,"Updater thread failed!",ex);}
+                try{
+                    update();
+                    try{Thread.sleep(1000/ups);}catch(Exception ex){Const.LOGGER.log(Level.WARNING,"Updater thread failed!",ex);}
+                }catch(Throwable ex){
+                    Const.LOGGER.log(Level.SEVERE,"Exception in main update loop! Attempting to continue... ",ex);
+                }
             }
         }
     }

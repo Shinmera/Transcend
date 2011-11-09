@@ -1,5 +1,6 @@
 /**********************\
-  file: GImage.java  package: gui
+  file: GImage.java
+  package: gui
   author: Nick
   team: NexT
   license: -
@@ -24,7 +25,11 @@ public class GImage extends GObject{
         drawable.setRelH(1);
         drawable.setRelW(1);
         drawable.setTileH(1);
-        drawable.setTileW(w/64);
+        drawable.setTileW(1);
+    }
+
+    public Animation getDrawable(){
+        return drawable;
     }
 
     public void paint(){

@@ -1,6 +1,6 @@
 /**********************\
   file: Expression file is undefined on line 2, column 11 in Templates/Classes/Class.java.
-  package: block
+  package: tile
   author: Nick
   team: NexT
   license: -
@@ -25,7 +25,7 @@ public class TileBlock extends Tile{
     }
 
     public void setTexture(String tex){
-        if(tex.length()==0)return;
+        if(tex.length()==0||tex.equals("null"))return;
         this.tex=tex;
         drawable.loadTexture(MainFrame.fileStorage.getFile("tex/"+tex));
         drawable.calcTile(w, h);
@@ -44,6 +44,7 @@ public class TileBlock extends Tile{
     public SimpleSet<String,String> getOptions(){
         SimpleSet<String,String> set = super.getOptions();
         set.put("tex",tex);
+        if((tex==null)||(tex.length()==0))set.put("nosave","1");
         return set;
     }
 }

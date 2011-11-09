@@ -57,6 +57,7 @@ public class Camera {
     public double getRelativeX(){return x-MainFrame.DISPLAY_WIDTH/zoom/2.0;}
     public double getRelativeY(){return y-MainFrame.DISPLAY_HEIGHT/zoom/2.0;}
     public double getZoom(){return zoom;}
+    public int    getFollowing(){return entityID;}
 
     public void camBegin(){
         glMatrixMode(GL_PROJECTION);

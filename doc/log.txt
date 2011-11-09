@@ -345,3 +345,46 @@ HFormSelector umgeschrieben.
 [20:45-21:30 30.9.2011]
 update() und render() Funktionen in unabhängige Threads verschoben.
 Setback punkte implementiert.
+
+[13:15-14:00 15.10.2011]
+Loader verschönert.
+Musik angefangen.
+
+[13:00-14:30 17.10.2011]
+Animationsboard für Form1 erstellt.
+
+[15:30-18:00 18.10.2011]
+Animationssheet für Form1 erstellt.
+
+[2:30-5:00 22.10.2011]
+Animation erweitert.
+Bug in der Animations Klasse behoben.
+
+[11:00-17:00 23.10.2011]
+Skizzen für Einstiegslevel erstellt.
+GameObject::Info Klasse hinzugefügt.
+Teuflischer fehler in der Animations Klasse behoben.
+MenuLoader bug behoben.
+Menu Hintergrund erstellt.
+Neues Logo erstellt.
+
+[16:30-20:00 31.10.2011]
+Intro Level erstellt.
+FitBlock Klasse hinzugefügt.
+GCheckBox hinzugefügt.
+Editor um lösch Fokus erweitert.
+Kollisionsproblem beim Spieler behoben.
+Camera argument zum World File hinzugefügt.
+Bugs beim Laden und Speichern der Welt behoben.
+Korrekte viewport skalierung aufgrund der Fenstergrösse eingeführt.
+
+[14:30-16:30 5.11.2011]
+Bugs in Editor behoben.
+Loader um display switch erweitert.
+Map fertiggestellt.
+Tastaturveranschaulichung erstellt.
+Bugs in MainFrame behoben.
+Info Block erweitert.
+
+[14:00-19:00 9.11.2011]
+Begin der Schriftlichen Arbeit.

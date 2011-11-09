@@ -1,0 +1,127 @@
+#!transcend world file
+world{
+bgc: 255,255,255,255
+camera: fixed 1.7200000000000002
+}
+player{
+x:-200
+y:0
+}
+
+FitBlock{
+x: -512
+y: -256
+z: 0
+w: 1024
+h: 512
+status: 0
+tex: intro_back.png
+scale: 1.0
+}
+
+FitBlock{
+x: -512
+y: -256
+z: 1
+w: 1024
+h: 512
+status: 0
+tex: intro_fore.png
+scale: 1.0
+}
+
+BlankBlock{
+x: -384
+y: -256
+z: 0
+w: 448
+h: 64
+status: 0
+}
+
+BlankBlock{
+x: -448
+y: -320
+z: 0
+w: 704
+h: 192
+status: 0
+}
+
+BlankBlock{
+x: -296
+y: -144
+z: 0
+w: 700
+h: 64
+status: 0
+}
+
+BlankBlock{
+x: 248
+y: -124
+z: 0
+w: 144
+h: 368
+status: 0
+}
+
+BlankBlock{
+x: -348
+y: 200
+z: 0
+w: 716
+h: 40
+status: 0
+}
+
+BlankBlock{
+x: -316
+y: -196
+z: 0
+w: 84
+h: 412
+status: 0
+}
+
+HalfBlankBlock{
+x: -116
+y: -24
+z: 0
+w: 140
+h: 8
+status: 0
+}
+
+Info{
+x: -156
+y: -84
+z: 5
+w: 128
+h: 5
+status: 0
+minitex: null
+popuptex: map.png
+readsnd: null
+minitex_x: -92
+minitex_y: -76
+autoshow: false
+text: View Map
+}
+
+Info{
+x: -212
+y: -84
+z: 5
+w: 56
+h: 5
+status: 0
+minitex: null
+popuptex: wasd.png
+readsnd: null
+minitex_x: -184
+minitex_y: -76
+autoshow: true
+text: null
+}
+

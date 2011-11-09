@@ -1,6 +1,6 @@
 ANTIALIAS: 2
 DEFAULT_FULL: false
-DEFAULT_SCREEN: 1440x900 @60
+DEFAULT_SCREEN: 1280x800 @60
 DEFAULT_VSYNC: true
 FORCED_H: 0
 FORCED_W: 0
@@ -8,3 +8,4 @@ FPS: 60
 LAYOUT: swiss
 PLAYOUT: lefty
 REPO: http://repo.tymoon.eu/v2/transcend
+UPS: 60

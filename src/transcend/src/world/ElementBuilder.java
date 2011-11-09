@@ -68,6 +68,11 @@ public class ElementBuilder {
             block.setOptions(args);
             MainFrame.world.addTile(block);
         }
+        else if(name.equals("fitblock")){
+            FitBlock block = new FitBlock();
+            block.setOptions(args);
+            MainFrame.world.addTile(block);
+        }
         else if(name.equals("movingblock")){
             MovingBlock block = new MovingBlock();
             block.setOptions(args);
@@ -136,6 +141,11 @@ public class ElementBuilder {
         }
         else if(name.equals("gameevent")){
             GameEvent block = new GameEvent();
+            block.setOptions(args);
+            MainFrame.world.addBlock(block);
+        }
+        else if(name.equals("info")){
+            Info block = new Info();
             block.setOptions(args);
             MainFrame.world.addBlock(block);
         }

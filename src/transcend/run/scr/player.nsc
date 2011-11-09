@@ -3,21 +3,18 @@ vxacc = {0.4,0.0,0.0,0.0,0.0}
 vxracc= {0.8,0.0,0.0,0.0,0.0}
 vyacc = 10.0
 vydcc = 0.4
-vxdcc = 1.0
-vxlim = {10.0,0.0,0.0,0.0,0.0}
-vxrlim= {15.0,0.0,0.0,0.0,0.0}
+vxdcc = 2.0
+vxlim = {18.0,0.0,0.0,0.0,0.0}
+vxrlim= {25.0,0.0,0.0,0.0,0.0}
 
-start = {{0,0},{0,0}}
-stop  = {{16,0},{16,0}}
-loop  = {{0,0},{0,0}}
-loop2 = {{0,0},{0,0}}
-start1= {0,0}
-stop1 = {16,0}
-loop1 = {0,0}
-loop21= {0,0}
+start = {{0,0,0,0,0,0,0,0},{0,0,0,0}}
+stop  = {{14,14,11,10,4,0,0,0},{16,0,0,0}}
+loop  = {{0,0,6,4,4,0,0,0},{0,0,0,0}}
+loop2 = {{0,0,0,0,0,0,0,0},{0,0,0,0}}
 
-width = {64,64}
-height= {64,64}
+width = {45,64}
+height= {110,64}
+spritesize={128,64}
 
 defun getVXAcc{
     vxlimc = (< vxlim form )
@@ -26,24 +23,26 @@ defun getVXAcc{
         vxlimc = (< vxrlim form )
         vxaccc = (< vxracc form )
     }
-    
-    if k_left == 1 {
-        if vx <= (* vxlimc -1 ) {
-            return (* vxlimc -1 )
+
+    if k_attack != 1 {
+        if k_left == 1 {
+            if vx <= (* vxlimc -1 ) {
+                return (* vxlimc -1 )
+            }
+            if vx > 0 {
+                return (- vx (* 2 vxaccc ) )
+            }
+            return (- vx vxaccc )
         }
-        if vx > 0 {
-            return (- vx (* 2 vxaccc ) )
+        if k_right == 1 {
+            if vx >= vxlimc {
+                return vxlimc
+            }
+            if vx < 0 {
+                return (+ vx (* 2 vxaccc ) )
+            }
+            return (+ vx vxaccc )
         }
-        return (- vx vxaccc )
-    }
-    if k_right == 1 {
-        if vx >= vxlimc {
-            return vxlimc
-        }
-        if vx < 0 {
-            return (+ vx (* 2 vxaccc ) )
-        }
-        return (+ vx vxaccc )
     }
     if vx > 1 {
         return (- vx vxdcc )

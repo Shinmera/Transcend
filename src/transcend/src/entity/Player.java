@@ -52,7 +52,7 @@ public class Player extends Entity implements KeyboardListener,EventListener{
     public void init(){
         ieh.addKeyboardListener(this);
         scriptManager.loadScript(fileStorage.getFile("scr/player"));
-        x=10;y=10;w=64;h=64;
+        x=0;y=0;z=0;
 
         setForm(form);
         eh.registerEvent(Event.ENTITY_SEE, 0, this);
@@ -61,7 +61,7 @@ public class Player extends Entity implements KeyboardListener,EventListener{
     }
 
     public void draw(){
-        drawable.draw((int)x-w/2, (int)y-4, w, h);
+        drawable.draw((int)(x-drawable.getSpritesize()/2), (int)y, (int)drawable.getSpritesize(), (int)drawable.getSpritesize());
         if(editor.getActive()){
             if(ground!=null)ground.draw();
             if(left!=null)left.draw();
@@ -104,7 +104,7 @@ public class Player extends Entity implements KeyboardListener,EventListener{
             }
         }else heart=null;
         //GROUND
-        if(((ground=(Block)check(x-w/2+3,y+1,x+w/2-3,y+1))!=null || (ground=(Block)check(x-w/2+3,y+vy  ,x+w/2-3,y+vy))!=null) && vy<0){
+        if(((ground=(Block)check(x-w/2+3,y+1,x+w/2-3,y+1))!=null || (ground=(Block)check(x-w/2+3,y+vy  ,x+w/2-3,y+vy))!=null)){
             vy=0;
             Vector v = ground.getCollisionPoint(new Ray(x+w/2-3,y+h,0,0,-1,0));
             if(v!=null)y=v.getY();else
@@ -124,24 +124,26 @@ public class Player extends Entity implements KeyboardListener,EventListener{
             }
         }
         //SIDES
-        if((left=check(x-w/2-1+vx,y+h/2+3,x-w/2-1+vx,y+h-3))!=null&&vx<0){
-            if(left.solid>0.5){
+        if((left=check(x-w/2-1+vx,y+h/2+3,x-w/2-1+vx,y+h-3))!=null){
+            if(left.solid>0.5&&vx<0){
                 vx=0;
                 Vector v = left.getCollisionPoint(new Ray(x,y,0,-1,0,0));
                 if(v!=null){
                     x=v.getX()+w/2;
                 }
             }
+            if(left.solid<=0.5)left=null;
         }
 
-        if((right=check(x+w/2+vx,y+h/2+3,x+w/2+1+vx,y+h-3))!=null&&vx>0){
-            if(right.solid>0.5){
+        if((right=check(x+w/2+vx,y+h/2+3,x+w/2+1+vx,y+h-3))!=null){
+            if(right.solid>0.5&&vx>0){
                 vx=0;
                 Vector v = right.getCollisionPoint(new Ray(x,y,0,1,0,0));
                 if(v!=null){
                     x=v.getX()-w/2;
                 }
             }
+            if(right.solid<=0.5)right=null;
         }
 
         //INPUT
@@ -149,24 +151,38 @@ public class Player extends Entity implements KeyboardListener,EventListener{
 
         updateScriptVars();
         double vxacc = scriptManager.s("player").eval("getVXAcc",null).fix();
-
-        if(K_LEFT){
-            drawable.setDirection(Animation.DIR_LEFT);
-            drawable.setReel(0);
-        }else if(K_RIGHT){
-            drawable.setDirection(Animation.DIR_RIGHT);
-            drawable.setReel(0);
-        }else{
-            drawable.setReel(1);
-            vx=0;
-        }
-        if(K_ATTACK){
+        if(!K_ATTACK){
+            if(K_LEFT){
+                drawable.setDirection(Animation.DIR_LEFT);
+                if(vy==0)drawable.setReel(1);
+            }else if(K_RIGHT){
+                drawable.setDirection(Animation.DIR_RIGHT);
+                if(vy==0)drawable.setReel(1);
+            }else{
+                if(vy==0)drawable.setReel(0);
+                vx=0;
+            }
+        } else {
             eh.triggerEvent(Event.PLAYER_ATTACK, wID, null);
             health-=0.1;
+            drawable.setReel(4);
         }
+        if(K_SWITCH){
+            texturePool.reloadTexture(fileStorage.getFile("player"+form).getName(), fileStorage.getFile("player"+form));
+        }
+        if(K_RUN){
+            drawable.setPPS(60);
+        }else{
+            drawable.setPPS(30);
+        }
+        if(vy>0){drawable.setReel(2);}
+        if(vy<0){drawable.setReel(3);}
         if((right==null&&vxacc>0)||(left==null&&vxacc<0))vx=vxacc;
 
-        if((left!=null&&right!=null)/*||(ground!=null&&ceiling!=null)*/)die();
+        if(/*(left!=null&&right!=null)||*/(ground!=null&&ceiling!=null))die();
+        
+        if(health<=0)die();
+
 
         //EVALUATE
         x+=vx;
@@ -255,9 +271,13 @@ public class Player extends Entity implements KeyboardListener,EventListener{
                                                                 (int[])((Var[])scriptManager.s("player").v("stop") .get())[form].get(),
                                                                 (int[])((Var[])scriptManager.s("player").v("loop") .get())[form].get(),
                                                                 (int[])((Var[])scriptManager.s("player").v("loop2").get())[form].get());
+        drawable.setSpritesize(((int[])scriptManager.s("player").v("spritesize").get())[form]);
+        drawable.setPPS(30);
         drawable.setReel(0);
         w=((int[])scriptManager.s("player").v("width").get())[form];
         h=((int[])scriptManager.s("player").v("height").get())[form];
+        drawable.setTileH(1);
+        drawable.setTileW(1);
     }
 
 

@@ -24,7 +24,7 @@ import static org.lwjgl.opengl.GL11.*;
 public class Editor extends GObject implements MouseListener{
     public static final int MODE_BLOCKS = 0;
     public static final int MODE_ENTITIES = 1;
-    private String[] blocks = {"blankblock","halfblankblock","tileblock","movingblock","complexblock","gameevent","water","emitter","daycycle"};
+    private String[] blocks = {"blankblock","halfblankblock","tileblock","movingblock","complexblock","gameevent","info","water","emitter","daycycle"};
     private String[] entities = {"enemyb1","enemyc1"};
     private boolean active=false;
     private boolean inComplex=false;
@@ -33,6 +33,9 @@ public class Editor extends GObject implements MouseListener{
     private int curItem=0;
     private int curLayer=0;
     private int mode=MODE_BLOCKS;
+    private boolean removeEntities = true;
+    private boolean removeBlocks = true;
+    private boolean removeTiles = true;
 
     public void paint(){
         if(!visible||!active)return;
@@ -89,6 +92,9 @@ public class Editor extends GObject implements MouseListener{
     public void setCurLayer(int i){curLayer=i;}
     public void setMode(int m){mode=m;curItem=0;}
     public int getMode(){return mode;}
+    public void setRemoveEntities(boolean r){removeEntities=r;}
+    public void setRemoveBlocks(boolean r){removeBlocks=r;}
+    public void setRemoveTiles(boolean r){removeTiles=r;}
 
     public void mouseMoved(int x, int y) {}
 
@@ -100,7 +106,7 @@ public class Editor extends GObject implements MouseListener{
         if(button==0&&!inComplex){
             x=Mouse.getX();
             y=Mouse.getY();
-            if((mode==MODE_BLOCKS)&&(blocks[curItem]=="complexblock"))inComplex=true;
+            if((mode==MODE_BLOCKS)&&(blocks[curItem].equals("complexblock")))inComplex=true;
         }
     }
 
@@ -120,8 +126,9 @@ public class Editor extends GObject implements MouseListener{
             double x = Mouse.getX()/MainFrame.camera.getZoom() + MainFrame.camera.getRelativeX();
             double y = Mouse.getY()/MainFrame.camera.getZoom() + MainFrame.camera.getRelativeY();
             Object[] ids = new Object[0];
-            if(mode==MODE_BLOCKS)ids = Toolkit.joinArray(MainFrame.world.getBlockList(),MainFrame.world.getTileList());
-            if(mode==MODE_ENTITIES)ids = MainFrame.world.getEntityList();
+            if(removeBlocks)ids=Toolkit.joinArray(ids,MainFrame.world.getBlockList());
+            if(removeEntities)ids=Toolkit.joinArray(ids,MainFrame.world.getEntityList());
+            if(removeTiles)ids=Toolkit.joinArray(ids,MainFrame.world.getTileList());
             for(int i=ids.length-1;i>=0;i--){
                 if(MainFrame.world.getByID((Integer)ids[i]).checkInside(x,y)){
                     e=MainFrame.world.getByID((Integer)ids[i]);
@@ -155,7 +162,7 @@ public class Editor extends GObject implements MouseListener{
             y=roundSampled(y,tilesize);
 
             if(bx>0&&by>0){
-                HashMap<String,String> args = new HashMap<String,String>();
+                final HashMap<String,String> args = new HashMap<String,String>();
                 args.putAll(Toolkit.stringToMap(((GTextArea)((GPanel)MainFrame.hud.get("p_editor")).get("args")).getText()));
                 if(inComplex){
                     if(complexPoints.size()<3)return;//not enough points.
@@ -187,9 +194,25 @@ public class Editor extends GObject implements MouseListener{
                         args.put("tex",tex);
                         ((GTextArea)((GPanel)MainFrame.hud.get("p_editor")).get("args")).append("tex="+tex);
                     }
-                    MainFrame.elementBuilder.buildElement(blocks[curItem], args);
+                    MainFrame.loader.setHelper(new LoadHelper(){
+                        public void load(){
+                            MainFrame.elementBuilder.buildElement(blocks[curItem], args);
+                            MainFrame.loader.setDisplayed(true);
+                        }
+                    });
+                    MainFrame.loader.setDisplayed(false);
+                    MainFrame.loader.start();
                 }
-                else MainFrame.elementBuilder.buildElement(entities[curItem], args);
+                else{
+                    MainFrame.loader.setHelper(new LoadHelper(){
+                        public void load(){
+                            MainFrame.elementBuilder.buildElement(entities[curItem], args);
+                            MainFrame.loader.setDisplayed(true);
+                        }
+                    });
+                    MainFrame.loader.setDisplayed(false);
+                    MainFrame.loader.start();
+                }
             }
             x=0;y=0;
         }

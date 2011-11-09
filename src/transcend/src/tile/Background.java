@@ -19,14 +19,12 @@ public class Background extends Tile{
     private String tex="";
     private double vsp=1;
     private boolean tile=false;
+    private boolean stretch=false;
 
     public Background(){}
     public Background(int x,int y,int w,int h,String tex){
         this.x=x;this.y=y;this.z=-5;this.w=w;this.h=h;
-        this.tex=tex;
-        drawable.loadTexture(MainFrame.fileStorage.getFile("tex/"+tex));
-        drawable.setSpritesize(drawable.getTexture().getImageWidth());
-        drawable.calcTile(w, h);
+        setTexture(tex);
     }
 
     public Background(int x,int y,int z,int w,int h,String tex){
@@ -38,7 +36,12 @@ public class Background extends Tile{
         this.tex=tex;
         drawable.loadTexture(MainFrame.fileStorage.getFile("tex/"+tex));
         drawable.setSpritesize(drawable.getTexture().getImageWidth());
-        drawable.calcTile(w, h);
+        if(stretch){
+            drawable.setTileH(1);
+            drawable.setTileW(1);
+            drawable.setRelH(1);
+            drawable.setRelW(1);
+        } else drawable.calcTile(w, h);
     }
 
     public void setVSP(double vsp){this.vsp=vsp;}
@@ -60,15 +63,15 @@ public class Background extends Tile{
 
     public void setOptions(HashMap<String,String> options){
         super.setOptions(options);
-        if(options.containsKey("tex")){
-            setTexture(options.get("tex"));
-        }
         if(options.containsKey("tile"))setTiled(Boolean.parseBoolean(options.get("tile")));
+        if(options.containsKey("stretch"))stretch = Boolean.parseBoolean(options.get("stretch"));
         if(options.containsKey("vsp"))setVSP(Double.parseDouble(options.get("vsp")));
+        if(options.containsKey("tex"))setTexture(options.get("tex"));
     }
 
     public void draw(){
-        drawable.draw((int)MainFrame.camera.getRelativeX(),(int)MainFrame.camera.getRelativeY(),
-                      (int)(MainFrame.DISPLAY_WIDTH/MainFrame.camera.getZoom()),(int)(MainFrame.DISPLAY_HEIGHT/MainFrame.camera.getZoom()));
+        MainFrame.camera.camEnd();
+        drawable.draw(0,0,MainFrame.DISPLAY_WIDTH,MainFrame.DISPLAY_HEIGHT);
+        MainFrame.camera.camBegin();
     }
 }

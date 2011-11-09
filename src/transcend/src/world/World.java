@@ -186,7 +186,9 @@ public class World {
         }
         for(int j=1;j<=5;j++){
             for(int i=0;i<blocks.size();i++){
-                if(blocks.getAt(i).z==j)blocks.getAt(i).draw();
+                if(blocks.getAt(i).z==j){
+                    blocks.getAt(i).draw();
+                }
             }
         }
     }

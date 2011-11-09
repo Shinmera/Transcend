@@ -26,13 +26,13 @@ public class MenuLoader extends LoadHelper{
         constructHUDPane();
         hud.setVisible(true);
         GImage i_logo = new GImage("logo");
-        i_logo.setBounds(DISPLAY_WIDTH/2-256,DISPLAY_HEIGHT-128-50,512,128);
+        i_logo.setBounds(DISPLAY_WIDTH/2-DISPLAY_WIDTH/4,DISPLAY_HEIGHT-DISPLAY_HEIGHT/4,DISPLAY_WIDTH/2,DISPLAY_HEIGHT/4);
         menu.add(i_logo);
     }
 
     private void constructMainPane(){
         int panel_width=(int)(DISPLAY_WIDTH/100.0*25.0);
-        GPanel p_main = new GPanel(DISPLAY_WIDTH/2-panel_width/2,0,panel_width,DISPLAY_HEIGHT-200);
+        GPanel p_main = new GPanel(DISPLAY_WIDTH/2-panel_width/2,0,panel_width,DISPLAY_HEIGHT-DISPLAY_HEIGHT/4);
 
         GButton b_quit = new GButton("Quit"){
             public void onRelease(){destroy();}
@@ -90,7 +90,7 @@ public class MenuLoader extends LoadHelper{
 
     private void constructSettingsPane(){
         int panel_width=(int)(DISPLAY_WIDTH/100.0*50.0);
-        GPanel p_settings  = new GPanel(DISPLAY_WIDTH/2-panel_width/2,0,panel_width,DISPLAY_HEIGHT-200);
+        GPanel p_settings  = new GPanel(DISPLAY_WIDTH/2-panel_width/2,0,panel_width,DISPLAY_HEIGHT-DISPLAY_HEIGHT/4);
 
         GButton b_return = new GButton("Return"){
             public void onRelease(){
@@ -109,7 +109,7 @@ public class MenuLoader extends LoadHelper{
 
     private void constructHelpPane(){
         int panel_width=(int)(DISPLAY_WIDTH/100.0*50.0);
-        GPanel p_help  = new GPanel(DISPLAY_WIDTH/2-panel_width/2,0,panel_width,DISPLAY_HEIGHT-200);
+        GPanel p_help  = new GPanel(DISPLAY_WIDTH/2-panel_width/2,0,panel_width,DISPLAY_HEIGHT-DISPLAY_HEIGHT/4);
 
         GButton b_return = new GButton("Return"){
             public void onRelease(){
@@ -128,7 +128,7 @@ public class MenuLoader extends LoadHelper{
 
     private void constructPausePane(){
         int panel_width=(int)(DISPLAY_WIDTH/100.0*25.0);
-        GPanel p_pause  = new GPanel(DISPLAY_WIDTH/2-panel_width/2,0,panel_width,DISPLAY_HEIGHT-200);
+        GPanel p_pause  = new GPanel(DISPLAY_WIDTH/2-panel_width/2,0,panel_width,DISPLAY_HEIGHT-DISPLAY_HEIGHT/4);
         GButton b_editor = new GButton("Toggle Editor"){
             public void onRelease(){if(editor.getActive()){
                 editor.setActive(false);this.setBackground(Color.red);
@@ -146,8 +146,12 @@ public class MenuLoader extends LoadHelper{
         //QUIT BUTTON (Main Menu)
         GButton b_quit = new GButton("Quit to Menu"){
             public void onRelease(){
-                MainFrame.worldLoader.loadWorld(MainFrame.fileStorage.getFile("menu.tw"));
+                MainFrame.loader.setHelper(new LoadHelper(){
+                    public void load() {MainFrame.worldLoader.loadWorld(MainFrame.fileStorage.getFile("menu.tw"));}
+                });
+                MainFrame.loader.start();
                 editor.setVisible(false);
+                editor.setActive(false);
                 hud.setVisible(false);
                 menu.get("p_pause").setVisible(false);
                 menu.get("p_main").setVisible(true);
@@ -180,7 +184,7 @@ public class MenuLoader extends LoadHelper{
 
     private void constructLoadPane(){
         int panel_width=(int)(DISPLAY_WIDTH/100.0*50.0);
-        GPanel p_load  = new GPanel(DISPLAY_WIDTH/2-panel_width/2,0,panel_width,DISPLAY_HEIGHT-200){
+        GPanel p_load  = new GPanel(DISPLAY_WIDTH/2-panel_width/2,0,panel_width,DISPLAY_HEIGHT-DISPLAY_HEIGHT/4){
             public void setVisible(boolean visible){
                 super.setVisible(visible);
                 ((GList)this.get("list")).clear();
@@ -209,7 +213,7 @@ public class MenuLoader extends LoadHelper{
             }
         };
         
-        l_loads.autoBounds(p_load, 0, p_load.getHeight()-(DISPLAY_HEIGHT-200-50), panel_width, DISPLAY_HEIGHT-200-50);
+        l_loads.autoBounds(p_load, 0, p_load.getHeight()-(DISPLAY_HEIGHT-DISPLAY_HEIGHT/4-50), panel_width, DISPLAY_HEIGHT-DISPLAY_HEIGHT/4-50);
         b_load.autoBounds(p_load, 0, 10, panel_width/2-5, 30);
         b_return.autoBounds(p_load, panel_width/2+5, 10, panel_width/2-5, 30);
 
@@ -294,7 +298,10 @@ public class MenuLoader extends LoadHelper{
         };
         GButton b_load = new GButton("Load"){
             public void onRelease(){
-                worldLoader.loadWorld(new File("world"+File.separator+t_file.getText()));
+                MainFrame.loader.setHelper(new LoadHelper(){
+                    public void load() {MainFrame.worldLoader.loadWorld(MainFrame.fileStorage.getFile(t_file.getText()));}
+                });
+                MainFrame.loader.start();
             }
         };
         GRadioButton r_blocks = new GRadioButton(p_editor,"Blocks"){
@@ -308,9 +315,30 @@ public class MenuLoader extends LoadHelper{
                 super.onPress();
                 MainFrame.editor.setMode(Editor.MODE_ENTITIES);
             }
-        };;
+        };
+        GCheckBox c_entities = new GCheckBox(p_editor,"Entities"){
+            public void onRelease(){
+                super.onRelease();
+                MainFrame.editor.setRemoveEntities(this.isActivated());
+            }
+        };
+        GCheckBox c_blocks = new GCheckBox(p_editor,"Blocks"){
+            public void onRelease(){
+                super.onRelease();
+                MainFrame.editor.setRemoveBlocks(this.isActivated());
+            }
+        };
+        GCheckBox c_tiles = new GCheckBox(p_editor,"Tiles"){
+            public void onRelease(){
+                super.onRelease();
+                MainFrame.editor.setRemoveTiles(this.isActivated());
+            }
+        };
         if(MainFrame.editor.getMode()==Editor.MODE_BLOCKS)r_blocks.setActivated(true);
         else r_entities.setActivated(true);
+        c_entities.setActivated(true);
+        c_blocks.setActivated(true);
+        c_tiles.setActivated(true);
 
         GLabel l_blockdesc = new GLabel("Block:",GLabel.ALIGN_LEFT);
         l_blockdesc.setBorder(new Color(0,0,0,0),0);
@@ -327,6 +355,9 @@ public class MenuLoader extends LoadHelper{
         GLabel l_argsdesc = new GLabel("Arguments:",GLabel.ALIGN_LEFT);
         l_argsdesc.setBorder(new Color(0,0,0,0),0);
         l_argsdesc.setBackground(new Color(1,1,1,0.5f));
+        GLabel l_removedesc = new GLabel("Removable:",GLabel.ALIGN_LEFT);
+        l_removedesc.setBorder(new Color(0,0,0,0),0);
+        l_removedesc.setBackground(new Color(1,1,1,0.5f));
 
         l_speed.setBounds(10,DISPLAY_HEIGHT-20,400,15);
         l_speed.setBorder(new Color(0,0,0,0),0);
@@ -360,6 +391,11 @@ public class MenuLoader extends LoadHelper{
         l_argsdesc.setBounds(10,p_editor.getHeight()-15-190,100,15);
         t_args.setBounds(10,p_editor.getHeight()-15-250,100,55);
 
+        l_removedesc.setBounds(10,p_editor.getHeight()-15-270,100,15);
+        c_entities.setBounds(10,p_editor.getHeight()-15-290,100,15);
+        c_blocks.setBounds(10,p_editor.getHeight()-15-310,100,15);
+        c_tiles.setBounds(10,p_editor.getHeight()-15-330,100,15);
+
 
         p_editor.add(b_save);
         p_editor.add(b_load);
@@ -375,10 +411,14 @@ public class MenuLoader extends LoadHelper{
         p_editor.add(b_layerp);
         p_editor.add(b_layerm);
         p_editor.add(l_layer);
+        p_editor.add(c_entities);
+        p_editor.add(c_blocks);
+        p_editor.add(c_tiles);
         p_editor.add(l_blockdesc);
         p_editor.add(l_layerdesc);
         p_editor.add(l_zoomdesc);
         p_editor.add(l_argsdesc);
+        p_editor.add(l_removedesc);
         p_editor.add(t_args,"args");
         p_editor.add(r_blocks,"r_blocks");
         p_editor.add(r_entities,"r_entities");
