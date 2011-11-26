@@ -31,12 +31,9 @@ import transcend.MainFrame;
 
 public class WorldLoader {
     private File loaded = null;
-    public WorldLoader(){
-        
-    }
 
     public File getLoaded(){return loaded;}
-    public boolean isLoaded(){if(loaded!=null)return true;else return false;}
+    public boolean isLoaded(){return(loaded!=null);}
 
     public boolean saveGame(File file){
         Const.LOGGER.info("[World] Save Game State to "+file.getAbsolutePath());
@@ -61,7 +58,6 @@ public class WorldLoader {
 
     public boolean loadGame(File file){
         if(!file.exists())return false;
-        HashMap<String,String> arguments = new HashMap<String,String>();
         try{
             Const.LOGGER.info("[World] Loading Game State from "+file.getAbsolutePath());
 
@@ -73,6 +69,7 @@ public class WorldLoader {
             //DECRYPT
             String read="";
             while((read=br.readLine())!=null)buf.append(read+"\n");
+            br.close();
             //SET PLAYER STATE
             HashMap<String,String> map = Toolkit.stringToMap(buf.toString(),";","=");
             loadWorld(MainFrame.fileStorage.getFile("world/"+map.get("world")));
@@ -165,8 +162,8 @@ public class WorldLoader {
                         if(read.length() != 0){ //value.
                             if(!inMulti){
                                 if(!read.contains(":")){Const.LOGGER.log(Level.SEVERE, "Failed to load World: Parse error on line {0}", line);return false;}
-                                String key = read.substring(0,read.indexOf(":")).trim();
-                                String val = read.substring(read.indexOf(":")+1).trim();
+                                String key = read.substring(0,read.indexOf(':')).trim();
+                                String val = read.substring(read.indexOf(':')+1).trim();
                                 if(val.equals("null"))val=null;
                                 arguments.put(key, val);
                             }
@@ -196,6 +193,7 @@ public class WorldLoader {
                 }
                 line++;
             }
+            in.close();
         }catch(IOException e){Const.LOGGER.log(Level.SEVERE,"Failed to load World: Read exception",e);return false;}
         Const.LOGGER.info("[World] Loaded "+elementsLoaded+" elements. "+MainFrame.world.blockSize()+" Blocks "+MainFrame.world.entitySize()+" Entities "+MainFrame.world.tileSize()+" Tiles.");
         loaded = file;

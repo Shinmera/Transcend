@@ -84,7 +84,7 @@ public class MainFrame implements KeyboardListener{
     public static GPanel menu,hud;
     public static Loader loader;
     private static Color clearcolor = new Color(0.2f,0.2f,0.2f);
-    private Updater updater = new Updater();
+    private final Updater updater = new Updater();
 
     public static void main(String[] args){
         MainFrame mf = new MainFrame();
@@ -97,8 +97,6 @@ public class MainFrame implements KeyboardListener{
         catch(Exception ex){Const.LOGGER.log(Level.SEVERE,"[MF] Error in main thread!",ex);}
         finally{mf.destroy();}
     }
-
-    public MainFrame(){}
 
     public void create() throws LWJGLException, IOException {
         Const.LOGGER.info("[MF] Initializing...");
@@ -175,9 +173,9 @@ public class MainFrame implements KeyboardListener{
         glClearDepth(1);        glEnable(GL_COLOR_MATERIAL);
         glEnable(GL_TEXTURE_2D);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-        glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-        glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-        glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
         
         //glDisable(GL_DITHER);
@@ -268,7 +266,7 @@ public class MainFrame implements KeyboardListener{
                     loader.draw();
                     SoundStore.get().poll(1000/fps);
                     glFlush();
-                }else {
+                }else{
                     if(Display.isDirty())render();
                     try {Thread.sleep(100);}
                     catch(InterruptedException ex) {Const.LOGGER.info("Failed thread sync.");}
@@ -297,7 +295,7 @@ public class MainFrame implements KeyboardListener{
         case Keyboard.KEY_F11:
             try{
             if(Display.isFullscreen())Display.setFullscreen(false);
-            else Display.setFullscreen(true);
+            else                      Display.setFullscreen(true);
             }catch(Exception e){Const.LOGGER.log(Level.WARNING, "Failed to switch to fullscreen mode.",e);}
             break;
         case Keyboard.KEY_ESCAPE:
