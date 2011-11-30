@@ -1,0 +1,136 @@
+17:30 [INFO][MF] Booting up...
+null.transcend.MainFrame.<clinit>
+17:30 [INFO][CONST] Loading
+null.transcend.Const.loadRegistry
+17:30 [WARNING][InputEventHandler] Failed to load layout 'swiss'!
+null.event.InputEventHandler.<init>
+17:30 [WARNING][InputEventHandler] Failed to load layout 'lefty'!
+null.event.InputEventHandler.<init>
+17:30 [INFO][FileStorage] Initial indexing...
+null.transcend.FileStorage.<init>
+17:30 [INFO][FileStorage] indexing .
+null.transcend.FileStorage.indexFolder
+17:30 [INFO][FileStorage] indexing build
+null.transcend.FileStorage.indexFolder
+17:30 [INFO][FileStorage] indexing classes
+null.transcend.FileStorage.indexFolder
+17:30 [INFO][FileStorage] indexing block
+null.transcend.FileStorage.indexFolder
+17:30 [INFO][FileStorage] indexing entity
+null.transcend.FileStorage.indexFolder
+17:30 [INFO][FileStorage] indexing event
+null.transcend.FileStorage.indexFolder
+17:30 [INFO][FileStorage] indexing graph
+null.transcend.FileStorage.indexFolder
+17:30 [INFO][FileStorage] indexing gui
+null.transcend.FileStorage.indexFolder
+17:30 [INFO][FileStorage] indexing particle
+null.transcend.FileStorage.indexFolder
+17:30 [INFO][FileStorage] indexing spare
+null.transcend.FileStorage.indexFolder
+17:30 [INFO][FileStorage] indexing tile
+null.transcend.FileStorage.indexFolder
+17:30 [INFO][FileStorage] indexing transcend
+null.transcend.FileStorage.indexFolder
+17:30 [INFO][FileStorage] indexing world
+null.transcend.FileStorage.indexFolder
+17:30 [INFO][FileStorage] indexing depcache
+null.transcend.FileStorage.indexFolder
+17:30 [INFO][FileStorage] indexing empty
+null.transcend.FileStorage.indexFolder
+17:30 [INFO][FileStorage] indexing dist
+null.transcend.FileStorage.indexFolder
+17:30 [INFO][FileStorage] indexing lib
+null.transcend.FileStorage.indexFolder
+17:30 [INFO][FileStorage] indexing jdepend
+null.transcend.FileStorage.indexFolder
+17:30 [INFO][FileStorage] indexing nbproject
+null.transcend.FileStorage.indexFolder
+17:30 [INFO][FileStorage] indexing configs
+null.transcend.FileStorage.indexFolder
+17:30 [INFO][FileStorage] indexing private
+null.transcend.FileStorage.indexFolder
+17:30 [INFO][FileStorage] indexing configs
+null.transcend.FileStorage.indexFolder
+17:30 [INFO][FileStorage] indexing org-nbheaven-sqe-core-java
+null.transcend.FileStorage.indexFolder
+17:30 [INFO][FileStorage] indexing CompileOnSaveHelper
+null.transcend.FileStorage.indexFolder
+17:30 [INFO][FileStorage] indexing 053028A9
+null.transcend.FileStorage.indexFolder
+17:30 [INFO][FileStorage] indexing block
+null.transcend.FileStorage.indexFolder
+17:30 [INFO][FileStorage] indexing entity
+null.transcend.FileStorage.indexFolder
+17:30 [INFO][FileStorage] indexing event
+null.transcend.FileStorage.indexFolder
+17:30 [INFO][FileStorage] indexing graph
+null.transcend.FileStorage.indexFolder
+17:30 [INFO][FileStorage] indexing gui
+null.transcend.FileStorage.indexFolder
+17:30 [INFO][FileStorage] indexing particle
+null.transcend.FileStorage.indexFolder
+17:30 [INFO][FileStorage] indexing spare
+null.transcend.FileStorage.indexFolder
+17:30 [INFO][FileStorage] indexing tile
+null.transcend.FileStorage.indexFolder
+17:30 [INFO][FileStorage] indexing transcend
+null.transcend.FileStorage.indexFolder
+17:30 [INFO][FileStorage] indexing world
+null.transcend.FileStorage.indexFolder
+17:30 [INFO][FileStorage] indexing profiler
+null.transcend.FileStorage.indexFolder
+17:30 [INFO][FileStorage] indexing run
+null.transcend.FileStorage.indexFolder
+17:30 [INFO][FileStorage] indexing data
+null.transcend.FileStorage.indexFolder
+17:30 [INFO][FileStorage] indexing native
+null.transcend.FileStorage.indexFolder
+17:30 [INFO][FileStorage] indexing linux
+null.transcend.FileStorage.indexFolder
+17:30 [INFO][FileStorage] indexing macosx
+null.transcend.FileStorage.indexFolder
+17:30 [INFO][FileStorage] indexing solaris
+null.transcend.FileStorage.indexFolder
+17:30 [INFO][FileStorage] indexing windows
+null.transcend.FileStorage.indexFolder
+17:30 [INFO][FileStorage] indexing scr
+null.transcend.FileStorage.indexFolder
+17:30 [INFO][FileStorage] indexing shaders
+null.transcend.FileStorage.indexFolder
+17:30 [INFO][FileStorage] indexing snd
+null.transcend.FileStorage.indexFolder
+17:30 [INFO][FileStorage] indexing tex
+null.transcend.FileStorage.indexFolder
+17:30 [INFO][FileStorage] indexing world
+null.transcend.FileStorage.indexFolder
+17:30 [INFO][FileStorage] indexing save
+null.transcend.FileStorage.indexFolder
+17:30 [INFO][FileStorage] indexing src
+null.transcend.FileStorage.indexFolder
+17:30 [INFO][FileStorage] indexing block
+null.transcend.FileStorage.indexFolder
+17:30 [INFO][FileStorage] indexing entity
+null.transcend.FileStorage.indexFolder
+17:30 [INFO][FileStorage] indexing event
+null.transcend.FileStorage.indexFolder
+17:30 [INFO][FileStorage] indexing graph
+null.transcend.FileStorage.indexFolder
+17:30 [INFO][FileStorage] indexing gui
+null.transcend.FileStorage.indexFolder
+17:30 [INFO][FileStorage] indexing particle
+null.transcend.FileStorage.indexFolder
+17:30 [INFO][FileStorage] indexing spare
+null.transcend.FileStorage.indexFolder
+17:30 [INFO][FileStorage] indexing tile
+null.transcend.FileStorage.indexFolder
+17:30 [INFO][FileStorage] indexing transcend
+null.transcend.FileStorage.indexFolder
+17:30 [INFO][FileStorage] indexing world
+null.transcend.FileStorage.indexFolder
+17:30 [INFO][FileStorage] indexing test
+null.transcend.FileStorage.indexFolder
+17:30 [INFO][CONST] Loading
+null.transcend.Const.loadRegistry
+17:30 [INFO][MF] Shutting down...
+null.transcend.MainFrame.destroy

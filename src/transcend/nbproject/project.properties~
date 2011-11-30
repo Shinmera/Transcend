@@ -1,0 +1,50 @@
+annotation.processing.enabled=true
+annotation.processing.enabled.in.editor=false
+annotation.processing.run.all.processors=true
+application.title=transcend
+application.vendor=linus
+build.classes.excludes=*.java
+build.generated.sources.dir=${build.dir}/generated-sources
+endorsed.classpath=
+excludes=
+file.reference.PNGDecoder.jar=../../lib/PNGDecoder.jar
+includes=**
+jar.archive.disabled=${jnlp.enabled}
+jar.compress=true
+jar.index=${jnlp.enabled}
+javac.classpath=\
+    ${reference.NexT.jar}:\
+    ${libs.LWJGL.classpath}:\
+    ${libs.Slick.classpath}:\
+    ${file.reference.PNGDecoder.jar}
+javac.deprecation=false
+javac.processorpath=\
+    ${javac.classpath}
+javac.source=1.6
+javac.target=1.6
+javac.test.classpath=
+javadoc.author=false
+javadoc.noindex=false
+javadoc.nonavbar=false
+javadoc.notree=false
+javadoc.private=false
+javadoc.splitindex=false
+javadoc.use=false
+javadoc.version=false
+jnlp.codebase.type=no.codebase
+jnlp.descriptor=application
+jnlp.enabled=false
+jnlp.mixed.code=default
+jnlp.offline-allowed=false
+jnlp.signed=false
+jnlp.signing=
+jnlp.signing.alias=
+jnlp.signing.keystore=
+mkdist.disabled=false
+platform.active=default_platform
+project.NexT=../../../NexT
+reference.NexT.jar=${project.NexT}/dist/NexT.jar
+run.classpath=
+run.test.classpath=
+src.src.dir=src
+test.test.dir=test

@@ -1,5 +1,5 @@
 #FindBugs User Preferences
-#Wed Nov 23 01:17:33 CET 2011
+#Mon Nov 28 23:20:29 CET 2011
 detectorAbnormalFinallyBlockReturn=AbnormalFinallyBlockReturn|false
 detectorAbstractClassEmptyMethods=AbstractClassEmptyMethods|false
 detectorAbstractOverriddenMethod=AbstractOverriddenMethod|false
