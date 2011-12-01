@@ -12,12 +12,23 @@ package graph;
 import gui.TrueTypeFont;
 import java.awt.Font;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import transcend.Const;
 
 public class FontPool {
     private HashMap<String,TrueTypeFont> fonts = new HashMap<String,TrueTypeFont>();
 
     public FontPool(){}
+    
+    public void clearPool(){
+        Iterator it = fonts.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry pairs = (Map.Entry)it.next();
+            ((TrueTypeFont)pairs.getValue()).destroy();
+        }
+        fonts.clear();
+    }
 
     public TrueTypeFont loadFont(String name,int weight,int size){
         Font f = new Font(name,weight,size);

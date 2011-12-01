@@ -1,0 +1,14 @@
+#!transcend world file
+Player{
+x: -2048
+y: 0
+}
+
+Background{
+x: 0
+y: 0
+w: 1024
+h: 1024
+tex: menu.png
+tile: false
+}

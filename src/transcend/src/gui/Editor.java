@@ -197,20 +197,16 @@ public class Editor extends GObject implements MouseListener{
                     MainFrame.loader.setHelper(new LoadHelper(){
                         public void load(){
                             MainFrame.elementBuilder.buildElement(blocks[curItem], args);
-                            MainFrame.loader.setDisplayed(true);
                         }
                     });
-                    MainFrame.loader.setDisplayed(false);
                     MainFrame.loader.start();
                 }
                 else{
                     MainFrame.loader.setHelper(new LoadHelper(){
                         public void load(){
                             MainFrame.elementBuilder.buildElement(entities[curItem], args);
-                            MainFrame.loader.setDisplayed(true);
                         }
                     });
-                    MainFrame.loader.setDisplayed(false);
                     MainFrame.loader.start();
                 }
             }

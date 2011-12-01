@@ -152,7 +152,6 @@ public class MainFrame implements KeyboardListener{
 
         hud = new GPanel(0,0,DISPLAY_WIDTH,DISPLAY_HEIGHT);
         hud.setBackground(new Color(0,0,0,0));
-        hud.setVisible(true);
 
         menu = new GPanel(0,0,DISPLAY_WIDTH,DISPLAY_HEIGHT);
         menu.setBackground(new Color(0,0,0,0));
@@ -161,8 +160,6 @@ public class MainFrame implements KeyboardListener{
         //LOAD MENU
         loader.setHelper(new MenuLoader());
         loader.start();
-
-        editor.setActive(true);
     }
 
     public void initGL() {
@@ -204,7 +201,7 @@ public class MainFrame implements KeyboardListener{
         //Load default world
         if(!worldLoader.isLoaded()&&!loader.isLoading()){
             loader.setHelper(new LoadHelper(){public void load(){
-                worldLoader.loadWorld(new File("world"+File.separator+"intro.tw"));
+                worldLoader.loadWorld(new File("world"+File.separator+"menu.tw"));
             }});
             loader.start();
         }
@@ -279,8 +276,8 @@ public class MainFrame implements KeyboardListener{
         }
     }
 
-    public static void pause(){pause=true;}
-    public static void unpause(){pause=false;}
+    public static void pause(){pause=true;Mouse.setGrabbed(false);}
+    public static void unpause(){pause=false;if(!editor.getActive())Mouse.setGrabbed(true);}
     public static Color getClearColor(){return clearcolor;}
     public static void setClearColor(Color c){
         clearcolor=c;

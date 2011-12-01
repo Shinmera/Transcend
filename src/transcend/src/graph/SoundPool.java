@@ -24,6 +24,8 @@ public class SoundPool {
     private String curSound = "";
 
     public SoundPool(){}
+    
+    public void clearPool(){sounds.clear();curMusic="";curSound="";}
 
     public Audio loadSound(String name,File f){
         return loadSound(name,f,false);

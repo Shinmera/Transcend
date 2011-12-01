@@ -24,10 +24,18 @@ public class MenuLoader extends LoadHelper{
         constructSettingsPane();
         constructHelpPane();
         constructHUDPane();
-        hud.setVisible(true);
         GImage i_logo = new GImage("logo");
         i_logo.setBounds(DISPLAY_WIDTH/2-DISPLAY_WIDTH/4,DISPLAY_HEIGHT-DISPLAY_HEIGHT/4,DISPLAY_WIDTH/2,DISPLAY_HEIGHT/4);
         menu.add(i_logo);
+        hud.setVisible(false);
+        
+        editor.setActive(false);
+        menu.setVisible(true);
+        menu.get("p_pause").setVisible(false);
+        menu.get("p_load").setVisible(false);
+        menu.get("p_settings").setVisible(false);
+        menu.get("p_help").setVisible(false);
+        pause();
     }
 
     private void constructMainPane(){
@@ -43,6 +51,9 @@ public class MenuLoader extends LoadHelper{
                 menu.get("p_main").setVisible(false);
                 loader.setHelper(new LoadHelper(){public void load(){
                     worldLoader.loadWorld(new File("world"+File.separator+"intro.tw"));
+                    menu.setVisible(false);
+                    hud.setVisible(true);
+                    unpause();
                 }});
                 loader.start();
             }
@@ -117,11 +128,17 @@ public class MenuLoader extends LoadHelper{
                 menu.get("p_help").setVisible(false);
             }
         };
-
+        GLabel l_help = new GLabel("Global controls:\nDelete or Escape: Bring up pause menu\n\n"
+                                 + "Player controls:\nA: Walk left\nD: Walk right\nSpace: Jump\nShift: Run\nUp: Attack/Use\n1-5: Switch form\n\n"
+                                 + "Editor controls:\nR: Return Player to 0,0");
+        l_help.setAlign(GLabel.ALIGN_LEFT);
+        
         b_return.autoBounds(p_help, 0, 10, panel_width, 30);
+        l_help.autoBounds(p_help, 10, 50, panel_width-20,(DISPLAY_HEIGHT-DISPLAY_HEIGHT/4)-60);
 
         p_help.setBackground(new Color(255,255,255,150));
         p_help.add(b_return);
+        p_help.add(l_help);
 
         menu.add(p_help,"p_help");
     }
@@ -202,6 +219,9 @@ public class MenuLoader extends LoadHelper{
                 final String name = ((GList)((GPanel)menu.get("p_load")).get("list")).getSelected();
                 loader.setHelper(new LoadHelper(){public void load(){
                     worldLoader.loadGame(MainFrame.fileStorage.getFile("save/"+name));
+                    menu.setVisible(false);
+                    hud.setVisible(true);
+                    unpause();
                 }});
                 loader.start();
             }

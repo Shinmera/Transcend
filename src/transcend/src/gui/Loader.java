@@ -64,6 +64,7 @@ public class Loader{
         } else {
             Const.LOGGER.info("[Loader] Finished loading. Ready.");
             loading=false;
+            display=false;
         }
     }
     public void start(){

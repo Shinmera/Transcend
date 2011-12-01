@@ -162,7 +162,9 @@ public class DisplayModeChooser extends JDialog implements ActionListener, ItemL
     public static boolean showDialog(String title){
         DisplayModeChooser dmc = new DisplayModeChooser(title);
         dmc.setVisible(true);
-        return dmc.getStatus();
+        boolean status = dmc.getStatus();
+        dmc.dispose();
+        return status;
     }
 
     public void actionPerformed(ActionEvent e) {

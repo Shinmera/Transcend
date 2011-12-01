@@ -93,7 +93,10 @@ public class WorldLoader {
             if(MainFrame.camera.getFollowing()==-1)
                  pw.println("camera: fixed "+MainFrame.camera.getZoom());
             else pw.println("camera: follow "+MainFrame.camera.getZoom());
-            pw.println("}");
+            pw.println("}\n\nplayer{");
+            pw.println("x:"+MainFrame.player.getX());
+            pw.println("y:"+MainFrame.player.getY());
+            pw.println("}\n");
 
             for(int i=0;i<MainFrame.world.size();i++){
                 BElement e = MainFrame.world.getByID(MainFrame.world.getID(i));
@@ -129,6 +132,9 @@ public class WorldLoader {
         HashMap<String,String> arguments = new HashMap<String,String>();
         String type = "";
         try{
+            MainFrame.loader.setDisplayed(true);
+            Const.LOGGER.info("[World] Clearing sound pool");
+            MainFrame.soundPool.clearPool();
             Const.LOGGER.info("[World] Loading World from "+file.getAbsolutePath());
 
             BufferedReader in = new BufferedReader(new FileReader(file));
@@ -172,8 +178,8 @@ public class WorldLoader {
                         if(!inBlock){ //End of block reached.
                             elementsLoaded++;
                             if(type.equals("player")){
-                                MainFrame.player.setPosition(Integer.parseInt(arguments.get("x")),
-                                                             Integer.parseInt(arguments.get("y")));
+                                MainFrame.player.setPosition(Double.parseDouble(arguments.get("x")),
+                                                             Double.parseDouble(arguments.get("y")));
                                 
                             }else if(type.equals("world")){
                                 if(arguments.containsKey("bgc")){

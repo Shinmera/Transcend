@@ -358,7 +358,7 @@
 		
 		Es gibt viele verschiedene Typen von Mechaniken, die auch je nach Spielgenre unterscheiden. Wichtig ist dabei die Unterscheidung zwischen belohnenden (z.B. Power-Ups oder Punkte) und bestrafenden (z.B. Verlieren von Leben oder Fähigkeiten) Mechaniken. Das Verhältnis von beiden muss im Gleichgewicht stehen, damit das Spiel nicht unfair oder langweilig erscheint.\\
 		
-		Transcend's Hautpmechanik besteht im Formenwechsel, welches einen starken Einfluss auf das Spielverhalten hat, da sich die Eigenschaften der Spielfigur innert kürzester Zeit drastisch ändern können. Das Abstimmen der Eigenschaften jeder Form wird einen enormen Aufwand an Tests und ausprobieren verlangen. Das gleiche gilt für die Fähigkeiten der Gegner und wie sie mit der restlichen Welt zusammenspielen. Wie gut ic
+		Transcend's Hautpmechanik besteht im Formenwechsel, welches einen starken Einfluss auf das Spielverhalten hat, da sich die Eigenschaften der Spielfigur innert kürzester Zeit drastisch ändern können. Das Abstimmen der Eigenschaften jeder Form wird einen enormen Aufwand an Tests und ausprobieren verlangen. Das gleiche gilt für die Fähigkeiten der Gegner und wie sie mit der restlichen Welt zusammenspielen. Wie gut ich diese Aufgaben meistern kann, wird sich noch herausstellen.
 		
 	
 \section{Schlussfolgerung \& Aussicht}
@@ -400,8 +400,9 @@
 		
 		Ich möchte auch all meinen anderen Freunden, die ich nur über das Internet erreichen kann, danken und hoffe auf eine lange Bekanntschaft und Zusammenarbeit.\\
 		
-		Schlussendlich will ich an dieser Stelle all jenen danken, die an den Projekten und Büchern gearbeitet haben, die ich für diese Arbeit benutzt habe. Es wäre ohne ihre Vorarbeit und Bemühung nie für mich möglich gewesen auch nur mit der Arbeit zu beginnen. Sie haben den Grundstein und die Grundwerkzeuge bereitgestellt, die nötig waren, um mir eine zielgerichtete und produktive Arbeitsumgebung zu ermöglichen.
-		
+		Schlussendlich will ich an dieser Stelle all jenen danken, die an den Projekten und Büchern gearbeitet haben, die ich für diese Arbeit benutzt habe. Es wäre ohne ihre Vorarbeit und Bemühung nie für mich möglich gewesen auch nur mit der Arbeit zu beginnen. Sie haben den Grundstein und die Grundwerkzeuge bereitgestellt, die nötig waren, um mir eine zielgerichtete und produktive Arbeitsumgebung zu ermöglichen.\\
+	
+	\clearpage
 	\subsection{Tools, Webseiten \& Bücher}
 		\paragraph{Programme, Libraries \& Tools}
 		\begin{itemize*}

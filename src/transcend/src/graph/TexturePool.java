@@ -12,6 +12,8 @@ package graph;
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.logging.Level;
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
@@ -21,6 +23,15 @@ public class TexturePool {
     private HashMap<String,Texture> textures = new HashMap();
     
     public TexturePool(){}
+    
+    public void clearPool(){
+        Iterator it = textures.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry pairs = (Map.Entry)it.next();
+            ((Texture)pairs.getValue()).release();
+        }
+        textures.clear();
+    }
 
     public Texture loadTexture(String name,File f){
         if(isLoaded(name))return getTexture(name);

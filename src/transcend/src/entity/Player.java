@@ -22,6 +22,7 @@ import graph.Animation;
 import java.util.HashMap;
 import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.Color;
+import transcend.MainFrame;
 import static transcend.MainFrame.*;
 import world.Element;
 
@@ -31,6 +32,8 @@ public class Player extends Entity implements KeyboardListener,EventListener{
     public static final int FORM_PONY = 2;
     public static final int FORM_DOLPHIN = 3;
     public static final int FORM_EAGLE = 4;
+    public static final double SWITCH_PENALTY = 25;
+    public double POWER_REGENERATION = 1.0/(30.0);
 
     public static final int ELEMENT_ID = 0x2;
     private Element ceiling = null,left = null,right = null,heart = null;
@@ -52,6 +55,7 @@ public class Player extends Entity implements KeyboardListener,EventListener{
     public void init(){
         ieh.addKeyboardListener(this);
         scriptManager.loadScript(fileStorage.getFile("scr/player"));
+        POWER_REGENERATION = 1.0/(MainFrame.ups);
         x=0;y=0;z=0;
 
         setForm(form);
@@ -93,7 +97,9 @@ public class Player extends Entity implements KeyboardListener,EventListener{
 
     public void update(){
         drawable.update();
-
+        if(power<100)power+=POWER_REGENERATION;
+        if(power>100)power=100;
+        
         //HEART
         Element heart2;
         if((heart2=check(x-w/2+3,y+h/2,y+w/2-3,y+h/2))!=null){
@@ -111,7 +117,7 @@ public class Player extends Entity implements KeyboardListener,EventListener{
             v = ground.getCollisionPoint(new Ray(x-w/2+3,y+h,0,0,-1,0));
             if(v!=null)y=v.getY();
         }else{
-            vy-=(Double)scriptManager.s("player").v("vydcc").get();
+            vy-=scriptManager.s("player").v("vydcc").fix(form);
         }
         //CEILING
         if((ceiling=check(x-w/2+3,y+h  ,x+w/2-3,y+h))!=null&&vy>0){
@@ -147,7 +153,7 @@ public class Player extends Entity implements KeyboardListener,EventListener{
         }
 
         //INPUT
-        if(K_JUMP&&ground!=null&&vy==0){vy+=(Double)scriptManager.s("player").v("vyacc").get();}
+        if(K_JUMP&&ground!=null&&vy==0){vy+=scriptManager.s("player").v("vyacc").fix(form);}
 
         updateScriptVars();
         double vxacc = scriptManager.s("player").eval("getVXAcc",null).fix();
@@ -164,7 +170,6 @@ public class Player extends Entity implements KeyboardListener,EventListener{
             }
         } else {
             eh.triggerEvent(Event.PLAYER_ATTACK, wID, null);
-            health-=0.1;
             drawable.setReel(4);
         }
         if(K_SWITCH){
@@ -229,6 +234,8 @@ public class Player extends Entity implements KeyboardListener,EventListener{
         else if(key==ieh.getPlayerKey("RUN"))K_RUN=false;
         else if(key==ieh.getPlayerKey("JUMP"))K_JUMP=false;
         else if(key==ieh.getPlayerKey("SWITCH"))K_SWITCH=false;
+        else if(key==Keyboard.KEY_1&&unlocked[FORM_HUMAN]&&power>SWITCH_PENALTY){power-=SWITCH_PENALTY;setForm(FORM_HUMAN);}
+        else if(key==Keyboard.KEY_2&&unlocked[FORM_MOUSE]&&power>SWITCH_PENALTY){power-=SWITCH_PENALTY;setForm(FORM_MOUSE);}
     }
     public void keyType(int key) {
         if(pause)return;
@@ -267,10 +274,10 @@ public class Player extends Entity implements KeyboardListener,EventListener{
         K_SWITCH=false;
         this.form=form;
         //switch animation
-        drawable.loadTexture(fileStorage.getFile("player"+form),(int[])((Var[])scriptManager.s("player").v("start").get())[form].get(),
-                                                                (int[])((Var[])scriptManager.s("player").v("stop") .get())[form].get(),
-                                                                (int[])((Var[])scriptManager.s("player").v("loop") .get())[form].get(),
-                                                                (int[])((Var[])scriptManager.s("player").v("loop2").get())[form].get());
+        drawable.loadTexture(fileStorage.getFile("player"+form),(int[])(((Var[])scriptManager.s("player").v("start").get())[form].get()),
+                                                                (int[])(((Var[])scriptManager.s("player").v("stop") .get())[form].get()),
+                                                                (int[])(((Var[])scriptManager.s("player").v("loop") .get())[form].get()),
+                                                                (int[])(((Var[])scriptManager.s("player").v("loop2").get())[form].get()));
         drawable.setSpritesize(((int[])scriptManager.s("player").v("spritesize").get())[form]);
         drawable.setPPS(30);
         drawable.setReel(0);

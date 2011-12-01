@@ -29,6 +29,7 @@ public class GameEvent extends Block implements EventListener{
 
     private int type = EVENT_NONE;
     private String to = "";
+    private String tex = "";
 
     public GameEvent(){
         MainFrame.eh.registerEvent(Event.PLAYER_TOUCH, 9,this);
@@ -47,10 +48,19 @@ public class GameEvent extends Block implements EventListener{
 
     public void loadTexture(){
         if(type==EVENT_SWITCH_WORLD){
-            drawable.loadTexture(MainFrame.fileStorage.getFile("portal"));
-            drawable.setSpritesize(128);
-            drawable.calcTile(128, 128);
-            drawable.setSize(128,128);
+            if(tex==""){
+                drawable.loadTexture(MainFrame.fileStorage.getFile("portal"));
+                drawable.setSpritesize(128);
+                drawable.calcTile(w,h);
+                drawable.setSize(w,h);
+            }else{
+                drawable.loadTexture(MainFrame.fileStorage.getFile(tex));
+                int temp=drawable.getTexture().getImageHeight();
+                drawable.setSpritesize(temp);
+                drawable.calcTile(temp,temp);
+                drawable.setSize(temp,temp);
+            }
+            h=5;
         }
         if(type==EVENT_SAVE_WORLD){
             drawable.loadTexture(MainFrame.fileStorage.getFile("savepoint"));
@@ -60,6 +70,10 @@ public class GameEvent extends Block implements EventListener{
             h=5;w=128;
             solid=1;
         }
+    }
+    
+    public boolean checkInside(double ax,double ay){
+        return checkInside(ax,ay,0.0001,0.0001);
     }
 
     public void setAdvancer(String adv){to=adv;}
@@ -104,6 +118,12 @@ public class GameEvent extends Block implements EventListener{
                 MainFrame.worldLoader.saveGame(MainFrame.fileStorage.getFile("save/"+to));
                 MainFrame.player.setSetbackPoint(MainFrame.player.getX(),MainFrame.player.getY());
             }
+            if(type==EVENT_SWITCH_WORLD&&!to.equals("")){
+                MainFrame.loader.setHelper(new LoadHelper(){
+                    public void load(){MainFrame.worldLoader.loadWorld(MainFrame.fileStorage.getFile("world/"+to));}
+                });
+                MainFrame.loader.start();
+            }
         }
     }
 
@@ -114,11 +134,13 @@ public class GameEvent extends Block implements EventListener{
         SimpleSet<String, String> set = super.getOptions();
         set.put("type", type+"");
         set.put("advance",to+"");
+        set.put("tex",tex);
         return set;
     }
 
     public void setOptions(HashMap<String, String> options) {
         super.setOptions(options);
+        if(options.containsKey("tex"))tex=options.get("tex");
         if(options.containsKey("type"))setType(Integer.parseInt(options.get("type")));
         if(options.containsKey("advance"))setAdvancer(options.get("advance"));
         loadTexture();

@@ -2,14 +2,14 @@
 GIT repository set up und Projekt Vorbereitungen getroffen.
 
 [16:00-19:10 30.03.2011] 3:10 
-Pläne für die Block-Basis der Welt ausgelegt.
-Über Event-Handling-Systeme nachgelesen.
-Mit Malakin über Geschwindigkeits-Optimierungen und Welt-Aufbau diskutiert.
+PlÃ¤ne fÃ¼r die Block-Basis der Welt ausgelegt.
+Ãœber Event-Handling-Systeme nachgelesen.
+Mit Malakin Ã¼ber Geschwindigkeits-Optimierungen und Welt-Aufbau diskutiert.
 Event Handling System begonnen.
 MainFrame Klasse geschrieben.
 
 [19:50-21:00 30.03.2011] 1:10 
-Weiterführung des EHS. 
+WeiterfÃ¼hrung des EHS. 
 
 [20:10-21:10 31.03.2011] 1:00 
 Logo design konzepte entworfen.
@@ -24,15 +24,15 @@ Animation Klasse angefangen.
 [13:35-14:35 02.04.2011] 1:00 
 Block Klasse erweitert.
 Entity Klasse erweitert.
-triggerSpecificEvent, triggerAnonymousSpecificEvent zur EventHandler Klasse hinzugefügt.
-Maus & Tastatur Evente hinzugefügt.
-EHS für Argumente erweitert.
-Element Identifikation hinzugefügt.
+triggerSpecificEvent, triggerAnonymousSpecificEvent zur EventHandler Klasse hinzugefÃ¼gt.
+Maus & Tastatur Evente hinzugefÃ¼gt.
+EHS fÃ¼r Argumente erweitert.
+Element Identifikation hinzugefÃ¼gt.
 WorldLoader erweitert.
 
 [18:05-18:40 24.4.2011] 0:35 
 GUI implementation begonnen.
-Über OpenGL primitives und text drawing recherchiert.
+Ãœber OpenGL primitives und text drawing recherchiert.
 
 [20:00-21:55 24.4.2011] 1:55
 itmap Font Rendering implementation angefangen.
@@ -40,12 +40,12 @@ Bitmap Font Rendering aufgegeben und durch Slick-util library ersetzt.
 
 [22:30-23:00 1.5.2011] 0:30
 Probleme mit Slick-util Entdeckt. TrueTypeFont class bringt das Programm zum abstuz.
-Neue Klasse gefunden, die die Slick TrueTypeFont Klasse ohne zusätzliche Library ersetzt.
-Problem gelöst furch hinzufügen von Render Flags.
+Neue Klasse gefunden, die die Slick TrueTypeFont Klasse ohne zusÃ¤tzliche Library ersetzt.
+Problem gelÃ¶st furch hinzufÃ¼gen von Render Flags.
 
 [15:30-19:30 2.5.2011] 4:00
 Probleme mit Fonts scheinen instabil und erscheinen nicht immer.
-DisplayModeChooser Klasse hinzugefügt und in das MainFrame eingebunden.
+DisplayModeChooser Klasse hinzugefÃ¼gt und in das MainFrame eingebunden.
 Das Korrekte setzen des DisplayModes beseitigt das Problem mit den Fonts.
 Probleme mit Alpha blending.
 
@@ -56,29 +56,29 @@ von Ressourcen in jar files bereit.
 [22:20-00:00 3.5.2011] 1:40
 Erweitern der DisplayModeChooser Klasse um einen "Advanced"-Dialog.
 Const Klasse um Registry erweitert.
-Registry speicher- und lade-Funktionen hinzugefügt.
+Registry speicher- und lade-Funktionen hinzugefÃ¼gt.
 Registry in den Advanced-Dialog eingebunden.
 
 [17:30-19:30 27.5.2011] 2:00
 Speicherung der Standard-Werte des DisplayModeChoosers eingebunden.
-GUI temporär aus dem MF entfernt.
+GUI temporÃ¤r aus dem MF entfernt.
 Begin der implementation des WorldLoaders und der einzelnen Block-Elemente.
-Weitere suche nach dem Grund der Inkompatibilität von GL_COLOR_MATERIAL und GL_TEXTURE_2D.
-->Möglicherweise ein LWJGL bug.
+Weitere suche nach dem Grund der InkompatibilitÃ¤t von GL_COLOR_MATERIAL und GL_TEXTURE_2D.
+->MÃ¶glicherweise ein LWJGL bug.
 
 [12:00-16:30 25.6.2011] 4:30
 Implementierung eines dynamischen Block-ladungssystems.
 Vernetzung der Klassen.
 Relokalisierung der LWJGL Native Library.
 Erster erfolgreicher Keyboard/Player test.
-Camera Klasse hinzugefügt zur Steuerung des Views.
+Camera Klasse hinzugefÃ¼gt zur Steuerung des Views.
 Implementierung eines Zoom verfahrens.
-Custom Logger hinzugefügt.
+Custom Logger hinzugefÃ¼gt.
 
 [00:30-3:50 26.6.2011] 3:20
 Behebung des Problems mit GL_COLOR_MATERIAL und GL_TEXTURE_2D.
 Test eines XOR verfahrens.
-JBox2D als mögliche Physik-Engine in Betracht gezogen.
+JBox2D als mÃ¶gliche Physik-Engine in Betracht gezogen.
 
 [16:00-19:00 26.6.2011] 3:00
 Weiterentwicklung des GUI Systems.
@@ -86,15 +86,15 @@ Shader tests.
 
 [6:00-9:45 27.6.2011] 3:45
 Weiteres testen von GLSL.
-Erfolglos; Verwurf des Konzeptes (für jetzt zumindest)
+Erfolglos; Verwurf des Konzeptes (fÃ¼r jetzt zumindest)
 Implementation von Spritesheet basierter Animation.
 
 [15:15-16:00 28.6.2011] 0:45
 Scene-Antialiasing implementation.
 
 [17:30-18:15 18.6.2011] 0:45
-Editor Klasse hinzugefügt.
-Tiling für Texturen implementiert.
+Editor Klasse hinzugefÃ¼gt.
+Tiling fÃ¼r Texturen implementiert.
 Einige Beispiel-Texturen gemalt.
 
 [20:00-21:20 18.6.2011] 1:20
@@ -102,7 +102,7 @@ Layer implementation zur sortierten Zeichnung von Elementen.
 Editor optimierung.
 
 [22:30-23:40 18.6.2011] 1:10
-GTextField hinzugefügt.
+GTextField hinzugefÃ¼gt.
 Probleme mit GPanel behoben.
 Nach Web gesucht um Texturen in BufferedImages zu konvertieren.
 
@@ -112,13 +112,13 @@ Einfache Kollisionserkennung implementiert.
 
 [18:10-18:45 29.6.2011] 0:35 
 Erweitern der Player Klasse.
-Weitere Kollisionsprüfung hinzugefügt.
+Weitere KollisionsprÃ¼fung hinzugefÃ¼gt.
 Auf Version 0.03 fortgeschritten.
 
 [19:15-21:30 29.6.2011] 1:15
 Erweiterte Kollisionserkennung.
 Spieler interaktion verbessert.
-Verhalten von GUI Elementen verändert.
+Verhalten von GUI Elementen verÃ¤ndert.
 
 [22:15-23:30 29.6.2011] 1:15
 WorldLoader um eine Save funktion erweitert.
@@ -127,44 +127,44 @@ Editor um remove Funktion erweitert.
 
 [17:40-19:00 1.7.2011] 1:20
 Problem mit dem Editor und der Zoom Funktion behoben.
-GImage hinzugefügt.
+GImage hinzugefÃ¼gt.
 Background Klasse angefangen.
 Logo Konzipiert und eingebunden.
 
 [22:30-1:50 2/3.7.2011] 3:20
 Background System revidiert.
-Tile System hinzugefügt.
-BElement System hinzugefügt.
+Tile System hinzugefÃ¼gt.
+BElement System hinzugefÃ¼gt.
 Loading System angefangen.
 
 [10:40-12:40 3.7.2011] 2:00
 Loading System erweitert.
 Intelligentes Texturen System eingebunden.
-SoundPool und TexturePool Klassen hinzugefügt und ins MainFrame eingebunden.
+SoundPool und TexturePool Klassen hinzugefÃ¼gt und ins MainFrame eingebunden.
 
 [17:50-18:10 3.7.2011] 0:30
-Sound Klasse hinzugefügt.
+Sound Klasse hinzugefÃ¼gt.
 Loading Screen erweitert.
 
 [22:30-23:50 3.7.2011] 1:20
-SoundPool und Sound Klasse verändert um den Konflikt zu entfernen.
+SoundPool und Sound Klasse verÃ¤ndert um den Konflikt zu entfernen.
 
 [19:30-23:30 12.7.2011] 4:00
 Bugs in WorldLoader, ElementBuilder, Loader, GPanel behoben.
-Automatische schatierung von Tiles auf grund ihrer Z-Ebene hinzugefügt.
-Editor Panel auf eigene Ebene gesetzt und einfacher verfügbar gemacht.
+Automatische schatierung von Tiles auf grund ihrer Z-Ebene hinzugefÃ¼gt.
+Editor Panel auf eigene Ebene gesetzt und einfacher verfÃ¼gbar gemacht.
 Steuerung des Players verbessert.
-BrickBlock hinzugefügt.
+BrickBlock hinzugefÃ¼gt.
 
 [13:20-15:50 13.7.2011] 2:30
-TileSet Klasse hinzugefügt.
+TileSet Klasse hinzugefÃ¼gt.
 Menu-Aufbereitung in extra Klasse verschoben.
-GTextArea Klasse hinzugefügt.
+GTextArea Klasse hinzugefÃ¼gt.
 GPanel um Namensgebung erweitert.
 
 [21:30-1:20 13/14.7.2011] 3:50
-Weitere kleinere Änderungen.
-Einführung von Keyboard Layouts zur korrekten parsung von text eingabe.
+Weitere kleinere Ã„nderungen.
+EinfÃ¼hrung von Keyboard Layouts zur korrekten parsung von text eingabe.
 
 [18:30-22:10 14.7.2011] 3:40
 Erweiterung des Keyboard Layouts.
@@ -174,44 +174,44 @@ Begin des Partikel-Systems.
 Boxen Kollision des Spielers perfektioniert.
 
 [15:00-17:00 15.7.2011] 2:00
-Weiterführung des Partikel-Systems.
+WeiterfÃ¼hrung des Partikel-Systems.
 
 [15:00-18:00 16.7.2011] 3:00
 Animieren des ersten Gegners.
-EnemyB1 hinzugefügt.
+EnemyB1 hinzugefÃ¼gt.
 Editor um Block/Entity modus erweitert.
 
 [23:00-1:00 17/18.7.2011] 2:00
 Beheben von bugs im EventHandler.
-CameraPath klasse hinzugefügt.
+CameraPath klasse hinzugefÃ¼gt.
 
 [18:30-20:10 20.7.2011] 1:40
 EnemyB1 erweitert.
-Animation erweitert um Abspielrichtung. (Animationen können rückwärts abgespielt werden)
+Animation erweitert um Abspielrichtung. (Animationen kÃ¶nnen rÃ¼ckwÃ¤rts abgespielt werden)
 
 [15:30-19:00 23.7.2011] 3:30
-Vektor klasse hinzugefügt.
+Vektor klasse hinzugefÃ¼gt.
 Emitter nach Tile migriert.
 CameraPath fertiggestellt.
-World Element Index hinzugefügt.
-GameEvent Klasse hinzugefügt.
+World Element Index hinzugefÃ¼gt.
+GameEvent Klasse hinzugefÃ¼gt.
 
 [16:15-18:00 6.8.2011] 1:45
-AI Klasse hinzugefügt.
+AI Klasse hinzugefÃ¼gt.
 
 [16:00-18:00 7.8.2011] 2:00
 AI Klasse erweitert.
-GRadioButton hinzugefügt.
+GRadioButton hinzugefÃ¼gt.
 Editor erweitert.
 
 [19:00-21:00 7.8.2011] 2:00
 AI sanitized.
-AI tests durchgeführt.
-Pläne zur erweiterung der AI ausgelegt.
+AI tests durchgefÃ¼hrt.
+PlÃ¤ne zur erweiterung der AI ausgelegt.
 
 [16:50-17:50 8.8.2011] 1:00
 AI erweitert.
-Profiling durchgeführt.
+Profiling durchgefÃ¼hrt.
 Ladebildschirm verbessert.
 
 [13:30-16:00 9.8.2011] 2:30
@@ -219,20 +219,20 @@ Renoise tests.
 
 [13:10-18:00 10.8.2011] 4:50
 AI verbessert.
-Spritesheet für EnemyC1 erstellt.
-Animation für EnemyC1 eingebunden.
+Spritesheet fÃ¼r EnemyC1 erstellt.
+Animation fÃ¼r EnemyC1 eingebunden.
 
 [22:55-00:30 11/12.8.2011] 1:35
-MovingBlock hinzugefügt.
+MovingBlock hinzugefÃ¼gt.
 
 [11:30-13:20 12.8.2011] 1:50
-ComplexBlock hinzugefügt.
-Tesselation eingeführt.
+ComplexBlock hinzugefÃ¼gt.
+Tesselation eingefÃ¼hrt.
 
 [13:40-16:00 12.8.2011] 2:20
-Ray Klasse hinzugefügt.
-Line Klasse hinzugefügt.
-Ray Casting Implementation eingeführt.
+Ray Klasse hinzugefÃ¼gt.
+Line Klasse hinzugefÃ¼gt.
+Ray Casting Implementation eingefÃ¼hrt.
 
 [13:30-20:00 14.8.2011] 6:30
 Kollisionsverfahren verbessert.
@@ -240,7 +240,7 @@ Versions Migration auf 0.04.
 
 [16:30-22:00 16.8.2011] 5:30
 Menu verbessert.
-GList hinzugefügt.
+GList hinzugefÃ¼gt.
 GObject verbessert.
 
 [22:00-23:40 18.8.2011] 1:40
@@ -259,16 +259,16 @@ Cleanup.
 [14:30-20:00 24.8.2011] 5:30
 AbstractGraph erweitert.
 Cleanup.
-Form hinzugefügt.
-GBar hinzugefügt.
-hid Packet hinzugefügt.
-PowerBar hinzugefügt.
+Form hinzugefÃ¼gt.
+GBar hinzugefÃ¼gt.
+hid Packet hinzugefÃ¼gt.
+PowerBar hinzugefÃ¼gt.
 
 [11:00-18:00 27.8.2011] 7:00
-InkBlock hinzugefügt.
+InkBlock hinzugefÃ¼gt.
 InkBlock animation erstellt.
 Game Design studiert.
-FileStorage indexing service hinzugefügt.
+FileStorage indexing service hinzugefÃ¼gt.
 Dateien nach FileStorage migriert.
 
 [16:00-22:00 28.8.2011] 6:00
@@ -279,7 +279,7 @@ Script sprache ausgelegt.
 Script sprache angefangen.
 
 [20:00-22:30 30.8.2011] 2:30
-Script sprache weitergeführt.
+Script sprache weitergefÃ¼hrt.
 
 [14:30-17:00 31.8.2011] 2:30
 Script sprache fertiggestellt.
@@ -298,7 +298,7 @@ NexT/Script erweitert und optimiert.
 Anti-aliasing bug behoben.
 Player erweitert.
 Engine auf version 0.10 migriert.
-DayCycle hinzugefügt.
+DayCycle hinzugefÃ¼gt.
 
 [21:30-23:00 14.9.2011] 1:30
 FORK|Master->Game
@@ -315,70 +315,70 @@ Toolkit erweitert.
 Script System verbessert und bugs behoben.
 
 [16:00-18:10 23.9.2011] 2:10
-FontPool hinzugefügt.
+FontPool hinzugefÃ¼gt.
 GUI Elemente migriert.
 Bugs im Script System behoben.
 
 [20:00-24:00 25.9.2011] 4:00
-Symbole für die Formen erstellt.
-HFormSelector Klasse hinzugefügt und eingebunden.
-Camera shutter hinzugefügt.
-Speichern und Laden von Formen hinzugefügt.
+Symbole fÃ¼r die Formen erstellt.
+HFormSelector Klasse hinzugefÃ¼gt und eingebunden.
+Camera shutter hinzugefÃ¼gt.
+Speichern und Laden von Formen hinzugefÃ¼gt.
 Bewegungsberechnung des Spielers in Skriptsprache umgeschrieben.
 
 [14:25-21:00 27.9.2011] 6:35
 HFormSelector verbessert.
-Dynamisches Key Mapping hinzugefügt.
+Dynamisches Key Mapping hinzugefÃ¼gt.
 Layout "lefty" und "righty" implementiert.
 Player um renn-modus erweitert.
-Enemy abstraktions Klasse hinzugefügt.
-Math umgeschrieben um höhere Kompatibilität mit Var zu erreichen.
-Mixed arrays in Var ermöglicht.
-Multi-dimensionale Arrays in Var ermöglicht.
+Enemy abstraktions Klasse hinzugefÃ¼gt.
+Math umgeschrieben um hÃ¶here KompatibilitÃ¤t mit Var zu erreichen.
+Mixed arrays in Var ermÃ¶glicht.
+Multi-dimensionale Arrays in Var ermÃ¶glicht.
 
 [17:30-18:30 28.9.2011] 1:00
-VaryingForce zum Partikel System hinzugefügt.
-Attractor zum Partikel System hinzugefügt.
+VaryingForce zum Partikel System hinzugefÃ¼gt.
+Attractor zum Partikel System hinzugefÃ¼gt.
 Probleme von GImage skalierung teilweise behoben.
 HFormSelector umgeschrieben.
 
-[20:45-21:30 30.9.2011]
-update() und render() Funktionen in unabhängige Threads verschoben.
+[20:45-21:30 30.9.2011] 0:45
+update() und render() Funktionen in unabhÃ¤ngige Threads verschoben.
 Setback punkte implementiert.
 
-[13:15-14:00 15.10.2011]
-Loader verschönert.
+[13:15-14:00 15.10.2011] 0:45
+Loader verschÃ¶nert.
 Musik angefangen.
 
-[13:00-14:30 17.10.2011]
-Animationsboard für Form1 erstellt.
+[13:00-14:30 17.10.2011] 1:30
+Animationsboard fÃ¼r Form1 erstellt.
 
-[15:30-18:00 18.10.2011]
-Animationssheet für Form1 erstellt.
+[15:30-18:00 18.10.2011] 2:30
+Animationssheet fÃ¼r Form1 erstellt.
 
-[2:30-5:00 22.10.2011]
+[2:30-5:00 22.10.2011] 2:30
 Animation erweitert.
 Bug in der Animations Klasse behoben.
 
-[11:00-17:00 23.10.2011]
-Skizzen für Einstiegslevel erstellt.
-GameObject::Info Klasse hinzugefügt.
+[11:00-17:00 23.10.2011] 6:00
+Skizzen fÃ¼r Einstiegslevel erstellt.
+GameObject::Info Klasse hinzugefÃ¼gt.
 Teuflischer fehler in der Animations Klasse behoben.
 MenuLoader bug behoben.
 Menu Hintergrund erstellt.
 Neues Logo erstellt.
 
-[16:30-20:00 31.10.2011]
+[16:30-20:00 31.10.2011] 3:30
 Intro Level erstellt.
-FitBlock Klasse hinzugefügt.
-GCheckBox hinzugefügt.
-Editor um lösch Fokus erweitert.
+FitBlock Klasse hinzugefÃ¼gt.
+GCheckBox hinzugefÃ¼gt.
+Editor um lÃ¶sch Fokus erweitert.
 Kollisionsproblem beim Spieler behoben.
-Camera argument zum World File hinzugefügt.
+Camera argument zum World File hinzugefÃ¼gt.
 Bugs beim Laden und Speichern der Welt behoben.
-Korrekte viewport skalierung aufgrund der Fenstergrösse eingeführt.
+Korrekte viewport skalierung aufgrund der FenstergrÃ¶sse eingefÃ¼hrt.
 
-[14:30-16:30 5.11.2011]
+[14:30-16:30 5.11.2011] 2:00
 Bugs in Editor behoben.
 Loader um display switch erweitert.
 Map fertiggestellt.
@@ -386,28 +386,45 @@ Tastaturveranschaulichung erstellt.
 Bugs in MainFrame behoben.
 Info Block erweitert.
 
-[14:00-19:00 9.11.2011]
+[14:00-19:00 9.11.2011] 5:00
 Begin der Schriftlichen Arbeit.
 
-[15:00-19:00 15.11.2011]
-Weiterführung der Schriftlichen Arbeit.
+[15:00-19:00 15.11.2011] 4:00
+WeiterfÃ¼hrung der Schriftlichen Arbeit.
 
-[20:45-22:00 20.11.2011]
+[20:45-22:00 20.11.2011] 1:15
 Erstellung des gamedesign diagrams.
-Weiterführung der Schriftlichen Arbeit.
+WeiterfÃ¼hrung der Schriftlichen Arbeit.
 
-[19:00-24:00 21.11.2011]
-Weiterführung der Schriftlichen Arbeit.
+[19:00-24:00 21.11.2011] 5:00
+WeiterfÃ¼hrung der Schriftlichen Arbeit.
 Erstellung des Transcend-Engine Diagramms.
 
-[14:15-15:45 26.11.2011]
-Weiterführung der Schriftlichen Arbeit.
+[14:15-15:45 26.11.2011] 1:00
+WeiterfÃ¼hrung der Schriftlichen Arbeit.
 
-[13:45-18:00 27.11.2011]
-Weiterführung der Schriftlichen Arbeit.
+[13:45-18:00 27.11.2011] 4:15
+WeiterfÃ¼hrung der Schriftlichen Arbeit.
 
-[20:30-1:30 28/29.11.2011]
-Weiterführung der Schriftlichen Arbeit.
+[20:30-1:30 28/29.11.2011] 5:00
+WeiterfÃ¼hrung der Schriftlichen Arbeit.
 
-[17:00-3:00 29/30.11.2011]
+[18:00-3:20 29/30.11.2011] 9:20
 Abschluss der Schriftlichen Arbeit.
+
+[13:20-18:20 30.11.2011] 5:00
+Erweiterung des Form1Human spritesheets.
+Erstellung des Form2Mouse spritesheets.
+Erstellung der intro-warp animation.
+
+[20:30- 30.11.2011]
+Tastatur bindings korrigiert.
+Bug mit multidminensionalen arrays in NexT/Script behoben.
+Zweite Form ins spiel eingebunden.
+Einige Bugs behoben.
+Cursor wÃ¤hrend dem Spiel unsichtbar gemacht.
+Verbindung zwischen dem intro Level und dem ersten Level hergestellt.
+
+
+--------------------------------
+[29.03.2011 - 30.11.2011] 233:05

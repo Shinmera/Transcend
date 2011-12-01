@@ -39,7 +39,6 @@ public class DayCycle extends Tile{
     public void update(){
         time++;
         if(time>=MAX_TIME)time=0;
-        ((GLabel)MainFrame.hud.get("hidinfo")).setText("T: "+time);
         if(time<MAX_TIME/full)                  part=PART_EVENING;
         else if(time<MAX_TIME/2)                part=PART_NIGHT;
         else if(time<MAX_TIME/full*(full/2+1))  part=PART_MORNING;
