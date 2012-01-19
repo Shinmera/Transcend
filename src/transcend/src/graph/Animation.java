@@ -54,7 +54,7 @@ public class Animation {
     }
 
     public boolean loadTexture(File f){
-        if(!f.exists())return false;
+        if((f==null)||(!f.exists()))return false;
         texture = MainFrame.texturePool.loadTexture(f.getName(), f);
         return true;
     }
