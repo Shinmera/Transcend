@@ -206,8 +206,10 @@ public class MenuLoader extends LoadHelper{
                 super.setVisible(visible);
                 ((GList)this.get("list")).clear();
                 File[] saves = new File(basedir,"world"+File.separator+"save"+File.separator).listFiles();
-                for(int i=0;i<saves.length;i++){
-                    if(!saves[i].isDirectory())((GList)this.get("list")).addListElement(saves[i].getName());
+                if(saves!=null){
+                    for(int i=0;i<saves.length;i++){
+                        if(!saves[i].isDirectory())((GList)this.get("list")).addListElement(saves[i].getName());
+                    }
                 }
             }
         };
