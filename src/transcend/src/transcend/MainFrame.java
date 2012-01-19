@@ -45,6 +45,7 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.LWJGLUtil;
 import java.util.logging.Level;
+import javax.swing.JOptionPane;
 import static org.lwjgl.opengl.GL11.*;
 import static transcend.Jitter.j;
 import static transcend.Jitter.jps;
@@ -86,7 +87,7 @@ public class MainFrame implements KeyboardListener{
     private static Color clearcolor = new Color(0.2f,0.2f,0.2f);
     private final Updater updater = new Updater();
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws Throwable{
         MainFrame mf = new MainFrame();
         try{
             if(!DisplayModeChooser.showDialog("Display Mode"))System.exit(0);
@@ -158,6 +159,7 @@ public class MainFrame implements KeyboardListener{
         ieh.addMouseListener(editor);
 
         //LOAD MENU
+        texturePool.loadTexture("player0", fileStorage.getFile("player0"));
         loader.setHelper(new MenuLoader());
         loader.start();
     }
@@ -253,7 +255,7 @@ public class MainFrame implements KeyboardListener{
         glBindTexture(GL_TEXTURE_2D, 0); //release
     }
 
-    public void run() {
+    public void run() throws Throwable {
         while(!Display.isCloseRequested()) {
             try{
                 if(Display.isVisible()) {
@@ -271,7 +273,9 @@ public class MainFrame implements KeyboardListener{
                 Display.update();
                 Display.sync(fps);
             }catch(Throwable ex){
-                Const.LOGGER.log(Level.SEVERE,"Exception in main run loop! Attempting to continue... ",ex);
+                Const.LOGGER.log(Level.SEVERE,"Exception in main run loop!",ex);
+                JOptionPane.showMessageDialog(null,"Encountered an exception in the main loop!\nStack Trace:\n"+ex.getMessage()+"\n\nGoodbye!");
+                throw ex;
             }
         }
     }

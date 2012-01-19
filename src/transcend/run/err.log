@@ -1,0 +1,104 @@
+11:00 [INFO][MF] Booting up...
+null.transcend.MainFrame.<clinit>
+11:00 [INFO][CONST] Loading
+null.transcend.Const.loadRegistry
+11:00 [INFO][InputEventHandler] Loaded layout swiss. 23 keys mapped.
+null.event.InputEventHandler.<init>
+11:00 [INFO][InputEventHandler] Loaded layout lefty. 10 keys mapped.
+null.event.InputEventHandler.<init>
+11:00 [INFO][FileStorage] Initial indexing...
+null.transcend.FileStorage.<init>
+11:00 [INFO][FileStorage] indexing .
+null.transcend.FileStorage.indexFolder
+11:00 [INFO][FileStorage] indexing data
+null.transcend.FileStorage.indexFolder
+11:00 [INFO][FileStorage] indexing native
+null.transcend.FileStorage.indexFolder
+11:00 [INFO][FileStorage] indexing linux
+null.transcend.FileStorage.indexFolder
+11:00 [INFO][FileStorage] indexing macosx
+null.transcend.FileStorage.indexFolder
+11:00 [INFO][FileStorage] indexing solaris
+null.transcend.FileStorage.indexFolder
+11:00 [INFO][FileStorage] indexing windows
+null.transcend.FileStorage.indexFolder
+11:00 [INFO][FileStorage] indexing scr
+null.transcend.FileStorage.indexFolder
+11:00 [INFO][FileStorage] indexing snd
+null.transcend.FileStorage.indexFolder
+11:00 [INFO][FileStorage] indexing tex
+null.transcend.FileStorage.indexFolder
+11:00 [INFO][FileStorage] indexing world
+null.transcend.FileStorage.indexFolder
+11:00 [INFO][FileStorage] indexing lib
+null.transcend.FileStorage.indexFolder
+11:00 [INFO][CONST] Loading
+null.transcend.Const.loadRegistry
+11:00 [INFO]LWJGL found 5 display modes.
+null.gui.DisplayModeChooser.<init>
+11:00 [INFO][CONST] Saving
+null.transcend.Const.saveRegistry
+11:00 [INFO][CONST] Loading
+null.transcend.Const.loadRegistry
+11:00 [INFO][MF] Initializing...
+null.transcend.MainFrame.create
+11:00 [INFO][MF] initGL
+null.transcend.MainFrame.initGL
+11:00 [INFO][MF] initGame
+null.transcend.MainFrame.initGame
+11:00 [INFO][FontPool] Reloading Dialog.bold 20
+null.graph.FontPool.reloadFont
+11:00 [INFO][TexturePool] Reloading load.png at /home/linus/Projects/transcend/src/transcend/run/./data/load.png
+null.graph.TexturePool.reloadTexture
+11:00 [INFO][TexturePool] Reloading player0 at /home/linus/Projects/transcend/src/transcend/run/./tex/player0.png
+null.graph.TexturePool.reloadTexture
+11:00 [SEVERE][TexturePool] Failed to load texture at /home/linus/Projects/transcend/src/transcend/run/./tex/player0.png.
+null.graph.TexturePool.reloadTexture: Attempt to allocate a texture to big for the current hardware
+11:00 [INFO][Loader] Loading...
+null.gui.Loader.run
+11:00 [INFO][FontPool] Reloading Dialog.plain 12
+null.graph.FontPool.reloadFont
+11:00 [INFO][TexturePool] Reloading health_bar.png at /home/linus/Projects/transcend/src/transcend/run/./tex/health_bar.png
+null.graph.TexturePool.reloadTexture
+11:00 [INFO][TexturePool] Reloading form_human.png at /home/linus/Projects/transcend/src/transcend/run/./tex/form_human.png
+null.graph.TexturePool.reloadTexture
+11:00 [INFO][TexturePool] Reloading form_mouse.png at /home/linus/Projects/transcend/src/transcend/run/./tex/form_mouse.png
+null.graph.TexturePool.reloadTexture
+11:00 [INFO][TexturePool] Reloading form_pony.png at /home/linus/Projects/transcend/src/transcend/run/./tex/form_pony.png
+null.graph.TexturePool.reloadTexture
+11:00 [INFO][TexturePool] Reloading form_dolphin.png at /home/linus/Projects/transcend/src/transcend/run/./tex/form_dolphin.png
+null.graph.TexturePool.reloadTexture
+11:00 [INFO][TexturePool] Reloading form_eagle.png at /home/linus/Projects/transcend/src/transcend/run/./tex/form_eagle.png
+null.graph.TexturePool.reloadTexture
+11:00 [INFO][TexturePool] Reloading logo.png at /home/linus/Projects/transcend/src/transcend/run/./tex/logo.png
+null.graph.TexturePool.reloadTexture
+11:00 [INFO][Loader] 14%
+null.gui.Loader.run
+11:00 [INFO][Loader] 28%
+null.gui.Loader.run
+11:00 [INFO][Loader] 42%
+null.gui.Loader.run
+11:00 [INFO][Loader] 57%
+null.gui.Loader.run
+11:00 [INFO][Loader] 71%
+null.gui.Loader.run
+11:00 [INFO][Loader] 85%
+null.gui.Loader.run
+11:00 [INFO][Loader] 100%
+null.gui.Loader.run
+11:00 [INFO][Loader] Finished loading. Ready.
+null.gui.Loader.run
+11:00 [INFO][Loader] Loading...
+null.gui.Loader.run
+11:00 [INFO][World] Clearing sound pool
+null.world.WorldLoader.loadWorld
+11:00 [INFO][World] Loading World from /home/linus/Projects/transcend/src/transcend/run/world/menu.tw
+null.world.WorldLoader.loadWorld
+11:00 [INFO][TexturePool] Reloading player0.png at /home/linus/Projects/transcend/src/transcend/run/./tex/player0.png
+null.graph.TexturePool.reloadTexture
+11:00 [SEVERE]Exception in main run loop!
+null.transcend.MainFrame.run: Attempt to use deferred texture before loading and resource not found: java.io.FileInputStream@1031310.PNG
+11:00 [SEVERE][MF] Error in main thread!
+null.transcend.MainFrame.main: Attempt to use deferred texture before loading and resource not found: java.io.FileInputStream@1031310.PNG
+11:00 [INFO][MF] Shutting down...
+null.transcend.MainFrame.destroy

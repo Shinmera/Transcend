@@ -31,6 +31,7 @@ import static org.lwjgl.opengl.GL11.*;
 public class ComplexBlock extends Block{
     private GLUtessellator tesselator;
     private ArrayList<Point> vertices = new ArrayList<Point>();
+    private String texture = "";
 
     public ComplexBlock() {
         tesselator = GLU.gluNewTess();
@@ -62,6 +63,7 @@ public class ComplexBlock extends Block{
         this.vertices=vertices;
     }
 
+    public void setTexture(String tex){texture=tex;}
     public void setVertices(ArrayList<Point> vertices){this.vertices=vertices;}
     public ArrayList<Point> getVertices(){return vertices;}
 
@@ -87,6 +89,7 @@ public class ComplexBlock extends Block{
                 }
             }
         }
+        if(o.containsKey("tex"))setTexture(o.get("tex"));
     }
     
     public SimpleSet<String,String> getOptions(){
@@ -95,6 +98,7 @@ public class ComplexBlock extends Block{
             o.put("p"+Toolkit.unifyNumberString(i,3)+"x",vertices.get(i).getX()+"");
             o.put("p"+Toolkit.unifyNumberString(i,3)+"y",vertices.get(i).getY()+"");
         }
+        o.put("tex", texture);
         return null;
     }
 
@@ -134,7 +138,8 @@ public class ComplexBlock extends Block{
     public Vector getCollisionPoint(Ray r){
         double hits = Double.MAX_VALUE;
         for(int i=1;i<vertices.size();i++){
-            double hits2 = new Line(vertices.get(i-1).getX(),vertices.get(i-1).getY(),0,vertices.get(i).getX(),vertices.get(i).getY(),0).getIntersection2D(r);
+            double hits2 = new Line(vertices.get(i-1).getX(),vertices.get(i-1).getY(),0,
+                                    vertices.get(i).getX(),  vertices.get(i).getY()  ,0).getIntersection2D(r);
             if(hits2<hits&&hits2>0)hits=hits2;
         }
         if(hits>0)return r.getPoint(hits);
@@ -144,6 +149,7 @@ public class ComplexBlock extends Block{
     public void draw(){
         glPushMatrix();
         //FIXME: TEXTURES
+        
         tesselator.gluTessProperty(GLU.GLU_TESS_WINDING_RULE,GLU.GLU_TESS_WINDING_POSITIVE);
         tesselator.gluTessBeginPolygon(null);
             for(int i=0;i<vertices.size();i++){

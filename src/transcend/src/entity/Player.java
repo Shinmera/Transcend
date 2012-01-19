@@ -111,11 +111,17 @@ public class Player extends Entity implements KeyboardListener,EventListener{
         }else heart=null;
         //GROUND
         if(((ground=(Block)check(x-w/2+3,y+1,x+w/2-3,y+1))!=null || (ground=(Block)check(x-w/2+3,y+vy  ,x+w/2-3,y+vy))!=null)){
-            vy=0;
-            Vector v = ground.getCollisionPoint(new Ray(x+w/2-3,y+h,0,0,-1,0));
-            if(v!=null)y=v.getY();else
-            v = ground.getCollisionPoint(new Ray(x-w/2+3,y+h,0,0,-1,0));
-            if(v!=null)y=v.getY();
+            double y1=Double.MAX_VALUE;
+            double y2=Double.MAX_VALUE;
+            
+            Vector v = ground.getCollisionPoint(new Ray(x+w/2-3,y+h,0,0,-1,0));if(v!=null)y1=v.getY();
+                   v = ground.getCollisionPoint(new Ray(x-w/2+3,y+h,0,0,-1,0));if(v!=null)y2=v.getY();
+            
+            if(y1!=Double.MAX_VALUE&&y2!=Double.MAX_VALUE){
+                vy=0;
+                if(y1>y2)y=y1;
+                else     y=y2;
+            }
         }else{
             vy-=scriptManager.s("player").v("vydcc").fix(form);
         }

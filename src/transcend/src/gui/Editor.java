@@ -1,5 +1,5 @@
 /**********************\
-  file: Expression file is undefined on line 2, column 11 in Templates/Classes/Class.java.
+  file: Editor.java
   package: gui
   author: Nick
   team: NexT
@@ -143,6 +143,12 @@ public class Editor extends GObject implements MouseListener{
         if(button==0&&inComplex){
             int x = Mouse.getX();
             int y = Mouse.getY();
+            x/=MainFrame.camera.getZoom();
+            y/=MainFrame.camera.getZoom();
+            x+=MainFrame.camera.getRelativeX();
+            y+=MainFrame.camera.getRelativeY();
+            x=roundSampled(x,tilesize);
+            y=roundSampled(y,tilesize);
             complexPoints.add(new Point(x,y));
             return;
         }
@@ -151,6 +157,8 @@ public class Editor extends GObject implements MouseListener{
             y/=MainFrame.camera.getZoom();
             x+=MainFrame.camera.getRelativeX();
             y+=MainFrame.camera.getRelativeY();
+            x=roundSampled(x,tilesize);
+            y=roundSampled(y,tilesize);
             int bx=(int) (Mouse.getX()/MainFrame.camera.getZoom() + MainFrame.camera.getRelativeX())-x;
             int by=(int) (Mouse.getY()/MainFrame.camera.getZoom() + MainFrame.camera.getRelativeY())-y;
             if(bx<0){bx*=-1;x-=bx;}
@@ -158,8 +166,6 @@ public class Editor extends GObject implements MouseListener{
             if(by<tilesize)by=tilesize;
             bx=roundSampled(bx,tilesize);
             by=roundSampled(by,tilesize);
-            x=roundSampled(x,tilesize);
-            y=roundSampled(y,tilesize);
 
             if(bx>0&&by>0){
                 final HashMap<String,String> args = new HashMap<String,String>();
@@ -168,10 +174,6 @@ public class Editor extends GObject implements MouseListener{
                     if(complexPoints.size()<3)return;//not enough points.
                     for(int i=0;i<complexPoints.size();i++){
                         int tx=complexPoints.get(i).getX(),ty=complexPoints.get(i).getY();
-                        tx/=MainFrame.camera.getZoom();
-                        ty/=MainFrame.camera.getZoom();
-                        tx+=MainFrame.camera.getRelativeX();
-                        ty+=MainFrame.camera.getRelativeY();
                         args.put("p"+Toolkit.unifyNumberString(i,3)+"x",tx+"");
                         args.put("p"+Toolkit.unifyNumberString(i,3)+"y",ty+"");
                     }
