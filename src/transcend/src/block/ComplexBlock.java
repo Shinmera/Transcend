@@ -38,7 +38,7 @@ public class ComplexBlock extends Block{
         solid=1;
 
         //Copied from http://www.java2s.com/Open-Source/Java-Document/Game/Lightweight-Java-Game-Library-2.4.2/org/lwjgl/test/glu/tessellation/TessellationTest.java.htm
-        TessCallback callback = new TessCallback(true);
+        TessCallback callback = new TessCallback(false);
         tesselator.gluTessCallback(GLU.GLU_TESS_VERTEX, callback);
         tesselator.gluTessCallback(GLU.GLU_TESS_BEGIN, callback);
         tesselator.gluTessCallback(GLU.GLU_TESS_END, callback);
@@ -51,7 +51,7 @@ public class ComplexBlock extends Block{
         solid=1;
 
         //Copied from http://www.java2s.com/Open-Source/Java-Document/Game/Lightweight-Java-Game-Library-2.4.2/org/lwjgl/test/glu/tessellation/TessellationTest.java.htm
-        TessCallback callback = new TessCallback(true);
+        TessCallback callback = new TessCallback(false);
         tesselator.gluTessCallback(GLU.GLU_TESS_VERTEX, callback);
         tesselator.gluTessCallback(GLU.GLU_TESS_BEGIN, callback);
         tesselator.gluTessCallback(GLU.GLU_TESS_END, callback);
@@ -149,11 +149,11 @@ public class ComplexBlock extends Block{
     public void draw(){
         glPushMatrix();
         //FIXME: TEXTURES
-        
+        if(texture.length()!=0)MainFrame.texturePool.getTexture(texture).bind();
         tesselator.gluTessProperty(GLU.GLU_TESS_WINDING_RULE,GLU.GLU_TESS_WINDING_POSITIVE);
         tesselator.gluTessBeginPolygon(null);
             for(int i=0;i<vertices.size();i++){
-                double data[] = {vertices.get(i).getX(),vertices.get(i).getY(),0.0,i/vertices.size(),i/vertices.size()};
+                double data[] = {vertices.get(i).getX(),vertices.get(i).getY(),0.0,0.0,1.0,1.0};
                 tesselator.gluTessVertex(data, 0, new VertexData(data));
             }
         tesselator.gluTessEndPolygon();

@@ -34,7 +34,7 @@ public class Background extends Tile{
 
     public void setTexture(String tex){
         this.tex=tex;
-        drawable.loadTexture(MainFrame.fileStorage.getFile("tex/"+tex));
+        drawable.loadTexture(MainFrame.fileStorage.getFile("bg/"+tex));
         drawable.setSpritesize(drawable.getTexture().getImageWidth());
         if(stretch){
             drawable.setTileH(1);

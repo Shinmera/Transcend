@@ -22,6 +22,7 @@ public class FileStorage {
     public FileStorage(){
         Const.LOGGER.info("[FileStorage] Initial indexing...");
         indexFolder(MainFrame.basedir);
+        Const.LOGGER.info("[FileStorage] Done, indexed "+indexed.size()+" files.");
     }
 
     public File getFile(String name){
@@ -35,7 +36,9 @@ public class FileStorage {
     public void storeFile(String name,File file){
         if(file.isDirectory())return;
         if(name.contains("/"))fullName.put(name.substring(name.indexOf("/")+1), name);
-        else fullName.put(name,name);
+        else                  fullName.put(name,name);
+        if(storage.containsValue(file))Const.LOGGER.warning("[FileStorage] Warning: Re-indexing file "+file);
+        if(storage.containsKey(name))Const.LOGGER.warning("[FileStorage] Warning: Overwritign file "+file);
         storage.put(name, file);
     }
 
@@ -43,12 +46,11 @@ public class FileStorage {
     public void indexFolder(File folder){
         if(!folder.isDirectory())return;
         if(indexed.contains(folder))return;
-        Const.LOGGER.info("[FileStorage] indexing "+folder.getName());
         indexed.add(folder);
         File[] contents = folder.listFiles();
         for(int i=0;i<contents.length;i++){
             if(contents[i].isDirectory())indexFolder(contents[i]);
-            storeFile(getFileName(contents[i]), contents[i]);
+            else storeFile(getFileName(contents[i]), contents[i]);
         }
     }
 

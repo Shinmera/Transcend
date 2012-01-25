@@ -12,6 +12,7 @@ package entity;
 import NexT.script.Var;
 import NexT.util.Ray;
 import NexT.util.SimpleSet;
+import NexT.util.Toolkit;
 import NexT.util.Vector;
 import block.Block;
 import event.Event;
@@ -105,7 +106,6 @@ public class Player extends Entity implements KeyboardListener,EventListener{
         if((heart2=check(x-w/2+3,y+h/2,y+w/2-3,y+h/2))!=null){
             if((heart==null)||(heart2.wID!=heart.wID)){
                 eh.triggerSpecificEvent(Event.PLAYER_TOUCH, wID,  heart2.wID, null);
-                System.out.println("TOUCH "+heart2.wID);
                 heart=heart2;
             }
         }else heart=null;
@@ -117,10 +117,10 @@ public class Player extends Entity implements KeyboardListener,EventListener{
             Vector v = ground.getCollisionPoint(new Ray(x+w/2-3,y+h,0,0,-1,0));if(v!=null)y1=v.getY();
                    v = ground.getCollisionPoint(new Ray(x-w/2+3,y+h,0,0,-1,0));if(v!=null)y2=v.getY();
             
-            if(y1!=Double.MAX_VALUE&&y2!=Double.MAX_VALUE){
+            if(Toolkit.p(y1)!=Double.MAX_VALUE&&Toolkit.p(y2)!=Double.MAX_VALUE){
                 vy=0;
-                if(y1>y2)y=y1;
-                else     y=y2;
+                if(y1<=y2)y=y1-1;
+                else      y=y2-1;
             }
         }else{
             vy-=scriptManager.s("player").v("vydcc").fix(form);
@@ -190,7 +190,7 @@ public class Player extends Entity implements KeyboardListener,EventListener{
         if(vy<0){drawable.setReel(3);}
         if((right==null&&vxacc>0)||(left==null&&vxacc<0))vx=vxacc;
 
-        if(/*(left!=null&&right!=null)||*/(ground!=null&&ceiling!=null))die();
+        //if(/*(left!=null&&right!=null)||*/(ground!=null&&ceiling!=null))die();
         
         if(health<=0)die();
 
@@ -204,10 +204,8 @@ public class Player extends Entity implements KeyboardListener,EventListener{
         vx=0;vy=0;
         lifes--;
         if(lifes<=0){
-            System.out.println("DEATH");
             //FIXME ADD SETBACK
         }else{
-            System.out.println("SETBACK");
             health=100;
             x=backX;
             y=backY;

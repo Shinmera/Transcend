@@ -20,14 +20,14 @@ public class TileBlock extends Tile{
     public TileBlock(int x,int y,int w,int h,String tex){
         super(x,y,w,h);
         this.tex=tex;
-        drawable.loadTexture(MainFrame.fileStorage.getFile("tex/"+tex));
+        drawable.loadTexture(MainFrame.fileStorage.getFile(tex));
         drawable.calcTile(w, h);
     }
 
     public void setTexture(String tex){
         if(tex.length()==0||tex.equals("null"))return;
         this.tex=tex;
-        drawable.loadTexture(MainFrame.fileStorage.getFile("tex/"+tex));
+        drawable.loadTexture(MainFrame.fileStorage.getFile(tex));
         drawable.calcTile(w, h);
     }
 

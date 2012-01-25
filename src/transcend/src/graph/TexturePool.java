@@ -35,7 +35,7 @@ public class TexturePool {
 
     public Texture loadTexture(String name,File f){
         if(isLoaded(name))return getTexture(name);
-        return reloadTexture(name,f);
+        else              return reloadTexture(name,f);
     }
 
     public Texture reloadTexture(String name,File f){
@@ -54,6 +54,7 @@ public class TexturePool {
     }
 
     public Texture getTexture(String name){
+        if(!textures.containsKey(name))Const.LOGGER.warning("Accessing inexistant texture '"+name+"'!");
         return textures.get(name);
     }
 

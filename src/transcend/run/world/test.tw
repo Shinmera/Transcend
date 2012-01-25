@@ -1,0 +1,17 @@
+#!transcend world file
+world{
+bgc: 0,0,0,255
+camera: follow 1.0
+}
+
+Player{
+x: 0
+y: 0
+}
+
+BlankBlock{
+x:-64
+y:-64
+w:128
+h:64
+}

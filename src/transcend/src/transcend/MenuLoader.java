@@ -27,15 +27,10 @@ public class MenuLoader extends LoadHelper{
         GImage i_logo = new GImage("logo");
         i_logo.setBounds(DISPLAY_WIDTH/2-DISPLAY_WIDTH/4,DISPLAY_HEIGHT-DISPLAY_HEIGHT/4,DISPLAY_WIDTH/2,DISPLAY_HEIGHT/4);
         menu.add(i_logo);
-        hud.setVisible(false);
+        hud.setVisible(true);
         
         editor.setActive(false);
-        menu.setVisible(true);
-        menu.get("p_pause").setVisible(false);
-        menu.get("p_load").setVisible(false);
-        menu.get("p_settings").setVisible(false);
-        menu.get("p_help").setVisible(false);
-        pause();
+        menu.setVisible(false);
     }
 
     private void constructMainPane(){
@@ -85,8 +80,6 @@ public class MenuLoader extends LoadHelper{
         b_load.autoBounds(p_main, 0, p_main.getHeight()-80, panel_width, 30);
         b_help.autoBounds(p_main, 0, p_main.getHeight()-130, panel_width, 30);
         b_settings.autoBounds(p_main, 0, p_main.getHeight()-170, panel_width, 30);
-
-
 
         p_main.setBackground(new Color(255,255,255,150));
         p_main.add(b_quit);
@@ -148,9 +141,11 @@ public class MenuLoader extends LoadHelper{
         GPanel p_pause  = new GPanel(DISPLAY_WIDTH/2-panel_width/2,0,panel_width,DISPLAY_HEIGHT-DISPLAY_HEIGHT/4);
         GButton b_editor = new GButton("Toggle Editor"){
             public void onRelease(){if(editor.getActive()){
-                editor.setActive(false);this.setBackground(Color.red);
+                editor.setActive(false);
+                this.setBackground(Color.red);
             }else{
-                editor.setActive(true);this.setBackground(Color.green);
+                editor.setActive(true);
+                this.setBackground(Color.green);
             }}
         };
         //LOAD BUTTON

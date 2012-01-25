@@ -47,7 +47,6 @@ public class TessCallback extends GLUtessellatorCallbackAdapter {
     public void vertex(Object vertexData) {
         VertexData vertex = (VertexData) vertexData;
 
-        GL11.glVertex3d(vertex.data[0], vertex.data[1], vertex.data[2]);
         if(!textured){
             if(vertex.data.length==6)new Color((float)vertex.data[3], (float)vertex.data[4], (float)vertex.data[5]).bind();
             if(vertex.data.length==7)new Color((float)vertex.data[3], (float)vertex.data[4], (float)vertex.data[5],(float)vertex.data[6]).bind();
@@ -55,5 +54,6 @@ public class TessCallback extends GLUtessellatorCallbackAdapter {
             if(vertex.data.length==6)GL11.glTexCoord3d((float)vertex.data[3], (float)vertex.data[4], (float)vertex.data[5]);
             else                     GL11.glTexCoord2d((float)vertex.data[3], (float)vertex.data[4]);
         }
+        GL11.glVertex3d(vertex.data[0], vertex.data[1], vertex.data[2]);
     }
 }

@@ -52,15 +52,17 @@ import static transcend.Jitter.jps;
 
 public class MainFrame implements KeyboardListener{
     static{
-        System.setProperty("org.lwjgl.librarypath",new File(new File(new File("."), "native"), LWJGLUtil.getPlatformName()).getAbsolutePath());
-        Toolkit.printMenu("><Transcend Engine v"+Const.VERSION+"\n"+
-                          "(c)2011 "+Const.MAINTAINER+" developed by "+Const.DEVELOPER+"\n"+
+        try{System.setProperty("org.lwjgl.librarypath"  ,new File(new File(new File(System.getProperty("user.dir")), "native"), LWJGLUtil.getPlatformName()).getAbsolutePath());
+        }catch(Exception ex){Const.LOGGER.log(Level.SEVERE,"Failed to set LWJGL library path!",ex);}
+        org.lwjgl.Sys.initialize();
+        Toolkit.printMenu("><Transcend Engine v"+Const.VERSION+" \n"+
+                          "(c)2011-2012 "+Const.MAINTAINER+" \n"+
+                          "Developed by "+Const.DEVELOPER+"\n"+
                           "http://www.tymoon.eu", "/", 1, null);
         Const.LOGGER.info("[MF] Booting up...");
     }
-
     public static final Const CONST = new Const();
-    public static final File basedir = new File(".");
+    public static final File basedir = new File(System.getProperty("user.dir"));
     public static final World world = new World();
     public static final WorldLoader worldLoader = new WorldLoader();
     public static final ElementBuilder elementBuilder = new ElementBuilder();
@@ -134,8 +136,9 @@ public class MainFrame implements KeyboardListener{
             AL.destroy();
         }catch(Exception ex){//Apparently shit can go bonkers in this.
             Const.LOGGER.log(Level.SEVERE,"Couldn't clean up properly!",ex);
+        }finally{
+            System.exit(0);
         }
-        System.exit(0);
     }
 
     public void initGame(){
@@ -159,7 +162,6 @@ public class MainFrame implements KeyboardListener{
         ieh.addMouseListener(editor);
 
         //LOAD MENU
-        texturePool.loadTexture("player0", fileStorage.getFile("player0"));
         loader.setHelper(new MenuLoader());
         loader.start();
     }
@@ -203,7 +205,7 @@ public class MainFrame implements KeyboardListener{
         //Load default world
         if(!worldLoader.isLoaded()&&!loader.isLoading()){
             loader.setHelper(new LoadHelper(){public void load(){
-                worldLoader.loadWorld(new File("world"+File.separator+"menu.tw"));
+                worldLoader.loadWorld(new File("world"+File.separator+"test.tw"));
             }});
             loader.start();
         }
@@ -274,7 +276,7 @@ public class MainFrame implements KeyboardListener{
                 Display.sync(fps);
             }catch(Throwable ex){
                 Const.LOGGER.log(Level.SEVERE,"Exception in main run loop!",ex);
-                JOptionPane.showMessageDialog(null,"Encountered an exception in the main loop!\nStack Trace:\n"+ex.getMessage()+"\n\nGoodbye!");
+                org.lwjgl.Sys.alert("Transcend Engine "+Const.VERSION,"Encountered an exception in the main loop!\nStack Trace:\n"+ex.getMessage()+"\n\nGoodbye!");
                 throw ex;
             }
         }

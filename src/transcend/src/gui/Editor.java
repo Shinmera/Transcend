@@ -70,9 +70,17 @@ public class Editor extends GObject implements MouseListener{
             glRecti(x, y, Mouse.getX(), Mouse.getY());
             glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
+            
+            Color.red.bind();
             glBegin(GL_LINE_LOOP);
                 for(int i=0;i<complexPoints.size();i++){
-                    glVertex2i(complexPoints.get(i).getX(),complexPoints.get(i).getY());
+                    int x=complexPoints.get(i).getX();
+                    int y=complexPoints.get(i).getY();
+                    x-=MainFrame.camera.getRelativeX();
+                    y-=MainFrame.camera.getRelativeY();
+                    x*=MainFrame.camera.getZoom();
+                    y*=MainFrame.camera.getZoom();
+                    glVertex2i(x,y);
                 }
             glEnd();
 

@@ -97,7 +97,7 @@ public class DisplayModeChooser extends JDialog implements ActionListener, ItemL
                 }
             }
             
-            if(dmodes.size()==0){
+            if(dmodes.size()<=1){
                 GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
                 GraphicsDevice[] gs = ge.getScreenDevices();
                 java.awt.DisplayMode[] dms = gs[0].getDisplayModes();
@@ -115,7 +115,7 @@ public class DisplayModeChooser extends JDialog implements ActionListener, ItemL
                     }
                 }
             }
-            if(dmodes.size()==0){
+            if(dmodes.size()<=2){
                 Const.LOGGER.log(Level.WARNING,"No display modes found. Falling back to manual.");
                     DisplayMode mode = new DisplayMode(800,600);
                     String label = mode.getWidth()+"x"+mode.getHeight()+" @"+mode.getFrequency();
