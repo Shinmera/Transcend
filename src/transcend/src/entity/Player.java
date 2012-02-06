@@ -111,17 +111,18 @@ public class Player extends Entity implements KeyboardListener,EventListener{
         }else heart=null;
         //GROUND
         if(((ground=(Block)check(x-w/2+3,y+1,x+w/2-3,y+1))!=null || (ground=(Block)check(x-w/2+3,y+vy  ,x+w/2-3,y+vy))!=null)){
-            double y1=Double.MAX_VALUE;
-            double y2=Double.MAX_VALUE;
+            int y1=Integer.MAX_VALUE;
+            int y2=Integer.MAX_VALUE;
             
-            Vector v = ground.getCollisionPoint(new Ray(x+w/2-3,y+h,0,0,-1,0));if(v!=null)y1=v.getY();
-                   v = ground.getCollisionPoint(new Ray(x-w/2+3,y+h,0,0,-1,0));if(v!=null)y2=v.getY();
+            Vector v = ground.getCollisionPoint(new Ray(x+w/2-3,y+h,0,0,-1,0));if(v!=null)y1=(int) v.getY();
+                   v = ground.getCollisionPoint(new Ray(x-w/2+3,y+h,0,0,-1,0));if(v!=null)y2=(int) v.getY();
             
-            if(Toolkit.p(y1)!=Double.MAX_VALUE&&Toolkit.p(y2)!=Double.MAX_VALUE){
-                vy=0;
-                if(y1<=y2)y=y1-1;
-                else      y=y2-1;
-            }
+            if(y1==Integer.MAX_VALUE)y1=Integer.MIN_VALUE;
+            else if(y2==Integer.MAX_VALUE)y2=Integer.MIN_VALUE;
+            
+            y1=Math.max(y1,y2)-1;
+            if(y1>Integer.MIN_VALUE)y=y1;
+            vy=0;
         }else{
             vy-=scriptManager.s("player").v("vydcc").fix(form);
         }
@@ -193,9 +194,6 @@ public class Player extends Entity implements KeyboardListener,EventListener{
         //if(/*(left!=null&&right!=null)||*/(ground!=null&&ceiling!=null))die();
         
         if(health<=0)die();
-
-
-        //EVALUATE
         x+=vx;
         y+=vy;
     }

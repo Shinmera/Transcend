@@ -1,17 +1,135 @@
 #!transcend world file
 world{
 bgc: 0,0,0,255
-camera: follow 1.0
+camera: follow 0.4099999999999995
 }
 
-Player{
-x: 0
-y: 0
+player{
+x:-344.0
+y:-800.0
 }
 
 BlankBlock{
-x:-64
-y:-64
-w:128
-h:64
+x: 640
+y: -24
+z: 0
+w: 192
+h: 64
+status: 0
 }
+
+BlankBlock{
+x: 640
+y: -841
+z: 0
+w: 192
+h: 64
+status: 0
+}
+
+MovingBlock{
+x: 640
+y: -149
+z: 0
+w: 192
+h: 64
+status: 0
+vx: 0.0
+vy: 5.0
+tex: 
+}
+
+DayCycle{
+x: 0
+y: 0
+z: -5
+w: 0
+h: 0
+time: 20256
+full: 8
+}
+
+BlankBlock{
+x: 832
+y: -482
+z: 0
+w: 64
+h: 512
+status: 0
+}
+
+BlankBlock{
+x: 896
+y: -504
+z: 0
+w: 512
+h: 128
+status: 0
+}
+
+BlankBlock{
+x: 832
+y: -828
+z: 0
+w: 704
+h: 192
+status: 0
+}
+
+BlankBlock{
+x: -320
+y: -139
+z: 0
+w: 512
+h: 128
+status: 0
+}
+
+ComplexBlock{
+x: -1024
+y: -896
+z: 0
+w: 1664
+h: 1408
+status: 0
+p0000x: -960
+p0000y: 320
+p0001x: -640
+p0001y: 512
+p0002x: -384
+p0002y: 512
+p0003x: -64
+p0003y: 384
+p0004x: -64
+p0004y: 128
+p0005x: -640
+p0005y: -64
+p0006x: -896
+p0006y: -448
+p0007x: -768
+p0007y: -768
+p0008x: 64
+p0008y: -832
+p0009x: 384
+p0009y: -448
+p0010x: 512
+p0010y: -384
+p0011x: 576
+p0011y: -512
+p0012x: 640
+p0012y: -704
+p0013x: 640
+p0013y: -832
+p0014x: 256
+p0014y: -896
+p0015x: -320
+p0015y: -896
+p0016x: -896
+p0016y: -896
+p0017x: -1024
+p0017y: -896
+p0018x: -1024
+p0018y: 320
+tex: 
+}
+

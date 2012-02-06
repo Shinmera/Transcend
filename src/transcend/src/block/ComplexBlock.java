@@ -99,7 +99,7 @@ public class ComplexBlock extends Block{
             o.put("p"+Toolkit.unifyNumberString(i,3)+"y",vertices.get(i).getY()+"");
         }
         o.put("tex", texture);
-        return null;
+        return o;
     }
 
     public void determineCoordinates(){

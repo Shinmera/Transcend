@@ -105,9 +105,7 @@ public class Editor extends GObject implements MouseListener{
     public void setRemoveTiles(boolean r){removeTiles=r;}
 
     public void mouseMoved(int x, int y) {}
-
     public void mousePressed(int button) {}
-
     public void mouseType(int button) {
         if(!active||!visible)return;
         if(Mouse.getX()<100)return;//temp fix for editor plate.
@@ -116,13 +114,6 @@ public class Editor extends GObject implements MouseListener{
             y=Mouse.getY();
             if((mode==MODE_BLOCKS)&&(blocks[curItem].equals("complexblock")))inComplex=true;
         }
-    }
-
-    private int roundSampled(double toround,int size){
-        double rest = toround%size;
-        if(rest==0)return (int)toround;
-        else if(rest>=size/2)return (int)(toround+size-rest);
-        else return (int)(toround-rest);
     }
 
     public void mouseReleased(int button) {
@@ -155,25 +146,23 @@ public class Editor extends GObject implements MouseListener{
             y/=MainFrame.camera.getZoom();
             x+=MainFrame.camera.getRelativeX();
             y+=MainFrame.camera.getRelativeY();
-            x=roundSampled(x,tilesize);
-            y=roundSampled(y,tilesize);
+            x=Toolkit.roundRastered(x,tilesize);
+            y=Toolkit.roundRastered(y,tilesize);
             complexPoints.add(new Point(x,y));
             return;
         }
         if(button==0||(button==1&&inComplex)){
-            x/=MainFrame.camera.getZoom();
-            y/=MainFrame.camera.getZoom();
-            x+=MainFrame.camera.getRelativeX();
-            y+=MainFrame.camera.getRelativeY();
-            x=roundSampled(x,tilesize);
-            y=roundSampled(y,tilesize);
+            x=(int)(x/MainFrame.camera.getZoom()+MainFrame.camera.getRelativeX());
+            y=(int)(y/MainFrame.camera.getZoom()+MainFrame.camera.getRelativeY());
+            x=Toolkit.roundRastered(x,tilesize);
+            y=Toolkit.roundRastered(y,tilesize);
             int bx=(int) (Mouse.getX()/MainFrame.camera.getZoom() + MainFrame.camera.getRelativeX())-x;
             int by=(int) (Mouse.getY()/MainFrame.camera.getZoom() + MainFrame.camera.getRelativeY())-y;
             if(bx<0){bx*=-1;x-=bx;}
             if(by<0){by*=-1;y-=by;}
             if(by<tilesize)by=tilesize;
-            bx=roundSampled(bx,tilesize);
-            by=roundSampled(by,tilesize);
+            bx=Toolkit.roundRastered(bx,tilesize);
+            by=Toolkit.roundRastered(by,tilesize);
 
             if(bx>0&&by>0){
                 final HashMap<String,String> args = new HashMap<String,String>();
@@ -205,17 +194,12 @@ public class Editor extends GObject implements MouseListener{
                         ((GTextArea)((GPanel)MainFrame.hud.get("p_editor")).get("args")).append("tex="+tex);
                     }
                     MainFrame.loader.setHelper(new LoadHelper(){
-                        public void load(){
-                            MainFrame.elementBuilder.buildElement(blocks[curItem], args);
-                        }
+                        public void load(){MainFrame.elementBuilder.buildElement(blocks[curItem], args);}
                     });
                     MainFrame.loader.start();
-                }
-                else{
+                }else{
                     MainFrame.loader.setHelper(new LoadHelper(){
-                        public void load(){
-                            MainFrame.elementBuilder.buildElement(entities[curItem], args);
-                        }
+                        public void load(){MainFrame.elementBuilder.buildElement(entities[curItem], args);}
                     });
                     MainFrame.loader.start();
                 }

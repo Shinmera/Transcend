@@ -1,98 +1,114 @@
-21:53 [INFO][MF] Booting up...
+23:57 [INFO][MF] Booting up...
 null.transcend.MainFrame.<clinit>
-21:53 [INFO][CONST] Loading
+23:57 [INFO][CONST] Loading
 null.transcend.Const.loadRegistry
-21:53 [INFO][InputEventHandler] Loaded layout swiss. 23 keys mapped.
+23:57 [INFO][InputEventHandler] Loaded layout swiss. 23 keys mapped.
 null.event.InputEventHandler.<init>
-21:53 [INFO][InputEventHandler] Loaded layout lefty. 10 keys mapped.
+23:57 [INFO][InputEventHandler] Loaded layout lefty. 10 keys mapped.
 null.event.InputEventHandler.<init>
-21:53 [INFO][FileStorage] Initial indexing...
+23:57 [INFO][FileStorage] Initial indexing...
 null.transcend.FileStorage.<init>
-21:53 [INFO][FileStorage] Done, indexed 19 files.
+23:57 [INFO][FileStorage] Done, indexed 19 files.
 null.transcend.FileStorage.<init>
-21:53 [INFO][CONST] Loading
+23:57 [INFO][CONST] Loading
 null.transcend.Const.loadRegistry
-21:53 [INFO]LWJGL found 1 display modes.
+23:57 [INFO]LWJGL found 1 display modes.
 null.gui.DisplayModeChooser.<init>
-21:53 [INFO]Java found 1 display modes.
+23:57 [INFO]Java found 1 display modes.
 null.gui.DisplayModeChooser.<init>
-21:53 [WARNING]No display modes found. Falling back to manual.
+23:57 [WARNING]No display modes found. Falling back to manual.
 null.gui.DisplayModeChooser.<init>
-21:53 [INFO][CONST] Saving
+23:57 [INFO][CONST] Saving
 null.transcend.Const.saveRegistry
-21:53 [INFO][CONST] Loading
+23:57 [INFO][CONST] Loading
 null.transcend.Const.loadRegistry
-21:53 [INFO][MF] Initializing...
+23:57 [INFO][MF] Initializing...
 null.transcend.MainFrame.create
-21:53 [INFO][MF] initGL
+23:57 [INFO][MF] initGL
 null.transcend.MainFrame.initGL
-21:53 [INFO][MF] initGame
+23:57 [INFO][MF] initGame
 null.transcend.MainFrame.initGame
-21:53 [INFO][FontPool] Reloading Arial Bold 20
+23:57 [INFO][FontPool] Reloading Arial Bold 20
 null.graph.FontPool.reloadFont
-21:53 [INFO][TexturePool] Reloading load.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/data/load.png
+23:57 [INFO][TexturePool] Reloading load.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/data/load.png
 null.graph.TexturePool.reloadTexture
-21:53 [INFO][Loader] Loading...
+23:57 [INFO][Loader] Loading...
 null.gui.Loader.run
-21:53 [INFO][FontPool] Reloading Arial 12
+23:57 [INFO][FontPool] Reloading Arial 12
 null.graph.FontPool.reloadFont
-21:53 [INFO][TexturePool] Reloading health_bar.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/ui/health_bar.png
+23:57 [INFO][TexturePool] Reloading health_bar.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/ui/health_bar.png
 null.graph.TexturePool.reloadTexture
-21:53 [INFO][TexturePool] Reloading form_human.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/ui/form_human.png
+23:58 [INFO][TexturePool] Reloading form_human.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/ui/form_human.png
 null.graph.TexturePool.reloadTexture
-21:53 [INFO][TexturePool] Reloading form_mouse.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/ui/form_mouse.png
+23:58 [INFO][TexturePool] Reloading form_mouse.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/ui/form_mouse.png
 null.graph.TexturePool.reloadTexture
-21:53 [INFO][TexturePool] Reloading form_pony.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/ui/form_pony.png
+23:58 [INFO][TexturePool] Reloading form_pony.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/ui/form_pony.png
 null.graph.TexturePool.reloadTexture
-21:53 [INFO][TexturePool] Reloading form_dolphin.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/ui/form_dolphin.png
+23:58 [INFO][TexturePool] Reloading form_dolphin.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/ui/form_dolphin.png
 null.graph.TexturePool.reloadTexture
-21:53 [INFO][TexturePool] Reloading form_eagle.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/ui/form_eagle.png
+23:58 [INFO][TexturePool] Reloading form_eagle.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/ui/form_eagle.png
 null.graph.TexturePool.reloadTexture
-21:53 [INFO][TexturePool] Reloading logo.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/ui/logo.png
+23:58 [INFO][TexturePool] Reloading logo.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/ui/logo.png
 null.graph.TexturePool.reloadTexture
-21:53 [INFO][Loader] 14%
+23:58 [INFO][Loader] 14%
 null.gui.Loader.run
-21:53 [INFO][Loader] 28%
+23:58 [INFO][Loader] 28%
 null.gui.Loader.run
-21:53 [INFO][Loader] 42%
+23:58 [INFO][Loader] 42%
 null.gui.Loader.run
-21:53 [INFO][Loader] 57%
+23:58 [INFO][Loader] 57%
 null.gui.Loader.run
-21:53 [INFO][Loader] 71%
+23:58 [INFO][Loader] 71%
 null.gui.Loader.run
-21:53 [INFO][Loader] 85%
+23:58 [INFO][Loader] 85%
 null.gui.Loader.run
-21:53 [INFO][Loader] 100%
+23:58 [INFO][Loader] 100%
 null.gui.Loader.run
-21:53 [INFO][Loader] Finished loading. Ready.
+23:58 [INFO][Loader] Finished loading. Ready.
 null.gui.Loader.run
-21:53 [INFO][Loader] Loading...
+23:58 [INFO][Loader] Loading...
 null.gui.Loader.run
-21:53 [INFO][World] Clearing sound pool
+23:58 [INFO][World] Clearing sound pool
 null.world.WorldLoader.loadWorld
-21:53 [INFO][World] Loading World from /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/world/test.tw
+23:58 [INFO][World] Loading World from /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/world/test.tw
 null.world.WorldLoader.loadWorld
-21:53 [INFO][TexturePool] Reloading player0.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/sprite/player0.png
+23:58 [INFO][TexturePool] Reloading player0.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/sprite/player0.png
 null.graph.TexturePool.reloadTexture
-21:53 [INFO][World] Loaded 3 elements. 1 Blocks 1 Entities 0 Tiles.
+23:58 [INFO][World] Loaded 11 elements. 8 Blocks 1 Entities 3 Tiles.
 null.world.WorldLoader.loadWorld
-21:53 [INFO][Loader] Finished loading. Ready.
+23:58 [INFO][Loader] Finished loading. Ready.
 null.gui.Loader.run
-21:53 [INFO][Loader] Loading...
+23:58 [INFO][Loader] Loading...
 null.gui.Loader.run
-21:53 [INFO][Loader] Finished loading. Ready.
+23:58 [INFO][Loader] Finished loading. Ready.
 null.gui.Loader.run
-21:53 [INFO][Loader] Loading...
+23:58 [INFO][Loader] Loading...
 null.gui.Loader.run
-21:53 [INFO][Loader] Finished loading. Ready.
+23:58 [INFO][Loader] Finished loading. Ready.
 null.gui.Loader.run
-21:53 [INFO][Loader] Loading...
+23:58 [INFO][Loader] Loading...
 null.gui.Loader.run
-21:53 [INFO][Loader] Finished loading. Ready.
+23:58 [INFO][Loader] Finished loading. Ready.
 null.gui.Loader.run
-21:53 [INFO][Loader] Loading...
+23:58 [INFO][Loader] Loading...
 null.gui.Loader.run
-21:53 [INFO][Loader] Finished loading. Ready.
+23:58 [INFO][Loader] Finished loading. Ready.
 null.gui.Loader.run
-21:54 [INFO][MF] Shutting down...
+23:58 [INFO][Loader] Loading...
+null.gui.Loader.run
+23:58 [INFO][Loader] Finished loading. Ready.
+null.gui.Loader.run
+23:58 [INFO][Loader] Loading...
+null.gui.Loader.run
+23:58 [INFO][Loader] Finished loading. Ready.
+null.gui.Loader.run
+23:58 [INFO][Loader] Loading...
+null.gui.Loader.run
+23:58 [INFO][Loader] Finished loading. Ready.
+null.gui.Loader.run
+23:58 [INFO][Loader] Loading...
+null.gui.Loader.run
+23:58 [INFO][Loader] Finished loading. Ready.
+null.gui.Loader.run
+23:58 [INFO][MF] Shutting down...
 null.transcend.MainFrame.destroy
