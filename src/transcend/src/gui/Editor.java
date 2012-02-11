@@ -24,7 +24,7 @@ import static org.lwjgl.opengl.GL11.*;
 public class Editor extends GObject implements MouseListener{
     public static final int MODE_BLOCKS = 0;
     public static final int MODE_ENTITIES = 1;
-    private String[] blocks = {"blankblock","halfblankblock","tileblock","movingblock","complexblock","gameevent","info","water","emitter","daycycle"};
+    private String[] blocks = {"blankblock","halfblankblock","complexblock","tileblock","movingblock","windblock","gameevent","info","water","emitter","daycycle","nullblock"};
     private String[] entities = {"enemyb1","enemyc1"};
     private boolean active=false;
     private boolean inComplex=false;
@@ -152,8 +152,10 @@ public class Editor extends GObject implements MouseListener{
             return;
         }
         if(button==0||(button==1&&inComplex)){
-            x=(int)(x/MainFrame.camera.getZoom()+MainFrame.camera.getRelativeX());
-            y=(int)(y/MainFrame.camera.getZoom()+MainFrame.camera.getRelativeY());
+            x/=MainFrame.camera.getZoom();
+            y/=MainFrame.camera.getZoom();
+            x+=MainFrame.camera.getRelativeX();
+            y+=MainFrame.camera.getRelativeY();
             x=Toolkit.roundRastered(x,tilesize);
             y=Toolkit.roundRastered(y,tilesize);
             int bx=(int) (Mouse.getX()/MainFrame.camera.getZoom() + MainFrame.camera.getRelativeX())-x;

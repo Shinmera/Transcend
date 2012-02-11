@@ -59,9 +59,9 @@ public class MovingBlock extends Block{
             if(MainFrame.player.getRight()==this){
                 MainFrame.player.x=x-MainFrame.player.getWidth()/2;
             }
-            if(Entity.check(x-1,y+h/2,x+w+1,y+h/2)!=null)vx*=-1;
-            if(Entity.check(x+w/2,y-1,x+w/4*3,y-1)!=null||
-               Entity.check(x+w/2,y+h+1,x+w/4*3,y+h+1)!=null)vy*=-1;
+            if(Entity.check(x-1,y+h/2,x+w+1,y+h/2,0)!=null)vx*=-1;
+            if(Entity.check(x+w/2,y-1,x+w/4*3,y-1,0)!=null||
+               Entity.check(x+w/2,y+h+1,x+w/4*3,y+h+1,0)!=null)vy*=-1;
         }else{
             x=MainFrame.world.getByID(cameraPath).getX();
             y=MainFrame.world.getByID(cameraPath).getY();
@@ -72,7 +72,7 @@ public class MovingBlock extends Block{
         if(drawable.isLoaded()){
             drawable.draw((int)x,(int)y,w,h);
         }else{
-            new Color(0.5f,0.5f,1f,1f).bind();
+            new Color(0.5f,1.0f,0.5f,0.5f).bind();
             glBegin(GL_QUADS);
                 glVertex2d(x,y);
                 glVertex2d(x,y+h);

@@ -49,11 +49,15 @@ public class Entity extends Element{
     }
 
     public static Element check(double ax,double ay,double bx,double by){
+        return check(ax,ay,bx,by,0.2);
+    }
+    
+    public static Element check(double ax,double ay,double bx,double by,double solidity){
         Element e=null;
         Object[] blockIDs = MainFrame.world.getBlockList();
         for(int i=0;i<blockIDs.length;i++){
             Block block = (Block)MainFrame.world.getByID((Integer)blockIDs[i]);
-            if((block.checkInside(ax,ay)||block.checkInside(bx,by))&&block.solid>0.2){
+            if((block.checkInside(ax,ay)||block.checkInside(bx,by))&&block.solid>=solidity){
                 e=block;
                 break;
             }

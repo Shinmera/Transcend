@@ -94,6 +94,16 @@ public class ElementBuilder {
             block.setOptions(args);
             MainFrame.world.addBlock(block);
         }
+        else if(name.equals("nullblock")){
+            NullBlock block = new NullBlock();
+            block.setOptions(args);
+            MainFrame.world.addBlock(block);
+        }
+        else if(name.equals("windblock")){
+            WindBlock block = new WindBlock();
+            block.setOptions(args);
+            MainFrame.world.addBlock(block);
+        }
         else if(name.equals("water")){
             Water block = new Water();
             block.setOptions(args);
