@@ -1,23 +1,23 @@
 #!transcend world file
 world{
 bgc: 0,0,0,255
-camera: follow 0.36999999999999944
+camera: follow 1.0
 }
 
 player{
-x:336.00000000000006
+x:545.1999999999999
 y:-65.0
 }
 
 MovingBlock{
 x: 640
-y: -439
+y: -499
 z: 0
 w: 192
 h: 64
 status: 0
-vx: -0.0
-vy: 5.0
+vx: 0.0
+vy: -5.0
 tex: 
 }
 
@@ -27,7 +27,7 @@ y: 0
 z: -5
 w: 0
 h: 0
-time: 29192
+time: 31200
 full: 8
 }
 
@@ -38,30 +38,6 @@ z: 0
 w: 192
 h: 64
 status: 0
-}
-
-ComplexBlock{
-x: 1536
-y: -640
-z: 0
-w: 704
-h: 192
-status: 0
-p0000x: 1536
-p0000y: -640
-p0001x: 1664
-p0001y: -576
-p0002x: 1792
-p0002y: -512
-p0003x: 1920
-p0003y: -448
-p0004x: 2176
-p0004y: -448
-p0005x: 2240
-p0005y: -512
-p0006x: 2240
-p0006y: -640
-tex: 
 }
 
 BlankBlock{
@@ -97,15 +73,6 @@ y: -768
 z: 0
 w: 64
 h: 640
-status: 0
-}
-
-BlankBlock{
-x: 832
-y: -768
-z: 0
-w: 1536
-h: 128
 status: 0
 }
 
@@ -330,5 +297,403 @@ z: 0
 w: 640
 h: 128
 status: 0
+}
+
+ComplexBlock{
+x: 1536
+y: -704
+z: 0
+w: 768
+h: 256
+status: 0
+p0000x: 1600
+p0000y: -640
+p0001x: 1728
+p0001y: -512
+p0002x: 1856
+p0002y: -512
+p0003x: 1920
+p0003y: -448
+p0004x: 2176
+p0004y: -448
+p0005x: 2240
+p0005y: -512
+p0006x: 2304
+p0006y: -512
+p0007x: 2304
+p0007y: -704
+p0008x: 1536
+p0008y: -704
+p0009x: 1536
+p0009y: -640
+tex: 
+}
+
+BlankBlock{
+x: 832
+y: -768
+z: 0
+w: 768
+h: 128
+status: 0
+}
+
+BlankBlock{
+x: -1024
+y: 768
+z: 0
+w: 64
+h: 1024
+status: 0
+}
+
+TileBlock{
+x: -1728
+y: -192
+z: 0
+w: 1536
+h: 1024
+status: 0
+tex: grass11
+}
+
+TileBlock{
+x: -1728
+y: 832
+z: 0
+w: 768
+h: 1088
+status: 0
+tex: grass11
+}
+
+TileBlock{
+x: -192
+y: 704
+z: 0
+w: 832
+h: 320
+status: 0
+tex: grass11
+}
+
+TileBlock{
+x: 0
+y: 1024
+z: 0
+w: 640
+h: 64
+status: 0
+tex: grass11
+}
+
+TileBlock{
+x: 64
+y: 1088
+z: 0
+w: 576
+h: 64
+status: 0
+tex: grass11
+}
+
+TileBlock{
+x: -384
+y: 832
+z: 0
+w: 192
+h: 64
+status: 0
+tex: grass11
+}
+
+TileBlock{
+x: -320
+y: 896
+z: 0
+w: 128
+h: 64
+status: 0
+tex: grass11
+}
+
+TileBlock{
+x: -256
+y: 960
+z: 0
+w: 64
+h: 64
+status: 0
+tex: grass11
+}
+
+TileBlock{
+x: -1408
+y: -960
+z: 0
+w: 2048
+h: 896
+status: 0
+tex: grass11
+}
+
+TileBlock{
+x: 576
+y: 64
+z: 0
+w: 64
+h: 640
+status: 0
+tex: grass11
+}
+
+TileBlock{
+x: 640
+y: 64
+z: 0
+w: 192
+h: 64
+status: 0
+tex: grass11
+}
+
+TileBlock{
+x: 832
+y: -448
+z: 0
+w: 384
+h: 576
+status: 0
+tex: grass11
+}
+
+TileBlock{
+x: 1216
+y: 0
+z: 0
+w: 320
+h: 64
+status: 0
+tex: grass11
+}
+
+TileBlock{
+x: 1216
+y: -448
+z: 0
+w: 320
+h: 128
+status: 0
+tex: grass11
+}
+
+TileBlock{
+x: -768
+y: -1472
+z: 0
+w: 3776
+h: 768
+status: 0
+tex: grass11
+}
+
+TileBlock{
+x: 1344
+y: 192
+z: 0
+w: 640
+h: 128
+status: 0
+tex: grass11
+}
+
+TileBlock{
+x: 832
+y: -704
+z: 0
+w: 2176
+h: 64
+status: 0
+tex: grass11
+}
+
+TileBlock{
+x: 1664
+y: -640
+z: 0
+w: 1344
+h: 64
+status: 0
+tex: grass11
+}
+
+TileBlock{
+x: 1728
+y: -576
+z: 0
+w: 1280
+h: 64
+status: 0
+tex: grass11
+}
+
+TileBlock{
+x: 1920
+y: -512
+z: 0
+w: 256
+h: 64
+status: 0
+tex: grass11
+}
+
+TileBlock{
+x: 1408
+y: -192
+z: 0
+w: 1600
+h: 64
+status: 0
+tex: grass11
+}
+
+TileBlock{
+x: 1856
+y: -128
+z: 0
+w: 1152
+h: 128
+status: 0
+tex: grass11
+}
+
+TileBlock{
+x: 1728
+y: 832
+z: 0
+w: 832
+h: 64
+status: 0
+tex: grass11
+}
+
+TileBlock{
+x: 1792
+y: 896
+z: 0
+w: 704
+h: 64
+status: 0
+tex: grass11
+}
+
+TileBlock{
+x: 1856
+y: 960
+z: 0
+w: 576
+h: 64
+status: 0
+tex: grass11
+}
+
+TileBlock{
+x: 1216
+y: 576
+z: 0
+w: 1024
+h: 192
+status: 0
+tex: grass11
+}
+
+TileBlock{
+x: 1536
+y: 768
+z: 0
+w: 704
+h: 64
+status: 0
+tex: grass11
+}
+
+TileBlock{
+x: 1088
+y: 448
+z: 0
+w: 256
+h: 64
+status: 0
+tex: grass11
+}
+
+TileBlock{
+x: 1024
+y: 512
+z: 0
+w: 384
+h: 64
+status: 0
+tex: grass11
+}
+
+TileBlock{
+x: 960
+y: 576
+z: 0
+w: 256
+h: 64
+status: 0
+tex: grass11
+}
+
+TileBlock{
+x: 1152
+y: 640
+z: 0
+w: 64
+h: 64
+status: 0
+tex: grass11
+}
+
+TileBlock{
+x: 1792
+y: 512
+z: 0
+w: 704
+h: 64
+status: 0
+tex: grass11
+}
+
+TileBlock{
+x: 2240
+y: 576
+z: 0
+w: 256
+h: 64
+status: 0
+tex: grass11
+}
+
+TileBlock{
+x: 2048
+y: 448
+z: 0
+w: 384
+h: 64
+status: 0
+tex: grass11
+}
+
+TileBlock{
+x: 2112
+y: 384
+z: 0
+w: 256
+h: 64
+status: 0
+tex: grass11
 }
 
