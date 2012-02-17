@@ -9,25 +9,18 @@
 
 package cape.physics;
 
-import transcend.block.*;
-import transcend.graph.AbstractGraph;
-import NexT.util.Toolkit;
-import NexT.util.Vector;
-import java.util.Arrays;
-import transcend.main.MainFrame;
-import NexT.util.Line;
-import NexT.util.Ray;
-import transcend.world.Element;
-import transcend.spare.TessCallback;
-import transcend.spare.VertexData;
+import NexT.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import static org.lwjgl.opengl.GL11.*;
+import org.lwjgl.util.Point;
 import org.lwjgl.util.glu.GLU;
 import org.lwjgl.util.glu.GLUtessellator;
-import java.util.HashMap;
-import NexT.util.SimpleSet;
 import org.newdawn.slick.Color;
-import java.util.ArrayList;
-import org.lwjgl.util.Point;
-import static org.lwjgl.opengl.GL11.*;
+import transcend.graph.AbstractGraph;
+import transcend.main.MainFrame;
+import transcend.spare.TessCallback;
+import transcend.spare.VertexData;
 
 public class ComplexBlock extends Block{
     private GLUtessellator tesselator;
@@ -36,7 +29,7 @@ public class ComplexBlock extends Block{
     public ComplexBlock() {
         tesselator = GLU.gluNewTess();
 
-        //Copied from http://www.java2s.com/Open-Source/Java-Document/Game/Lightweight-Java-Game-Library-2.4.2/org/lwjgl/test/glu/tessellation/TessellationTest.java.htm
+        
         TessCallback callback = new TessCallback(false);
         tesselator.gluTessCallback(GLU.GLU_TESS_VERTEX, callback);
         tesselator.gluTessCallback(GLU.GLU_TESS_BEGIN, callback);
@@ -109,15 +102,15 @@ public class ComplexBlock extends Block{
             if(p.getY()>maxY)maxY=p.getY();
             if(p.getY()<minY)minY=p.getY();
         }
-        x=minX;
-        y=minY;
+        pos.x=minX;
+        pos.y=minY;
         w=maxX-minX;
         h=maxY-minY;
     }
 
     public boolean checkInside(double x,double y,double w,double h){
-        if(x>this.x+this.w||x<this.x||
-           y>this.y+this.h||y<this.y)return false;
+        if(x>pos.x+this.w||x<pos.x||
+           y>pos.y+this.h||y<pos.y)return false;
         //COPYPASTA. I HAVE NO IDEA HOW THIS ACTUALLY WORKS. SRC: http://paulbourke.net/geometry/insidepoly/
         int i, j;boolean c = false;
         for (i = 0, j = vertices.size()-1; i < vertices.size(); j = i++) {
@@ -154,7 +147,7 @@ public class ComplexBlock extends Block{
         glPopMatrix();
 
         if(MainFrame.editor.getActive()){
-            AbstractGraph.glCross2d(x, y, 25);
+            AbstractGraph.glCross2d(pos.x, pos.y, 25);
 
             Color.white.bind();
             glBegin(GL_LINE_LOOP);

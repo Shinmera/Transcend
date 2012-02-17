@@ -9,10 +9,10 @@
 package cape.physics;
 
 import NexT.util.Toolkit;
-import org.newdawn.slick.Color;
-import transcend.graph.AbstractGraph;
 import cape.main.MainFrame;
-import transcend.world.BElement;
+import cape.physics.form.Form;
+import cape.physics.form.Rectangle;
+import org.newdawn.slick.Color;
 
 public class Entity extends BElement{
     public static final double GRAVITY = -0.5;
@@ -23,22 +23,26 @@ public class Entity extends BElement{
     public Entity(){c = new Color((float)Math.random(),(float)Math.random(),(float)Math.random(),0.5f);}
     public Entity(int x,int y,int w,int h){
         this();
-        this.x=x;this.y=y;this.w=w;this.h=h;
+        pos.x=x;pos.y=y;this.w=w;this.h=h;
+        form = new Rectangle(w,h);
+    }
+    public Entity(int x,int y,int w,int h,Form form){
+        this(x,y,w,h);
+        this.form = form;
     }
     
     public void update(){
         vy+=GRAVITY;
         
-        x+=vx;
-        y+=vy;
+        pos.x+=vx;
+        pos.y+=vy;
         
-        if(Toolkit.p(x)>10000)MainFrame.world.delByID(wID);
-        else if(Toolkit.p(y)>10000)MainFrame.world.delByID(wID);
+        if(Toolkit.p(pos.x)>10000)MainFrame.world.delByID(wID);
+        else if(Toolkit.p(pos.y)>10000)MainFrame.world.delByID(wID);
     }
     
     public void draw(){
         c.bind();
-        
-        AbstractGraph.glRectangle2d(x, y, w, h);
+        form.draw();
     }
 }

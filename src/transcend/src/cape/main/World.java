@@ -1,6 +1,6 @@
 /**********************\
   file: World
-  package: world
+  package: cape.main
   author: Nick
   team: NexT
   license: -
@@ -9,18 +9,21 @@
 
 package cape.main;
 
-import NexT.util.SimpleSet;
+import cape.physics.BElement;
 import cape.physics.Block;
 import cape.physics.Entity;
-import java.util.ArrayList;
+import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.map.hash.THashMap;
+import gnu.trove.procedure.TObjectProcedure;
+import static org.lwjgl.opengl.GL11.*;
 import transcend.main.Const;
-import transcend.world.BElement;
 
 public class World {
-    ArrayList<Integer> ids              = new ArrayList<Integer>();
-    SimpleSet<Integer,Block> blocks     = new SimpleSet<Integer,Block>();
-    SimpleSet<Integer,Entity> entities  = new SimpleSet<Integer,Entity>();
-
+    private final UpdateProcedure updateProc = new UpdateProcedure();
+    private final DrawProcedure drawProc = new DrawProcedure();
+    TIntArrayList ids = new TIntArrayList();
+    THashMap<Integer,Block> blocks     = new THashMap<Integer,Block>();
+    THashMap<Integer,Entity> entities  = new THashMap<Integer,Entity>();
     public World(){}
 
     public void printWorldStats(){
@@ -37,11 +40,13 @@ public class World {
     }
 
     public int getID(int i){return ids.get(i);}
-    public Object[] getBlockList(){return blocks.getList().toArray();}
-    public Object[] getEntityList(){return entities.getList().toArray();}
+    public Object[] getBlockList(){return blocks.values().toArray();}
+    public Object[] getEntityList(){return entities.values().toArray();}
+    public THashMap<Integer,Block> getBlockMap(){return blocks;}
+    public THashMap<Integer,Entity> getEntityMap(){return entities;}
 
     public double getDistance(int a,int b){
-        return Math.sqrt(Math.pow(getByID(a).x-getByID(b).x,2)+Math.pow(getByID(a).y-getByID(b).y,2));
+        return Math.sqrt(Math.pow(getByID(a).getX()-getByID(b).getX(),2)+Math.pow(getByID(a).getY()-getByID(b).getY(),2));
     }
 
     public int addBlock(Block block){
@@ -78,23 +83,34 @@ public class World {
     }
     
     public void delByID(int wID){
-        if(blocks.containsKey(wID)){blocks.remove(wID);ids.remove((Object)wID);}
-        if(entities.containsKey(wID)){entities.remove(wID);ids.remove((Object)wID);}
+        if(blocks.containsKey(wID)){blocks.remove(wID);ids.remove(wID);}
+        if(entities.containsKey(wID)){entities.remove(wID);ids.remove(wID);}
     }
 
     public void update(){
-        for(int i=0;i<entities.size();i++){
-            entities.getAt(i).update();
-        }
+        entities.forEachValue(updateProc);
     }
 
     public void draw(){
-        for(int i=0;i<blocks.size();i++){
-            blocks.getAt(i).draw();
+        blocks.forEachValue(drawProc);
+        entities.forEachValue(drawProc);
+    }
+    
+    final class UpdateProcedure implements TObjectProcedure{
+        public boolean execute(Object object) {
+            ((BElement)object).update();
+            return true;
         }
-
-        for(int i=0;i<entities.size();i++){
-            entities.getAt(i).draw();
+    }
+    
+    final class DrawProcedure implements TObjectProcedure{
+        public boolean execute(Object object) {
+            BElement o = (BElement)object;
+            glPushMatrix();
+            glTranslated(o.getX(),o.getY(),0);
+            o.draw();
+            glPopMatrix();
+            return true;
         }
     }
 }

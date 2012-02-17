@@ -1,6 +1,6 @@
 /**********************\
   file: MainFrame
-  package: transcend
+  package: cape.main
   author: Nick
   team: NexT
   license: -
@@ -13,32 +13,31 @@ import NexT.util.Toolkit;
 import cape.physics.Block;
 import cape.physics.Entity;
 import java.awt.Font;
-import transcend.event.EventHandler;
-import org.lwjgl.openal.AL;
-import org.lwjgl.BufferUtils;
-import java.nio.IntBuffer;
-import java.net.URL;
-import java.io.IOException;
-import transcend.event.KeyboardListener;
 import java.io.File;
-import transcend.event.InputEventHandler;
-import transcend.graph.AbstractGraph;
-import org.lwjgl.input.Mouse;
-import org.lwjgl.input.Keyboard;
-import org.lwjgl.opengl.Display;
+import java.io.IOException;
+import java.nio.IntBuffer;
+import java.util.logging.Level;
+import org.lwjgl.BufferUtils;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.LWJGLUtil;
-import java.util.logging.Level;
+import org.lwjgl.input.Keyboard;
+import org.lwjgl.input.Mouse;
+import org.lwjgl.openal.AL;
+import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import static org.lwjgl.opengl.GL11.*;
 import org.newdawn.slick.Color;
+import transcend.event.EventHandler;
+import transcend.event.InputEventHandler;
+import transcend.event.KeyboardListener;
 import transcend.event.MouseListener;
+import transcend.graph.AbstractGraph;
 import transcend.gui.TrueTypeFont;
 import transcend.main.Const;
 import static transcend.main.Jitter.j;
 import static transcend.main.Jitter.jps;
 
-public class MainFrame implements KeyboardListener, MouseListener{
+public class MainFrame implements KeyboardListener{
     static{
         try{System.setProperty("org.lwjgl.librarypath"  ,new File(new File(new File(System.getProperty("user.dir")), "native"), LWJGLUtil.getPlatformName()).getAbsolutePath());
         }catch(Exception ex){Const.LOGGER.log(Level.SEVERE,"Failed to set LWJGL library path!",ex);}
@@ -49,6 +48,12 @@ public class MainFrame implements KeyboardListener, MouseListener{
                           "http://www.tymoon.eu", "/", 1, null);
         Const.LOGGER.info("[MF] Booting up...");
     }
+    public static int DISPLAY_WIDTH = 800;
+    public static int DISPLAY_HEIGHT= 600;
+    public static double DISPLAY_ASPECT= DISPLAY_WIDTH/DISPLAY_HEIGHT;
+    public static int fps = 60, ups = 60;
+    public static int ACSIZE = 2;
+    public static boolean pause = false;
     public static TrueTypeFont ttf = null;
     public static final Const CONST = new Const();
     public static final File basedir = new File(System.getProperty("user.dir"));
@@ -56,17 +61,8 @@ public class MainFrame implements KeyboardListener, MouseListener{
     public static final InputEventHandler ieh = new InputEventHandler();
     public static final EventHandler eh = new EventHandler();
     public static final ScriptManager scriptManager = new ScriptManager();
+    public static final Editor editor = new Editor();
     public static final int[][] DEFAULT_DIM = {{1280,960},{1280,720},{1280,800}};//4:3 16:9 16:10
-    public static int DISPLAY_WIDTH = 800;
-    public static int DISPLAY_HEIGHT= 600;
-    public static double DISPLAY_ASPECT= DISPLAY_WIDTH/DISPLAY_HEIGHT;
-    public static int fps = 60, ups = 60;
-    public static int ACSIZE = 2;
-    public static boolean pause = false;
-    
-    private boolean shifting = false;
-    private int x_off=+DISPLAY_WIDTH/2,y_off=+DISPLAY_HEIGHT/2;
-    private int x_cre=0,y_cre=0;
     private final Updater updater = new Updater();
 
     public static void main(String[] args) throws Throwable{
@@ -119,7 +115,6 @@ public class MainFrame implements KeyboardListener, MouseListener{
         Const.LOGGER.info("[MF] initGame");
         ttf = new TrueTypeFont(new Font("Arial",Font.PLAIN,12),true);
         ieh.addKeyboardListener(this);
-        ieh.addMouseListener(this);
         world.addBlock(new Block(-256,-64,512,64));
     }
 
@@ -192,19 +187,18 @@ public class MainFrame implements KeyboardListener, MouseListener{
 
     public void renderScene(){
         glPushMatrix();
-            glTranslatef(x_off,y_off,0);
+            glTranslatef(editor.x_off,editor.y_off,0);
             Color.white.bind();
             world.draw();
             Color.white.bind();
             AbstractGraph.glCross2d(0,0,50);
-            if(x_cre!=0&&y_cre!=0)
-                AbstractGraph.glRectangle2d(x_cre-x_off,y_cre-y_off,Mouse.getX()-x_cre,Mouse.getY()-y_cre);
+            editor.paint();
         glPopMatrix();
         AbstractGraph.glCross2d(Mouse.getX(),Mouse.getY(),10);
         
-        
         Color.red.bind();   if(pause)ttf.drawString(10, DISPLAY_HEIGHT-20, "PAUSED", 1, 1);
-        Color.white.bind(); ttf.drawString(10, DISPLAY_HEIGHT-30, "Blocks: "+world.blockSize()+" Entities: "+world.entitySize(), 1, 1);
+        Color.white.bind(); ttf.drawString(10, DISPLAY_HEIGHT-30, "Blocks: "+world.blockSize()+" Entities: "+world.entitySize()+"\n"+
+                                                                  "Mode: "+editor.getModeS(), 1, 1);
         
         glBindTexture(GL_TEXTURE_2D, 0); //release
     }
@@ -248,60 +242,12 @@ public class MainFrame implements KeyboardListener, MouseListener{
             else                      Display.setFullscreen(true);
             }catch(Exception e){Const.LOGGER.log(Level.WARNING, "Failed to switch to fullscreen mode.",e);}
             break;
-        case Keyboard.KEY_LSHIFT:shifting=false;break;
         case Keyboard.KEY_SPACE:pause=!pause;break;
         case Keyboard.KEY_ESCAPE:
         case Keyboard.KEY_DELETE:destroy();break;
         }
     }
-    public void keyType(int key) {
-        switch(key){
-        case Keyboard.KEY_LSHIFT:shifting=true;break;
-        }
-    }
-
-    public void mouseMoved(int x, int y) {
-        if(shifting){
-            x_off+=Mouse.getDX();
-            y_off+=Mouse.getDY();
-        }
-    }
-    public void mousePressed(int button) {
-        if(button==0){
-            if(x_cre==0&&y_cre==0){
-                x_cre=Mouse.getX();
-                y_cre=Mouse.getY();
-            }
-        }
-    }
-    
-    public void mouseType(int button) {
-        if(button==1){
-            Object[] ids = world.ids.toArray();
-            for(int i=0;i<ids.length;i++){
-                if(world.getByID((Integer)ids[i]).checkInside(Mouse.getX()-x_off, Mouse.getY()-y_off))
-                    world.delByID((Integer)ids[i]);
-            }
-        }
-    }
-    
-    public void mouseReleased(int button) {
-        if(button==0){
-            int w = Mouse.getX()-x_cre;
-            int h = Mouse.getY()-y_cre;
-            if(w<0){
-                w*=-1;
-                x_cre-=w;
-            }
-            if(h<0){
-                h*=-1;
-                y_cre-=h;
-            }
-            world.addEntity(new Entity(x_cre-x_off,y_cre-y_off,w,h));
-            x_cre=0;
-            y_cre=0;
-        }
-    }
+    public void keyType(int key) {}
 
     class Updater extends Thread{
         public void run(){
