@@ -12,14 +12,14 @@ package cape.physics;
 import NexT.util.SimpleSet;
 import NexT.util.Vector;
 import cape.physics.form.Form;
+import cape.physics.form.Polygon;
 import cape.physics.form.Rectangle;
 import java.util.HashMap;
-import transcend.world.Element;
 
 public class BElement {
-    public static final int ELEMENT_ID = 0x0;
     public int wID = -1;
     protected Vector pos = new Vector();
+    public double vx=0,vy=0;
     protected int w=0,h=0;
     protected Form form = new Rectangle();
 
@@ -32,7 +32,6 @@ public class BElement {
     public final double getLayer(){return pos.getZ();}
     public final int getWidth(){return w;}
     public final int getHeight(){return h;}
-    public final int getElementID(){return this.ELEMENT_ID;}
     public final boolean isBaseElement(){return true;}
     public final Form getForm(){return form;}
 
@@ -44,7 +43,14 @@ public class BElement {
     public final void setSize(int w,int h){this.w=w;this.h=h;}
     public final void setW(int w){this.w=w;}
     public final void setH(int h){this.h=h;}
-    public final void setForm(Form f){this.form=f;}
+    public final void setForm(Form f){
+        this.form=f;
+        if(f.getType()==Form.FORM_POLYGON){
+            ((Polygon)f).determineCoordinates();
+        }
+        w=(int)form.getWidth();
+        h=(int)form.getHeight();
+    }
 
     public void setOptions(HashMap<String,String> options){
         if(options.containsKey("x"))pos.setX(Integer.parseInt(options.get("x")));
@@ -66,8 +72,8 @@ public class BElement {
         if(ay>pos.getY()+h)return false;
         return true;
     }
-    public boolean checkInside(Element e){
-        return checkInside(e.x,e.y,e.w,e.h);
+    public boolean checkInside(BElement e){
+        return checkInside(e.pos.x,e.pos.y,e.w,e.h);
     }
     public boolean checkInside(double ax,double ay){
         return checkInside(ax,ay,0.0001,0.0001);

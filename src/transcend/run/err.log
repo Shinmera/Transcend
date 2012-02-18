@@ -1,30 +1,30 @@
-21:43 [INFO][MF] Booting up...
+23:59 [INFO][MF] Booting up...
 null.cape.main.MainFrame.<clinit>
-21:43 [INFO][CONST] Loading
+23:59 [INFO][CONST] Loading
 null.transcend.main.Const.loadRegistry
-21:43 [INFO][MF] Booting up...
+23:59 [INFO][MF] Booting up...
 null.transcend.main.MainFrame.<clinit>
-21:43 [INFO][CONST] Loading
+23:59 [INFO][CONST] Loading
 null.transcend.main.Const.loadRegistry
-21:43 [INFO][InputEventHandler] Loaded layout swiss. 23 keys mapped.
+23:59 [INFO][InputEventHandler] Loaded layout swiss. 23 keys mapped.
 null.transcend.event.InputEventHandler.<init>
-21:43 [INFO][InputEventHandler] Loaded layout lefty. 10 keys mapped.
+23:59 [INFO][InputEventHandler] Loaded layout lefty. 10 keys mapped.
 null.transcend.event.InputEventHandler.<init>
-21:43 [INFO][FileStorage] Initial indexing...
+23:59 [INFO][FileStorage] Initial indexing...
 null.transcend.main.FileStorage.<init>
-21:43 [INFO][FileStorage] Done, indexed 19 files.
+23:59 [INFO][FileStorage] Done, indexed 19 files.
 null.transcend.main.FileStorage.<init>
-21:43 [INFO][InputEventHandler] Loaded layout swiss. 23 keys mapped.
+23:59 [INFO][InputEventHandler] Loaded layout swiss. 23 keys mapped.
 null.transcend.event.InputEventHandler.<init>
-21:43 [INFO][InputEventHandler] Loaded layout lefty. 10 keys mapped.
+23:59 [INFO][InputEventHandler] Loaded layout lefty. 10 keys mapped.
 null.transcend.event.InputEventHandler.<init>
-21:43 [INFO][CONST] Loading
+23:59 [INFO][CONST] Loading
 null.transcend.main.Const.loadRegistry
-21:43 [INFO][MF] Initializing...
+23:59 [INFO][MF] Initializing...
 null.cape.main.MainFrame.create
-21:43 [INFO][MF] initGL
+23:59 [INFO][MF] initGL
 null.cape.main.MainFrame.initGL
-21:43 [INFO][MF] initGame
+23:59 [INFO][MF] initGame
 null.cape.main.MainFrame.initGame
-21:45 [INFO][MF] Shutting down...
+23:59 [INFO][MF] Shutting down...
 null.cape.main.MainFrame.destroy

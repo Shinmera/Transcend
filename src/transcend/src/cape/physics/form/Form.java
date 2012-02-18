@@ -18,6 +18,10 @@ public class Form {
     protected int form = FORM_POINT;
     protected double r = 0;
     
+    public double getHeight(){return 0;}
+    public double getWidth(){return 0;}
+    public int getType(){return form;}
+    
     public void draw(){
         
     }

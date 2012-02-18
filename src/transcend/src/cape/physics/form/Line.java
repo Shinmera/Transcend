@@ -34,6 +34,8 @@ public class Line extends Form{
     public void setV(Vector2 a){this.a=a;}
     public void setX(double ax){a.setX(ax);}
     public void setY(double ay){a.setY(ay);}
+    public double getWidth(){return a.getX();}
+    public double getHeight(){return a.getY();}
     
     public void draw(){
         glBegin(GL_LINES);

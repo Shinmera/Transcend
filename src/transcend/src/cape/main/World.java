@@ -21,9 +21,9 @@ import transcend.main.Const;
 public class World {
     private final UpdateProcedure updateProc = new UpdateProcedure();
     private final DrawProcedure drawProc = new DrawProcedure();
-    TIntArrayList ids = new TIntArrayList();
-    THashMap<Integer,Block> blocks     = new THashMap<Integer,Block>();
-    THashMap<Integer,Entity> entities  = new THashMap<Integer,Entity>();
+    private final TIntArrayList ids = new TIntArrayList();
+    private final THashMap<Integer,Block> blocks     = new THashMap<Integer,Block>();
+    private final THashMap<Integer,Entity> entities  = new THashMap<Integer,Entity>();
     public World(){}
 
     public void printWorldStats(){
@@ -34,14 +34,15 @@ public class World {
     public int entitySize(){return entities.size();}
     public int size(){return ids.size();}
     public void clear(){
-        blocks.clear();
-        entities.clear();
+        synchronized(blocks){blocks.clear();}
+        synchronized(entities){entities.clear();}
         ids.clear();
     }
 
     public int getID(int i){return ids.get(i);}
-    public Object[] getBlockList(){return blocks.values().toArray();}
-    public Object[] getEntityList(){return entities.values().toArray();}
+    public Block[] getBlockList(){return blocks.values().toArray(new Block[blocks.size()]);}
+    public Entity[] getEntityList(){return entities.values().toArray(new Entity[entities.size()]);}
+    public int[] getIDList(){return ids.toArray();}
     public THashMap<Integer,Block> getBlockMap(){return blocks;}
     public THashMap<Integer,Entity> getEntityMap(){return entities;}
 
@@ -54,7 +55,7 @@ public class World {
         ids.add(nID);
         block.wID=nID;
         block.init();
-        blocks.put(nID, block);
+        synchronized(blocks){blocks.put(nID, block);}
         return nID;
     }
 
@@ -63,13 +64,8 @@ public class World {
         ids.add(nID);
         entity.wID=nID;
         entity.init();
-        entities.put(nID, entity);
+        synchronized(entities){entities.put(nID, entity);}
         return nID;
-    }
-
-    public void addElement(BElement element){
-        if(element.ELEMENT_ID>=Block.ELEMENT_ID)addBlock((Block)element);else
-        if(element.ELEMENT_ID>=Entity.ELEMENT_ID)addEntity((Entity)element);
     }
 
     public boolean isBlock(int wID){return blocks.containsKey(wID);}
@@ -83,17 +79,17 @@ public class World {
     }
     
     public void delByID(int wID){
-        if(blocks.containsKey(wID)){blocks.remove(wID);ids.remove(wID);}
-        if(entities.containsKey(wID)){entities.remove(wID);ids.remove(wID);}
+        if(blocks.containsKey(wID)){synchronized(blocks){blocks.remove(wID);}ids.remove(wID);}
+        if(entities.containsKey(wID)){synchronized(entities){entities.remove(wID);}ids.remove(wID);}
     }
 
     public void update(){
-        entities.forEachValue(updateProc);
+        synchronized(entities){entities.forEachValue(updateProc);}
     }
 
     public void draw(){
-        blocks.forEachValue(drawProc);
-        entities.forEachValue(drawProc);
+        synchronized(blocks){blocks.forEachValue(drawProc);}
+        synchronized(entities){entities.forEachValue(drawProc);}
     }
     
     final class UpdateProcedure implements TObjectProcedure{

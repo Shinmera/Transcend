@@ -101,4 +101,11 @@ public class AbstractGraph {
         glEnd();
         glDisable(GL_COLOR_LOGIC_OP);
     }
+    
+    public static void glLine2d(double ax,double ay,double bx,double by){
+        glBegin(GL_LINES);
+            glVertex2d(ax,ay);
+            glVertex2d(bx,by);
+        glEnd();
+    }
 }

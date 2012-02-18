@@ -12,6 +12,7 @@ import NexT.script.ScriptManager;
 import NexT.util.Toolkit;
 import cape.physics.Block;
 import cape.physics.Entity;
+import cape.physics.PhysicsController;
 import java.awt.Font;
 import java.io.File;
 import java.io.IOException;
@@ -48,6 +49,7 @@ public class MainFrame implements KeyboardListener{
                           "http://www.tymoon.eu", "/", 1, null);
         Const.LOGGER.info("[MF] Booting up...");
     }
+    public static final double VERSION = 0.1;
     public static int DISPLAY_WIDTH = 800;
     public static int DISPLAY_HEIGHT= 600;
     public static double DISPLAY_ASPECT= DISPLAY_WIDTH/DISPLAY_HEIGHT;
@@ -62,7 +64,9 @@ public class MainFrame implements KeyboardListener{
     public static final EventHandler eh = new EventHandler();
     public static final ScriptManager scriptManager = new ScriptManager();
     public static final Editor editor = new Editor();
+    public static final PhysicsController physics = new PhysicsController();
     public static final int[][] DEFAULT_DIM = {{1280,960},{1280,720},{1280,800}};//4:3 16:9 16:10
+    public static long updateTime = 0;
     private final Updater updater = new Updater();
 
     public static void main(String[] args) throws Throwable{
@@ -78,7 +82,7 @@ public class MainFrame implements KeyboardListener{
 
     public void create() throws LWJGLException, IOException {
         Const.LOGGER.info("[MF] Initializing...");
-        Display.setTitle("Transcend - v"+Const.VERSION);
+        Display.setTitle("Transcend - v"+Const.VERSION+" - CAPE v"+VERSION);
         Display.setDisplayMode(new DisplayMode(DISPLAY_WIDTH,DISPLAY_HEIGHT));
         Display.setVSyncEnabled(true);
         Display.setLocation(0, 0);
@@ -154,7 +158,10 @@ public class MainFrame implements KeyboardListener{
 
     public void update() {
         //Hook to world loop
-        if(!pause)world.update();
+        if(!pause){
+            physics.update();
+            world.update();
+        }
         //Handle input
         ieh.triggerKeyboardEvent();
         ieh.triggerMouseEvent();
@@ -198,7 +205,8 @@ public class MainFrame implements KeyboardListener{
         
         Color.red.bind();   if(pause)ttf.drawString(10, DISPLAY_HEIGHT-20, "PAUSED", 1, 1);
         Color.white.bind(); ttf.drawString(10, DISPLAY_HEIGHT-30, "Blocks: "+world.blockSize()+" Entities: "+world.entitySize()+"\n"+
-                                                                  "Mode: "+editor.getModeS(), 1, 1);
+                                                                  "Mode: "+editor.getModeS()+" Place: "+editor.getPlaceS()+"\n"+
+                                                                  "Updatetime: "+updateTime+" Passes: "+physics.passes, 1, 1);
         
         glBindTexture(GL_TEXTURE_2D, 0); //release
     }
@@ -253,8 +261,12 @@ public class MainFrame implements KeyboardListener{
         public void run(){
             while(!isInterrupted()){
                 try{
+                    long milis = System.currentTimeMillis();
                     update();
-                    try{Thread.sleep(1000/ups);}catch(Exception ex){Const.LOGGER.log(Level.WARNING,"Updater thread failed!",ex);}
+                    updateTime = System.currentTimeMillis() - milis;
+                    milis = (1000/ups)-updateTime;
+                    if(milis<0)milis=0;
+                    try{Thread.sleep(milis);}catch(Exception ex){Const.LOGGER.log(Level.WARNING,"Updater thread failed!",ex);}
                 }catch(Throwable ex){
                     Const.LOGGER.log(Level.SEVERE,"Exception in main update loop! Attempting to continue... ",ex);
                 }

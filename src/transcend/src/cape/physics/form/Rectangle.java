@@ -23,10 +23,10 @@ public class Rectangle extends Form{
         this.h=h;
     }
     
-    public double getW(){return w;}
-    public double getH(){return h;}
-    public void setW(double w){this.w=w;}
-    public void setH(double h){this.h=h;}
+    public double getWidth(){return w;}
+    public double getHeight(){return h;}
+    public void setWidth(double w){this.w=w;}
+    public void setHeight(double h){this.h=h;}
     
     public void draw(){
         AbstractGraph.glRectangle2d(0, 0, w, h);

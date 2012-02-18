@@ -13,12 +13,12 @@ import cape.main.MainFrame;
 import cape.physics.form.Form;
 import cape.physics.form.Rectangle;
 import org.newdawn.slick.Color;
+import transcend.graph.AbstractGraph;
 
 public class Entity extends BElement{
     public static final double GRAVITY = -0.5;
     
     private Color c;
-    private double vx=0,vy=0;
     
     public Entity(){c = new Color((float)Math.random(),(float)Math.random(),(float)Math.random(),0.5f);}
     public Entity(int x,int y,int w,int h){
@@ -28,7 +28,7 @@ public class Entity extends BElement{
     }
     public Entity(int x,int y,int w,int h,Form form){
         this(x,y,w,h);
-        this.form = form;
+        setForm(form);
     }
     
     public void update(){
@@ -42,6 +42,8 @@ public class Entity extends BElement{
     }
     
     public void draw(){
+        new Color(1.0f,1.0f,1.0f,0.1f).bind();
+        AbstractGraph.glRectangle2d(0, 0, w, h);
         c.bind();
         form.draw();
     }

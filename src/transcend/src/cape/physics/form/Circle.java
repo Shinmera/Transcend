@@ -24,8 +24,10 @@ public class Circle extends Form{
     
     public double getR(){return r;}
     public void setR(double r){this.r=r;}
+    public double getHeight(){return r*2;}
+    public double getWidth(){return r*2;}
     
     public void draw(){
-        AbstractGraph.glCircle2d(0, 0, r);
+        AbstractGraph.glFCircle2d(0, 0, r);
     }
 }
