@@ -13,6 +13,8 @@ import NexT.util.Toolkit;
 import cape.physics.Block;
 import cape.physics.Entity;
 import cape.physics.PhysicsController;
+import cape.physics.form.Circle;
+import cape.physics.form.Line;
 import java.awt.Font;
 import java.io.File;
 import java.io.IOException;
@@ -31,7 +33,6 @@ import org.newdawn.slick.Color;
 import transcend.event.EventHandler;
 import transcend.event.InputEventHandler;
 import transcend.event.KeyboardListener;
-import transcend.event.MouseListener;
 import transcend.graph.AbstractGraph;
 import transcend.gui.TrueTypeFont;
 import transcend.main.Const;
@@ -40,7 +41,7 @@ import static transcend.main.Jitter.jps;
 
 public class MainFrame implements KeyboardListener{
     static{
-        try{System.setProperty("org.lwjgl.librarypath"  ,new File(new File(new File(System.getProperty("user.dir")), "native"), LWJGLUtil.getPlatformName()).getAbsolutePath());
+        try{System.setProperty("org.lwjgl.librarypath",new File(new File(new File(System.getProperty("user.dir")), "native"),LWJGLUtil.getPlatformName()).getAbsolutePath());
         }catch(Exception ex){Const.LOGGER.log(Level.SEVERE,"Failed to set LWJGL library path!",ex);}
         org.lwjgl.Sys.initialize();
         Toolkit.printMenu("><Transcend Engine v"+Const.VERSION+" \n"+
@@ -53,7 +54,7 @@ public class MainFrame implements KeyboardListener{
     public static int DISPLAY_WIDTH = 800;
     public static int DISPLAY_HEIGHT= 600;
     public static double DISPLAY_ASPECT= DISPLAY_WIDTH/DISPLAY_HEIGHT;
-    public static int fps = 60, ups = 60;
+    public static int fps = 60, ups = 30;
     public static int ACSIZE = 2;
     public static boolean pause = false;
     public static TrueTypeFont ttf = null;
@@ -119,7 +120,8 @@ public class MainFrame implements KeyboardListener{
         Const.LOGGER.info("[MF] initGame");
         ttf = new TrueTypeFont(new Font("Arial",Font.PLAIN,12),true);
         ieh.addKeyboardListener(this);
-        world.addBlock(new Block(-256,-64,512,64));
+        world.addBlock(new Block(0,0,500,0,new Line(500,0)));
+        world.addEntity(new Entity(150,-50,20,20,new Circle(20)));
     }
 
     public void initGL() {
@@ -205,7 +207,7 @@ public class MainFrame implements KeyboardListener{
         
         Color.red.bind();   if(pause)ttf.drawString(10, DISPLAY_HEIGHT-20, "PAUSED", 1, 1);
         Color.white.bind(); ttf.drawString(10, DISPLAY_HEIGHT-30, "Blocks: "+world.blockSize()+" Entities: "+world.entitySize()+"\n"+
-                                                                  "Mode: "+editor.getModeS()+" Place: "+editor.getPlaceS()+"\n"+
+                                                                  "Place: "+editor.getPlaceS()+" Mode: "+editor.getModeS()+"\n"+
                                                                   "Updatetime: "+updateTime+" Passes: "+physics.passes, 1, 1);
         
         glBindTexture(GL_TEXTURE_2D, 0); //release

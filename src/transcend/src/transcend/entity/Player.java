@@ -102,10 +102,9 @@ public class Player extends RigidBody implements KeyboardListener,EventListener{
         if(power<100)power+=POWER_REGENERATION;
         if(power>100)power=100;
         
-        vy+=GRAVITY;
-        performCollisionChecks();
+        //vy+=GRAVITY;
+        //performCollisionChecks();
         
-        /**************
         //bottom
         if(((bottom=(Block)check(x-w/2+3,y+1,x+w/2-3,y+1))!=null || (bottom=(Block)check(x-w/2+3,y+vy  ,x+w/2-3,y+vy))!=null)){
             int y1=Integer.MAX_VALUE;
@@ -124,10 +123,10 @@ public class Player extends RigidBody implements KeyboardListener,EventListener{
             vy-=scriptManager.s("player").v("vydcc").fix(form);
         }
         //CEILING
-        if((ceiling=check(x-w/2+3,y+h  ,x+w/2-3,y+h))!=null&&vy>0){
-            if(ceiling.solid>0.5){
+        if((top=check(x-w/2+3,y+h  ,x+w/2-3,y+h))!=null&&vy>0){
+            if(top.solid>0.5){
                 vy=0;
-                Vector v = ceiling.getCollisionPoint(new Ray(x,y,0,0,1,0));
+                Vector v = top.getCollisionPoint(new Ray(x,y,0,0,1,0));
                 if(v!=null){
                     y=v.getY()-h;
                 }
@@ -155,7 +154,6 @@ public class Player extends RigidBody implements KeyboardListener,EventListener{
             }
             if(right.solid<=0.5)right=null;
         }
-        *************/
 
         //INPUT
         if(K_JUMP&&bottom!=null&&vy==0){vy+=scriptManager.s("player").v("vyacc").fix(form);}

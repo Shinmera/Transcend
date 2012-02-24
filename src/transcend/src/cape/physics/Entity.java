@@ -32,10 +32,9 @@ public class Entity extends BElement{
     }
     
     public void update(){
-        vy+=GRAVITY;
-        
-        pos.x+=vx;
-        pos.y+=vy;
+        pos.x+=dir.x;
+        pos.y+=dir.y;
+        dir.y+=GRAVITY;
         
         if(Toolkit.p(pos.x)>10000)MainFrame.world.delByID(wID);
         else if(Toolkit.p(pos.y)>10000)MainFrame.world.delByID(wID);
