@@ -14,12 +14,17 @@ import NexT.util.Toolkit;
 import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.IntBuffer;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
+import javax.imageio.ImageIO;
+import javax.swing.Icon;
 import javax.swing.JFrame;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.LWJGLException;
@@ -93,12 +98,12 @@ public class MainFrame implements KeyboardListener{
         MainFrame mf = new MainFrame();
         try{
             if(!DisplayModeChooser.showDialog("Display Mode"))System.exit(0);
-            mf.CONST.loadRegistry();
+            MainFrame.CONST.loadRegistry();
             mf.create();
             mf.run();
         }
         catch(Exception ex){Const.LOGGER.log(Level.SEVERE,"[MF] Error in main thread!",ex);}
-        finally{mf.destroy();}
+        finally{MainFrame.destroy();}
     }
 
     public void create() throws LWJGLException, IOException {
@@ -121,8 +126,13 @@ public class MainFrame implements KeyboardListener{
         frame.setLayout(new BorderLayout());
         frame.add(canvas, BorderLayout.CENTER);
         
-        //Display.setTitle("Transcend - v"+Const.VERSION);
-        //Display.create();
+        List<Image> icons = new ArrayList<Image>();
+        icons.add(ImageIO.read(fileStorage.getFile("icon_16")));
+        icons.add(ImageIO.read(fileStorage.getFile("icon_32")));
+        icons.add(ImageIO.read(fileStorage.getFile("icon_64")));
+        icons.add(ImageIO.read(fileStorage.getFile("icon_128")));
+        frame.setIconImages(icons);
+        
         DISPLAY_WIDTH =Display.getDisplayMode().getWidth();
         DISPLAY_HEIGHT=Display.getDisplayMode().getHeight();
         DISPLAY_ASPECT=DISPLAY_WIDTH/(DISPLAY_HEIGHT+0.0);
@@ -134,7 +144,7 @@ public class MainFrame implements KeyboardListener{
         
         Display.setParent(canvas);
         frame.setPreferredSize(new Dimension(DISPLAY_WIDTH,DISPLAY_HEIGHT));
-        frame.setMinimumSize(new Dimension(800,600));
+        frame.setMinimumSize(new Dimension(300,200));
         frame.pack();
         frame.setVisible(true);
         Display.create();
@@ -168,7 +178,7 @@ public class MainFrame implements KeyboardListener{
         ieh.addKeyboardListener(this);
         camera.setBoundary(300);
         camera.setPosition(0,0);
-        double zoom = 1.0;
+        double zoom;
         if(DISPLAY_ASPECT==4.0/3.0)           zoom = DISPLAY_WIDTH / (DEFAULT_DIM[0][0] + 0.0);
         else if(DISPLAY_ASPECT == 16.0 / 9.0) zoom = DISPLAY_WIDTH / (DEFAULT_DIM[1][0] + 0.0);
         else if(DISPLAY_ASPECT == 16.0 / 10.0)zoom = DISPLAY_WIDTH / (DEFAULT_DIM[2][0] + 0.0);

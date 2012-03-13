@@ -9,8 +9,8 @@
 
 package transcend.gui;
 
-import org.newdawn.slick.Color;
 import static org.lwjgl.opengl.GL11.*;
+import org.newdawn.slick.Color;
 
 public class GObject {
     int x,y,w,h;
