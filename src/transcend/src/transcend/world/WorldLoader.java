@@ -103,7 +103,7 @@ public class WorldLoader {
                 if(!e.getClass().getName().equals("entity.Player")){
                     SimpleSet s = e.getOptions();
                     if((s!=null)&&(!s.containsKey("nosave"))){
-                        pw.println(e.getClass().getName().substring(e.getClass().getName().indexOf(".")+1)+"{");
+                        pw.println(e.getClass().getName().substring(e.getClass().getName().lastIndexOf('.')+1)+"{");
                         pw.println("x: "+(int)e.getX());
                         pw.println("y: "+(int)e.getY());
                         pw.println("z: "+(int)e.getZ());
@@ -126,7 +126,7 @@ public class WorldLoader {
     }
 
     public boolean loadWorld(File file){
-        if(!file.exists())return false;
+        if((file==null)||(!file.exists()))return false;
         boolean skip = false,inBlock = false,inMulti = false;
         int line = 1,elementsLoaded=0;
         HashMap<String,String> arguments = new HashMap<String,String>();

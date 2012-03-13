@@ -15,6 +15,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.logging.Level;
+import static org.lwjgl.opengl.GL11.*;
+import org.lwjgl.opengl.GL12;
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 import transcend.main.Const;
@@ -44,6 +46,10 @@ public class TexturePool {
         try{
             String extension = f.getName().substring(f.getName().indexOf(".")+1);
             Texture texture = TextureLoader.getTexture(extension.toUpperCase(), new FileInputStream(f));
+            glTexParameteri(texture.getTextureID(), GL_TEXTURE_WRAP_S, GL12.GL_CLAMP_TO_EDGE);
+            glTexParameteri(texture.getTextureID(), GL_TEXTURE_WRAP_T, GL12.GL_CLAMP_TO_EDGE);
+            glTexParameteri(texture.getTextureID(), GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+            glTexParameteri(texture.getTextureID(), GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
             textures.put(name, texture);
             return texture;
         }catch(Exception e){Const.LOGGER.log(Level.SEVERE,"[TexturePool] Failed to load texture at "+f.getAbsolutePath()+".",e);return null;}

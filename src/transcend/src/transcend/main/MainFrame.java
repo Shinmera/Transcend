@@ -24,7 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import javax.imageio.ImageIO;
-import javax.swing.Icon;
 import javax.swing.JFrame;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.LWJGLException;
@@ -34,6 +33,7 @@ import org.lwjgl.input.Mouse;
 import org.lwjgl.openal.AL;
 import org.lwjgl.opengl.Display;
 import static org.lwjgl.opengl.GL11.*;
+import org.lwjgl.opengl.GL13;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.openal.SoundStore;
 import transcend.entity.Player;
@@ -204,10 +204,10 @@ public class MainFrame implements KeyboardListener{
         glClearAccum(0,0,0,0);
         glClearDepth(1);        glEnable(GL_COLOR_MATERIAL);
         glEnable(GL_TEXTURE_2D);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL13.GL_CLAMP_TO_BORDER);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL13.GL_CLAMP_TO_BORDER);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
         glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
         
         //glDisable(GL_DITHER);
@@ -217,9 +217,9 @@ public class MainFrame implements KeyboardListener{
         glDisable(GL_DEPTH_TEST);
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
-        glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
         glEnable(GL_POINT_SMOOTH);
         glHint(GL_POINT_SMOOTH_HINT, GL_NICEST);
+        glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
         
         //2D Scene
         glViewport(0,0,DISPLAY_WIDTH,DISPLAY_HEIGHT);
@@ -321,9 +321,8 @@ public class MainFrame implements KeyboardListener{
         DISPLAY_WIDTH = (int) (DISPLAY_ASPECT*DISPLAY_HEIGHT);
         frame.setSize(DISPLAY_WIDTH, DISPLAY_HEIGHT);
         if(menu!=null&&hud!=null){
-            menu.clear();hud.clear();
-            new MenuLoader().load();
-            if(editor.getActive())hud.get("p_editor").setVisible(true);
+            //menu.clear();hud.clear();
+            //new MenuLoader().load();
         }
         glViewport(0,0,DISPLAY_WIDTH,DISPLAY_HEIGHT);
         glMatrixMode(GL_PROJECTION);

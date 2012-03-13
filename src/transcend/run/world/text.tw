@@ -1,17 +1,17 @@
 #!transcend world file
 world{
 bgc: 0,0,0,255
-camera: follow 0.6399999999999997
+camera: follow 0.3299999999999994
 }
 
 player{
-x:-632.7999999999994
-y:831.0
+x:1873.9999999999995
+y:-1.0
 }
 
-MovingBlock{
+.MovingBlock{
 x: 640
-y: -299
+y: -169
 z: 0
 w: 192
 h: 64
@@ -21,17 +21,17 @@ vy: -5.0
 tex: 
 }
 
-DayCycle{
+.DayCycle{
 x: 0
 y: 0
 z: -5
 w: 0
 h: 0
-time: 2536
+time: 62576
 full: 8
 }
 
-BlankBlock{
+.BlankBlock{
 x: 640
 y: 64
 z: 0
@@ -40,7 +40,7 @@ h: 64
 status: 0
 }
 
-BlankBlock{
+.BlankBlock{
 x: -192
 y: -128
 z: 0
@@ -49,7 +49,7 @@ h: 64
 status: 0
 }
 
-NullBlock{
+.NullBlock{
 x: 640
 y: -64
 z: 0
@@ -58,7 +58,7 @@ h: 64
 status: 0
 }
 
-BlankBlock{
+.BlankBlock{
 x: 640
 y: -767
 z: 0
@@ -67,7 +67,7 @@ h: 64
 status: 0
 }
 
-BlankBlock{
+.BlankBlock{
 x: 576
 y: -768
 z: 0
@@ -76,7 +76,7 @@ h: 640
 status: 0
 }
 
-BlankBlock{
+.BlankBlock{
 x: 2240
 y: -640
 z: 0
@@ -85,7 +85,7 @@ h: 128
 status: 0
 }
 
-BlankBlock{
+.BlankBlock{
 x: -256
 y: -128
 z: 0
@@ -94,7 +94,7 @@ h: 832
 status: 0
 }
 
-BlankBlock{
+.BlankBlock{
 x: -256
 y: 704
 z: 0
@@ -103,7 +103,7 @@ h: 64
 status: 0
 }
 
-BlankBlock{
+.BlankBlock{
 x: 832
 y: -448
 z: 0
@@ -112,7 +112,7 @@ h: 576
 status: 0
 }
 
-BlankBlock{
+.BlankBlock{
 x: 1216
 y: -448
 z: 0
@@ -121,7 +121,7 @@ h: 128
 status: 0
 }
 
-BlankBlock{
+.BlankBlock{
 x: 1408
 y: -192
 z: 0
@@ -130,7 +130,7 @@ h: 64
 status: 0
 }
 
-ComplexBlock{
+.ComplexBlock{
 x: 1152
 y: 0
 z: 0
@@ -152,7 +152,7 @@ p0005y: 128
 tex: 
 }
 
-WindBlock{
+.WindBlock{
 x: 640
 y: 128
 z: 0
@@ -161,7 +161,7 @@ h: 768
 status: 0
 }
 
-BlankBlock{
+.BlankBlock{
 x: 64
 y: 1088
 z: 0
@@ -170,7 +170,7 @@ h: 64
 status: 0
 }
 
-ComplexBlock{
+.ComplexBlock{
 x: -512
 y: 768
 z: 0
@@ -196,7 +196,7 @@ p0007y: 768
 tex: 
 }
 
-BlankBlock{
+.BlankBlock{
 x: -960
 y: 768
 z: 0
@@ -205,7 +205,7 @@ h: 64
 status: 0
 }
 
-ComplexBlock{
+.ComplexBlock{
 x: 960
 y: 384
 z: 0
@@ -263,7 +263,7 @@ p0023y: 448
 tex: 
 }
 
-BlankBlock{
+.BlankBlock{
 x: 1856
 y: -192
 z: 0
@@ -272,7 +272,7 @@ h: 192
 status: 0
 }
 
-BlankBlock{
+.BlankBlock{
 x: 2368
 y: -576
 z: 0
@@ -281,7 +281,7 @@ h: 64
 status: 0
 }
 
-BlankBlock{
+.BlankBlock{
 x: 1344
 y: 192
 z: 0
@@ -290,7 +290,7 @@ h: 128
 status: 0
 }
 
-ComplexBlock{
+.ComplexBlock{
 x: 1536
 y: -704
 z: 0
@@ -320,7 +320,7 @@ p0009y: -640
 tex: 
 }
 
-BlankBlock{
+.BlankBlock{
 x: 832
 y: -768
 z: 0
@@ -329,7 +329,7 @@ h: 128
 status: 0
 }
 
-BlankBlock{
+.BlankBlock{
 x: -1024
 y: 768
 z: 0
@@ -338,57 +338,77 @@ h: 1024
 status: 0
 }
 
-TileBlock{
-x: -2816
-y: -1664
+.TileBlock{
+x: -2560
+y: -1344
 z: 0
-w: 5824
-h: 960
-status: 0
-tex: tallgrass11
-}
-
-TileBlock{
-x: -2816
-y: -704
-z: 0
-w: 3456
+w: 5568
 h: 640
 status: 0
 tex: tallgrass11
 }
 
-TileBlock{
-x: -2816
+.TileBlock{
+x: -2560
+y: -704
+z: 0
+w: 3200
+h: 640
+status: 0
+tex: tallgrass11
+}
+
+.TileBlock{
+x: -2560
 y: -64
 z: 0
-w: 2624
-h: 768
+w: 2368
+h: 896
 status: 0
 tex: tallgrass11
 }
 
-TileBlock{
-x: -2816
-y: 704
-z: 0
-w: 1856
-h: 1088
-status: 0
-tex: tallgrass11
-}
-
-TileBlock{
-x: -960
-y: 704
+.TileBlock{
+x: -2560
+y: 832
 z: 0
 w: 1600
+h: 960
+status: 0
+tex: tallgrass11
+}
+
+.TileBlock{
+x: 0
+y: 1024
+z: 0
+w: 640
+h: 64
+status: 0
+tex: tallgrass11
+}
+
+.TileBlock{
+x: 64
+y: 1088
+z: 0
+w: 576
+h: 64
+status: 0
+tex: tallgrass11
+}
+
+.TileBlock{
+x: -192
+y: 704
+z: 0
+w: 832
 h: 128
 status: 0
 tex: tallgrass11
 }
 
-TileBlock{
+.TileBlock{
 x: -384
 y: 832
 z: 0
@@ -398,7 +418,7 @@ status: 0
 tex: tallgrass11
 }
 
-TileBlock{
+.TileBlock{
 x: -320
 y: 896
 z: 0
@@ -408,7 +428,7 @@ status: 0
 tex: tallgrass11
 }
 
-TileBlock{
+.TileBlock{
 x: -256
 y: 960
 z: 0
@@ -418,67 +438,7 @@ status: 0
 tex: tallgrass11
 }
 
-TileBlock{
-x: 0
-y: 1024
-z: 0
-w: 640
-h: 64
-status: 0
-tex: tallgrass11
-}
-
-TileBlock{
-x: 64
-y: 1088
-z: 0
-w: 576
-h: 64
-status: 0
-tex: tallgrass11
-}
-
-TileBlock{
-x: 640
-y: 64
-z: 0
-w: 576
-h: 64
-status: 0
-tex: tallgrass11
-}
-
-TileBlock{
-x: 832
-y: -448
-z: 0
-w: 384
-h: 512
-status: 0
-tex: tallgrass11
-}
-
-TileBlock{
-x: 1216
-y: -448
-z: 0
-w: 320
-h: 128
-status: 0
-tex: tallgrass11
-}
-
-TileBlock{
-x: 1216
-y: 0
-z: 0
-w: 320
-h: 64
-status: 0
-tex: tallgrass11
-}
-
-TileBlock{
+.TileBlock{
 x: 1344
 y: 192
 z: 0
@@ -488,7 +448,56 @@ status: 0
 tex: tallgrass11
 }
 
-TileBlock{
+.TileBlock{
+x: 832
+y: -448
+z: 0
+w: 384
+h: 576
+status: 0
+tex: tallgrass11
+}
+
+.TileBlock{
+x: 1216
+y: -448
+z: 0
+w: 320
+h: 128
+status: 0
+tex: tallgrass11
+}
+
+.TileBlock{
+x: 640
+y: 64
+z: 0
+w: 192
+h: 64
+status: 0
+tex: tallgrass11
+}
+
+.BlankBlock{
+x: 448
+y: 64
+z: 0
+w: 192
+h: 1024
+status: 0
+}
+
+.TileBlock{
+x: 448
+y: 64
+z: 0
+w: 192
+h: 640
+status: 0
+tex: tallgrass11
+}
+
+.TileBlock{
 x: 1408
 y: -192
 z: 0
@@ -498,7 +507,7 @@ status: 0
 tex: tallgrass11
 }
 
-TileBlock{
+.TileBlock{
 x: 1856
 y: -128
 z: 0
@@ -508,7 +517,7 @@ status: 0
 tex: tallgrass11
 }
 
-TileBlock{
+.TileBlock{
 x: 832
 y: -704
 z: 0
@@ -518,17 +527,7 @@ status: 0
 tex: tallgrass11
 }
 
-TileBlock{
-x: 1728
-y: -576
-z: 0
-w: 1280
-h: 64
-status: 0
-tex: tallgrass11
-}
-
-TileBlock{
+.TileBlock{
 x: 1664
 y: -640
 z: 0
@@ -538,7 +537,17 @@ status: 0
 tex: tallgrass11
 }
 
-TileBlock{
+.TileBlock{
+x: 1728
+y: -576
+z: 0
+w: 1280
+h: 64
+status: 0
+tex: tallgrass11
+}
+
+.TileBlock{
 x: 1920
 y: -512
 z: 0
@@ -548,246 +557,17 @@ status: 0
 tex: tallgrass11
 }
 
-TileBlock{
-x: 1792
-y: -128
-z: 0
-w: 64
-h: 64
-status: 0
-tex: tallgrass311
-}
-
-TileBlock{
-x: 768
-y: -704
-z: 0
-w: 64
-h: 64
-status: 0
-tex: tallgrass311
-}
-
-TileBlock{
-x: 832
-y: -640
-z: 0
-w: 768
-h: 64
-status: 0
-tex: tallgrass21
-}
-
-TileBlock{
-x: 1920
-y: -448
-z: 0
-w: 256
-h: 64
-status: 0
-tex: tallgrass21
-}
-
-TileBlock{
-x: 1728
-y: -512
-z: 0
-w: 128
-h: 64
-status: 0
-tex: tallgrass21
-}
-
-TileBlock{
+.TileBlock{
 x: 1216
-y: -320
+y: 0
 z: 0
 w: 320
 h: 64
 status: 0
-tex: tallgrass21
-}
-
-TileBlock{
-x: 1408
-y: -128
-z: 0
-w: 384
-h: 64
-status: 0
-tex: tallgrass21
-}
-
-TileBlock{
-x: 640
-y: 128
-z: 0
-w: 576
-h: 64
-status: 0
-tex: tallgrass21
-}
-
-TileBlock{
-x: -192
-y: -64
-z: 0
-w: 832
-h: 64
-status: 0
-tex: tallgrass21
-}
-
-TileBlock{
-x: 2240
-y: -512
-z: 0
-w: 768
-h: 64
-status: 0
-tex: tallgrass21
-}
-
-TileBlock{
-x: 1856
-y: 0
-z: 0
-w: 1152
-h: 64
-status: 0
-tex: tallgrass21
-}
-
-TileBlock{
-x: 1344
-y: 320
-z: 0
-w: 640
-h: 64
-status: 0
-tex: tallgrass21
-}
-
-BlankBlock{
-x: 448
-y: 64
-z: 0
-w: 192
-h: 1088
-status: 0
-}
-
-TileBlock{
-x: 448
-y: 64
-z: 0
-w: 192
-h: 640
-status: 0
 tex: tallgrass11
 }
 
-TileBlock{
-x: 320
-y: -261
-z: 0
-w: 64
-h: 64
-status: 0
-tex: tallgrass11
-}
-
-TileBlock{
-x: -256
-y: -128
-z: -4
-w: 896
-h: 896
-status: 0
-tex: tallgrass11
-}
-
-TileBlock{
-x: 576
-y: -768
-z: -4
-w: 640
-h: 896
-status: 0
-tex: tallgrass11
-}
-
-TileBlock{
-x: 1152
-y: -1344
-z: -4
-w: 64
-h: 64
-status: 0
-tex: tallgrass11
-}
-
-TileBlock{
-x: 1344
-y: 0
-z: -4
-w: 640
-h: 192
-status: 0
-tex: tallgrass11
-}
-
-TileBlock{
-x: -960
-y: 832
-z: 0
-w: 512
-h: 64
-status: 0
-tex: tallgrass21
-}
-
-TileBlock{
-x: -256
-y: 1024
-z: 0
-w: 192
-h: 64
-status: 0
-tex: tallgrass21
-}
-
-TileBlock{
-x: 64
-y: 1152
-z: 0
-w: 576
-h: 64
-status: 0
-tex: tallgrass21
-}
-
-TileBlock{
-x: 1216
-y: 768
-z: 0
-w: 256
-h: 64
-status: 0
-tex: tallgrass21
-}
-
-TileBlock{
-x: 1856
-y: 1024
-z: 0
-w: 576
-h: 64
-status: 0
-tex: tallgrass21
-}
-
-TileBlock{
+.TileBlock{
 x: 1088
 y: 448
 z: 0
@@ -797,7 +577,7 @@ status: 0
 tex: tallgrass11
 }
 
-TileBlock{
+.TileBlock{
 x: 1024
 y: 512
 z: 0
@@ -807,7 +587,7 @@ status: 0
 tex: tallgrass11
 }
 
-TileBlock{
+.TileBlock{
 x: 960
 y: 576
 z: 0
@@ -817,7 +597,7 @@ status: 0
 tex: tallgrass11
 }
 
-TileBlock{
+.TileBlock{
 x: 1792
 y: 512
 z: 0
@@ -827,7 +607,7 @@ status: 0
 tex: tallgrass11
 }
 
-TileBlock{
+.TileBlock{
 x: 2112
 y: 384
 z: 0
@@ -837,7 +617,7 @@ status: 0
 tex: tallgrass11
 }
 
-TileBlock{
+.TileBlock{
 x: 2048
 y: 448
 z: 0
@@ -847,7 +627,7 @@ status: 0
 tex: tallgrass11
 }
 
-TileBlock{
+.TileBlock{
 x: 1152
 y: 640
 z: 0
@@ -857,7 +637,7 @@ status: 0
 tex: tallgrass11
 }
 
-TileBlock{
+.TileBlock{
 x: 1216
 y: 704
 z: 0
@@ -867,7 +647,7 @@ status: 0
 tex: tallgrass11
 }
 
-TileBlock{
+.TileBlock{
 x: 1536
 y: 768
 z: 0
@@ -877,7 +657,7 @@ status: 0
 tex: tallgrass11
 }
 
-TileBlock{
+.TileBlock{
 x: 1728
 y: 832
 z: 0
@@ -887,7 +667,7 @@ status: 0
 tex: tallgrass11
 }
 
-TileBlock{
+.TileBlock{
 x: 1792
 y: 896
 z: 0
@@ -897,7 +677,7 @@ status: 0
 tex: tallgrass11
 }
 
-TileBlock{
+.TileBlock{
 x: 1856
 y: 960
 z: 0
@@ -905,195 +685,5 @@ w: 576
 h: 64
 status: 0
 tex: tallgrass11
-}
-
-TileBlock{
-x: 1600
-y: -640
-z: 0
-w: 64
-h: 64
-status: 0
-tex: tallgrass20
-}
-
-TileBlock{
-x: 1664
-y: -576
-z: 0
-w: 64
-h: 64
-status: 0
-tex: tallgrass20
-}
-
-TileBlock{
-x: 1856
-y: -512
-z: 0
-w: 64
-h: 64
-status: 0
-tex: tallgrass20
-}
-
-TileBlock{
-x: 1216
-y: -640
-z: -4
-w: 1792
-h: 640
-status: 0
-tex: tallgrass11
-}
-
-TileBlock{
-x: 2176
-y: -512
-z: 0
-w: 64
-h: 64
-status: 0
-tex: tallgrass22
-}
-
-TileBlock{
-x: 1216
-y: 64
-z: 0
-w: 64
-h: 64
-status: 0
-tex: tallgrass22
-}
-
-TileBlock{
-x: 2432
-y: 960
-z: 0
-w: 64
-h: 64
-status: 0
-tex: tallgrass22
-}
-
-TileBlock{
-x: 2496
-y: 896
-z: 0
-w: 64
-h: 64
-status: 0
-tex: tallgrass22
-}
-
-TileBlock{
-x: 1792
-y: 960
-z: 0
-w: 64
-h: 64
-status: 0
-tex: tallgrass20
-}
-
-TileBlock{
-x: 1728
-y: 896
-z: 0
-w: 64
-h: 64
-status: 0
-tex: tallgrass20
-}
-
-TileBlock{
-x: 1664
-y: 832
-z: 0
-w: 64
-h: 64
-status: 0
-tex: tallgrass20
-}
-
-TileBlock{
-x: 1472
-y: 768
-z: 0
-w: 64
-h: 64
-status: 0
-tex: tallgrass20
-}
-
-TileBlock{
-x: 1088
-y: 640
-z: 0
-w: 64
-h: 64
-status: 0
-tex: tallgrass20
-}
-
-TileBlock{
-x: 1152
-y: 704
-z: 0
-w: 64
-h: 64
-status: 0
-tex: tallgrass20
-}
-
-TileBlock{
-x: -448
-y: 832
-z: 0
-w: 64
-h: 64
-status: 0
-tex: tallgrass20
-}
-
-TileBlock{
-x: -384
-y: 896
-z: 0
-w: 64
-h: 64
-status: 0
-tex: tallgrass20
-}
-
-TileBlock{
-x: -320
-y: 960
-z: 0
-w: 64
-h: 64
-status: 0
-tex: tallgrass20
-}
-
-TileBlock{
-x: -64
-y: 1024
-z: 0
-w: 64
-h: 64
-status: 0
-tex: tallgrass20
-}
-
-TileBlock{
-x: 0
-y: 1088
-z: 0
-w: 64
-h: 64
-status: 0
-tex: tallgrass20
 }
 

@@ -47,6 +47,7 @@ public class InputEventHandler {
 
     public void lockKeyboard(boolean b){lockKeyboard=b;}
     public void lockMouse(boolean b){lockMouse=b;}
+    public void clear(){klisteners.clear();mlisteners.clear();}
 
     public int size(){
         return mlisteners.size()+klisteners.size();

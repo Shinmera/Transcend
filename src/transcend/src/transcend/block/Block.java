@@ -44,7 +44,7 @@ public class Block extends Element implements EventListener{
 
     public void setOptions(HashMap<String,String> options){
         super.setOptions(options);
-        if(options.containsKey("tex"))MainFrame.elementBuilder.buildElement("tileblock", options);
+        //if(options.containsKey("tex"))MainFrame.elementBuilder.buildElement("tileblock", options);
         if(options.containsKey("status"))setStatus(Integer.parseInt(options.get("status")));
     }
     public SimpleSet<String,String> getOptions(){
