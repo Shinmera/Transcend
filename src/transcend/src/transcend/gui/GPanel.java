@@ -34,6 +34,10 @@ public class GPanel extends GObject{
     public GObject get(int i){
         return regs.getAt(i);
     }
+    
+    public void clear(){
+        regs.clear();
+    }
 
     public int size(){return regs.size();}
     public int getHeight(){return h;}
@@ -60,4 +64,5 @@ public class GPanel extends GObject{
         super.paint();
         for(int i=0;i<regs.size();i++){regs.getAt(i).paint();}
     }
+    
 }

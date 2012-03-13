@@ -82,6 +82,7 @@ public class PhysicsController {
     }
     
     public void handleCollision(double time,Entity a,BElement b){
+        
         a.setVX(a.getVX()*-1.0);
         a.setVY(a.getVY()*-1.0);
         /**

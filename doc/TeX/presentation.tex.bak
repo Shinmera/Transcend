@@ -1,0 +1,48 @@
+\documentclass[12pt,a4paper,titlepage]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[top=3cm, bottom=3cm, left=2cm, right=2cm]{geometry}
+\usepackage{textcomp}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{fix-cm}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{color}
+\usepackage{mdwlist}
+\usepackage{listings}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{datetime}
+\usepackage[perpage,para,bottom,marginal]{footmisc}
+\usepackage{listings}
+\usepackage{caption}
+\renewcommand{\lstlistingname}{Code}
+\newdateformat{dmny}{\monthname[\THEMONTH] \THEYEAR}
+\newdateformat{dyo}{\THEYEAR}
+\lstloadlanguages{Java}
+\lstset{language=Java,basicstyle=\small\ttfamily ,numberstyle=\tiny ,numbersep=5pt,tabsize=2,breaklines=true,
+        keywordstyle=\color{red},stringstyle=\color{blue}\ttfamily ,commentstyle=\color{green}\ttfamily}
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{\colorbox[cmyk]{0.43, 0.35, 0.35,0.01}{\parbox{\textwidth}{\hspace{15pt}#1#2#3}}}
+\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white,singlelinecheck=false,margin=0pt,font={bf,footnotesize}}
+\setlength{\headheight}{30pt}
+\pagestyle{fancy}
+
+\author{Nicolas Hafner}
+\lhead{Nicolas Hafner}
+\title{Transcend Präsentation}
+\chead{Transcend Präsentation}
+\rhead{Zürich, \dmny\today}
+\cfoot{\thepage\ / \pageref{LastPage}}
+\lfoot{\copyright \dyo\today TymoonNET/NexT}
+\date{\d_mny\today}
+
+
+\begin{document}	
+	% Remember, you only have 10 minutes for this.
+	
+\end{document}

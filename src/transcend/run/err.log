@@ -1,30 +1,90 @@
-21:55 [INFO][MF] Booting up...
-null.cape.main.MainFrame.<clinit>
-21:55 [INFO][CONST] Loading
-null.transcend.main.Const.loadRegistry
-21:55 [INFO][MF] Booting up...
+18:47 [INFO][MF] Booting up...
 null.transcend.main.MainFrame.<clinit>
-21:55 [INFO][CONST] Loading
+18:47 [INFO][CONST] Loading
 null.transcend.main.Const.loadRegistry
-21:55 [INFO][InputEventHandler] Loaded layout swiss. 23 keys mapped.
+18:47 [INFO][InputEventHandler] Loaded layout swiss. 23 keys mapped.
 null.transcend.event.InputEventHandler.<init>
-21:55 [INFO][InputEventHandler] Loaded layout lefty. 10 keys mapped.
+18:47 [INFO][InputEventHandler] Loaded layout lefty. 10 keys mapped.
 null.transcend.event.InputEventHandler.<init>
-21:55 [INFO][FileStorage] Initial indexing...
+18:47 [INFO][FileStorage] Initial indexing...
 null.transcend.main.FileStorage.<init>
-21:55 [INFO][FileStorage] Done, indexed 19 files.
+18:47 [INFO][FileStorage] Done, indexed 19 files.
 null.transcend.main.FileStorage.<init>
-21:55 [INFO][InputEventHandler] Loaded layout swiss. 23 keys mapped.
-null.transcend.event.InputEventHandler.<init>
-21:55 [INFO][InputEventHandler] Loaded layout lefty. 10 keys mapped.
-null.transcend.event.InputEventHandler.<init>
-21:55 [INFO][CONST] Loading
+18:47 [INFO][CONST] Loading
 null.transcend.main.Const.loadRegistry
-21:55 [INFO][MF] Initializing...
-null.cape.main.MainFrame.create
-21:55 [INFO][MF] initGL
-null.cape.main.MainFrame.initGL
-21:55 [INFO][MF] initGame
-null.cape.main.MainFrame.initGame
-21:55 [INFO][MF] Shutting down...
-null.cape.main.MainFrame.destroy
+18:47 [INFO]LWJGL found 1 display modes.
+null.transcend.gui.DisplayModeChooser.<init>
+18:47 [INFO]Java found 1 display modes.
+null.transcend.gui.DisplayModeChooser.<init>
+18:47 [WARNING]No display modes found. Falling back to manual.
+null.transcend.gui.DisplayModeChooser.<init>
+18:47 [INFO][CONST] Saving
+null.transcend.main.Const.saveRegistry
+18:47 [INFO][CONST] Loading
+null.transcend.main.Const.loadRegistry
+18:47 [INFO][MF] Initializing...
+null.transcend.main.MainFrame.create
+18:47 [INFO][MF] initGL
+null.transcend.main.MainFrame.initGL
+18:47 [INFO][MF] initGame
+null.transcend.main.MainFrame.initGame
+18:47 [INFO][FontPool] Reloading Arial Bold 20
+null.transcend.graph.FontPool.reloadFont
+18:47 [INFO][TexturePool] Reloading load.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/data/load.png
+null.transcend.graph.TexturePool.reloadTexture
+18:47 [INFO][FontPool] Reloading Arial 12
+null.transcend.graph.FontPool.reloadFont
+18:47 [INFO][TexturePool] Reloading health_bar.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/ui/health_bar.png
+null.transcend.graph.TexturePool.reloadTexture
+18:47 [INFO][TexturePool] Reloading form_human.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/ui/form_human.png
+null.transcend.graph.TexturePool.reloadTexture
+18:47 [INFO][TexturePool] Reloading form_mouse.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/ui/form_mouse.png
+null.transcend.graph.TexturePool.reloadTexture
+18:47 [INFO][TexturePool] Reloading form_pony.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/ui/form_pony.png
+null.transcend.graph.TexturePool.reloadTexture
+18:47 [INFO][TexturePool] Reloading form_dolphin.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/ui/form_dolphin.png
+null.transcend.graph.TexturePool.reloadTexture
+18:47 [INFO][TexturePool] Reloading form_eagle.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/ui/form_eagle.png
+null.transcend.graph.TexturePool.reloadTexture
+18:47 [INFO][TexturePool] Reloading logo.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/ui/logo.png
+null.transcend.graph.TexturePool.reloadTexture
+18:47 [INFO][Loader] Loading...
+null.transcend.gui.Loader.run
+18:47 [INFO][Loader] 14%
+null.transcend.gui.Loader.run
+18:47 [INFO][Loader] 28%
+null.transcend.gui.Loader.run
+18:47 [INFO][Loader] 42%
+null.transcend.gui.Loader.run
+18:47 [INFO][Loader] 57%
+null.transcend.gui.Loader.run
+18:47 [INFO][Loader] 71%
+null.transcend.gui.Loader.run
+18:47 [INFO][Loader] 85%
+null.transcend.gui.Loader.run
+18:47 [INFO][Loader] 100%
+null.transcend.gui.Loader.run
+18:47 [INFO][Loader] Finished loading. Ready.
+null.transcend.gui.Loader.run
+18:47 [INFO][Loader] Loading...
+null.transcend.gui.Loader.run
+18:47 [INFO][World] Clearing sound pool
+null.transcend.world.WorldLoader.loadWorld
+18:47 [INFO][World] Loading World from /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/world/test.tw
+null.transcend.world.WorldLoader.loadWorld
+18:47 [INFO][TexturePool] Reloading player0.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/sprite/player0.png
+null.transcend.graph.TexturePool.reloadTexture
+18:47 [INFO][TexturePool] Reloading grass11.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/64/grass11.png
+null.transcend.graph.TexturePool.reloadTexture
+18:47 [INFO][World] Loaded 63 elements. 25 Blocks 1 Entities 41 Tiles.
+null.transcend.world.WorldLoader.loadWorld
+18:47 [INFO][Loader] Finished loading. Ready.
+null.transcend.gui.Loader.run
+18:47 [INFO][FontPool] Reloading Arial Bold 12
+null.transcend.graph.FontPool.reloadFont
+18:48 [INFO][TexturePool] Reloading player1.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/sprite/player1.png
+null.transcend.graph.TexturePool.reloadTexture
+18:48 [SEVERE]Exception in main update loop! Attempting to continue... 
+null.transcend.main.MainFrame$Updater.run: Image based resources must be loaded as part of init() or the game loop. They cannot be loaded before initialisation.
+18:48 [INFO][MF] Shutting down...
+null.transcend.main.MainFrame.destroy

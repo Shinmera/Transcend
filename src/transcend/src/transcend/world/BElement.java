@@ -76,7 +76,7 @@ public class BElement {
         if(hits_t<hits_b&&hits_t>=0)hits_b=hits_t;
         hits_t = new Line(x+w,y,0,x+w,y+h,0).getIntersection2D(r);
         if(hits_t<hits_b&&hits_t>=0)hits_b=hits_t;
-        System.out.println(">>> LP: "+hits_b+"");
+        //System.out.println(">>> LP: "+hits_b+"");
         //Translate ray position into real-world coordinates.
         if(hits_b>=0)return r.getPoint(hits_b);
         return null;
@@ -92,7 +92,7 @@ public class BElement {
         hits_t = new Line(x+w,y,0,x+w,y+h,0).getIntersection2D(l);
         if(hits_t<hits_b&&hits_t>=0)hits_b=hits_t;
         //Translate ray position into real-world coordinates. If it's outside of the line reach, cap it.
-        System.out.println(">>> LP: "+hits_b+"");
+        //System.out.println(">>> LP: "+hits_b+"");
         if(hits_b>=0&&hits_b<=1)return l.getPoint(hits_b);
         return null;
     }

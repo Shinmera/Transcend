@@ -8,47 +8,46 @@
 \**********************/
 
 package transcend.main;
-import transcend.graph.FontPool;
 import NexT.repo.Repository;
 import NexT.script.ScriptManager;
-import transcend.graph.AbstractGraph;
 import NexT.util.Toolkit;
-import transcend.event.EventHandler;
-import org.newdawn.slick.openal.SoundStore;
-import org.lwjgl.openal.AL;
-import transcend.graph.SoundPool;
-import transcend.graph.TexturePool;
-import transcend.gui.LoadHelper;
-import transcend.gui.Loader;
-import transcend.gui.Editor;
-import org.lwjgl.BufferUtils;
-import java.nio.IntBuffer;
 import de.matthiasmann.twl.utils.PNGDecoder;
-import java.io.InputStream;
-import java.nio.ByteBuffer;
-import java.net.URL;
-import java.io.IOException;
-import org.newdawn.slick.Color;
-import transcend.gui.Camera;
-import transcend.event.KeyboardListener;
-import transcend.entity.Player;
-import transcend.world.ElementBuilder;
+import java.awt.BorderLayout;
+import java.awt.Canvas;
+import java.awt.Dimension;
+import java.awt.event.*;
 import java.io.File;
-import transcend.world.WorldLoader;
-import transcend.gui.DisplayModeChooser;
-import transcend.event.InputEventHandler;
-import transcend.gui.GPanel;
-import transcend.world.World;
-import org.lwjgl.input.Mouse;
-import org.lwjgl.input.Keyboard;
-import org.lwjgl.opengl.Display;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.nio.ByteBuffer;
+import java.nio.IntBuffer;
+import java.util.logging.Level;
+import javax.swing.JFrame;
+import org.lwjgl.BufferUtils;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.LWJGLUtil;
-import java.util.logging.Level;
-import javax.swing.JOptionPane;
+import org.lwjgl.input.Keyboard;
+import org.lwjgl.input.Mouse;
+import org.lwjgl.openal.AL;
+import org.lwjgl.opengl.Display;
 import static org.lwjgl.opengl.GL11.*;
+import org.newdawn.slick.Color;
+import org.newdawn.slick.openal.SoundStore;
+import transcend.entity.Player;
+import transcend.event.EventHandler;
+import transcend.event.InputEventHandler;
+import transcend.event.KeyboardListener;
+import transcend.graph.AbstractGraph;
+import transcend.graph.FontPool;
+import transcend.graph.SoundPool;
+import transcend.graph.TexturePool;
+import transcend.gui.*;
 import static transcend.main.Jitter.j;
 import static transcend.main.Jitter.jps;
+import transcend.world.ElementBuilder;
+import transcend.world.World;
+import transcend.world.WorldLoader;
 
 public class MainFrame implements KeyboardListener{
     static{
@@ -63,6 +62,7 @@ public class MainFrame implements KeyboardListener{
     }
     public static final Const CONST = new Const();
     public static final File basedir = new File(System.getProperty("user.dir"));
+    public static final JFrame frame = new JFrame("Transcend - v"+Const.VERSION);
     public static final World world = new World();
     public static final WorldLoader worldLoader = new WorldLoader();
     public static final ElementBuilder elementBuilder = new ElementBuilder();
@@ -88,6 +88,9 @@ public class MainFrame implements KeyboardListener{
     public static Loader loader;
     private static Color clearcolor = new Color(0.2f,0.2f,0.2f);
     private final Updater updater = new Updater();
+    private final Canvas canvas = new Canvas();
+    private boolean closeRequested = false;
+    private boolean frameChanged = false;
 
     public static void main(String[] args) throws Throwable{
         MainFrame mf = new MainFrame();
@@ -109,8 +112,25 @@ public class MainFrame implements KeyboardListener{
             loadIcon(new File(basedir,"data"+File.separator+"icon_32.png").toURI().toURL()),
             loadIcon(new File(basedir,"data"+File.separator+"icon_128.png").toURI().toURL()),
         });
-        Display.setTitle("Transcend - v"+Const.VERSION);
-        Display.create();
+        
+        canvas.addComponentListener(new ComponentListener() {
+            public void componentResized(ComponentEvent e){ resize();}
+            public void componentMoved(ComponentEvent e) {}
+            public void componentShown(ComponentEvent e) {}
+            public void componentHidden(ComponentEvent e) {}
+        });
+        frame.addWindowFocusListener(new WindowFocusListener() {
+            public void windowGainedFocus(WindowEvent e){canvas.requestFocusInWindow(); }
+            public void windowLostFocus(WindowEvent e) {}
+        });
+        frame.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e){ closeRequested = true; }
+        });
+        frame.setLayout(new BorderLayout());
+        frame.add(canvas, BorderLayout.CENTER);
+        
+        //Display.setTitle("Transcend - v"+Const.VERSION);
+        //Display.create();
         DISPLAY_WIDTH =Display.getDisplayMode().getWidth();
         DISPLAY_HEIGHT=Display.getDisplayMode().getHeight();
         DISPLAY_ASPECT=DISPLAY_WIDTH/(DISPLAY_HEIGHT+0.0);
@@ -119,6 +139,14 @@ public class MainFrame implements KeyboardListener{
         ACSIZE=CONST.gInteger("ANTIALIAS");
         try{repo.setURL(new URL(CONST.gString("REPO")));}
         catch(Exception e){Const.LOGGER.log(Level.SEVERE, "[MF] Repo URL malformed. Check the constants!",e);}
+        
+        Display.setParent(canvas);
+        frame.setPreferredSize(new Dimension(DISPLAY_WIDTH,DISPLAY_HEIGHT));
+        frame.setMinimumSize(new Dimension(800,600));
+        frame.pack();
+        frame.setVisible(true);
+        Display.create();
+        
         Keyboard.create();
         Mouse.setGrabbed(false);
         Mouse.create();
@@ -133,9 +161,10 @@ public class MainFrame implements KeyboardListener{
             Mouse.destroy();
             Keyboard.destroy();
             Display.destroy();
+            frame.dispose();
             AL.destroy();
-        }catch(Exception ex){//Apparently shit can go bonkers in this.
-            Const.LOGGER.log(Level.SEVERE,"Couldn't clean up properly!",ex);
+        }catch(Throwable t){//Apparently shit can go bonkers in this.
+            Const.LOGGER.log(Level.SEVERE,"Couldn't clean up properly!",t);
         }finally{
             System.exit(0);
         }
@@ -220,6 +249,7 @@ public class MainFrame implements KeyboardListener{
     }
 
     public void render() {
+        
         glLoadIdentity();
         IntBuffer viewport = BufferUtils.createIntBuffer(16);
         glGetInteger(GL_VIEWPORT, viewport);
@@ -258,9 +288,23 @@ public class MainFrame implements KeyboardListener{
     }
 
     public void run() throws Throwable {
-        while(!Display.isCloseRequested()) {
+        while(!closeRequested) {
             try{
                 if(Display.isVisible()) {
+                    if(frameChanged){
+                        if(menu!=null&&hud!=null){
+                            menu.clear();hud.clear();
+                            new MenuLoader().load();
+                        }
+                        glViewport(0,0,DISPLAY_WIDTH,DISPLAY_HEIGHT);
+                        glMatrixMode(GL_PROJECTION);
+                        glLoadIdentity();
+                        glOrtho(0, DISPLAY_WIDTH, 0, DISPLAY_HEIGHT, -10, 10);
+                        glMatrixMode(GL_MODELVIEW);
+                        glLoadIdentity();
+                        frameChanged=false;
+                    }
+                    
                     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
                     if(loader.isLoading()){loader.run();
                     }else{render();}
@@ -280,6 +324,13 @@ public class MainFrame implements KeyboardListener{
                 throw ex;
             }
         }
+    }
+    
+    public void resize(){
+        DISPLAY_HEIGHT = frame.getHeight();
+        DISPLAY_WIDTH = (int) (DISPLAY_ASPECT*DISPLAY_HEIGHT);
+        frame.setSize(DISPLAY_WIDTH, DISPLAY_HEIGHT);
+        frameChanged=true;
     }
 
     public static void pause(){pause=true;Mouse.setGrabbed(false);}
@@ -331,8 +382,6 @@ public class MainFrame implements KeyboardListener{
             }
         }
     }
-
-
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //SPARE FUNCTIONS
