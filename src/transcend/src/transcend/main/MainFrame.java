@@ -11,16 +11,13 @@ package transcend.main;
 import NexT.repo.Repository;
 import NexT.script.ScriptManager;
 import NexT.util.Toolkit;
-import de.matthiasmann.twl.utils.PNGDecoder;
 import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
-import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 import java.util.logging.Level;
 import javax.swing.JFrame;
@@ -106,15 +103,10 @@ public class MainFrame implements KeyboardListener{
 
     public void create() throws LWJGLException, IOException {
         Const.LOGGER.info("[MF] Initializing...");
-        //Display
-        Display.setIcon(new ByteBuffer[] {
-            loadIcon(new File(basedir,"data"+File.separator+"icon_16.png").toURI().toURL()),
-            loadIcon(new File(basedir,"data"+File.separator+"icon_32.png").toURI().toURL()),
-            loadIcon(new File(basedir,"data"+File.separator+"icon_128.png").toURI().toURL()),
-        });
         
+        //FRAME
         canvas.addComponentListener(new ComponentListener() {
-            public void componentResized(ComponentEvent e){ resize();}
+            public void componentResized(ComponentEvent e){ frameChanged = true;}
             public void componentMoved(ComponentEvent e) {}
             public void componentShown(ComponentEvent e) {}
             public void componentHidden(ComponentEvent e) {}
@@ -291,19 +283,7 @@ public class MainFrame implements KeyboardListener{
         while(!closeRequested) {
             try{
                 if(Display.isVisible()) {
-                    if(frameChanged){
-                        if(menu!=null&&hud!=null){
-                            menu.clear();hud.clear();
-                            new MenuLoader().load();
-                        }
-                        glViewport(0,0,DISPLAY_WIDTH,DISPLAY_HEIGHT);
-                        glMatrixMode(GL_PROJECTION);
-                        glLoadIdentity();
-                        glOrtho(0, DISPLAY_WIDTH, 0, DISPLAY_HEIGHT, -10, 10);
-                        glMatrixMode(GL_MODELVIEW);
-                        glLoadIdentity();
-                        frameChanged=false;
-                    }
+                    if(frameChanged){resize();}
                     
                     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
                     if(loader.isLoading()){loader.run();
@@ -330,7 +310,18 @@ public class MainFrame implements KeyboardListener{
         DISPLAY_HEIGHT = frame.getHeight();
         DISPLAY_WIDTH = (int) (DISPLAY_ASPECT*DISPLAY_HEIGHT);
         frame.setSize(DISPLAY_WIDTH, DISPLAY_HEIGHT);
-        frameChanged=true;
+        if(menu!=null&&hud!=null){
+            menu.clear();hud.clear();
+            new MenuLoader().load();
+            if(editor.getActive())hud.get("p_editor").setVisible(true);
+        }
+        glViewport(0,0,DISPLAY_WIDTH,DISPLAY_HEIGHT);
+        glMatrixMode(GL_PROJECTION);
+        glLoadIdentity();
+        glOrtho(0, DISPLAY_WIDTH, 0, DISPLAY_HEIGHT, -10, 10);
+        glMatrixMode(GL_MODELVIEW);
+        glLoadIdentity();
+        frameChanged=false;
     }
 
     public static void pause(){pause=true;Mouse.setGrabbed(false);}
@@ -380,22 +371,6 @@ public class MainFrame implements KeyboardListener{
                     Const.LOGGER.log(Level.SEVERE,"Exception in main update loop! Attempting to continue... ",ex);
                 }
             }
-        }
-    }
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //SPARE FUNCTIONS
-
-    private static ByteBuffer loadIcon(URL url) throws IOException {
-        InputStream is = url.openStream();
-        try {
-            PNGDecoder decoder = new PNGDecoder(is);
-            ByteBuffer bb = ByteBuffer.allocateDirect(decoder.getWidth()*decoder.getHeight()*4);
-            decoder.decode(bb, decoder.getWidth()*4, PNGDecoder.Format.RGBA);
-            bb.flip();
-            return bb;
-        } finally {
-            is.close();
         }
     }
 }

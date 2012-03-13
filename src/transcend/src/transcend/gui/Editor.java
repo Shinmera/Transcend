@@ -125,9 +125,9 @@ public class Editor extends GObject implements MouseListener{
             double x = Mouse.getX()/MainFrame.camera.getZoom() + MainFrame.camera.getRelativeX();
             double y = Mouse.getY()/MainFrame.camera.getZoom() + MainFrame.camera.getRelativeY();
             Object[] ids = new Object[0];
-            if(removeBlocks)ids=Toolkit.joinArray(ids,MainFrame.world.getBlockList());
-            if(removeEntities)ids=Toolkit.joinArray(ids,MainFrame.world.getEntityList());
-            if(removeTiles)ids=Toolkit.joinArray(ids,MainFrame.world.getTileList());
+            if(removeBlocks)ids=Toolkit.joinArray(ids,MainFrame.world.getBlockIDList());
+            if(removeEntities)ids=Toolkit.joinArray(ids,MainFrame.world.getEntityIDList());
+            if(removeTiles)ids=Toolkit.joinArray(ids,MainFrame.world.getTileIDList());
             for(int i=ids.length-1;i>=0;i--){
                 if(MainFrame.world.getByID((Integer)ids[i]).checkInside(x,y)){
                     e=MainFrame.world.getByID((Integer)ids[i]);

@@ -9,20 +9,25 @@
 
 package transcend.world;
 
-import NexT.util.SimpleSet;
+import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.map.hash.THashMap;
+import gnu.trove.procedure.TObjectProcedure;
+import static org.lwjgl.opengl.GL11.*;
 import transcend.block.Block;
 import transcend.entity.Entity;
-import java.util.ArrayList;
-import java.util.HashMap;
-import transcend.tile.Tile;
 import transcend.main.Const;
+import transcend.tile.Tile;
 
 public class World {
-    ArrayList<Integer> ids              = new ArrayList<Integer>();
-    SimpleSet<Integer,Block> blocks     = new SimpleSet<Integer,Block>();
-    SimpleSet<Integer,Entity> entities  = new SimpleSet<Integer,Entity>();
-    SimpleSet<Integer,Tile> tiles       = new SimpleSet<Integer,Tile>();
-    HashMap<String,Integer> index       = new HashMap<String,Integer>();
+    private final UpdateProcedure updateProc            = new UpdateProcedure();
+    private final DrawProcedure drawProc                = new DrawProcedure();
+    private final DrawProcedureLayered drawProcLayered  = new DrawProcedureLayered();
+    private final TIntArrayList ids                     = new TIntArrayList();
+    private final THashMap<String,Integer> index        = new THashMap<String,Integer>();
+    private final THashMap<Integer,Block> blocks        = new THashMap<Integer,Block>();
+    private final THashMap<Integer,Entity> entities     = new THashMap<Integer,Entity>();
+    private final THashMap<Integer,Tile> tiles          = new THashMap<Integer,Tile>();
+    private static int currentDrawLayer = 0;
 
     public World(){}
 
@@ -35,18 +40,21 @@ public class World {
     public int tileSize(){return tiles.size();}
     public int size(){return ids.size();}
     public void clear(){
-        blocks.clear();
-        entities.clear();
-        tiles.clear();
+        synchronized(blocks){blocks.clear();}
+        synchronized(entities){entities.clear();}
+        synchronized(tiles){tiles.clear();}
         ids.clear();
         index.clear();
     }
 
     public int getID(int i){return ids.get(i);}
     public int getID(String name){if(index.containsKey(name))return index.get(name);else return -1;}
-    public Object[] getBlockList(){return blocks.getList().toArray();}
-    public Object[] getEntityList(){return entities.getList().toArray();}
-    public Object[] getTileList(){return tiles.getList().toArray();}
+    public Block[] getBlockList()       {synchronized(blocks){      return blocks.values().toArray(     new Block[blocks.size()]);}}
+    public Entity[] getEntityList()     {synchronized(entities){    return entities.values().toArray(   new Entity[blocks.size()]);}}
+    public Tile[] getTileList()         {synchronized(tiles){       return tiles.values().toArray(      new Tile[blocks.size()]);}}
+    public Integer[] getBlockIDList()   {synchronized(blocks){      return blocks.keySet().toArray(     new Integer[blocks.size()]);}}
+    public Integer[] getEntityIDList()  {synchronized(entities){    return entities.keySet().toArray(   new Integer[blocks.size()]);}}
+    public Integer[] getTileIDList()    {synchronized(tiles){       return tiles.keySet().toArray(      new Integer[blocks.size()]);}}
 
     public double getDistance(int a,int b){
         return Math.sqrt(Math.pow(getByID(a).x-getByID(b).x,2)+Math.pow(getByID(a).y-getByID(b).y,2));
@@ -57,7 +65,7 @@ public class World {
         ids.add(nID);
         block.wID=nID;
         block.init();
-        blocks.put(nID, block);
+        synchronized(blocks){blocks.put(nID, block);}
         return nID;
     }
 
@@ -66,7 +74,7 @@ public class World {
         ids.add(nID);
         entity.wID=nID;
         entity.init();
-        entities.put(nID, entity);
+        synchronized(entities){entities.put(nID, entity);}
         return nID;
     }
 
@@ -75,44 +83,26 @@ public class World {
         ids.add(nID);
         tile.wID=nID;
         tile.init();
-        tiles.put(nID, tile);
+        synchronized(tiles){tiles.put(nID, tile);}
         return nID;
     }
 
     public int addBlock(Block block,String name){
-        int nID=0;if(ids.size()>0)nID=ids.get(ids.size()-1)+1;
-        ids.add(nID);
-        block.wID=nID;
-        block.init();
-        blocks.put(nID, block);
+        int nID=addBlock(block);
         index.put(name, nID);
         return nID;
     }
 
     public int addEntity(Entity entity,String name){
-        int nID=0;if(ids.size()>0)nID=ids.get(ids.size()-1)+1;
-        ids.add(nID);
-        entity.wID=nID;
-        entity.init();
-        entities.put(nID, entity);
+        int nID=addEntity(entity);
         index.put(name, nID);
         return nID;
     }
 
     public int addTile(Tile tile,String name){
-        int nID=0;if(ids.size()>0)nID=ids.get(ids.size()-1)+1;
-        ids.add(nID);
-        tile.wID=nID;
-        tile.init();
-        tiles.put(nID, tile);
+        int nID=addTile(tile);
         index.put(name, nID);
         return nID;
-    }
-
-    public void addElement(BElement element){
-        if(element.ELEMENT_ID>=Block.ELEMENT_ID)addBlock((Block)element);else
-        if(element.ELEMENT_ID>=Entity.ELEMENT_ID)addEntity((Entity)element);else
-        if(element.ELEMENT_ID>=Tile.ELEMENT_ID)addTile((Tile)element);
     }
 
     public boolean isBlock(int wID){return blocks.containsKey(wID);}
@@ -130,66 +120,73 @@ public class World {
 
     public BElement getByName(String name){
         int wID = getID(name);
-        if(blocks.containsKey(wID))return blocks.get(wID);
-        if(entities.containsKey(wID))return entities.get(wID);
-        if(tiles.containsKey(wID))return tiles.get(wID);
-        return null;
+        return getByID(wID);
     }
     
     public void delByID(int wID){
-        if(blocks.containsKey(wID)){blocks.remove(wID);ids.remove((Object)wID);}
-        if(entities.containsKey(wID)){entities.remove(wID);ids.remove((Object)wID);}
-        if(tiles.containsKey(wID)){tiles.remove(wID);ids.remove((Object)wID);}
+        if(blocks.containsKey(wID)){synchronized(blocks){blocks.remove(wID);}ids.remove(wID);return;}
+        if(entities.containsKey(wID)){synchronized(entities){entities.remove(wID);}ids.remove(wID);return;}
+        if(tiles.containsKey(wID)){synchronized(tiles){tiles.remove(wID);}ids.remove(wID);return;}
     }
 
     public void delByName(String name){
         int wID = getID(name);
-        if(blocks.containsKey(wID)){blocks.remove(wID);ids.remove((Object)wID);}
-        if(entities.containsKey(wID)){entities.remove(wID);ids.remove((Object)wID);}
-        if(tiles.containsKey(wID)){tiles.remove(wID);ids.remove((Object)wID);}
+        delByID(wID);
     }
 
     public void update(){
-        for(int i=0;i<tiles.size();i++){
-            tiles.getAt(i).update();
-        }
-
-        for(int i=0;i<blocks.size();i++){
-            blocks.getAt(i).update();
-        }
-
-        for(int i=0;i<entities.size();i++){
-            entities.getAt(i).update();
-        }
+        synchronized(tiles){tiles.forEachValue(updateProc);}
+        synchronized(blocks){blocks.forEachValue(updateProc);}
+        synchronized(entities){entities.forEachValue(updateProc);}
     }
 
     public void draw(){
-        for(int j=-5;j<=0;j++){
-            for(int i=0;i<tiles.size();i++){
-                if(tiles.getAt(i).z==j)tiles.getAt(i).draw();
-            }
+        for(currentDrawLayer=-5;currentDrawLayer<=0;currentDrawLayer++){
+            synchronized(tiles){tiles.forEachValue(drawProcLayered);}
         }
-        for(int j=-5;j<=0;j++){
-            for(int i=0;i<blocks.size();i++){
-                if(blocks.getAt(i).z==j)blocks.getAt(i).draw();
-            }
+        for(currentDrawLayer=-5;currentDrawLayer<=0;currentDrawLayer++){
+            synchronized(blocks){blocks.forEachValue(drawProcLayered);}
         }
-
-        for(int i=0;i<entities.size();i++){
-            entities.getAt(i).draw();
+        
+        synchronized(entities){entities.forEachValue(drawProc);}
+        
+        for(currentDrawLayer=1;currentDrawLayer<=5;currentDrawLayer++){
+            synchronized(blocks){blocks.forEachValue(drawProcLayered);}
         }
-
-        for(int j=1;j<=5;j++){
-            for(int i=0;i<tiles.size();i++){
-                if(tiles.getAt(i).z==j)tiles.getAt(i).draw();
-            }
+        for(currentDrawLayer=1;currentDrawLayer<=5;currentDrawLayer++){
+            synchronized(tiles){tiles.forEachValue(drawProcLayered);}
         }
-        for(int j=1;j<=5;j++){
-            for(int i=0;i<blocks.size();i++){
-                if(blocks.getAt(i).z==j){
-                    blocks.getAt(i).draw();
-                }
+    }
+    
+    
+    final class UpdateProcedure implements TObjectProcedure{
+        public boolean execute(Object object) {
+            ((BElement)object).update();
+            return true;
+        }
+    }
+    
+    final class DrawProcedureLayered implements TObjectProcedure{
+        public boolean execute(Object object){
+            BElement o = (BElement)object;
+            if(o.z==currentDrawLayer){
+                //glPushMatrix();
+                //glTranslated(o.getX(),o.getY(),0);
+                o.draw();
+                //glPopMatrix();
             }
+            return true;
+        }
+    }
+    
+    final class DrawProcedure implements TObjectProcedure{
+        public boolean execute(Object object) {
+            BElement o = (BElement)object;
+            //glPushMatrix();
+            //glTranslated(o.getX(),o.getY(),0);
+            o.draw();
+            //glPopMatrix();
+            return true;
         }
     }
 }

@@ -49,10 +49,10 @@ public class Element extends BElement{
     
     public Element check(double ax,double ay,double bx,double by,double solidity){
         Element e=null;
-        Object[] blockIDs = Toolkit.joinArray(MainFrame.world.getBlockList(),MainFrame.world.getEntityList());
-        for(int i=0;i<blockIDs.length;i++){
-            Element block = (Element)MainFrame.world.getByID((Integer)blockIDs[i]);
-            if((block.wID!=wID)&&((block.checkInside(ax,ay)||block.checkInside(bx,by))&&block.solid>=solidity)){
+        Object[] blocks = Toolkit.joinArray(MainFrame.world.getBlockList(),MainFrame.world.getEntityList());
+        for(int i=0;i<blocks.length;i++){
+            Element block = (Element)blocks[i];
+            if((block!=null)&&(block.wID!=wID)&&((block.checkInside(ax,ay)||block.checkInside(bx,by))&&block.solid>=solidity)){
                 e=block;
                 break;
             }
@@ -62,7 +62,7 @@ public class Element extends BElement{
 
     public static Entity checkEntity(int wID,double ax,double ay,double bx,double by){
         Entity e=null;
-        Object[] entIDs = MainFrame.world.getEntityList();
+        Object[] entIDs = MainFrame.world.getEntityIDList();
         for(int i=0;i<entIDs.length;i++){
             if((Integer)entIDs[i]!=wID){
                 Entity block = (Entity)MainFrame.world.getByID((Integer)entIDs[i]);

@@ -186,7 +186,7 @@ public class ElementBuilder {
             MainFrame.world.addTile(block,"daycycle");
         }
         //ATTEMPT TO DYNAMICALLY LOAD BLOCK
-        else{
+        /*else{
             if(loadElement(name)){
                 try {
                     Element block = (Element) elements.get(name).newInstance();
@@ -199,6 +199,6 @@ public class ElementBuilder {
                     Const.LOGGER.log(Level.WARNING,"Failed to instantiate block '"+name+"'.",ex);
                 }
             }
-        }
+        }*/
     }
 }

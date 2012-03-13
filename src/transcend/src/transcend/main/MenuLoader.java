@@ -196,7 +196,6 @@ public class MenuLoader extends LoadHelper{
         b_load.autoBounds(p_pause, 0,   p_pause.getHeight()-80, panel_width, 30);
         b_quit.autoBounds(p_pause, 0,   p_pause.getHeight()-120, panel_width, 30);
 
-
         p_pause.setBackground(new Color(255,255,255,150));
         p_pause.add(b_editor);
         p_pause.add(b_return);
