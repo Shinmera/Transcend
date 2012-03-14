@@ -33,17 +33,14 @@ import org.lwjgl.input.Mouse;
 import org.lwjgl.openal.AL;
 import org.lwjgl.opengl.Display;
 import static org.lwjgl.opengl.GL11.*;
-import org.lwjgl.opengl.GL13;
+import org.lwjgl.opengl.GL12;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.openal.SoundStore;
 import transcend.entity.Player;
 import transcend.event.EventHandler;
 import transcend.event.InputEventHandler;
 import transcend.event.KeyboardListener;
-import transcend.graph.AbstractGraph;
-import transcend.graph.FontPool;
-import transcend.graph.SoundPool;
-import transcend.graph.TexturePool;
+import transcend.graph.*;
 import transcend.gui.*;
 import static transcend.main.Jitter.j;
 import static transcend.main.Jitter.jps;
@@ -73,6 +70,7 @@ public class MainFrame implements KeyboardListener{
     public static final Camera camera = new Camera();
     public static final Editor editor = new Editor();
     public static final TexturePool texturePool = new TexturePool();
+    public static final TextureLoader textureLoader = new TextureLoader();
     public static final SoundPool soundPool = new SoundPool();
     public static final FontPool fontPool = new FontPool();
     public static final FileStorage fileStorage = new FileStorage();
@@ -85,12 +83,14 @@ public class MainFrame implements KeyboardListener{
     public static double DISPLAY_ASPECT= DISPLAY_WIDTH/DISPLAY_HEIGHT;
     public static int fps = 60, ups = 60;
     public static int ACSIZE = 2;
+    public static int backTileTexture = -1,frontTileTexture = 1;
     public static boolean pause = false;
     public static GPanel menu,hud;
     public static Loader loader;
     private static Color clearcolor = new Color(0.2f,0.2f,0.2f);
     private final Updater updater = new Updater();
     private final Canvas canvas = new Canvas();
+    private TextureRenderer textureRenderer;
     private boolean closeRequested = false;
     private boolean frameChanged = false;
 
@@ -202,12 +202,13 @@ public class MainFrame implements KeyboardListener{
         //2D Initialization
        	glClearColor(clearcolor.getRed(),clearcolor.getGreen(),clearcolor.getBlue(),clearcolor.getAlpha());
         glClearAccum(0,0,0,0);
-        glClearDepth(1);        glEnable(GL_COLOR_MATERIAL);
+        glClearDepth(1);        
+        glEnable(GL_COLOR_MATERIAL);
         glEnable(GL_TEXTURE_2D);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL13.GL_CLAMP_TO_BORDER);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL13.GL_CLAMP_TO_BORDER);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL12.GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL12.GL_CLAMP_TO_EDGE);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
         
         //glDisable(GL_DITHER);
@@ -229,6 +230,7 @@ public class MainFrame implements KeyboardListener{
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
 
+        textureRenderer = new TextureRenderer();
         SoundStore.get().setSoundVolume(0);
     }
 
@@ -237,6 +239,7 @@ public class MainFrame implements KeyboardListener{
         if(!worldLoader.isLoaded()&&!loader.isLoading()){
             loader.setHelper(new LoadHelper(){public void load(){
                 worldLoader.loadWorld(new File("world"+File.separator+"test.tw"));
+                createTileTextures();
             }});
             loader.start();
         }
@@ -251,7 +254,6 @@ public class MainFrame implements KeyboardListener{
     }
 
     public void render() {
-        
         glLoadIdentity();
         IntBuffer viewport = BufferUtils.createIntBuffer(16);
         glGetInteger(GL_VIEWPORT, viewport);
@@ -278,12 +280,30 @@ public class MainFrame implements KeyboardListener{
         hud.paint();
         menu.paint();
     }
+    
+    public void createTileTextures(){
+        int realWorldWidth = (int) (Toolkit.p(world.leftLimit)+Toolkit.p(world.rightLimit));
+        int realWorldHeight= (int) (Toolkit.p(world.upperLimit)+Toolkit.p(world.lowerLimit));
+        int powerWidth = (int) Math.pow(2, Toolkit.nearestHighPowerOfTwo(realWorldWidth));
+        int powerHeight = (int) Math.pow(2, Toolkit.nearestHighPowerOfTwo(realWorldHeight));
+        textureRenderer.beginDrawToTexture(powerWidth, powerHeight);
+        glPushMatrix();
+            glTranslatef(world.leftLimit,world.lowerLimit,0);
+            world.drawBack();
+        glPopMatrix();
+        backTileTexture = textureRenderer.endDrawToTexture();
+        textureRenderer.beginDrawToTexture(powerWidth, powerHeight);
+        glPushMatrix();
+            glTranslatef(world.leftLimit,world.lowerLimit,0);
+            world.drawFront();
+        glPopMatrix();
+        frontTileTexture = textureRenderer.endDrawToTexture();
+    }
 
     public void renderScene(){
         Color.white.bind();
         camera.camBegin();
             world.draw();
-
             if(editor.getActive())AbstractGraph.glCross2d(0,0,50);
         camera.camEnd();
         glBindTexture(GL_TEXTURE_2D, 0); //release

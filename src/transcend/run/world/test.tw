@@ -1,23 +1,23 @@
 #!transcend world file
 world{
 bgc: 0,0,0,255
-camera: follow 0.6399999999999997
+camera: follow 1
 }
 
 player{
-x:-632.7999999999994
-y:831.0
+x:875.6000000000004
+y:-641.0
 }
 
 MovingBlock{
 x: 640
-y: -299
+y: -144
 z: 0
 w: 192
 h: 64
 status: 0
-vx: 0.0
-vy: -5.0
+vx: -0.0
+vy: 5.0
 tex: 
 }
 
@@ -27,7 +27,7 @@ y: 0
 z: -5
 w: 0
 h: 0
-time: 2536
+time: 18063
 full: 8
 }
 
@@ -128,28 +128,6 @@ z: 0
 w: 448
 h: 64
 status: 0
-}
-
-ComplexBlock{
-x: 1152
-y: 0
-z: 0
-w: 384
-h: 128
-status: 0
-p0000x: 1216
-p0000y: 128
-p0001x: 1280
-p0001y: 64
-p0002x: 1536
-p0002y: 64
-p0003x: 1536
-p0003y: 0
-p0004x: 1152
-p0004y: 0
-p0005x: 1152
-p0005y: 128
-tex: 
 }
 
 WindBlock{
@@ -1095,5 +1073,45 @@ w: 64
 h: 64
 status: 0
 tex: tallgrass20
+}
+
+TileBlock{
+x: -768
+y: 832
+z: 0
+w: 128
+h: 256
+status: 0
+tex: palmtree
+}
+
+TileBlock{
+x: 1984
+y: 1024
+z: 0
+w: 128
+h: 256
+status: 0
+tex: palmtree
+}
+
+ComplexBlock{
+x: 1216
+y: 0
+z: 0
+w: 320
+h: 128
+status: 0
+p0000x: 1216
+p0000y: 0
+p0001x: 1536
+p0001y: 0
+p0002x: 1536
+p0002y: 64
+p0003x: 1280
+p0003y: 64
+p0004x: 1216
+p0004y: 128
+tex: 
 }
 

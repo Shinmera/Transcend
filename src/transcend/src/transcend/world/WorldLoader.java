@@ -200,8 +200,10 @@ public class WorldLoader {
                 line++;
             }
             in.close();
+            MainFrame.world.findEdges();
         }catch(IOException e){Const.LOGGER.log(Level.SEVERE,"Failed to load World: Read exception",e);return false;}
         Const.LOGGER.info("[World] Loaded "+elementsLoaded+" elements. "+MainFrame.world.blockSize()+" Blocks "+MainFrame.world.entitySize()+" Entities "+MainFrame.world.tileSize()+" Tiles.");
+        Const.LOGGER.info("[World] Current edges: xl: "+MainFrame.world.leftLimit+" yb: "+MainFrame.world.lowerLimit+" xr: "+MainFrame.world.rightLimit+" yt: "+MainFrame.world.upperLimit);
         loaded = file;
         return true;
     }

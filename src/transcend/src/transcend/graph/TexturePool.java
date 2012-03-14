@@ -10,16 +10,11 @@
 package transcend.graph;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
 import java.util.logging.Level;
-import static org.lwjgl.opengl.GL11.*;
-import org.lwjgl.opengl.GL12;
-import org.newdawn.slick.opengl.Texture;
-import org.newdawn.slick.opengl.TextureLoader;
 import transcend.main.Const;
+import transcend.main.MainFrame;
 
 public class TexturePool {
     private HashMap<String,Texture> textures = new HashMap();
@@ -28,10 +23,7 @@ public class TexturePool {
     
     public void clearPool(){
         Iterator it = textures.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry pairs = (Map.Entry)it.next();
-            ((Texture)pairs.getValue()).release();
-        }
+        MainFrame.texturePool.clearPool();
         textures.clear();
     }
 
@@ -45,11 +37,8 @@ public class TexturePool {
         Const.LOGGER.info("[TexturePool] Reloading "+name+" at "+f.getAbsolutePath());
         try{
             String extension = f.getName().substring(f.getName().indexOf(".")+1);
-            Texture texture = TextureLoader.getTexture(extension.toUpperCase(), new FileInputStream(f));
-            glTexParameteri(texture.getTextureID(), GL_TEXTURE_WRAP_S, GL12.GL_CLAMP_TO_EDGE);
-            glTexParameteri(texture.getTextureID(), GL_TEXTURE_WRAP_T, GL12.GL_CLAMP_TO_EDGE);
-            glTexParameteri(texture.getTextureID(), GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-            glTexParameteri(texture.getTextureID(), GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+            //Texture texture = TextureLoader.getTexture(extension.toUpperCase(), new FileInputStream(f),GL_LINEAR);
+            Texture texture = MainFrame.textureLoader.getTexture(name);
             textures.put(name, texture);
             return texture;
         }catch(Exception e){Const.LOGGER.log(Level.SEVERE,"[TexturePool] Failed to load texture at "+f.getAbsolutePath()+".",e);return null;}

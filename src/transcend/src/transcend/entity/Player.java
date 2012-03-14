@@ -12,17 +12,16 @@ package transcend.entity;
 import NexT.script.Var;
 import NexT.util.Ray;
 import NexT.util.SimpleSet;
-import NexT.util.Toolkit;
 import NexT.util.Vector;
+import java.util.HashMap;
+import org.lwjgl.input.Keyboard;
+import org.newdawn.slick.Color;
 import transcend.block.Block;
 import transcend.event.Event;
 import transcend.event.EventListener;
 import transcend.event.KeyboardListener;
 import transcend.graph.AbstractGraph;
 import transcend.graph.Animation;
-import java.util.HashMap;
-import org.lwjgl.input.Keyboard;
-import org.newdawn.slick.Color;
 import transcend.main.MainFrame;
 import static transcend.main.MainFrame.*;
 import transcend.world.Element;
@@ -36,7 +35,6 @@ public class Player extends RigidBody implements KeyboardListener,EventListener{
     public static final double SWITCH_PENALTY = 25;
     public double POWER_REGENERATION = 1.0/(30.0);
 
-    public static final int ELEMENT_ID = 0x2;
     /*public Element ceiling = null,left = null,right = null,heart = null,bottom = null;*/
     private boolean K_LEFT,K_RIGHT,K_UP,K_DOWN,K_JUMP,K_RUN,K_SWITCH,K_ATTACK,K_USE,K_MAP;
     private double power=100;

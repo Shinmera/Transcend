@@ -8,7 +8,6 @@
 \**********************/
 
 package transcend.graph;
-import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.Color;
 import transcend.main.MainFrame;
 import java.io.File;
@@ -189,13 +188,13 @@ public class Animation {
             glScalef(direction,1,1);
             glBegin(GL_QUADS);
                 glTexCoord2d(rel_w*ind_w     ,rel_h*(ind_h+1));
-                glVertex2i(-w/2,-h/2);
-                glTexCoord2d(rel_w*(ind_w+1) ,rel_h*(ind_h+1));
-                glVertex2i(w/2, -h/2);
-                glTexCoord2d(rel_w*(ind_w+1) ,rel_h*ind_h);
-                glVertex2i(w/2, h/2);
+                glVertex2f(-w/2.0f,-h/2.0f);
+                glTexCoord2d(rel_w*(ind_w+1)*texture.getWidth() ,rel_h*(ind_h+1)*texture.getHeight());
+                glVertex2f(w/2.0f, -h/2.0f);
+                glTexCoord2d(rel_w*(ind_w+1)*texture.getWidth() ,rel_h*ind_h);
+                glVertex2f(w/2.0f, h/2.0f);
                 glTexCoord2d(rel_w*ind_w     ,rel_h*ind_h);
-                glVertex2i(-w/2, h/2);
+                glVertex2f(-w/2.0f, h/2.0f);
             glEnd();
             glPopMatrix();
 

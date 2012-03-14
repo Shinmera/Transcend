@@ -12,10 +12,10 @@ package transcend.world;
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.THashMap;
 import gnu.trove.procedure.TObjectProcedure;
-import static org.lwjgl.opengl.GL11.*;
 import transcend.block.Block;
 import transcend.entity.Entity;
 import transcend.main.Const;
+import transcend.main.MainFrame;
 import transcend.tile.Tile;
 
 public class World {
@@ -28,6 +28,7 @@ public class World {
     private final THashMap<Integer,Entity> entities     = new THashMap<Integer,Entity>();
     private final THashMap<Integer,Tile> tiles          = new THashMap<Integer,Tile>();
     private static int currentDrawLayer = 0;
+    public int lowerLimit = 0, upperLimit = 0, leftLimit = 0, rightLimit = 0;
 
     public World(){}
 
@@ -58,6 +59,19 @@ public class World {
 
     public double getDistance(int a,int b){
         return Math.sqrt(Math.pow(getByID(a).x-getByID(b).x,2)+Math.pow(getByID(a).y-getByID(b).y,2));
+    }
+    
+    public void findEdges(){
+        for(int i=0;i<tiles.size();i++){checkEdges(tiles.get(i));}
+        for(int i=0;i<blocks.size();i++){checkEdges(blocks.get(i));}
+    }
+    
+    private void checkEdges(BElement e){
+        if(e==null)return;
+        if(e.x<leftLimit)leftLimit=(int) e.x;
+        if(e.x+e.w>rightLimit)rightLimit=(int) e.x+e.w;
+        if(e.y<lowerLimit)lowerLimit=(int) e.y;
+        if(e.y+e.h>upperLimit)upperLimit=(int) e.y+e.h;
     }
 
     public int addBlock(Block block){
@@ -141,9 +155,7 @@ public class World {
     }
 
     public void draw(){
-        for(currentDrawLayer=-5;currentDrawLayer<=0;currentDrawLayer++){
-            synchronized(tiles){tiles.forEachValue(drawProcLayered);}
-        }
+        drawBack();
         for(currentDrawLayer=-5;currentDrawLayer<=0;currentDrawLayer++){
             synchronized(blocks){blocks.forEachValue(drawProcLayered);}
         }
@@ -153,8 +165,28 @@ public class World {
         for(currentDrawLayer=1;currentDrawLayer<=5;currentDrawLayer++){
             synchronized(blocks){blocks.forEachValue(drawProcLayered);}
         }
-        for(currentDrawLayer=1;currentDrawLayer<=5;currentDrawLayer++){
-            synchronized(tiles){tiles.forEachValue(drawProcLayered);}
+        drawFront();
+    }
+    
+    public void drawBack(){
+        if(MainFrame.backTileTexture==-1){
+            //Unsupported or unprepared.
+            for(currentDrawLayer=-5;currentDrawLayer<=0;currentDrawLayer++){
+                synchronized(tiles){tiles.forEachValue(drawProcLayered);}
+            }
+        }else{
+            
+        }
+    }
+    
+    public void drawFront(){
+        if(MainFrame.frontTileTexture==-1){
+            //Unsupported or unprepared.
+            for(currentDrawLayer=1;currentDrawLayer<=5;currentDrawLayer++){
+                synchronized(tiles){tiles.forEachValue(drawProcLayered);}
+            }
+        }else{
+            
         }
     }
     
