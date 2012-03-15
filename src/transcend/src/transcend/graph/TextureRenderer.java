@@ -8,56 +8,72 @@
 
 package transcend.graph;
 
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.nio.IntBuffer;
+import org.lwjgl.opengl.EXTFramebufferObject;
 import static org.lwjgl.opengl.EXTFramebufferObject.*;
 import static org.lwjgl.opengl.GL11.*;
+import org.lwjgl.opengl.GL12;
 import org.lwjgl.opengl.GL14;
 import org.lwjgl.opengl.GLContext;
 import transcend.main.Const;
 
 public class TextureRenderer {
     int framebufferID = -1;
-    int depthRenderBufferID = -1;
     int currentTexture = -1;
     
     public TextureRenderer(){
         if (!GLContext.getCapabilities().GL_EXT_framebuffer_object) {
             Const.LOGGER.warning("[TextureRenderer] FrameBufferObject NOT supported. Tiling may be slow.");
         }else {
-            Const.LOGGER.info("[TextureRenderer] FrameBufferObject supported.");
-            framebufferID = glGenFramebuffersEXT();                                                                         // create a new framebuffer
-            depthRenderBufferID = glGenRenderbuffersEXT();                                                                  // And finally a new depthbuffer
+            Const.LOGGER.info("[TextureRenderer] Generating FrameBufferObject");
+            IntBuffer buffer = ByteBuffer.allocateDirect(1*4).order(ByteOrder.nativeOrder()).asIntBuffer(); // allocate a 1 int byte buffer
+            EXTFramebufferObject.glGenFramebuffersEXT( buffer ); // generate 
+            framebufferID = buffer.get();
         }
     }
     
     public void beginDrawToTexture(int width,int height){
         if(framebufferID==-1)return;
         int id = glGenTextures();
+        Const.LOGGER.info("[TextureRenderer] Generated new texture ID: "+id);
+        Const.LOGGER.info("[TextureRenderer] Allocating texture space for "+width+"x"+height+" ...");
+        glBindTexture(GL_TEXTURE_2D, id);
+        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL12.GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL12.GL_CLAMP_TO_EDGE);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0,GL_RGBA, GL_UNSIGNED_BYTE, (java.nio.ByteBuffer) null);
+        glBindTexture(GL_TEXTURE_2D, 0);
+        
         beginDrawToTexture(id,width,height);
     }
     
     public void beginDrawToTexture(int id,int width,int height){
         if(framebufferID==-1)return;
-        glBindTexture(GL_TEXTURE_2D, id);                                                                                   // Bind the colorbuffer texture
-        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);                                                   // make it linear filterd
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0,GL_RGBA, GL_INT, (java.nio.ByteBuffer) null);             // Create the texture data
-        glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT,GL_COLOR_ATTACHMENT0_EXT,GL_TEXTURE_2D, id, 0);                        // attach it to the framebufferglBindFramebufferEXT(GL_FRAMEBUFFER_EXT, framebufferID);                                                            // switch to the new framebuffer
-        // initialize depth renderbuffer
-        glBindRenderbufferEXT(GL_RENDERBUFFER_EXT, depthRenderBufferID);                                                    // bind the depth renderbuffer
-        glRenderbufferStorageEXT(GL_RENDERBUFFER_EXT, GL14.GL_DEPTH_COMPONENT24, width, height);                            // get the data space for it
-        glFramebufferRenderbufferEXT(GL_FRAMEBUFFER_EXT,GL_DEPTH_ATTACHMENT_EXT,GL_RENDERBUFFER_EXT, depthRenderBufferID);  // bind it to the renderbuffer
-        glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);                                                                        // Swithch back to normal framebuffer rendering
-        
-        glViewport (0, 0, width,height);                                                                                    // set The Current Viewport to the fbo size
-        glBindTexture(GL_TEXTURE_2D, 0);                                                                                    // unlink textures because if we dont it all is gonna fail
-        glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, framebufferID);                                                            // switch to rendering on our FBO
-        glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);                                                                // Clear Screen And Depth Buffer on the fbo to red
-        glLoadIdentity ();                                                                                                  // Reset The Modelview Matrix
         currentTexture=id;
+        glBindFramebufferEXT( GL_FRAMEBUFFER_EXT, framebufferID );
+        glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT,GL_COLOR_ATTACHMENT0_EXT,GL_TEXTURE_2D, id, 0);
+        glPushAttrib(GL_VIEWPORT_BIT);
+        
+        glClearColor(0.0f,0.0f,0.0f,0.0f);
+        glClear (GL_COLOR_BUFFER_BIT);
+
+        glMatrixMode(GL_PROJECTION);
+        glLoadIdentity();
+        glViewport (0, 0, width, height);
+        glMatrixMode(GL_MODELVIEW);
+        glLoadIdentity();
+        
+        Const.LOGGER.info("[TextureRenderer] Switched to FBO render mode.");
     }
     
     public int endDrawToTexture(){
-        glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);                                                                        // switch to rendering on the framebuffer
-        glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);                                                                // Clear Screen And Depth Buffer on the framebuffer to black
+        glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
+        glPopAttrib();
+        glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        Const.LOGGER.info("[TextureRenderer] Switched to Screen render mode.");
         return currentTexture;
     }
 }

@@ -16,6 +16,7 @@ import java.io.File;
 import org.newdawn.slick.Color;
 import transcend.main.MainFrame;
 import static org.lwjgl.opengl.GL11.*;
+import transcend.world.BElement;
 
 public class MovingBlock extends Block{
     private double vx=0,vy=0;
@@ -59,9 +60,12 @@ public class MovingBlock extends Block{
             if(MainFrame.player.getRight()==this){
                 MainFrame.player.x=x-MainFrame.player.getWidth()/2;
             }
-            if(check(x-1,y+h/2,x+w+1,y+h/2,0)!=null)vx*=-1;
-            if(check(x+w/2,y-1,x+w/4*3,y-1,0)!=null||
-               check(x+w/2,y+h+1,x+w/4*3,y+h+1,0)!=null)vy*=-1;
+            BElement a = check(x-1,y+h/2,x+w+1,y+h/2,0);
+            if(a!=null)if(a.wID!=MainFrame.player.wID)vx*=-1;
+                     a = check(x+w/2,y-1,x+w/4*3,y-1,0);
+            BElement b = check(x+w/2,y+h+1,x+w/4*3,y+h+1,0);
+            if(a!=null)if(a.wID!=MainFrame.player.wID)vy*=-1;
+            if(b!=null)if(b.wID!=MainFrame.player.wID)vy*=-1;
         }else{
             x=MainFrame.world.getByID(cameraPath).getX();
             y=MainFrame.world.getByID(cameraPath).getY();

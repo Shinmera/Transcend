@@ -17,6 +17,7 @@ import transcend.entity.Entity;
 import transcend.main.Const;
 import transcend.main.MainFrame;
 import transcend.tile.Tile;
+import static org.lwjgl.opengl.GL11.*;
 
 public class World {
     private final UpdateProcedure updateProc            = new UpdateProcedure();
@@ -169,19 +170,28 @@ public class World {
     }
     
     public void drawBack(){
-        if(MainFrame.backTileTexture==-1){
-            //Unsupported or unprepared.
+        if(MainFrame.backTileTexture==null){//Unsupported or unprepared.
             for(currentDrawLayer=-5;currentDrawLayer<=0;currentDrawLayer++){
                 synchronized(tiles){tiles.forEachValue(drawProcLayered);}
             }
         }else{
-            
+            MainFrame.backTileTexture.bind();
+            glBegin(GL_QUADS);
+                glTexCoord2f(0,0);
+                glVertex3f(leftLimit                                            ,lowerLimit                                           ,0);
+                glTexCoord2f(1,0);
+                glVertex3f(leftLimit+MainFrame.backTileTexture.getImageWidth()  ,lowerLimit                                           ,0);
+                glTexCoord2f(1,1);
+                glVertex3f(leftLimit+MainFrame.backTileTexture.getImageWidth()  ,lowerLimit+MainFrame.backTileTexture.getImageHeight(),0);
+                glTexCoord2f(0,1);
+                glVertex3f(leftLimit                                            ,lowerLimit+MainFrame.backTileTexture.getImageHeight(),0);
+            glEnd();
+            glBindTexture(GL_TEXTURE_2D, 0); //release
         }
     }
     
     public void drawFront(){
-        if(MainFrame.frontTileTexture==-1){
-            //Unsupported or unprepared.
+        if(MainFrame.frontTileTexture==null){//Unsupported or unprepared.
             for(currentDrawLayer=1;currentDrawLayer<=5;currentDrawLayer++){
                 synchronized(tiles){tiles.forEachValue(drawProcLayered);}
             }
@@ -202,10 +212,7 @@ public class World {
         public boolean execute(Object object){
             BElement o = (BElement)object;
             if(o.z==currentDrawLayer){
-                //glPushMatrix();
-                //glTranslated(o.getX(),o.getY(),0);
                 o.draw();
-                //glPopMatrix();
             }
             return true;
         }

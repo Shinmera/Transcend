@@ -35,14 +35,16 @@ public class GButton extends GLabel implements MouseListener{
             glVertex2f(x+w,y);
         glEnd();
 
-        border.bind();
-        glLineWidth(thickness);
-        glBegin(GL_LINE_LOOP);
-            glVertex2f(x,y);
-            glVertex2f(x,y+h);
-            glVertex2f(x+w,y+h);
-            glVertex2f(x+w,y);
-        glEnd();
+        if(thickness>0){
+            border.bind();
+            glLineWidth(thickness);
+            glBegin(GL_LINE_LOOP);
+                glVertex2f(x,y);
+                glVertex2f(x,y+h);
+                glVertex2f(x+w,y+h);
+                glVertex2f(x+w,y);
+            glEnd();
+        }
 
         fore.bind();
         font.drawString(x+w/2, y+h/2-font.getLineHeight()/2, text, 1,1, TrueTypeFont.ALIGN_CENTER);

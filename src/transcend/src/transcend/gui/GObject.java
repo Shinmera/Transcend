@@ -62,12 +62,15 @@ public class GObject {
         glEnd();
 
         border.bind();
-        glLineWidth(thickness);
-        glBegin(GL_LINE_LOOP);
-            glVertex2f(x,y);
-            glVertex2f(x,y+h);
-            glVertex2f(x+w,y+h);
-            glVertex2f(x+w,y);
-        glEnd();
+        
+        if(thickness>0){
+            glLineWidth(thickness);
+            glBegin(GL_LINE_LOOP);
+                glVertex2f(x,y);
+                glVertex2f(x,y+h);
+                glVertex2f(x+w,y+h);
+                glVertex2f(x+w,y);
+            glEnd();
+        }
     }
 }

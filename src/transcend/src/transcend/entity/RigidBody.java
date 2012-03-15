@@ -113,24 +113,25 @@ public class RigidBody extends Entity{
     }
 
     public void draw() {
+        if(!MainFrame.editor.getActive())return;
         Color.red.bind();
         TrueTypeFont ttf = MainFrame.fontPool.loadFont("Arial", Font.BOLD, 12);
         ttf.drawString((float)(x+w/2+2),(float)(y+h/2), "X: "+x+"\nY: "+y+"\nVX: "+vx+"\nVY: "+vy+"\nBTLR: "+bottom+" "+top+" "+left+" "+right, 1, 1, TrueTypeFont.ALIGN_LEFT);
         
         new Color(1.0f,0.0f,0.0f,0.5f).bind();
-        AbstractGraph.glRectangle2d(x-w/2, y-h/2, w, h);
+        AbstractGraph.glRectangle2d(x-w/2, y, w, h);
         Color.blue.bind();
-        AbstractGraph.glCircle2d(x-w/2+3+vx, y-h/2+vy, 2);
-        AbstractGraph.glCircle2d(x+w/2-3+vx, y-h/2+vy, 2);
+        AbstractGraph.glCircle2d(x-w/2+3+vx, y+vy, 2);
+        AbstractGraph.glCircle2d(x+w/2-3+vx, y+vy, 2);
         Color.blue.bind();
-        AbstractGraph.glCircle2d(x-w/2+3+vx, y+h/2+vy, 2);
-        AbstractGraph.glCircle2d(x+w/2-3+vx, y+h/2+vy, 2);
+        AbstractGraph.glCircle2d(x-w/2+3+vx, y+h+vy, 2);
+        AbstractGraph.glCircle2d(x+w/2-3+vx, y+h+vy, 2);
         Color.green.bind();
-        AbstractGraph.glCircle2d(x-w/2-1+vx, y-h/2+3+vy, 2);
-        AbstractGraph.glCircle2d(x-w/2-1+vx, y+h/2-3+vy, 2);
+        AbstractGraph.glCircle2d(x-w/2-1+vx, y+3+vy, 2);
+        AbstractGraph.glCircle2d(x-w/2-1+vx, y+h-3+vy, 2);
         Color.green.bind();
-        AbstractGraph.glCircle2d(x+w/2+1+vx, y-h/2+3+vy, 2);
-        AbstractGraph.glCircle2d(x+w/2+1+vx, y+h/2-3+vy, 2);
+        AbstractGraph.glCircle2d(x+w/2+1+vx, y+3+vy, 2);
+        AbstractGraph.glCircle2d(x+w/2+1+vx, y+h-3+vy, 2);
     }
     
     

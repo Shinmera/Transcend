@@ -31,9 +31,8 @@ import org.lwjgl.LWJGLUtil;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.openal.AL;
-import org.lwjgl.opengl.Display;
+import org.lwjgl.opengl.*;
 import static org.lwjgl.opengl.GL11.*;
-import org.lwjgl.opengl.GL12;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.openal.SoundStore;
 import transcend.entity.Player;
@@ -83,7 +82,7 @@ public class MainFrame implements KeyboardListener{
     public static double DISPLAY_ASPECT= DISPLAY_WIDTH/DISPLAY_HEIGHT;
     public static int fps = 60, ups = 60;
     public static int ACSIZE = 2;
-    public static int backTileTexture = -1,frontTileTexture = 1;
+    public static Texture backTileTexture = null,frontTileTexture = null;
     public static boolean pause = false;
     public static GPanel menu,hud;
     public static Loader loader;
@@ -205,10 +204,6 @@ public class MainFrame implements KeyboardListener{
         glClearDepth(1);        
         glEnable(GL_COLOR_MATERIAL);
         glEnable(GL_TEXTURE_2D);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL12.GL_CLAMP_TO_EDGE);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL12.GL_CLAMP_TO_EDGE);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
         
         //glDisable(GL_DITHER);
@@ -279,6 +274,8 @@ public class MainFrame implements KeyboardListener{
 
         hud.paint();
         menu.paint();
+        
+        
     }
     
     public void createTileTextures(){
@@ -286,18 +283,32 @@ public class MainFrame implements KeyboardListener{
         int realWorldHeight= (int) (Toolkit.p(world.upperLimit)+Toolkit.p(world.lowerLimit));
         int powerWidth = (int) Math.pow(2, Toolkit.nearestHighPowerOfTwo(realWorldWidth));
         int powerHeight = (int) Math.pow(2, Toolkit.nearestHighPowerOfTwo(realWorldHeight));
+        
+        
+        if(backTileTexture==null)textureRenderer.beginDrawToTexture(powerWidth, powerHeight);
+        else                     textureRenderer.beginDrawToTexture(backTileTexture.getTextureID(), powerWidth, powerHeight);
+            glMatrixMode(GL_PROJECTION);
+            glLoadIdentity();
+            glOrtho(0,64,0,64, -10, 10);
+            
+            glMatrixMode(GL_MODELVIEW);
+            glLoadIdentity();
+            glPushMatrix();
+                glScalef(0.5f,0.5f,1.0f);
+                world.drawBack();
+            glPopMatrix();
+        backTileTexture = new Texture(GL_TEXTURE_2D,textureRenderer.endDrawToTexture());
+        backTileTexture.setWidth(powerWidth);
+        backTileTexture.setHeight(powerHeight);
+        
         textureRenderer.beginDrawToTexture(powerWidth, powerHeight);
-        glPushMatrix();
-            glTranslatef(world.leftLimit,world.lowerLimit,0);
-            world.drawBack();
-        glPopMatrix();
-        backTileTexture = textureRenderer.endDrawToTexture();
-        textureRenderer.beginDrawToTexture(powerWidth, powerHeight);
-        glPushMatrix();
-            glTranslatef(world.leftLimit,world.lowerLimit,0);
-            world.drawFront();
-        glPopMatrix();
-        frontTileTexture = textureRenderer.endDrawToTexture();
+            glPushMatrix();
+                glTranslatef(world.leftLimit,world.lowerLimit,0);
+                world.drawFront();
+            glPopMatrix();
+        frontTileTexture = new Texture(GL_TEXTURE_2D,textureRenderer.endDrawToTexture());
+        frontTileTexture.setWidth(powerWidth);
+        frontTileTexture.setHeight(powerHeight);
     }
 
     public void renderScene(){

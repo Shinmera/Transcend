@@ -126,7 +126,7 @@ public class Player extends RigidBody implements KeyboardListener,EventListener{
                 vy=0;
                 Vector v = top.getCollisionPoint(new Ray(x,y,0,0,1,0));
                 if(v!=null){
-                    y=v.getY()-h;
+                    if((int)(v.getY())!=Integer.MAX_VALUE)y=v.getY()-h;
                 }
             }
         }
@@ -136,7 +136,7 @@ public class Player extends RigidBody implements KeyboardListener,EventListener{
                 vx=0;
                 Vector v = left.getCollisionPoint(new Ray(x,y,0,-1,0,0));
                 if(v!=null){
-                    x=v.getX()+w/2;
+                    if((int)(v.getX())!=Integer.MAX_VALUE)x=v.getX()+w/2;
                 }
             }
             if(left.solid<=0.5)left=null;
@@ -147,7 +147,8 @@ public class Player extends RigidBody implements KeyboardListener,EventListener{
                 vx=0;
                 Vector v = right.getCollisionPoint(new Ray(x,y,0,1,0,0));
                 if(v!=null){
-                    x=v.getX()-w/2;
+                    if((int)(v.getX())!=Integer.MAX_VALUE)
+                        x=v.getX()-w/2;
                 }
             }
             if(right.solid<=0.5)right=null;

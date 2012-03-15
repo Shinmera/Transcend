@@ -11,6 +11,7 @@ package transcend.graph;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.MediaTracker;
 import java.awt.color.ColorSpace;
 import java.awt.image.*;
 import java.io.IOException;
@@ -20,9 +21,11 @@ import java.nio.ByteOrder;
 import java.nio.IntBuffer;
 import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.logging.Level;
 import javax.swing.ImageIcon;
 import org.lwjgl.BufferUtils;
 import static org.lwjgl.opengl.GL11.*;
+import transcend.main.Const;
 import transcend.main.MainFrame;
 
 /**
@@ -39,6 +42,9 @@ import transcend.main.MainFrame;
  * @author Brian Matzon
  */
 public class TextureLoader {
+    /** To make sure images are loaded fully. */
+    MediaTracker media_tracker = new MediaTracker(MainFrame.frame);
+    
     /** The table of textures that have been loaded in this loader */
     private HashMap<String, Texture> table = new HashMap<String, Texture>();
 
@@ -247,6 +253,13 @@ public class TextureLoader {
         // we are now using good oldfashioned ImageIcon to load
         // images and the paint it on top of a new BufferedImage
         Image img = new ImageIcon(url).getImage();
+        int id = 0;
+        media_tracker.addImage(img,id);
+        try{media_tracker.waitForAll();}
+        catch(InterruptedException e){
+            Const.LOGGER.log(Level.SEVERE,"[TextureLoader] Texture loading interrupted!",e);
+        }
+        
         BufferedImage bufferedImage = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
         Graphics g = bufferedImage.getGraphics();
         g.drawImage(img, 0, 0, null);

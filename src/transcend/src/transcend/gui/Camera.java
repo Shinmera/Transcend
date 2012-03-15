@@ -9,10 +9,9 @@
 
 package transcend.gui;
 
-import transcend.world.BElement;
-import transcend.entity.Entity;
-import transcend.main.MainFrame;
 import static org.lwjgl.opengl.GL11.*;
+import transcend.main.MainFrame;
+import transcend.world.BElement;
 
 public class Camera {
     private int entityID = -1;
