@@ -32,6 +32,7 @@ public class GLog extends GLabel{
     }
     
     public void paint(){
+        if(!MainFrame.CONST.gBoolean("LOG"))return;
         if(timer<=0){timer=nTimer;nTimer=0;log.poll();}
         if(log.size()==0)return;
         h = log.size()*22+20;

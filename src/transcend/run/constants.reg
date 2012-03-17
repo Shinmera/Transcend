@@ -6,6 +6,7 @@ FORCED_H: 800
 FORCED_W: 1280
 FPS: 60
 LAYOUT: swiss
+LOG: true
 PLAYOUT: lefty
 REPO: http://repo.tymoon.eu/v2/transcend
 UPS: 60

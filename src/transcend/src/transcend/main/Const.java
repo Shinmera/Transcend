@@ -28,7 +28,7 @@ public class Const {
     public static final int     DISPLAY_WIDTH           = 640;
 
     //DOUBLES
-    public static final double  VERSION                 = 1.35;
+    public static final double  VERSION                 = 1.65;
 
     //STRINGS
     public static final String  MAINTAINER              = "NexT";
@@ -102,6 +102,7 @@ public class Const {
         registry.put("LAYOUT","swiss");
         registry.put("PLAYOUT","lefty");
         registry.put("REPO","http://repo.tymoon.eu/v2/transcend");
+        registry.put("LOG","false");
     }
 
     public String gString(String key){

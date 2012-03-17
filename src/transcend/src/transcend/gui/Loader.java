@@ -11,7 +11,6 @@ package transcend.gui;
 import java.awt.Font;
 import java.util.logging.Level;
 import org.newdawn.slick.Color;
-import org.newdawn.slick.loading.LoadingList;
 import transcend.graph.AbstractGraph;
 import transcend.graph.Animation;
 import transcend.graph.Texture;
@@ -68,7 +67,6 @@ public class Loader{
         }
     }
     public void start(){
-        LoadingList.get().setDeferredLoading(true);
         loading = true;
         fader = 1;
         delay = 0;
