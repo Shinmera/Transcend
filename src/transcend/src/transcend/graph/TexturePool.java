@@ -38,7 +38,7 @@ public class TexturePool {
         try{
             String extension = f.getName().substring(f.getName().indexOf(".")+1);
             //Texture texture = TextureLoader.getTexture(extension.toUpperCase(), new FileInputStream(f),GL_LINEAR);
-            Texture texture = MainFrame.textureLoader.getTexture(name);
+            Texture texture = MainFrame.textureLoader.getDeferredTexture(name);
             textures.put(name, texture);
             return texture;
         }catch(Exception e){Const.LOGGER.log(Level.SEVERE,"[TexturePool] Failed to load texture at "+f.getAbsolutePath()+".",e);return null;}

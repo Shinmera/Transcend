@@ -471,8 +471,12 @@ public class MenuLoader extends LoadHelper{
         score.setBorder(new Color(0,0,0,0), 0);
         score.setBounds(20, DISPLAY_HEIGHT-30-20, 200, 30);
         HFormSelector formsel = new HFormSelector();
+        
+        MainFrame.gameLog.setBounds(DISPLAY_WIDTH-500, 0, 500, 200);
+        
         hud.add(formsel,"formselector");
         hud.add(score,"score");
         hud.add(powerBar,"powerbar");
+        hud.add(MainFrame.gameLog,"gamelog");
     }
 }

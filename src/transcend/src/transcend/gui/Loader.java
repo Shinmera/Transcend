@@ -8,16 +8,15 @@
 \**********************/
 
 package transcend.gui;
-import transcend.graph.AbstractGraph;
-import org.newdawn.slick.Color;
 import java.awt.Font;
-import transcend.main.Const;
 import java.util.logging.Level;
-import org.newdawn.slick.loading.DeferredResource;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.loading.LoadingList;
-import transcend.main.MainFrame;
+import transcend.graph.AbstractGraph;
 import transcend.graph.Animation;
-import static org.lwjgl.opengl.GL11.*;
+import transcend.graph.Texture;
+import transcend.main.Const;
+import transcend.main.MainFrame;
 
 public class Loader{
     public static final int DELAY_TIMER = 2;
@@ -54,11 +53,12 @@ public class Loader{
             helper.load();
             helper=null;
         }
-        if (LoadingList.get().getRemainingResources() > 0) {
-            DeferredResource nextResource = LoadingList.get().getNext();
+        if (MainFrame.textureLoader.getDeferredCount() > 0) {
+            Texture nextResource = MainFrame.textureLoader.getNextDeferred();
             String currentt = current;
-            current = (LoadingList.get().getTotalResources()-LoadingList.get().getRemainingResources())*100/LoadingList.get().getTotalResources()+"%";
+            current = (MainFrame.textureLoader.getTexturesCount()-MainFrame.textureLoader.getDeferredCount())*100/MainFrame.textureLoader.getTexturesCount()+"%";
             if(!current.equals(currentt))Const.LOGGER.info("[Loader] "+current);
+            
             try {nextResource.load();}
             catch (Exception ex) {Const.LOGGER.log(Level.SEVERE,"[Loader] Failed to load resource!", ex);}
         } else {

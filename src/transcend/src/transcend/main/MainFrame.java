@@ -31,7 +31,7 @@ import org.lwjgl.LWJGLUtil;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.openal.AL;
-import org.lwjgl.opengl.*;
+import org.lwjgl.opengl.Display;
 import static org.lwjgl.opengl.GL11.*;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.openal.SoundStore;
@@ -85,6 +85,7 @@ public class MainFrame implements KeyboardListener{
     public static Texture backTileTexture = null,frontTileTexture = null;
     public static boolean pause = false;
     public static GPanel menu,hud;
+    public static GLog gameLog;
     public static Loader loader;
     private static Color clearcolor = new Color(0.2f,0.2f,0.2f);
     private final Updater updater = new Updater();
@@ -190,6 +191,8 @@ public class MainFrame implements KeyboardListener{
         menu = new GPanel(0,0,DISPLAY_WIDTH,DISPLAY_HEIGHT);
         menu.setBackground(new Color(0,0,0,0));
         ieh.addMouseListener(editor);
+        
+        gameLog = new GLog();
 
         //LOAD MENU
         loader.setHelper(new MenuLoader());
@@ -234,7 +237,7 @@ public class MainFrame implements KeyboardListener{
         if(!worldLoader.isLoaded()&&!loader.isLoading()){
             loader.setHelper(new LoadHelper(){public void load(){
                 worldLoader.loadWorld(new File("world"+File.separator+"test.tw"));
-                createTileTextures();
+                //createTileTextures();
             }});
             loader.start();
         }
@@ -290,6 +293,11 @@ public class MainFrame implements KeyboardListener{
             glMatrixMode(GL_PROJECTION);
             glLoadIdentity();
             glOrtho(0,64,0,64, -10, 10);
+            //FIXME: I DON'T FUCKING KNOW ANYMORE
+            //FIXME: Ortho projection matrix set doesn't seem to affect FBO rendering. WTF?
+            
+            //FIX to bring the world to draw instead of refer to the texture again:
+            backTileTexture = null;
             
             glMatrixMode(GL_MODELVIEW);
             glLoadIdentity();

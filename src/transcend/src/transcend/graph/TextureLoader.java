@@ -15,13 +15,15 @@ import java.awt.MediaTracker;
 import java.awt.color.ColorSpace;
 import java.awt.image.*;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.IntBuffer;
-import java.util.HashMap;
-import java.util.Hashtable;
+import java.util.*;
 import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import org.lwjgl.BufferUtils;
 import static org.lwjgl.opengl.GL11.*;
@@ -37,16 +39,22 @@ import transcend.main.MainFrame;
  * loaded from disk may not match this format this loader introduces
  * a intermediate image which the source image is copied into. In turn,
  * this image is used as source for the OpenGL texture.
+ * 
+ * Additionally this has been modified to match the requirements of the
+ * Transcend Engine. In particular, this includes deferred texture loading
+ * and the assurance of image loading.
  *
  * @author Kevin Glass
  * @author Brian Matzon
+ * @author Nicolas Hafner
  */
 public class TextureLoader {
     /** To make sure images are loaded fully. */
-    MediaTracker media_tracker = new MediaTracker(MainFrame.frame);
+    MediaTracker mediaTracker = new MediaTracker(MainFrame.frame);
     
     /** The table of textures that have been loaded in this loader */
     private HashMap<String, Texture> table = new HashMap<String, Texture>();
+    private Queue<Texture> deferred = new LinkedList<Texture>();
 
     /** The colour model including alpha for the GL image */
     private ColorModel glAlphaColorModel;
@@ -87,85 +95,6 @@ public class TextureLoader {
     }
 
     /**
-     * Load a texture
-     *
-     * @param resourceName The location of the resource to load
-     * @return The loaded texture
-     * @throws IOException Indicates a failure to access the resource
-     */
-    public Texture getTexture(String resourceName) throws IOException {
-        Texture tex = table.get(resourceName);
-
-        if (tex != null) {
-            return tex;
-        }
-
-        tex = getTexture(resourceName,GL_TEXTURE_2D,GL_RGBA,GL_LINEAR,GL_LINEAR);
-
-        table.put(resourceName,tex);
-
-        return tex;
-    }
-
-    /**
-     * Load a texture into OpenGL from a image reference on
-     * disk.
-     *
-     * @param resourceName The location of the resource to load
-     * @param target The GL target to load the texture against
-     * @param dstPixelFormat The pixel format of the screen
-     * @param minFilter The minimising filter
-     * @param magFilter The magnification filter
-     * @return The loaded texture
-     * @throws IOException Indicates a failure to access the resource
-     */
-    public Texture getTexture(String resourceName,
-                              int target,
-                              int dstPixelFormat,
-                              int minFilter,
-                              int magFilter) throws IOException {
-        int srcPixelFormat;
-
-        // create the texture ID for this texture
-        int textureID = createTextureID();
-        Texture texture = new Texture(target,textureID);
-
-        // bind this texture
-        glBindTexture(target, textureID);
-
-        BufferedImage bufferedImage = loadImage(resourceName);
-        texture.setWidth(bufferedImage.getWidth());
-        texture.setHeight(bufferedImage.getHeight());
-
-        if (bufferedImage.getColorModel().hasAlpha()) {
-            srcPixelFormat = GL_RGBA;
-        } else {
-            srcPixelFormat = GL_RGB;
-        }
-
-        // convert that image into a byte buffer of texture data
-        ByteBuffer textureBuffer = convertImageData(bufferedImage,texture);
-
-        if (target == GL_TEXTURE_2D) {
-            glTexParameteri(target, GL_TEXTURE_MIN_FILTER, minFilter);
-            glTexParameteri(target, GL_TEXTURE_MAG_FILTER, magFilter);
-        }
-
-        // produce a texture from the byte buffer
-        glTexImage2D(target,
-                      0,
-                      dstPixelFormat,
-                      get2Fold(bufferedImage.getWidth()),
-                      get2Fold(bufferedImage.getHeight()),
-                      0,
-                      srcPixelFormat,
-                      GL_UNSIGNED_BYTE,
-                      textureBuffer );
-
-        return texture;
-    }
-
-    /**
      * Get the closest greater power of 2 to the fold number
      *
      * @param fold The target number
@@ -177,6 +106,22 @@ public class TextureLoader {
             ret *= 2;
         }
         return ret;
+    }
+    
+    public int getDeferredCount(){
+        return deferred.size();
+    }
+    
+    public int getTexturesCount(){
+        return table.size()+deferred.size();
+    }
+    
+    public Texture getNextDeferred(){
+        return deferred.poll();
+    }
+    
+    public MediaTracker getMediaTracker(){
+        return mediaTracker;
     }
 
     /**
@@ -241,7 +186,7 @@ public class TextureLoader {
      * @return The loaded buffered image
      * @throws IOException Indicates a failure to find a resource
      */
-    private BufferedImage loadImage(String ref) throws IOException {
+    private Image loadImage(String ref,int texID) throws IOException {
         URL url = TextureLoader.class.getClassLoader().getResource(ref);
 
         if (url == null) {
@@ -249,17 +194,29 @@ public class TextureLoader {
             if(url == null)throw new IOException("Cannot find: " + ref);
         }
 
-        // due to an issue with ImageIO and mixed signed code
-        // we are now using good oldfashioned ImageIcon to load
-        // images and the paint it on top of a new BufferedImage
         Image img = new ImageIcon(url).getImage();
-        int id = 0;
-        media_tracker.addImage(img,id);
-        try{media_tracker.waitForAll();}
-        catch(InterruptedException e){
-            Const.LOGGER.log(Level.SEVERE,"[TextureLoader] Texture loading interrupted!",e);
+        mediaTracker.addImage(img,texID);
+        
+        return img;
+    }
+    
+    private Image loadImageByImageIO(String ref,int texID) throws IOException{
+        URL url = TextureLoader.class.getClassLoader().getResource(ref);
+
+        if (url == null) {
+            url = MainFrame.fileStorage.getFile(ref).toURI().toURL();
+            if(url == null)throw new IOException("Cannot find: " + ref);
         }
         
+        Image img = ImageIO.read(url);
+        return img;
+    }
+    
+    private BufferedImage convertImageToBuffered(Image img){
+        if(img==null){
+            Const.LOGGER.warning("[TextureLoader] Got NULL image, creating empty buffer.");
+            img = new BufferedImage(1,1,BufferedImage.TYPE_INT_ARGB);
+        }
         BufferedImage bufferedImage = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
         Graphics g = bufferedImage.getGraphics();
         g.drawImage(img, 0, 0, null);
@@ -267,4 +224,194 @@ public class TextureLoader {
 
         return bufferedImage;
     }
+    
+    /**
+     * Load a texture
+     *
+     * @param resourceName The location of the resource to load
+     * @return The loaded texture
+     * @throws IOException Indicates a failure to access the resource
+     */
+    public Texture getTexture(String resourceName) throws IOException {
+        Texture tex = table.get(resourceName);
+        if (tex != null) return tex;
+        
+        tex = getTexture(resourceName,GL_TEXTURE_2D,GL_RGBA,GL_LINEAR,GL_LINEAR);
+        table.put(resourceName,tex);
+
+        return tex;
+    }
+
+    /**
+     * Load a texture into OpenGL from a image reference on
+     * disk.
+     *
+     * @param resourceName The location of the resource to load
+     * @param target The GL target to load the texture against
+     * @param dstPixelFormat The pixel format of the screen
+     * @param minFilter The minimising filter
+     * @param magFilter The magnification filter
+     * @return The loaded texture
+     * @throws IOException Indicates a failure to access the resource
+     */
+    public Texture getTexture(String resourceName,
+                              int target,
+                              int dstPixelFormat,
+                              int minFilter,
+                              int magFilter) throws IOException {
+        int srcPixelFormat;
+
+        // create the texture ID for this texture
+        int textureID = createTextureID();
+        Texture texture = new Texture(target,textureID);
+
+        // bind this texture
+        glBindTexture(target, textureID);
+
+        BufferedImage bufferedImage = convertImageToBuffered(loadImage(resourceName,textureID));
+        texture.setWidth(bufferedImage.getWidth());
+        texture.setHeight(bufferedImage.getHeight());
+        texture.setPixelFormat(dstPixelFormat);
+        texture.setMagFilter(magFilter);
+        texture.setMinFilter(magFilter);
+        texture.setResourceName(resourceName);
+
+        if (bufferedImage.getColorModel().hasAlpha()) {
+            srcPixelFormat = GL_RGBA;
+        } else {
+            srcPixelFormat = GL_RGB;
+        }
+
+        // convert that image into a byte buffer of texture data
+        ByteBuffer textureBuffer = convertImageData(bufferedImage,texture);
+
+        if (target == GL_TEXTURE_2D) {
+            glTexParameteri(target, GL_TEXTURE_MIN_FILTER, minFilter);
+            glTexParameteri(target, GL_TEXTURE_MAG_FILTER, magFilter);
+        }
+
+        // produce a texture from the byte buffer
+        glTexImage2D(target,
+                      0,
+                      dstPixelFormat,
+                      get2Fold(bufferedImage.getWidth()),
+                      get2Fold(bufferedImage.getHeight()),
+                      0,
+                      srcPixelFormat,
+                      GL_UNSIGNED_BYTE,
+                      textureBuffer );
+        glBindTexture(texture.getTarget(),0);
+        texture.setLoaded(true);
+        return texture;
+    }
+
+    /**
+     * Load a texture in deferred mode.
+     *
+     * @param resourceName The location of the resource to load
+     * @return The loaded texture
+     * @throws IOException Indicates a failure to access the resource
+     */
+    public Texture getDeferredTexture(String resourceName) throws IOException {
+        Texture tex = table.get(resourceName);
+        if (tex != null) return tex;
+        
+        tex = getDeferredTexture(resourceName,GL_TEXTURE_2D,GL_RGBA,GL_LINEAR,GL_LINEAR);
+        deferred.offer(tex);
+
+        return tex;
+    }
+
+    /**
+     * Load a texture into OpenGL from a image reference on
+     * disk in deferred mode.
+     *
+     * @param resourceName The location of the resource to load
+     * @param target The GL target to load the texture against
+     * @param dstPixelFormat The pixel format of the screen
+     * @param minFilter The minimising filter
+     * @param magFilter The magnification filter
+     * @return The loaded texture
+     * @throws IOException Indicates a failure to access the resource
+     */
+    public Texture getDeferredTexture(String resourceName,
+                              int target,
+                              int dstPixelFormat,
+                              int minFilter,
+                              int magFilter) throws IOException {
+
+        // create the texture ID for this texture
+        int textureID = createTextureID();
+        Texture texture = new Texture(target,textureID);
+
+        // bind this texture
+        glBindTexture(target, textureID);
+
+        Image i = loadImage(resourceName,textureID);
+        mediaTracker.addImage(i, textureID);
+        texture.setImage(i);
+        texture.setPixelFormat(dstPixelFormat);
+        texture.setMagFilter(magFilter);
+        texture.setMinFilter(magFilter);
+        texture.setResourceName(resourceName);
+        return texture;
+    }
+    
+    public Texture loadDeferredTexture(Texture texture){
+        try {
+            mediaTracker.waitForID(texture.getTextureID());
+            int id = mediaTracker.statusID(texture.getTextureID(), true);
+            if((id & MediaTracker.ERRORED) == MediaTracker.ERRORED){
+                Const.LOGGER.log(Level.SEVERE,"[TextureLoader]["+texture.getResourceName()+"] Error during image load! Attempting ImageIO load.");
+                try {texture.setImage(loadImageByImageIO(texture.getResourceName(), texture.getTextureID()));
+                } catch (IOException ex) { Const.LOGGER.log(Level.SEVERE,"[TextureLoader] Failed loading through ImageIO!",ex);}
+            }if((id & MediaTracker.ABORTED) == MediaTracker.ABORTED){
+                Const.LOGGER.log(Level.SEVERE,"[TextureLoader]["+texture.getResourceName()+"] Image loading was aborted! Attempting ImageIO load.");
+                try {texture.setImage(loadImageByImageIO(texture.getResourceName(), texture.getTextureID()));
+                } catch (IOException ex) { Const.LOGGER.log(Level.SEVERE,"[TextureLoader] Failed loading through ImageIO!",ex);}
+            }if((id & MediaTracker.LOADING) == MediaTracker.LOADING)
+                Const.LOGGER.log(Level.WARNING,"[TextureLoader]["+texture.getResourceName()+"] Image still loading! ");
+        } catch (InterruptedException ex) {
+            Const.LOGGER.log(Level.SEVERE,"[TextureLoader]["+texture.getResourceName()+"] Image loading interrupted! ",ex);
+        }
+        
+        glBindTexture(texture.getTarget(), texture.getTextureID());
+        BufferedImage bufferedImage = convertImageToBuffered(texture.getImage());
+        texture.setWidth(bufferedImage.getWidth());
+        texture.setHeight(bufferedImage.getHeight());
+        
+        int srcPixelFormat;
+        if (bufferedImage.getColorModel().hasAlpha()) {
+            srcPixelFormat = GL_RGBA;
+        } else {
+            srcPixelFormat = GL_RGB;
+        }
+
+        // convert that image into a byte buffer of texture data
+        ByteBuffer textureBuffer = convertImageData(bufferedImage,texture);
+
+        if(texture.getTarget() == GL_TEXTURE_2D){
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, texture.getMinFilter());
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, texture.getMagFilter());
+        }
+
+        // produce a texture from the byte buffer
+        glTexImage2D(texture.getTarget(),
+                      0,
+                      texture.getPixelFormat(),
+                      get2Fold(bufferedImage.getWidth()),
+                      get2Fold(bufferedImage.getHeight()),
+                      0,
+                      srcPixelFormat,
+                      GL_UNSIGNED_BYTE,
+                      textureBuffer );
+        glBindTexture(texture.getTarget(),0);
+        texture.setLoaded(true);
+        
+        if(deferred.contains(texture))deferred.remove(texture);
+        table.put(texture.getResourceName(), texture);
+        
+        return texture;
+    }
+
 }

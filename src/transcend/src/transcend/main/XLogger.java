@@ -30,6 +30,7 @@ public class XLogger extends Handler{
     }
 
     public String sformat(LogRecord record) {
+        if(MainFrame.gameLog!=null)MainFrame.gameLog.addMessage(sdf.format(record.getMillis())+" ["+record.getLevel().getName()+"]"+record.getMessage());
         if(record.getThrown()==null)
             return sdf.format(record.getMillis())+" ["+record.getLevel().getName()+"]"+record.getMessage();
         else{

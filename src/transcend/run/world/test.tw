@@ -1,22 +1,22 @@
 #!transcend world file
 world{
 bgc: 0,0,0,255
-camera: follow 0.8899999999999999
+camera: follow 0.4299999999999995
 }
 
 player{
-x:2249.200000000002
+x:3064.800000000004
 y:-1.0
 }
 
 MovingBlock{
 x: 640
-y: -694
+y: -359
 z: 0
 w: 192
 h: 64
 status: 0
-vx: -0.0
+vx: 0.0
 vy: -5.0
 tex: 
 }
@@ -27,7 +27,7 @@ y: 0
 z: -5
 w: 0
 h: 0
-time: 22319
+time: 26392
 full: 8
 }
 
@@ -1133,5 +1133,24 @@ w: 128
 h: 256
 status: 0
 tex: palmtree
+}
+
+TileBlock{
+x: 3008
+y: -64
+z: 0
+w: 1344
+h: 64
+status: 0
+tex: sand21
+}
+
+BlankBlock{
+x: 3008
+y: -64
+z: 0
+w: 1344
+h: 64
+status: 0
 }
 
