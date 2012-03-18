@@ -1,24 +1,24 @@
 #!transcend world file
 world{
 bgc: 0,0,0,255
-camera: follow 0.4299999999999995
+camera: follow 1.02
 }
 
 player{
-x:3064.800000000004
+x:2470.1999999999985
 y:-1.0
 }
 
 MovingBlock{
 x: 640
-y: -359
+y: -354
 z: 0
 w: 192
 h: 64
 status: 0
 vx: 0.0
-vy: -5.0
-tex: 
+vy: 5.0
+tex: sand11
 }
 
 DayCycle{
@@ -27,7 +27,7 @@ y: 0
 z: -5
 w: 0
 h: 0
-time: 26392
+time: 5991
 full: 8
 }
 
@@ -55,33 +55,6 @@ y: -64
 z: 0
 w: 192
 h: 64
-status: 0
-}
-
-BlankBlock{
-x: 640
-y: -767
-z: 0
-w: 192
-h: 64
-status: 0
-}
-
-BlankBlock{
-x: 576
-y: -768
-z: 0
-w: 64
-h: 640
-status: 0
-}
-
-BlankBlock{
-x: 2240
-y: -640
-z: 0
-w: 128
-h: 128
 status: 0
 }
 
@@ -251,58 +224,10 @@ status: 0
 }
 
 BlankBlock{
-x: 2368
-y: -576
-z: 0
-w: 640
-h: 64
-status: 0
-}
-
-BlankBlock{
 x: 1344
 y: 192
 z: 0
 w: 640
-h: 128
-status: 0
-}
-
-ComplexBlock{
-x: 1536
-y: -704
-z: 0
-w: 768
-h: 256
-status: 0
-p0000x: 1600
-p0000y: -640
-p0001x: 1728
-p0001y: -512
-p0002x: 1856
-p0002y: -512
-p0003x: 1920
-p0003y: -448
-p0004x: 2176
-p0004y: -448
-p0005x: 2240
-p0005y: -512
-p0006x: 2304
-p0006y: -512
-p0007x: 2304
-p0007y: -704
-p0008x: 1536
-p0008y: -704
-p0009x: 1536
-p0009y: -640
-tex: 
-}
-
-BlankBlock{
-x: 832
-y: -768
-z: 0
-w: 768
 h: 128
 status: 0
 }
@@ -314,26 +239,6 @@ z: 0
 w: 64
 h: 1024
 status: 0
-}
-
-TileBlock{
-x: -2816
-y: -1664
-z: 0
-w: 5824
-h: 960
-status: 0
-tex: tallgrass11
-}
-
-TileBlock{
-x: -2816
-y: -704
-z: 0
-w: 3456
-h: 640
-status: 0
-tex: tallgrass11
 }
 
 TileBlock{
@@ -482,36 +387,6 @@ y: -128
 z: 0
 w: 1152
 h: 128
-status: 0
-tex: tallgrass11
-}
-
-TileBlock{
-x: 832
-y: -704
-z: 0
-w: 2176
-h: 64
-status: 0
-tex: tallgrass11
-}
-
-TileBlock{
-x: 1728
-y: -576
-z: 0
-w: 1280
-h: 64
-status: 0
-tex: tallgrass11
-}
-
-TileBlock{
-x: 1664
-y: -640
-z: 0
-w: 1344
-h: 64
 status: 0
 tex: tallgrass11
 }
@@ -666,16 +541,6 @@ tex: tallgrass11
 }
 
 TileBlock{
-x: 320
-y: -261
-z: 0
-w: 64
-h: 64
-status: 0
-tex: tallgrass11
-}
-
-TileBlock{
 x: -256
 y: -128
 z: -4
@@ -691,16 +556,6 @@ y: -768
 z: -4
 w: 640
 h: 896
-status: 0
-tex: tallgrass11
-}
-
-TileBlock{
-x: 1152
-y: -1344
-z: -4
-w: 64
-h: 64
 status: 0
 tex: tallgrass11
 }
@@ -1139,18 +994,1167 @@ TileBlock{
 x: 3008
 y: -64
 z: 0
-w: 1344
+w: 64
+h: 64
+status: 0
+tex: grasssand21
+}
+
+TileBlock{
+x: 3072
+y: -64
+z: 0
+w: 1280
 h: 64
 status: 0
 tex: sand21
+}
+
+ComplexBlock{
+x: 1600
+y: -704
+z: 0
+w: 704
+h: 256
+status: 0
+p0000x: 2304
+p0000y: -704
+p0001x: 1600
+p0001y: -704
+p0002x: 1600
+p0002y: -640
+p0003x: 1728
+p0003y: -512
+p0004x: 1856
+p0004y: -512
+p0005x: 1920
+p0005y: -448
+p0006x: 2176
+p0006y: -448
+p0007x: 2240
+p0007y: -512
+p0008x: 2304
+p0008y: -512
+tex: 
+}
+
+BlankBlock{
+x: 832
+y: -704
+z: 0
+w: 768
+h: 64
+status: 0
+}
+
+BlankBlock{
+x: 2304
+y: -576
+z: 0
+w: 704
+h: 64
+status: 0
+}
+
+TileBlock{
+x: 3008
+y: -448
+z: 0
+w: 64
+h: 384
+status: 0
+tex: grasssand11
+}
+
+TileBlock{
+x: 3008
+y: -480
+z: 0
+w: 64
+h: 32
+status: 0
+tex: grasssand11
+}
+
+BlankBlock{
+x: 3008
+y: -480
+z: 0
+w: 64
+h: 352
+status: 0
+}
+
+BlankBlock{
+x: 3008
+y: -544
+z: 0
+w: 832
+h: 32
+status: 0
+}
+
+TileBlock{
+x: 3008
+y: -512
+z: -5
+w: 64
+h: 32
+status: 0
+tex: grasssand11
+}
+
+TileBlock{
+x: 3008
+y: -512
+z: -4
+w: 64
+h: 32
+status: 0
+tex: grasssand11
+}
+
+TileBlock{
+x: 3072
+y: -512
+z: -4
+w: 768
+h: 32
+status: 0
+tex: sand11
 }
 
 BlankBlock{
 x: 3008
 y: -64
 z: 0
-w: 1344
+w: 1280
 h: 64
 status: 0
+}
+
+ComplexBlock{
+x: 4288
+y: -576
+z: 0
+w: 576
+h: 576
+status: 0
+p0000x: 4288
+p0000y: 0
+p0001x: 4352
+p0001y: 0
+p0002x: 4416
+p0002y: -64
+p0003x: 4480
+p0003y: -64
+p0004x: 4608
+p0004y: -192
+p0005x: 4800
+p0005y: -192
+p0006x: 4864
+p0006y: -256
+p0007x: 4864
+p0007y: -320
+p0008x: 4800
+p0008y: -384
+p0009x: 4544
+p0009y: -384
+p0010x: 4480
+p0010y: -448
+p0011x: 4480
+p0011y: -512
+p0012x: 4480
+p0012y: -576
+p0013x: 4288
+p0013y: -576
+tex: 
+}
+
+ComplexBlock{
+x: 4608
+y: -640
+z: 0
+w: 704
+h: 704
+status: 0
+p0000x: 4928
+p0000y: -320
+p0001x: 4928
+p0001y: -256
+p0002x: 4992
+p0002y: -192
+p0003x: 5056
+p0003y: -128
+p0004x: 5184
+p0004y: -128
+p0005x: 5184
+p0005y: 0
+p0006x: 5248
+p0006y: 64
+p0007x: 5312
+p0007y: 64
+p0008x: 5312
+p0008y: -576
+p0009x: 5312
+p0009y: -640
+p0010x: 4608
+p0010y: -640
+p0011x: 4608
+p0011y: -576
+p0012x: 4672
+p0012y: -512
+p0013x: 4928
+p0013y: -512
+tex: 
+}
+
+BlankBlock{
+x: 5312
+y: 0
+z: 0
+w: 704
+h: 64
+status: 0
+}
+
+BlankBlock{
+x: 3968
+y: -576
+z: 0
+w: 320
+h: 128
+status: 0
+}
+
+ComplexBlock{
+x: 4224
+y: -1536
+z: 0
+w: 384
+h: 192
+status: 0
+p0000x: 4608
+p0000y: -1344
+p0001x: 4544
+p0001y: -1408
+p0002x: 4352
+p0002y: -1408
+p0003x: 4288
+p0003y: -1472
+p0004x: 4224
+p0004y: -1472
+p0005x: 4224
+p0005y: -1536
+p0006x: 4608
+p0006y: -1536
+tex: 
+}
+
+BlankBlock{
+x: 3840
+y: -1344
+z: 0
+w: 64
+h: 832
+status: 0
+}
+
+BlankBlock{
+x: 3904
+y: -896
+z: 0
+w: 384
+h: 192
+status: 0
+}
+
+BlankBlock{
+x: 4608
+y: -1536
+z: 0
+w: 64
+h: 896
+status: 0
+}
+
+BlankBlock{
+x: 2624
+y: -1536
+z: 0
+w: 1600
+h: 64
+status: 0
+}
+
+BlankBlock{
+x: 3264
+y: -1344
+z: 0
+w: 576
+h: 64
+status: 0
+}
+
+ComplexBlock{
+x: 2304
+y: -1536
+z: 0
+w: 320
+h: 192
+status: 0
+p0000x: 2624
+p0000y: -1536
+p0001x: 2624
+p0001y: -1472
+p0002x: 2560
+p0002y: -1472
+p0003x: 2432
+p0003y: -1344
+p0004x: 2304
+p0004y: -1344
+p0005x: 2304
+p0005y: -1536
+tex: 
+}
+
+BlankBlock{
+x: 2304
+y: -1344
+z: 0
+w: 64
+h: 128
+status: 0
+}
+
+BlankBlock{
+x: 1920
+y: -1280
+z: 0
+w: 384
+h: 64
+status: 0
+}
+
+BlankBlock{
+x: 1920
+y: -1024
+z: 0
+w: 1408
+h: 64
+status: 0
+}
+
+BlankBlock{
+x: 3264
+y: -1280
+z: 0
+w: 64
+h: 256
+status: 0
+}
+
+GameEvent{
+x: 2048
+y: -1216
+z: 0
+w: 128
+h: 5
+status: 0
+type: 4
+advance: test
+tex: 
+}
+
+BlankBlock{
+x: 1280
+y: -1280
+z: 0
+w: 640
+h: 64
+status: 0
+}
+
+BlankBlock{
+x: 1920
+y: -1184
+z: 0
+w: 64
+h: 160
+status: 0
+}
+
+BlankBlock{
+x: 1280
+y: -1184
+z: 0
+w: 640
+h: 32
+status: 0
+}
+
+BlankBlock{
+x: 416
+y: -672
+z: 0
+w: 160
+h: 32
+status: 0
+}
+
+BlankBlock{
+x: 576
+y: -672
+z: 0
+w: 64
+h: 544
+status: 0
+}
+
+BlankBlock{
+x: 1280
+y: -1472
+z: 0
+w: 64
+h: 192
+status: 0
+}
+
+ComplexBlock{
+x: 704
+y: -1536
+z: 0
+w: 256
+h: 128
+status: 0
+p0000x: 704
+p0000y: -1536
+p0001x: 960
+p0001y: -1536
+p0002x: 960
+p0002y: -1472
+p0003x: 896
+p0003y: -1408
+p0004x: 768
+p0004y: -1408
+p0005x: 704
+p0005y: -1472
+tex: 
+}
+
+BlankBlock{
+x: 960
+y: -1536
+z: 0
+w: 384
+h: 64
+status: 0
+}
+
+BlankBlock{
+x: 512
+y: -1536
+z: 0
+w: 192
+h: 64
+status: 0
+}
+
+BlankBlock{
+x: 448
+y: -1536
+z: 0
+w: 64
+h: 512
+status: 0
+}
+
+BlankBlock{
+x: 192
+y: -768
+z: 0
+w: 704
+h: 64
+status: 0
+}
+
+BlankBlock{
+x: 1280
+y: -1152
+z: 0
+w: 64
+h: 192
+status: 0
+}
+
+ComplexBlock{
+x: 896
+y: -960
+z: 0
+w: 448
+h: 128
+status: 0
+p0000x: 1344
+p0000y: -960
+p0001x: 1280
+p0001y: -960
+p0002x: 1216
+p0002y: -896
+p0003x: 1152
+p0003y: -896
+p0004x: 1088
+p0004y: -960
+p0005x: 960
+p0005y: -960
+p0006x: 896
+p0006y: -896
+p0007x: 896
+p0007y: -832
+p0008x: 1344
+p0008y: -832
+tex: 
+}
+
+HalfBlankBlock{
+x: 512
+y: -1248
+z: 0
+w: 224
+h: 32
+status: 0
+}
+
+BlankBlock{
+x: -192
+y: -1088
+z: 0
+w: 64
+h: 448
+status: 0
+}
+
+BlankBlock{
+x: -192
+y: -640
+z: 0
+w: 640
+h: 64
+status: 0
+}
+
+BlankBlock{
+x: -128
+y: -1088
+z: 0
+w: 576
+h: 64
+status: 0
+}
+
+BlankBlock{
+x: 64
+y: -896
+z: 0
+w: 832
+h: 64
+status: 0
+}
+
+BlankBlock{
+x: 192
+y: -832
+z: 0
+w: 64
+h: 64
+status: 0
+}
+
+BlankBlock{
+x: 3072
+y: -480
+z: 0
+w: 896
+h: 32
+status: 0
+}
+
+TileBlock{
+x: 5248
+y: 0
+z: 0
+w: 768
+h: 64
+status: 0
+tex: sand21
+}
+
+TileBlock{
+x: 3904
+y: -896
+z: 0
+w: 384
+h: 192
+status: 0
+tex: sand11
+}
+
+TileBlock{
+x: -2880
+y: -1472
+z: 0
+w: 3392
+h: 448
+status: 0
+tex: tallgrass11
+}
+
+TileBlock{
+x: -2880
+y: -1024
+z: 0
+w: 2752
+h: 384
+status: 0
+tex: tallgrass11
+}
+
+TileBlock{
+x: -2880
+y: -640
+z: 0
+w: 3520
+h: 576
+status: 0
+tex: tallgrass11
+}
+
+TileBlock{
+x: 960
+y: -960
+z: 0
+w: 128
+h: 64
+status: 0
+tex: tallgrass11
+}
+
+TileBlock{
+x: 1280
+y: -1184
+z: 0
+w: 704
+h: 160
+status: 0
+tex: tallgrass11
+}
+
+TileBlock{
+x: 448
+y: -672
+z: 0
+w: 192
+h: 32
+status: 0
+tex: tallgrass11
+}
+
+TileBlock{
+x: 2624
+y: -1024
+z: 0
+w: 64
+h: 512
+status: 0
+tex: grasssand11
+}
+
+TileBlock{
+x: 2240
+y: -2048
+z: 0
+w: 64
+h: 832
+status: 0
+tex: grasssand11
+}
+
+TileBlock{
+x: 2304
+y: -1344
+z: 0
+w: 64
+h: 128
+status: 0
+tex: sand11
+}
+
+TileBlock{
+x: 2688
+y: -1024
+z: 0
+w: 1216
+h: 512
+status: 0
+tex: sand11
+}
+
+TileBlock{
+x: 192
+y: -896
+z: 0
+w: 2432
+h: 192
+status: 0
+tex: tallgrass11
+}
+
+TileBlock{
+x: 832
+y: -704
+z: 0
+w: 832
+h: 64
+status: 0
+tex: tallgrass11
+}
+
+TileBlock{
+x: 1664
+y: -704
+z: 0
+w: 960
+h: 128
+status: 0
+tex: tallgrass11
+}
+
+TileBlock{
+x: 1728
+y: -576
+z: 0
+w: 576
+h: 64
+status: 0
+tex: tallgrass11
+}
+
+TileBlock{
+x: 1280
+y: -1024
+z: 0
+w: 1344
+h: 128
+status: 0
+tex: tallgrass11
+}
+
+TileBlock{
+x: 64
+y: -896
+z: 0
+w: 128
+h: 64
+status: 0
+tex: tallgrass11
+}
+
+TileBlock{
+x: 1280
+y: -2048
+z: 0
+w: 960
+h: 832
+status: 0
+tex: tallgrass11
+}
+
+TileBlock{
+x: 768
+y: -1472
+z: 0
+w: 128
+h: 64
+status: 0
+tex: tallgrass11
+}
+
+TileBlock{
+x: -2752
+y: -2176
+z: 0
+w: 4032
+h: 704
+status: 0
+tex: tallgrass11
+}
+
+TileBlock{
+x: 2304
+y: -576
+z: 0
+w: 320
+h: 64
+status: 0
+tex: tallgrass11
+}
+
+TileBlock{
+x: -1336
+y: -320
+z: -4
+w: 128
+h: 64
+status: 0
+tex: grass11
+}
+
+TileBlock{
+x: 2368
+y: -1472
+z: 1
+w: 2240
+h: 192
+status: 0
+tex: water_clear
+}
+
+TileBlock{
+x: 4480
+y: -1280
+z: 1
+w: 128
+h: 704
+status: 0
+tex: water_clear
+}
+
+TileBlock{
+x: 3072
+y: -480
+z: 2
+w: 1408
+h: 416
+status: 0
+tex: sand11
+}
+
+TileBlock{
+x: 3968
+y: -576
+z: 2
+w: 512
+h: 96
+status: 0
+tex: sand11
+}
+
+TileBlock{
+x: 4480
+y: -384
+z: 2
+w: 320
+h: 192
+status: 0
+tex: sand11
+}
+
+TileBlock{
+x: 4480
+y: -192
+z: 2
+w: 64
+h: 64
+status: 0
+tex: sand11
+}
+
+TileBlock{
+x: 4800
+y: -320
+z: 2
+w: 64
+h: 64
+status: 0
+tex: sand11
+}
+
+TileBlock{
+x: 2304
+y: -2048
+z: 2
+w: 3904
+h: 576
+status: 0
+tex: sand11
+}
+
+TileBlock{
+x: 4608
+y: -1472
+z: 2
+w: 1472
+h: 896
+status: 0
+tex: sand11
+}
+
+TileBlock{
+x: 4928
+y: -576
+z: 2
+w: 1152
+h: 320
+status: 0
+tex: sand11
+}
+
+TileBlock{
+x: 4672
+y: -576
+z: 2
+w: 256
+h: 64
+status: 0
+tex: sand11
+}
+
+TileBlock{
+x: 4352
+y: -1472
+z: 2
+w: 256
+h: 64
+status: 0
+tex: sand11
+}
+
+TileBlock{
+x: 2304
+y: -1472
+z: 2
+w: 192
+h: 64
+status: 0
+tex: sand11
+}
+
+TileBlock{
+x: 2304
+y: -1408
+z: 2
+w: 128
+h: 64
+status: 0
+tex: sand11
+}
+
+TileBlock{
+x: 5184
+y: -256
+z: 2
+w: 896
+h: 256
+status: 0
+tex: sand11
+}
+
+TileBlock{
+x: 5056
+y: -256
+z: 2
+w: 128
+h: 128
+status: 0
+tex: sand11
+}
+
+TileBlock{
+x: 4992
+y: -256
+z: 2
+w: 64
+h: 64
+status: 0
+tex: sand11
+}
+
+TileBlock{
+x: 4352
+y: -576
+z: 1
+w: 832
+h: 576
+status: 0
+tex: water_clear
+}
+
+TileBlock{
+x: 3264
+y: -1344
+z: 2
+w: 640
+h: 320
+status: 0
+tex: sand11
+}
+
+TileBlock{
+x: 4288
+y: -1472
+z: 0
+w: 64
+h: 64
+status: 0
+tex: sand20
+}
+
+TileBlock{
+x: 4288
+y: -1472
+z: 2
+w: 64
+h: 64
+status: 0
+tex: sand20
+}
+
+TileBlock{
+x: 4544
+y: -1408
+z: 2
+w: 64
+h: 64
+status: 0
+tex: sand20
+}
+
+TileBlock{
+x: 4608
+y: -576
+z: 2
+w: 64
+h: 64
+status: 0
+tex: sand20
+}
+
+TileBlock{
+x: 4928
+y: -256
+z: 2
+w: 64
+h: 64
+status: 0
+tex: sand20
+}
+
+TileBlock{
+x: 4992
+y: -192
+z: 2
+w: 64
+h: 64
+status: 0
+tex: sand20
+}
+
+TileBlock{
+x: 5184
+y: 0
+z: 2
+w: 64
+h: 64
+status: 0
+tex: sand20
+}
+
+TileBlock{
+x: 2496
+y: -1472
+z: 2
+w: 64
+h: 64
+status: 0
+tex: sand22
+}
+
+TileBlock{
+x: 2432
+y: -1408
+z: 2
+w: 64
+h: 64
+status: 0
+tex: sand22
+}
+
+TileBlock{
+x: 4800
+y: -256
+z: 2
+w: 64
+h: 64
+status: 0
+tex: sand22
+}
+
+TileBlock{
+x: 4544
+y: -192
+z: 2
+w: 64
+h: 64
+status: 0
+tex: sand22
+}
+
+TileBlock{
+x: 4480
+y: -128
+z: 2
+w: 64
+h: 64
+status: 0
+tex: sand22
+}
+
+TileBlock{
+x: 4352
+y: -64
+z: 2
+w: 64
+h: 64
+status: 0
+tex: sand22
+}
+
+TileBlock{
+x: 704
+y: -1472
+z: 0
+w: 64
+h: 64
+status: 0
+tex: tallgrass20
+}
+
+TileBlock{
+x: 896
+y: -1472
+z: 0
+w: 64
+h: 64
+status: 0
+tex: tallgrass22
+}
+
+TileBlock{
+x: -192
+y: -1536
+z: -4
+w: 2176
+h: 896
+status: 0
+tex: tallgrass11
 }
 

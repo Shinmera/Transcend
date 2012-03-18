@@ -29,12 +29,16 @@ public class InputEventHandler {
     public InputEventHandler(){
         ConfigManager man = new ConfigManager("KeyboardLayout");
         man.verbose=true;
-        if(!man.loadConfig(MainFrame.CONST.gString("LAYOUT")+".kl")) Const.LOGGER.warning("[InputEventHandler] Failed to load layout '"+MainFrame.CONST.gString("LAYOUT")+"'!");
-        else                                                         Const.LOGGER.info("[InputEventHandler] Loaded layout "+MainFrame.CONST.gString("LAYOUT")+". "+man.output().size()+" keys mapped.");
+        if(!man.loadConfig(MainFrame.fileStorage.getFile(MainFrame.CONST.gString("LAYOUT")+".kl").getAbsolutePath()))
+            Const.LOGGER.warning("[InputEventHandler] Failed to load layout '"+MainFrame.CONST.gString("LAYOUT")+"'!");
+        else 
+            Const.LOGGER.info("[InputEventHandler] Loaded layout "+MainFrame.CONST.gString("LAYOUT")+". "+man.output().size()+" keys mapped.");
         keyMap=man.output().asSimpleSet();
         
-        if(!man.loadConfig(MainFrame.CONST.gString("PLAYOUT")+".kl"))Const.LOGGER.warning("[InputEventHandler] Failed to load layout '"+MainFrame.CONST.gString("PLAYOUT")+"'!");
-        else                                                         Const.LOGGER.info("[InputEventHandler] Loaded layout "+MainFrame.CONST.gString("PLAYOUT")+". "+man.output().size()+" keys mapped.");
+        if(!man.loadConfig(MainFrame.fileStorage.getFile(MainFrame.CONST.gString("PLAYOUT")+".kl").getAbsolutePath()))
+            Const.LOGGER.warning("[InputEventHandler] Failed to load layout '"+MainFrame.CONST.gString("PLAYOUT")+"'!");
+        else 
+            Const.LOGGER.info("[InputEventHandler] Loaded layout "+MainFrame.CONST.gString("PLAYOUT")+". "+man.output().size()+" keys mapped.");
         playerMap=man.output().asSimpleSet();
     }
 

@@ -40,8 +40,14 @@ public class GLog extends GLabel{
         
         fore.bind();
         Iterator<String> it = log.iterator();int i=0;
+        w=10;
         while(it.hasNext()){
-            font.drawString(x+10, y+10+i*22, it.next(), 1,1);
+            String cur = it.next();
+            if(cur.length()*5>w){
+                w = cur.length()*5+20;
+                x = MainFrame.DISPLAY_WIDTH-w;
+            }
+            font.drawString(x+10, y+10+i*22, cur, 1,1);
             i++;
         }
         glBindTexture(GL_TEXTURE_2D, 0); //release

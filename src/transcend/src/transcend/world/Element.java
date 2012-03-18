@@ -10,6 +10,7 @@
 package transcend.world;
 
 import NexT.util.Toolkit;
+import transcend.block.Block;
 import transcend.entity.Entity;
 import transcend.graph.Animation;
 import transcend.main.MainFrame;
@@ -62,12 +63,25 @@ public class Element extends BElement{
 
     public static Entity checkEntity(int wID,double ax,double ay,double bx,double by){
         Entity e=null;
-        Object[] entIDs = MainFrame.world.getEntityIDList();
+        Entity[] entIDs = MainFrame.world.getEntityList();
         for(int i=0;i<entIDs.length;i++){
-            if((Integer)entIDs[i]!=wID){
-                Entity block = (Entity)MainFrame.world.getByID((Integer)entIDs[i]);
-                if((block.checkInside(ax,ay)||block.checkInside(bx,by))){
-                    e=block;
+            if((entIDs[i]!=null)&&(entIDs[i].wID!=wID)){
+                if((entIDs[i].checkInside(ax,ay)||entIDs[i].checkInside(bx,by))){
+                    e=entIDs[i];
+                    break;
+                }
+            }
+        }
+        return e;
+    }
+
+    public static Block checkBlock(int wID,double ax,double ay,double bx,double by){
+        Block e=null;
+        Block[] entIDs = MainFrame.world.getBlockList();
+        for(int i=0;i<entIDs.length;i++){
+            if((entIDs[i]!=null)&&(entIDs[i].wID!=wID)){
+                if((entIDs[i].checkInside(ax,ay)||entIDs[i].checkInside(bx,by))){
+                    e=entIDs[i];
                     break;
                 }
             }

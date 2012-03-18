@@ -8,16 +8,15 @@
 \**********************/
 
 package transcend.entity;
-import transcend.world.Element;
-import transcend.event.EventListener;
-import transcend.event.Event;
-import transcend.graph.Animation;
-import java.io.File;
 import java.util.HashMap;
-import transcend.main.MainFrame;
-import transcend.block.Block;
-import org.newdawn.slick.Color;
 import static org.lwjgl.opengl.GL11.*;
+import org.newdawn.slick.Color;
+import transcend.block.Block;
+import transcend.event.Event;
+import transcend.event.EventListener;
+import transcend.graph.Animation;
+import transcend.main.MainFrame;
+import transcend.world.Element;
 
 public class EnemyC1 extends Entity implements EventListener{
 
@@ -30,11 +29,12 @@ public class EnemyC1 extends Entity implements EventListener{
         int[] stop = {21,14,0,8,14,0,0,0};
         int[] loop = {0,-2,0,-999,-999,0,0,0};
         int[] loop2 = {0,0,0,0,0,0,0,0};
-        drawable.loadTexture(MainFrame.fileStorage.getFile("tex/enemy_c1.png"),start,stop,loop,loop2);
+        drawable.loadTexture(MainFrame.fileStorage.getFile("enemy_c1"),start,stop,loop,loop2);
         drawable.setReel(0);
         drawable.setPPS(15);
-        atk=1;def=1;health=1.0;
+        atk=1;def=1;health=100;
         status=Entity.STATUS_IDLE;
+        solid=0;
         w=64;h=64;
     }
 
@@ -59,6 +59,11 @@ public class EnemyC1 extends Entity implements EventListener{
                 glVertex2d(x-w*1.5,y+h*1.5);
                 glVertex2d(x+w*0.5,y+h*0.5);
                 glVertex2d(x+w*2.5,y+h*1.5);
+                glVertex2d(x+w*0.5,y+h*0.5);
+                
+                glVertex2d(x-w*1.5,y+h*2.5);
+                glVertex2d(x+w*0.5,y+h*0.5);
+                glVertex2d(x+w*2.5,y+h*2.5);
                 glVertex2d(x+w*0.5,y+h*0.5);
                 //PRIMARY DETECTORS
                 Color.red.bind();
@@ -98,13 +103,13 @@ public class EnemyC1 extends Entity implements EventListener{
         ai.setGoal((int)MainFrame.player.getX(), (int)MainFrame.player.getY());
         
 
-        Block ceiling,left,right;
-        if(vy<=0)ground=(Block)check(x+3,y,x+w-3,y);else ground=null;
-        if(vy>=0)ceiling=(Block)check(x+3,y+h,x+w-3,y+h);else ceiling=null;
+        Element ceiling,left,right;
+        if(vy<=0)ground=check(x+3,y,x+w-3,y);else ground=null;
+        if(vy>=0)ceiling=check(x+3,y+h,x+w-3,y+h);else ceiling=null;
         if(ground==null){
             vy-=vydcc;
             if(vy<0){
-                Block temp = (Block)check(x+2,y+vy,x+w-2,y+vy);
+                Block temp = checkBlock(wID,x+2,y+vy,x+w-2,y+vy);
                 if((temp!=null)&&(temp.y+temp.h-y-vy<temp.h)){
                     vy=0;
                     y=temp.y+temp.h;
@@ -114,8 +119,8 @@ public class EnemyC1 extends Entity implements EventListener{
         } else if(vy<0)vy=0;
         if((ceiling!=null)&&(vy>0&&ceiling.solid>0.5)){vy=0;y=ceiling.y-h-1;}
 
-        if(vx<=0)left=(Block)check(x+vx,y+3,x+vx,y+h-3);else left=null;
-        if(vx>=0)right=(Block)check(x+w+vx,y+3,x+w+vx,y+h-3);else right=null;
+        if(vx<=0)left= check(x+vx  ,y+3,x+vx  ,y+h-3);else left=null;
+        if(vx>=0)right=check(x+w+vx,y+3,x+w+vx,y+h-3);else right=null;
         if(left!=null&&vx<0){x=left.x+left.w;vx=0;}
         if(right!=null&&vx>0){x=right.x-w;vx=0;}
 
@@ -125,7 +130,7 @@ public class EnemyC1 extends Entity implements EventListener{
         x+=vx;
         y+=vy;
         if(status==Entity.STATUS_IDLE){vx=0;return;}
-        if(status==Entity.STATUS_JUMP&&ground!=null){vy=12;status=Entity.STATUS_MOVE;drawable.setReel(1);return;}
+        if(status==Entity.STATUS_JUMP&&ground!=null){vy=15;status=Entity.STATUS_MOVE;drawable.setReel(1);return;}
         
         }
     }

@@ -21,12 +21,14 @@ public class Loader{
     public static final int DELAY_TIMER = 2;
     private boolean loading=false;
     private String current="";
+    private String loadingMessage="";
     private Animation drawable = new Animation();
     private LoadHelper helper = null;
     private TrueTypeFont font;
     private int delay = 0;
     private float fader = 1;
     private boolean display = true;
+    private int textureCountAtBeginning=0;
 
     public Loader(){
         font = MainFrame.fontPool.loadFont(new Font("Arial", Font.BOLD, 20));
@@ -48,25 +50,31 @@ public class Loader{
         if(!loading)return;
         if(delay<DELAY_TIMER){delay++;return;}
         if (helper!=null) {
-            Const.LOGGER.info("[Loader] Loading...");
+            Const.LOGGER.info("[Loader] "+loadingMessage);
+            textureCountAtBeginning = MainFrame.textureLoader.getTexturesCount()-1; //So we can get an accurate amount of stuff being loaded, not a total.
             helper.load();
             helper=null;
         }
         if (MainFrame.textureLoader.getDeferredCount() > 0) {
             Texture nextResource = MainFrame.textureLoader.getNextDeferred();
             String currentt = current;
-            current = (MainFrame.textureLoader.getTexturesCount()-MainFrame.textureLoader.getDeferredCount())*100/MainFrame.textureLoader.getTexturesCount()+"%";
-            if(!current.equals(currentt))Const.LOGGER.info("[Loader] "+current);
+            current = ((MainFrame.textureLoader.getTexturesCount()-textureCountAtBeginning)-MainFrame.textureLoader.getDeferredCount())*100/
+                       (MainFrame.textureLoader.getTexturesCount()-textureCountAtBeginning)+"%";
+            if(!current.equals(currentt))Const.LOGGER.info("[Loader]["+current+"] "+nextResource.getResourceName());
             
             try {nextResource.load();}
             catch (Exception ex) {Const.LOGGER.log(Level.SEVERE,"[Loader] Failed to load resource!", ex);}
         } else {
             Const.LOGGER.info("[Loader] Finished loading. Ready.");
             loading=false;
-            display=false;
         }
     }
-    public void start(){
+    
+    public void start(){start("");}
+    public void start(String message){start(message,true);}
+    public void start(String message,boolean display){
+        this.display=display;
+        loadingMessage=message;
         loading = true;
         fader = 1;
         delay = 0;
@@ -83,7 +91,9 @@ public class Loader{
         font.drawString(MainFrame.DISPLAY_WIDTH/2,
                 MainFrame.DISPLAY_HEIGHT/2-font.getLineHeight()/2-drawable.getTexture().getImageHeight()/2,
                 current, 1,1,TrueTypeFont.ALIGN_CENTER);
-
+        font.drawString(MainFrame.DISPLAY_WIDTH/2,
+                MainFrame.DISPLAY_HEIGHT/2-font.getLineHeight()*2-drawable.getTexture().getImageHeight()/2,
+                loadingMessage, 1,1,TrueTypeFont.ALIGN_CENTER);
         if(!loading)fader-=0.005;
     }
 }

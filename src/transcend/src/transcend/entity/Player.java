@@ -16,7 +16,6 @@ import NexT.util.Vector;
 import java.util.HashMap;
 import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.Color;
-import transcend.block.Block;
 import transcend.event.Event;
 import transcend.event.EventListener;
 import transcend.event.KeyboardListener;
@@ -32,6 +31,14 @@ public class Player extends RigidBody implements KeyboardListener,EventListener{
     public static final int FORM_PONY = 2;
     public static final int FORM_DOLPHIN = 3;
     public static final int FORM_EAGLE = 4;
+    public static final int REEL_IDLE = 0;
+    public static final int REEL_WALK = 1;
+    public static final int REEL_JUMP = 2;
+    public static final int REEL_FALL = 3;
+    public static final int REEL_ATTACK = 4;
+    public static final int REEL_HURT = 5;
+    public static final int REEL_SWITCH = 6;
+    public static final int REEL_DIE = 7;
     public static final double SWITCH_PENALTY = 25;
     public double POWER_REGENERATION = 1.0/(30.0);
 
@@ -40,9 +47,12 @@ public class Player extends RigidBody implements KeyboardListener,EventListener{
     private double power=100;
     private int lifes=5;
     private int form=FORM_HUMAN;
+    private int toForm=-1;
     private boolean[] unlocked = new boolean[5];
     private int score=100;
     private double backX=0,backY=0;
+    private MagicBullet bullet = null;
+    private int switchTimer=0;
 
     public Player(){
         unlocked[FORM_HUMAN]=true;
@@ -56,7 +66,15 @@ public class Player extends RigidBody implements KeyboardListener,EventListener{
         scriptManager.loadScript(fileStorage.getFile("scr/player"));
         POWER_REGENERATION = 1.0/(MainFrame.ups);
         x=0;y=0;z=0;
-
+        
+        //Load all forms in advance.
+        drawable.loadTexture(fileStorage.getFile("player"+FORM_HUMAN));
+        drawable.loadTexture(fileStorage.getFile("player"+FORM_MOUSE));
+        drawable.loadTexture(fileStorage.getFile("player"+FORM_PONY));
+        drawable.loadTexture(fileStorage.getFile("player"+FORM_DOLPHIN));
+        drawable.loadTexture(fileStorage.getFile("player"+FORM_EAGLE));
+        
+        
         setForm(form);
         eh.registerEvent(Event.ENTITY_SEE, 0, this);
         eh.registerEvent(Event.ENTITY_ATTACK, 0, this);
@@ -72,6 +90,23 @@ public class Player extends RigidBody implements KeyboardListener,EventListener{
             if(right!=null)right.draw();
             Color.red.bind();
             AbstractGraph.drawRay(new Ray(x,y,0,vx,vy,0),64);
+        }
+        
+        if(K_ATTACK){
+            if(bullet==null){
+                bullet = new MagicBullet(0,0);
+                MainFrame.world.addEntity(bullet);
+            }
+            bullet.setPosition((int)(x+(w+10)*drawable.getDirection()),(int)(y+h/4*3));
+            bullet.setHealth(bullet.getHealth()+1.0/fps*10);
+        }
+        
+        if(toForm!=-1){
+            switchTimer--;
+            if(switchTimer<=0){
+                setForm(toForm);
+                toForm=-1;
+            }
         }
     }
 
@@ -97,6 +132,7 @@ public class Player extends RigidBody implements KeyboardListener,EventListener{
 
     public void update(){
         drawable.update();
+        if(toForm!=-1)return; //No input during switch
         if(power<100)power+=POWER_REGENERATION;
         if(power>100)power=100;
         
@@ -104,7 +140,7 @@ public class Player extends RigidBody implements KeyboardListener,EventListener{
         //performCollisionChecks();
         
         //bottom
-        if(((bottom=(Block)check(x-w/2+3,y+1,x+w/2-3,y+1))!=null || (bottom=(Block)check(x-w/2+3,y+vy  ,x+w/2-3,y+vy))!=null)){
+        if(((bottom=check(x-w/2+3,y+1,x+w/2-3,y+1))!=null || (bottom=check(x-w/2+3,y+vy  ,x+w/2-3,y+vy))!=null)){
             int y1=Integer.MAX_VALUE;
             int y2=Integer.MAX_VALUE;
             
@@ -126,7 +162,7 @@ public class Player extends RigidBody implements KeyboardListener,EventListener{
                 vy=0;
                 Vector v = top.getCollisionPoint(new Ray(x,y,0,0,1,0));
                 if(v!=null){
-                    if((int)(v.getY())!=Integer.MAX_VALUE)y=v.getY()-h;
+                    if((int)(v.getY())<Integer.MAX_VALUE)y=v.getY()-h;
                 }
             }
         }
@@ -136,7 +172,7 @@ public class Player extends RigidBody implements KeyboardListener,EventListener{
                 vx=0;
                 Vector v = left.getCollisionPoint(new Ray(x,y,0,-1,0,0));
                 if(v!=null){
-                    if((int)(v.getX())!=Integer.MAX_VALUE)x=v.getX()+w/2;
+                    if((int)(v.getX())>-Integer.MAX_VALUE)x=v.getX()+w/2;
                 }
             }
             if(left.solid<=0.5)left=null;
@@ -147,8 +183,7 @@ public class Player extends RigidBody implements KeyboardListener,EventListener{
                 vx=0;
                 Vector v = right.getCollisionPoint(new Ray(x,y,0,1,0,0));
                 if(v!=null){
-                    if((int)(v.getX())!=Integer.MAX_VALUE)
-                        x=v.getX()-w/2;
+                    if((int)(v.getX())<Integer.MAX_VALUE)x=v.getX()-w/2;
                 }
             }
             if(right.solid<=0.5)right=null;
@@ -162,28 +197,28 @@ public class Player extends RigidBody implements KeyboardListener,EventListener{
         if(!K_ATTACK){
             if(K_LEFT){
                 drawable.setDirection(Animation.DIR_LEFT);
-                if(vy==0)drawable.setReel(1);
+                if(vy==0)drawable.setReel(REEL_WALK);
             }else if(K_RIGHT){
                 drawable.setDirection(Animation.DIR_RIGHT);
-                if(vy==0)drawable.setReel(1);
+                if(vy==0)drawable.setReel(REEL_WALK);
             }else{
-                if(vy==0)drawable.setReel(0);
+                if(vy==0)drawable.setReel(REEL_IDLE);
                 vx=0;
             }
+            if(bullet!=null){bullet.shoot((15+bullet.getHealth()/10)*drawable.getDirection(), 0.0);bullet=null;}
         } else {
-            eh.triggerEvent(Event.PLAYER_ATTACK, wID, null);
-            drawable.setReel(4);
+            //eh.triggerEvent(Event.PLAYER_ATTACK, wID, null);
+            //bullet = new MagicBullet((int)(x+w),(int)(y+h/4*3)); Can't load here since it's not in the GL context.
+            drawable.setReel(REEL_ATTACK);
         }
-        if(K_SWITCH){
-            texturePool.reloadTexture(fileStorage.getFile("player"+form).getName(), fileStorage.getFile("player"+form));
-        }
+        
         if(K_RUN){
             drawable.setPPS(60);
         }else{
             drawable.setPPS(30);
         }
-        if(vy>0){drawable.setReel(2);}
-        if(vy<0){drawable.setReel(3);}
+        if(vy>0){drawable.setReel(REEL_JUMP);}
+        if(vy<0){drawable.setReel(REEL_FALL);}
         if((right==null&&vxacc>0)||(left==null&&vxacc<0))vx=vxacc;
 
         //if(/*(left!=null&&right!=null)||*/(bottom!=null&&ceiling!=null))die();
@@ -231,9 +266,13 @@ public class Player extends RigidBody implements KeyboardListener,EventListener{
         else if(key==ieh.getPlayerKey("RUN"))K_RUN=false;
         else if(key==ieh.getPlayerKey("JUMP"))K_JUMP=false;
         else if(key==ieh.getPlayerKey("SWITCH"))K_SWITCH=false;
-        else if(key==Keyboard.KEY_1&&unlocked[FORM_HUMAN]&&power>SWITCH_PENALTY){power-=SWITCH_PENALTY;setForm(FORM_HUMAN);}
-        else if(key==Keyboard.KEY_2&&unlocked[FORM_MOUSE]&&power>SWITCH_PENALTY){power-=SWITCH_PENALTY;setForm(FORM_MOUSE);}
+        else if(key==Keyboard.KEY_1){switchForm(FORM_HUMAN);}
+        else if(key==Keyboard.KEY_2){switchForm(FORM_MOUSE);}
+        else if(key==Keyboard.KEY_3){switchForm(FORM_PONY);}
+        else if(key==Keyboard.KEY_4){switchForm(FORM_DOLPHIN);}
+        else if(key==Keyboard.KEY_5){switchForm(FORM_EAGLE);}
     }
+    
     public void keyType(int key) {
         if(pause)return;
         switch(key){
@@ -268,8 +307,8 @@ public class Player extends RigidBody implements KeyboardListener,EventListener{
     public void setSetbackPoint(double x,double y){backX=x;backY=y;}
 
     public void setForm(int form){
-        K_SWITCH=false;
         this.form=form;
+        K_SWITCH=false;
         //switch animation
         drawable.loadTexture(fileStorage.getFile("player"+form),(int[])(((Var[])scriptManager.s("player").v("start").get())[form].get()),
                                                                 (int[])(((Var[])scriptManager.s("player").v("stop") .get())[form].get()),
@@ -277,11 +316,20 @@ public class Player extends RigidBody implements KeyboardListener,EventListener{
                                                                 (int[])(((Var[])scriptManager.s("player").v("loop2").get())[form].get()));
         drawable.setSpritesize(((int[])scriptManager.s("player").v("spritesize").get())[form]);
         drawable.setPPS(30);
-        drawable.setReel(0);
+        drawable.setReel(REEL_IDLE);
         w=((int[])scriptManager.s("player").v("width").get())[form];
         h=((int[])scriptManager.s("player").v("height").get())[form];
         drawable.setTileH(1);
         drawable.setTileW(1);
+    }
+    
+    public void switchForm(int newForm){
+        if(unlocked[newForm]&&power>SWITCH_PENALTY&&form!=newForm&&toForm==-1){
+            power-=SWITCH_PENALTY;
+            switchTimer=fps*1;
+            drawable.setReel(REEL_SWITCH);
+            toForm=newForm;
+        }
     }
 
 

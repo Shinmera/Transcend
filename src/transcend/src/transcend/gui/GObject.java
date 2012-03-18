@@ -17,7 +17,7 @@ public class GObject {
     boolean visible=false;
     Color back = new Color(255,255,255,255),
           border = new Color(0,0,0,255);
-    float thickness = 0;
+    float thickness = 1.0f;
 
     public GObject(){ }
 
@@ -61,9 +61,8 @@ public class GObject {
             glVertex2f(x+w,y);
         glEnd();
 
-        border.bind();
-        
         if(thickness>0){
+            border.bind();
             glLineWidth(thickness);
             glBegin(GL_LINE_LOOP);
                 glVertex2f(x,y);

@@ -136,6 +136,7 @@ public class Animation {
     public double getSpritesize(){return spritesize;}
     public int getPPS(){return pps;}
     public boolean isLoaded(){return texture!=null;}
+    public int getDirection(){return direction;}
 
     public void update(){
         if(stop[0]<0)return;

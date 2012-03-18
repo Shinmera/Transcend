@@ -9,10 +9,6 @@
 
 package transcend.entity;
 
-import NexT.util.Toolkit;
-import NexT.util.Vector;
-import transcend.block.Block;
-import transcend.main.MainFrame;
 import transcend.world.Element;
 
 public class Entity extends Element{

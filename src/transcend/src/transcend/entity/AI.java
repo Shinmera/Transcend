@@ -24,7 +24,7 @@ public class AI {
     public static final int CHOICE_BR = 0x06;
     public static final int CHOICE_L  = 0x07;
     public static final int CHOICE_R  = 0x08;
-    public static final int TRESHOLD = 100;
+    public static final int TRESHOLD = 200;
     public static final int FORCE_REFRESH = 6;
     public static final double FORCE_TIMEOUT = MainFrame.fps*0.45;
 
@@ -57,17 +57,21 @@ public class AI {
         if(refresh>=FORCE_REFRESH){this.choices.clear();refresh=0;}
 
         //get blocks. We only need to check those.
-        Object[] blockIDs = world.getBlockList();
+        Block[] blocks = world.getBlockList();
         //set parameters...
         ArrayList<Integer> choices = new ArrayList<Integer>();
-        for(int i=0;i<blockIDs.length;i++){
-            Block block = (Block)world.getByID((Integer)blockIDs[i]);
-            if((block.checkInside(e.x-e.w*0.5,   e.y+e.h*1.5)||block.checkInside(e.x-e.w*1.5,   e.y+e.h*1.5)))choices.add(CHOICE_TL);
-            if((block.checkInside(e.x+e.w*1.5,   e.y+e.h*1.5)||block.checkInside(e.x+e.w*2.5,   e.y+e.h*1.5)))choices.add(CHOICE_TR);
-            if(block.checkInside(e.x-e.w*0.5,   e.y+e.h*0.5))choices.add(CHOICE_ML);
-            if(block.checkInside(e.x+e.w*1.5,   e.y+e.h*0.5))choices.add(CHOICE_MR);
-            if(!block.checkInside(e.x-e.w*0.5,  e.y-e.h*0.5))choices.add(CHOICE_BL);else choices.add(CHOICE_L);
-            if(!block.checkInside(e.x+e.w*1.5,  e.y-e.h*0.5))choices.add(CHOICE_BR);else choices.add(CHOICE_R);
+        for(int i=0;i<blocks.length;i++){
+            Block block = blocks[i];
+            if(block!=null){
+                if((block.checkInside(e.x-e.w*0.5,   e.y+e.h*1.5)||block.checkInside(e.x-e.w*1.5,   e.y+e.h*1.5))||
+                   (block.checkInside(e.x-e.w*0.5,   e.y+e.h*2.5)||block.checkInside(e.x-e.w*1.5,   e.y+e.h*2.5)))choices.add(CHOICE_TL);
+                if((block.checkInside(e.x+e.w*1.5,   e.y+e.h*1.5)||block.checkInside(e.x+e.w*2.5,   e.y+e.h*1.5))||
+                   (block.checkInside(e.x+e.w*1.5,   e.y+e.h*2.5)||block.checkInside(e.x+e.w*2.5,   e.y+e.h*2.5)))choices.add(CHOICE_TR);
+                if(block.checkInside(e.x-e.w*0.5,   e.y+e.h*0.5))choices.add(CHOICE_ML);
+                if(block.checkInside(e.x+e.w*1.5,   e.y+e.h*0.5))choices.add(CHOICE_MR);
+                if(!block.checkInside(e.x-e.w*0.5,  e.y-e.h*0.5))choices.add(CHOICE_BL);else choices.add(CHOICE_L);
+                if(!block.checkInside(e.x+e.w*1.5,  e.y-e.h*0.5))choices.add(CHOICE_BR);else choices.add(CHOICE_R);
+            }
         }
         //make sure we got choices at all.
         if(choices.size()<=1)return;

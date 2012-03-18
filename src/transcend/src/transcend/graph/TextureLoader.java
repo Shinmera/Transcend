@@ -15,17 +15,20 @@ import java.awt.MediaTracker;
 import java.awt.color.ColorSpace;
 import java.awt.image.*;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.IntBuffer;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import org.lwjgl.BufferUtils;
+import org.lwjgl.LWJGLException;
+import org.lwjgl.opengl.Display;
 import static org.lwjgl.opengl.GL11.*;
 import transcend.main.Const;
 import transcend.main.MainFrame;
@@ -64,6 +67,7 @@ public class TextureLoader {
 
     /** Scratch buffer for texture ID's */
     private IntBuffer textureIDBuffer = BufferUtils.createIntBuffer(1);
+    
 
     /**
      * Create a new texture loader based on the game panel
@@ -90,8 +94,15 @@ public class TextureLoader {
      * @return A new texture ID
      */
     private int createTextureID() {
-      glGenTextures(textureIDBuffer);
-      return textureIDBuffer.get(0);
+        try {
+            if(!Display.isCurrent()){
+                Const.LOGGER.log(Level.SEVERE,"[TextureLoader] Not in current context! Attempt to create texture will fail.");
+            }
+        } catch (LWJGLException ex) {
+            Const.LOGGER.log(Level.WARNING,"[TextureLoader] Couldn't perform context check!",ex);
+        }
+        glGenTextures(textureIDBuffer);
+        return textureIDBuffer.get(0);
     }
 
     /**
@@ -344,9 +355,6 @@ public class TextureLoader {
         int textureID = createTextureID();
         Texture texture = new Texture(target,textureID);
 
-        // bind this texture
-        glBindTexture(target, textureID);
-
         Image i = loadImage(resourceName,textureID);
         mediaTracker.addImage(i, textureID);
         texture.setImage(i);
@@ -377,6 +385,10 @@ public class TextureLoader {
         
         glBindTexture(texture.getTarget(), texture.getTextureID());
         BufferedImage bufferedImage = convertImageToBuffered(texture.getImage());
+        //Dispose of the image reference.
+        if(texture.getImage()!=null)texture.getImage().flush();
+        texture.setImage(null);
+        //Update data.
         texture.setWidth(bufferedImage.getWidth());
         texture.setHeight(bufferedImage.getHeight());
         

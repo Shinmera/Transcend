@@ -1,9 +1,8 @@
 
 package transcend.block;
-import transcend.graph.AbstractGraph;
 import org.newdawn.slick.Color;
+import transcend.graph.AbstractGraph;
 import transcend.main.MainFrame;
-import static org.lwjgl.opengl.GL11.*;
 
 public class BlankBlock extends Block{
 
@@ -14,6 +13,10 @@ public class BlankBlock extends Block{
 
     public BlankBlock() {
         solid=1;z=5;
+    }
+    
+    public void init() {
+        z=5;
     }
     
     public void draw(){

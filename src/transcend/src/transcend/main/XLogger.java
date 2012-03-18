@@ -9,16 +9,11 @@
 
 package transcend.main;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.text.SimpleDateFormat;
-import java.util.logging.LogRecord;
 import java.util.logging.Handler;
 import java.util.logging.Level;
+import java.util.logging.LogRecord;
 
 public class XLogger extends Handler{
     SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
@@ -44,8 +39,7 @@ public class XLogger extends Handler{
     public String format(LogRecord record) {
         if(record.getLevel()==null)record.setLevel(Level.INFO);
         if(record.getThrown()==null)
-            return sdf.format(record.getMillis())+" ["+record.getLevel().getName()+"]"+record.getMessage()
-                +"\n"+record.getResourceBundleName()+"."+record.getSourceClassName()+"."+record.getSourceMethodName();
+            return sdf.format(record.getMillis())+" ["+record.getLevel().getName()+"]"+record.getMessage();
         else
             return sdf.format(record.getMillis())+" ["+record.getLevel().getName()+"]"+record.getMessage()
                 +"\n"+record.getResourceBundleName()+"."+record.getSourceClassName()+"."+record.getSourceMethodName()+": "

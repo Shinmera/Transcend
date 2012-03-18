@@ -244,6 +244,10 @@ public class Texture {
     public String getResourceName(){
         return resourceName;
     }
+    
+    public void setTextureID(int id){
+        textureID=id;
+    }
 
     public void load(){
         if(!loaded)MainFrame.textureLoader.loadDeferredTexture(this);

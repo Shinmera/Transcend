@@ -53,6 +53,10 @@ public class TextureRenderer {
     public void beginDrawToTexture(int id,int width,int height){
         if(framebufferID==-1)return;
         currentTexture=id;
+        
+        glClearColor(0.0f,0.0f,0.0f,0.0f);
+        glClear (GL_COLOR_BUFFER_BIT);
+        
         glBindFramebufferEXT( GL_FRAMEBUFFER_EXT, framebufferID );
         glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT,GL_COLOR_ATTACHMENT0_EXT,GL_TEXTURE_2D, id, 0);
         glPushAttrib(GL_VIEWPORT_BIT);

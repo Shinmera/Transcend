@@ -155,6 +155,7 @@ public class World {
         synchronized(entities){entities.forEachValue(updateProc);}
     }
 
+    //TODO: Create layering system that doesn't suck balls.
     public void draw(){
         drawBack();
         for(currentDrawLayer=-5;currentDrawLayer<=0;currentDrawLayer++){

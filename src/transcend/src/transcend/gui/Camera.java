@@ -64,13 +64,9 @@ public class Camera {
 	glOrtho(x-MainFrame.DISPLAY_WIDTH/zoom/2, x+MainFrame.DISPLAY_WIDTH/zoom/2, y-MainFrame.DISPLAY_HEIGHT/zoom/2, y+MainFrame.DISPLAY_HEIGHT/zoom/2, -100, 100);
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
-        
-        glPushMatrix();
     }
 
     public void camEnd(){
-        glPopMatrix();
-        
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
 	glOrtho(0, MainFrame.DISPLAY_WIDTH, 0, MainFrame.DISPLAY_HEIGHT, -100, 100);

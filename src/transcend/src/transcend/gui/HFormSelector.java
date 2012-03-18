@@ -9,16 +9,12 @@
 
 package transcend.gui;
 
-import transcend.event.KeyboardListener;
-import transcend.graph.AbstractGraph;
 import java.util.ArrayList;
-import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.Color;
+import transcend.graph.AbstractGraph;
 import transcend.main.MainFrame;
 
-public class HFormSelector extends GObject implements KeyboardListener{
-    int index = 0;
-    double scroll = 0;
+public class HFormSelector extends GObject{
     GImage[] images = new GImage[5];
     ArrayList<Integer> available = new ArrayList<Integer>();
 
@@ -31,7 +27,6 @@ public class HFormSelector extends GObject implements KeyboardListener{
         images[2] = new GImage("form_pony");
         images[3] = new GImage("form_dolphin");
         images[4] = new GImage("form_eagle");
-        MainFrame.ieh.addKeyboardListener(this);
     }
 
     public void detectForms(){
@@ -51,27 +46,15 @@ public class HFormSelector extends GObject implements KeyboardListener{
             //MainFrame.unpause();
         }
     }
-    public void keyPressed(int key){}
-    public void keyType(int key){}
-    public void keyReleased(int key){
-        if(!visible)return;
-        switch(key){
-            case Keyboard.KEY_1:if(available.contains(0))index=0;break;
-            case Keyboard.KEY_2:if(available.contains(1))index=1;break;
-            case Keyboard.KEY_3:if(available.contains(2))index=2;break;
-            case Keyboard.KEY_4:if(available.contains(3))index=3;break;
-            case Keyboard.KEY_5:if(available.contains(4))index=4;break;
-        }
-    }
 
     public void paint(){
         if(!visible)return;
         for(int i=0;i<available.size();i++){
             images[available.get(i)].setBounds(w/2+(i-available.size()/2)*h,y,h,h);
-            if(i!=index)images[available.get(i)].paint();
+            if(i!=MainFrame.player.getForm())images[available.get(i)].paint();
         }
         new Color(0,0,0,0.5f).bind();
         AbstractGraph.glRectangle2d(x,y,w,h);
-        images[available.get(index)].paint();
+        images[available.get(MainFrame.player.getForm())].paint();
     }
 }

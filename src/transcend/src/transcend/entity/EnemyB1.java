@@ -30,7 +30,7 @@ public class EnemyB1 extends Entity implements EventListener{
         int[] start = {0,0,0,0};
         int[] loop = {0,-2,0,0};
         int[] loop2 = {0,-999,0,0};
-        drawable.loadTexture(MainFrame.fileStorage.getFile("tex/enemy_b1.png"),start,stop,loop,loop2);
+        drawable.loadTexture(MainFrame.fileStorage.getFile("enemy_b1"),start,stop,loop,loop2);
         drawable.setReel(0);
         drawable.setPPS(15);
         w=64;h=64;

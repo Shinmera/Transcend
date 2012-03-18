@@ -33,6 +33,7 @@ import org.lwjgl.input.Mouse;
 import org.lwjgl.openal.AL;
 import org.lwjgl.opengl.Display;
 import static org.lwjgl.opengl.GL11.*;
+import org.lwjgl.opengl.GLContext;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.openal.SoundStore;
 import transcend.entity.Player;
@@ -60,6 +61,7 @@ public class MainFrame implements KeyboardListener{
     }
     public static final Const CONST = new Const();
     public static final File basedir = new File(System.getProperty("user.dir"));
+    public static final FileStorage fileStorage = new FileStorage();
     public static final JFrame frame = new JFrame("Transcend - v"+Const.VERSION);
     public static final World world = new World();
     public static final WorldLoader worldLoader = new WorldLoader();
@@ -72,7 +74,6 @@ public class MainFrame implements KeyboardListener{
     public static final TextureLoader textureLoader = new TextureLoader();
     public static final SoundPool soundPool = new SoundPool();
     public static final FontPool fontPool = new FontPool();
-    public static final FileStorage fileStorage = new FileStorage();
     public static final ScriptManager scriptManager = new ScriptManager();
     public static final Repository repo = new Repository();
     public static final Player player = new Player();
@@ -196,7 +197,7 @@ public class MainFrame implements KeyboardListener{
 
         //LOAD MENU
         loader.setHelper(new MenuLoader());
-        loader.start();
+        loader.start("Loading Menu and Base...");
     }
 
     public void initGL() {
@@ -239,7 +240,7 @@ public class MainFrame implements KeyboardListener{
                 worldLoader.loadWorld(new File("world"+File.separator+"test.tw"));
                 //createTileTextures();
             }});
-            loader.start();
+            loader.start("Loading World...");
         }
         //Hook to world loop
         if(!pause){
@@ -287,12 +288,11 @@ public class MainFrame implements KeyboardListener{
         int powerWidth = (int) Math.pow(2, Toolkit.nearestHighPowerOfTwo(realWorldWidth));
         int powerHeight = (int) Math.pow(2, Toolkit.nearestHighPowerOfTwo(realWorldHeight));
         
-        
         if(backTileTexture==null)textureRenderer.beginDrawToTexture(powerWidth, powerHeight);
         else                     textureRenderer.beginDrawToTexture(backTileTexture.getTextureID(), powerWidth, powerHeight);
             glMatrixMode(GL_PROJECTION);
             glLoadIdentity();
-            glOrtho(0,64,0,64, -10, 10);
+            glOrtho(world.leftLimit,powerWidth,world.lowerLimit,powerHeight, -10, 10);
             //FIXME: I DON'T FUCKING KNOW ANYMORE
             //FIXME: Ortho projection matrix set doesn't seem to affect FBO rendering. WTF?
             
@@ -302,12 +302,12 @@ public class MainFrame implements KeyboardListener{
             glMatrixMode(GL_MODELVIEW);
             glLoadIdentity();
             glPushMatrix();
-                glScalef(0.5f,0.5f,1.0f);
                 world.drawBack();
             glPopMatrix();
         backTileTexture = new Texture(GL_TEXTURE_2D,textureRenderer.endDrawToTexture());
         backTileTexture.setWidth(powerWidth);
         backTileTexture.setHeight(powerHeight);
+        backTileTexture.setLoaded(true);
         
         textureRenderer.beginDrawToTexture(powerWidth, powerHeight);
             glPushMatrix();
@@ -317,6 +317,7 @@ public class MainFrame implements KeyboardListener{
         frontTileTexture = new Texture(GL_TEXTURE_2D,textureRenderer.endDrawToTexture());
         frontTileTexture.setWidth(powerWidth);
         frontTileTexture.setHeight(powerHeight);
+        frontTileTexture.setLoaded(true);
     }
 
     public void renderScene(){
@@ -331,6 +332,12 @@ public class MainFrame implements KeyboardListener{
     public void run() throws Throwable {
         while(!closeRequested) {
             try{
+                try {
+                    //FIX for multithreading.
+                    GLContext.useContext(this);
+                } catch (LWJGLException ex) {
+                    Const.LOGGER.log(Level.WARNING,"[MF] Failed to get context for texture ID generation.",ex);
+                }
                 if(Display.isVisible()) {
                     if(frameChanged){resize();}
                     

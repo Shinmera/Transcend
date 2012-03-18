@@ -1,7 +1,7 @@
 
 package transcend.block;
-import transcend.graph.AbstractGraph;
 import org.newdawn.slick.Color;
+import transcend.graph.AbstractGraph;
 import transcend.main.MainFrame;
 
 public class HalfBlankBlock extends Block{
@@ -14,7 +14,7 @@ public class HalfBlankBlock extends Block{
     public HalfBlankBlock() {
         solid=0.5;z=5;
     }
-
+    
     public void draw(){
         if(!MainFrame.editor.getActive())return;
         new Color(0.5f,0.5f,0.5f,0.5f).bind();

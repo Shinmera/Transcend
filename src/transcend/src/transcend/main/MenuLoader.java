@@ -62,7 +62,7 @@ public class MenuLoader extends LoadHelper{
                     hud.setVisible(true);
                     unpause();
                 }});
-                loader.start();
+                loader.start("Loading world...");
             }
         };
 
@@ -173,7 +173,7 @@ public class MenuLoader extends LoadHelper{
                 MainFrame.loader.setHelper(new LoadHelper(){
                     public void load() {MainFrame.worldLoader.loadWorld(MainFrame.fileStorage.getFile("menu.tw"));}
                 });
-                MainFrame.loader.start();
+                MainFrame.loader.start("Loading menu...");
                 editor.setVisible(false);
                 editor.setActive(false);
                 hud.setVisible(false);
@@ -231,7 +231,7 @@ public class MenuLoader extends LoadHelper{
                     hud.setVisible(true);
                     unpause();
                 }});
-                loader.start();
+                loader.start("Loading world...");
             }
         };
         GButton b_return = new GButton("Return"){
@@ -329,7 +329,7 @@ public class MenuLoader extends LoadHelper{
                 MainFrame.loader.setHelper(new LoadHelper(){
                     public void load() {MainFrame.worldLoader.loadWorld(MainFrame.fileStorage.getFile(t_file.getText()));}
                 });
-                MainFrame.loader.start();
+                MainFrame.loader.start("Loading world...");
             }
         };
         GRadioButton r_blocks = new GRadioButton(p_editor,"Blocks"){
@@ -360,6 +360,12 @@ public class MenuLoader extends LoadHelper{
             public void onRelease(){
                 super.onRelease();
                 MainFrame.editor.setRemoveTiles(this.isActivated());
+            }
+        };
+        GCheckBox c_layerlock = new GCheckBox(p_editor,"Lock layer"){
+            public void onRelease(){
+                super.onRelease();
+                MainFrame.editor.setLayerLocked(this.isActivated());
             }
         };
         if(MainFrame.editor.getMode()==Editor.MODE_BLOCKS)r_blocks.setActivated(true);
@@ -423,6 +429,8 @@ public class MenuLoader extends LoadHelper{
         c_entities.setBounds(10,p_editor.getHeight()-15-290,100,15);
         c_blocks.setBounds(10,p_editor.getHeight()-15-310,100,15);
         c_tiles.setBounds(10,p_editor.getHeight()-15-330,100,15);
+        
+        c_layerlock.setBounds(10,p_editor.getHeight()-15-350,100,15);
 
 
         p_editor.add(b_save);
@@ -442,6 +450,7 @@ public class MenuLoader extends LoadHelper{
         p_editor.add(c_entities);
         p_editor.add(c_blocks);
         p_editor.add(c_tiles);
+        p_editor.add(c_layerlock);
         p_editor.add(l_blockdesc);
         p_editor.add(l_layerdesc);
         p_editor.add(l_zoomdesc);

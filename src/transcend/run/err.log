@@ -1,154 +1,86 @@
-02:43 [INFO][MF] Booting up...
-null.transcend.main.MainFrame.<clinit>
-02:43 [INFO][CONST] Loading
-null.transcend.main.Const.loadRegistry
-02:43 [INFO][InputEventHandler] Loaded layout swiss. 23 keys mapped.
-null.transcend.event.InputEventHandler.<init>
-02:43 [INFO][InputEventHandler] Loaded layout lefty. 10 keys mapped.
-null.transcend.event.InputEventHandler.<init>
-02:43 [INFO][FileStorage] Initial indexing...
-null.transcend.main.FileStorage.<init>
-02:43 [INFO][FileStorage] Done, indexed 19 files.
-null.transcend.main.FileStorage.<init>
-02:43 [INFO][CONST] Loading
-null.transcend.main.Const.loadRegistry
-02:43 [INFO]LWJGL found 1 display modes.
-null.transcend.gui.DisplayModeChooser.<init>
-02:43 [INFO]Java found 1 display modes.
-null.transcend.gui.DisplayModeChooser.<init>
-02:43 [WARNING]No display modes found. Falling back to manual.
-null.transcend.gui.DisplayModeChooser.<init>
-02:43 [INFO][CONST] Saving
-null.transcend.main.Const.saveRegistry
-02:43 [INFO][CONST] Loading
-null.transcend.main.Const.loadRegistry
-02:43 [INFO][MF] Initializing...
-null.transcend.main.MainFrame.create
-02:43 [INFO][MF] initGL
-null.transcend.main.MainFrame.initGL
-02:43 [INFO][TextureRenderer] Generating FrameBufferObject
-null.transcend.graph.TextureRenderer.<init>
-02:43 [INFO][MF] initGame
-null.transcend.main.MainFrame.initGame
-02:43 [INFO][FontPool] Reloading Arial Bold 20
-null.transcend.graph.FontPool.reloadFont
-02:44 [INFO][TexturePool] Reloading load.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/data/load.png
-null.transcend.graph.TexturePool.reloadTexture
-02:44 [WARNING][Texture][load.png] Early loading of deferred texture!
-null.transcend.graph.Texture.getImageWidth
-02:44 [INFO][FontPool] Reloading Arial 12
-null.transcend.graph.FontPool.reloadFont
-02:44 [INFO][Loader] Loading...
-null.transcend.gui.Loader.run
-02:44 [INFO][TexturePool] Reloading health_bar.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/ui/health_bar.png
-null.transcend.graph.TexturePool.reloadTexture
-02:44 [INFO][TexturePool] Reloading form_human.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/ui/form_human.png
-null.transcend.graph.TexturePool.reloadTexture
-02:44 [INFO][TexturePool] Reloading form_mouse.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/ui/form_mouse.png
-null.transcend.graph.TexturePool.reloadTexture
-02:44 [INFO][TexturePool] Reloading form_pony.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/ui/form_pony.png
-null.transcend.graph.TexturePool.reloadTexture
-02:44 [INFO][TexturePool] Reloading form_dolphin.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/ui/form_dolphin.png
-null.transcend.graph.TexturePool.reloadTexture
-02:44 [INFO][TexturePool] Reloading form_eagle.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/ui/form_eagle.png
-null.transcend.graph.TexturePool.reloadTexture
-02:44 [INFO][TexturePool] Reloading logo.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/ui/logo.png
-null.transcend.graph.TexturePool.reloadTexture
-02:44 [INFO][Loader] 14%
-null.transcend.gui.Loader.run
-02:44 [INFO][Loader] 28%
-null.transcend.gui.Loader.run
-02:44 [INFO][Loader] 42%
-null.transcend.gui.Loader.run
-02:44 [INFO][Loader] 57%
-null.transcend.gui.Loader.run
-02:44 [INFO][Loader] 71%
-null.transcend.gui.Loader.run
-02:44 [INFO][Loader] 85%
-null.transcend.gui.Loader.run
-02:44 [INFO][Loader] 100%
-null.transcend.gui.Loader.run
-02:44 [INFO][Loader] Finished loading. Ready.
-null.transcend.gui.Loader.run
-02:44 [INFO][Loader] Loading...
-null.transcend.gui.Loader.run
-02:44 [INFO][World] Clearing sound pool
-null.transcend.world.WorldLoader.loadWorld
-02:44 [INFO][World] Loading World from /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/world/test.tw
-null.transcend.world.WorldLoader.loadWorld
-02:44 [INFO][TexturePool] Reloading player0.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/sprite/player0.png
-null.transcend.graph.TexturePool.reloadTexture
-02:44 [WARNING][Texture][player0.png] Early loading of deferred texture!
-null.transcend.graph.Texture.getImageWidth
-02:44 [INFO][TexturePool] Reloading tallgrass11.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/64/tallgrass11.png
-null.transcend.graph.TexturePool.reloadTexture
-02:44 [INFO][TexturePool] Reloading tallgrass311.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/64/tallgrass311.png
-null.transcend.graph.TexturePool.reloadTexture
-02:44 [INFO][TexturePool] Reloading tallgrass21.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/64/tallgrass21.png
-null.transcend.graph.TexturePool.reloadTexture
-02:44 [INFO][TexturePool] Reloading tallgrass20.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/64/tallgrass20.png
-null.transcend.graph.TexturePool.reloadTexture
-02:44 [INFO][TexturePool] Reloading tallgrass22.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/64/tallgrass22.png
-null.transcend.graph.TexturePool.reloadTexture
-02:44 [INFO][TexturePool] Reloading palmtree.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/single/palmtree.png
-null.transcend.graph.TexturePool.reloadTexture
-02:44 [INFO][TexturePool] Reloading palmtree2.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/single/palmtree2.png
-null.transcend.graph.TexturePool.reloadTexture
-02:44 [INFO][TexturePool] Reloading sand21.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/64/sand21.png
-null.transcend.graph.TexturePool.reloadTexture
-02:44 [INFO][World] Loaded 109 elements. 26 Blocks 1 Entities 81 Tiles.
-null.transcend.world.WorldLoader.loadWorld
-02:44 [INFO][World] Current edges: xl: -2816 yb: -1664 xr: 3008 yt: 1792
-null.transcend.world.WorldLoader.loadWorld
-02:44 [INFO][Loader] 56%
-null.transcend.gui.Loader.run
-02:44 [INFO][Loader] 62%
-null.transcend.gui.Loader.run
-02:44 [INFO][Loader] 68%
-null.transcend.gui.Loader.run
-02:44 [INFO][Loader] 75%
-null.transcend.gui.Loader.run
-02:44 [INFO][Loader] 81%
-null.transcend.gui.Loader.run
-02:44 [INFO][Loader] 87%
-null.transcend.gui.Loader.run
-02:44 [INFO][Loader] 93%
-null.transcend.gui.Loader.run
-02:44 [INFO][Loader] 100%
-null.transcend.gui.Loader.run
-02:44 [INFO][Loader] Finished loading. Ready.
-null.transcend.gui.Loader.run
-02:44 [INFO][FontPool] Reloading Arial Bold 12
-null.transcend.graph.FontPool.reloadFont
-02:44 [INFO][Loader] Loading...
-null.transcend.gui.Loader.run
-02:44 [INFO][TexturePool] Reloading grasssand21.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/64/grasssand21.png
-null.transcend.graph.TexturePool.reloadTexture
-02:44 [INFO][Loader] Finished loading. Ready.
-null.transcend.gui.Loader.run
-02:44 [INFO][Loader] Loading...
-null.transcend.gui.Loader.run
-02:44 [INFO][Loader] Finished loading. Ready.
-null.transcend.gui.Loader.run
-02:45 [INFO][Loader] Loading...
-null.transcend.gui.Loader.run
-02:45 [INFO][Loader] Finished loading. Ready.
-null.transcend.gui.Loader.run
-02:45 [INFO][Loader] Loading...
-null.transcend.gui.Loader.run
-02:45 [INFO][Loader] Finished loading. Ready.
-null.transcend.gui.Loader.run
-02:45 [INFO][Loader] Loading...
-null.transcend.gui.Loader.run
-02:45 [INFO][TexturePool] Reloading grasssand11.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/64/grasssand11.png
-null.transcend.graph.TexturePool.reloadTexture
-02:45 [INFO][Loader] Finished loading. Ready.
-null.transcend.gui.Loader.run
-02:46 [INFO][Loader] Loading...
-null.transcend.gui.Loader.run
-02:46 [INFO][TexturePool] Reloading sand11.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/64/sand11.png
-null.transcend.graph.TexturePool.reloadTexture
-02:46 [INFO][Loader] Finished loading. Ready.
-null.transcend.gui.Loader.run
-02:46 [INFO][MF] Shutting down...
-null.transcend.main.MainFrame.destroy
+19:34 [INFO][MF] Booting up...
+19:34 [INFO][CONST] Loading
+19:34 [INFO][FileStorage] Initial indexing...
+19:34 [INFO][FileStorage] Done, indexed 19 files.
+19:34 [INFO][InputEventHandler] Loaded layout swiss. 23 keys mapped.
+19:34 [INFO][InputEventHandler] Loaded layout lefty. 10 keys mapped.
+19:34 [INFO][CONST] Loading
+19:34 [INFO]LWJGL found 1 display modes.
+19:34 [INFO]Java found 1 display modes.
+19:34 [WARNING]No display modes found. Falling back to manual.
+19:34 [INFO][CONST] Saving
+19:34 [INFO][CONST] Loading
+19:34 [INFO][MF] Initializing...
+19:34 [INFO][MF] initGL
+19:34 [INFO][TextureRenderer] Generating FrameBufferObject
+19:34 [INFO][MF] initGame
+19:34 [INFO][FontPool] Reloading Arial Bold 20
+19:34 [INFO][TexturePool] Reloading load.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/data/load.png
+19:34 [WARNING][Texture][load.png] Early loading of deferred texture!
+19:34 [INFO][FontPool] Reloading Arial 12
+19:34 [INFO][Loader] Loading Menu and Base...
+19:34 [INFO][TexturePool] Reloading health_bar.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/ui/health_bar.png
+19:34 [INFO][TexturePool] Reloading form_human.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/ui/form_human.png
+19:34 [INFO][TexturePool] Reloading form_mouse.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/ui/form_mouse.png
+19:34 [INFO][TexturePool] Reloading form_pony.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/ui/form_pony.png
+19:34 [INFO][TexturePool] Reloading form_dolphin.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/ui/form_dolphin.png
+19:34 [INFO][TexturePool] Reloading form_eagle.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/ui/form_eagle.png
+19:34 [INFO][TexturePool] Reloading logo.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/ui/logo.png
+19:34 [INFO][Loader][14%] health_bar.png
+19:34 [INFO][Loader][28%] form_human.png
+19:34 [INFO][Loader][42%] form_mouse.png
+19:34 [INFO][Loader][57%] form_pony.png
+19:34 [INFO][Loader][71%] form_dolphin.png
+19:34 [INFO][Loader][85%] form_eagle.png
+19:34 [INFO][Loader][100%] logo.png
+19:34 [INFO][Loader] Finished loading. Ready.
+19:34 [INFO][Loader] Loading World...
+19:34 [INFO][World] Clearing sound pool
+19:34 [INFO][World] Loading World from /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/world/test.tw
+19:34 [INFO][TexturePool] Reloading player0.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/sprite/player0.png
+19:34 [INFO][TexturePool] Reloading player1.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/sprite/player1.png
+19:34 [INFO][TexturePool] Reloading player2.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/sprite/player2.png
+19:34 [INFO][TexturePool] Reloading player3.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/sprite/player3.png
+19:34 [INFO][TexturePool] Reloading player4.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/sprite/player4.png
+19:34 [WARNING][Texture][player0.png] Early loading of deferred texture!
+19:34 [INFO][TexturePool] Reloading sand11.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/64/sand11.png
+19:34 [INFO][TexturePool] Reloading tallgrass11.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/64/tallgrass11.png
+19:34 [INFO][TexturePool] Reloading tallgrass311.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/64/tallgrass311.png
+19:34 [INFO][TexturePool] Reloading tallgrass21.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/64/tallgrass21.png
+19:34 [INFO][TexturePool] Reloading tallgrass20.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/64/tallgrass20.png
+19:34 [INFO][TexturePool] Reloading tallgrass22.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/64/tallgrass22.png
+19:34 [INFO][TexturePool] Reloading palmtree.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/single/palmtree.png
+19:34 [INFO][TexturePool] Reloading palmtree2.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/single/palmtree2.png
+19:34 [INFO][TexturePool] Reloading grasssand21.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/64/grasssand21.png
+19:34 [INFO][TexturePool] Reloading sand21.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/64/sand21.png
+19:34 [INFO][TexturePool] Reloading grasssand11.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/64/grasssand11.png
+19:34 [INFO][TexturePool] Reloading savepoint.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/single/savepoint.png
+19:34 [WARNING][Texture][savepoint.png] Early loading of deferred texture!
+19:34 [INFO][TexturePool] Reloading grass11.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/64/grass11.png
+19:34 [INFO][TexturePool] Reloading water_clear.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/64/water_clear.png
+19:34 [INFO][TexturePool] Reloading sand20.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/64/sand20.png
+19:34 [INFO][TexturePool] Reloading sand22.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/64/sand22.png
+19:34 [INFO][World] Loaded 201 elements. 61 Blocks 1 Entities 138 Tiles.
+19:34 [INFO][World] Current edges: xl: -2816 yb: -768 xr: 4352 yt: 1792
+19:34 [INFO][Loader][14%] player1.png
+19:34 [INFO][Loader][19%] player2.png
+19:34 [INFO][Loader][23%] player3.png
+19:34 [INFO][Loader][28%] player4.png
+19:34 [INFO][Loader][33%] sand11.png
+19:34 [INFO][Loader][38%] tallgrass11.png
+19:34 [INFO][Loader][42%] tallgrass311.png
+19:34 [INFO][Loader][47%] tallgrass21.png
+19:34 [INFO][Loader][52%] tallgrass20.png
+19:34 [INFO][Loader][57%] tallgrass22.png
+19:34 [INFO][Loader][61%] palmtree.png
+19:34 [INFO][Loader][66%] palmtree2.png
+19:34 [INFO][Loader][71%] grasssand21.png
+19:34 [INFO][Loader][76%] sand21.png
+19:34 [INFO][Loader][80%] grasssand11.png
+19:34 [INFO][Loader][85%] grass11.png
+19:34 [INFO][Loader][90%] water_clear.png
+19:34 [INFO][Loader][95%] sand20.png
+19:34 [INFO][Loader][100%] sand22.png
+19:34 [INFO][Loader] Finished loading. Ready.
+19:34 [INFO][FontPool] Reloading Arial Bold 12
+19:34 [INFO][MF] Shutting down...

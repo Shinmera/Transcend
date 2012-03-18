@@ -36,6 +36,7 @@ public class Editor extends GObject implements MouseListener{
     private boolean removeEntities = true;
     private boolean removeBlocks = true;
     private boolean removeTiles = true;
+    private boolean layerLocked = false;
 
     public void paint(){
         if(!visible||!active)return;
@@ -100,6 +101,7 @@ public class Editor extends GObject implements MouseListener{
     public void setCurLayer(int i){curLayer=i;}
     public void setMode(int m){mode=m;curItem=0;}
     public int getMode(){return mode;}
+    public void setLayerLocked(boolean locked){layerLocked=locked;}
     public void setRemoveEntities(boolean r){removeEntities=r;}
     public void setRemoveBlocks(boolean r){removeBlocks=r;}
     public void setRemoveTiles(boolean r){removeTiles=r;}
@@ -130,8 +132,10 @@ public class Editor extends GObject implements MouseListener{
             if(removeTiles)ids=Toolkit.joinArray(ids,MainFrame.world.getTileList());
             for(int i=ids.length-1;i>=0;i--){
                 if((ids[i]!=null)&&(((BElement)ids[i]).checkInside(x,y))){
-                    e=((BElement)ids[i]);
-                    break;
+                    if(!layerLocked||((BElement)ids[i]).z==curLayer){
+                        e=((BElement)ids[i]);
+                        break;
+                    }
                 }
             }
             if(e!=null){
@@ -198,12 +202,12 @@ public class Editor extends GObject implements MouseListener{
                     MainFrame.loader.setHelper(new LoadHelper(){
                         public void load(){MainFrame.elementBuilder.buildElement(blocks[curItem], args);}
                     });
-                    MainFrame.loader.start();
+                    MainFrame.loader.start("Injecting Block...",false);
                 }else{
                     MainFrame.loader.setHelper(new LoadHelper(){
                         public void load(){MainFrame.elementBuilder.buildElement(entities[curItem], args);}
                     });
-                    MainFrame.loader.start();
+                    MainFrame.loader.start("Injecting Entity...",false);
                 }
             }
             x=0;y=0;
