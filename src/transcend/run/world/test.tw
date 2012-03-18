@@ -1,23 +1,23 @@
 #!transcend world file
 world{
 bgc: 0,0,0,255
-camera: follow 1.02
+camera: follow 1.08
 }
 
 player{
-x:2470.1999999999985
+x:3568.6000000000136
 y:-1.0
 }
 
 MovingBlock{
 x: 640
-y: -354
+y: -664
 z: 0
 w: 192
 h: 64
 status: 0
 vx: 0.0
-vy: 5.0
+vy: -5.0
 tex: sand11
 }
 
@@ -27,14 +27,14 @@ y: 0
 z: -5
 w: 0
 h: 0
-time: 5991
+time: 14883
 full: 8
 }
 
 BlankBlock{
 x: 640
 y: 64
-z: 0
+z: 5
 w: 192
 h: 64
 status: 0
@@ -43,7 +43,7 @@ status: 0
 BlankBlock{
 x: -192
 y: -128
-z: 0
+z: 5
 w: 832
 h: 64
 status: 0
@@ -61,7 +61,7 @@ status: 0
 BlankBlock{
 x: -256
 y: -128
-z: 0
+z: 5
 w: 64
 h: 832
 status: 0
@@ -70,7 +70,7 @@ status: 0
 BlankBlock{
 x: -256
 y: 704
-z: 0
+z: 5
 w: 896
 h: 64
 status: 0
@@ -79,7 +79,7 @@ status: 0
 BlankBlock{
 x: 832
 y: -448
-z: 0
+z: 5
 w: 384
 h: 576
 status: 0
@@ -88,7 +88,7 @@ status: 0
 BlankBlock{
 x: 1216
 y: -448
-z: 0
+z: 5
 w: 320
 h: 128
 status: 0
@@ -97,7 +97,7 @@ status: 0
 BlankBlock{
 x: 1408
 y: -192
-z: 0
+z: 5
 w: 448
 h: 64
 status: 0
@@ -115,7 +115,7 @@ status: 0
 BlankBlock{
 x: 64
 y: 1088
-z: 0
+z: 5
 w: 576
 h: 64
 status: 0
@@ -150,7 +150,7 @@ tex:
 BlankBlock{
 x: -960
 y: 768
-z: 0
+z: 5
 w: 512
 h: 64
 status: 0
@@ -217,7 +217,7 @@ tex:
 BlankBlock{
 x: 1856
 y: -192
-z: 0
+z: 5
 w: 1152
 h: 192
 status: 0
@@ -226,7 +226,7 @@ status: 0
 BlankBlock{
 x: 1344
 y: 192
-z: 0
+z: 5
 w: 640
 h: 128
 status: 0
@@ -235,7 +235,7 @@ status: 0
 BlankBlock{
 x: -1024
 y: 768
-z: 0
+z: 5
 w: 64
 h: 1024
 status: 0
@@ -524,7 +524,7 @@ tex: tallgrass21
 BlankBlock{
 x: 448
 y: 64
-z: 0
+z: 5
 w: 192
 h: 1088
 status: 0
@@ -1041,7 +1041,7 @@ tex:
 BlankBlock{
 x: 832
 y: -704
-z: 0
+z: 5
 w: 768
 h: 64
 status: 0
@@ -1050,7 +1050,7 @@ status: 0
 BlankBlock{
 x: 2304
 y: -576
-z: 0
+z: 5
 w: 704
 h: 64
 status: 0
@@ -1079,7 +1079,7 @@ tex: grasssand11
 BlankBlock{
 x: 3008
 y: -480
-z: 0
+z: 5
 w: 64
 h: 352
 status: 0
@@ -1088,7 +1088,7 @@ status: 0
 BlankBlock{
 x: 3008
 y: -544
-z: 0
+z: 5
 w: 832
 h: 32
 status: 0
@@ -1127,7 +1127,7 @@ tex: sand11
 BlankBlock{
 x: 3008
 y: -64
-z: 0
+z: 5
 w: 1280
 h: 64
 status: 0
@@ -1212,7 +1212,7 @@ tex:
 BlankBlock{
 x: 5312
 y: 0
-z: 0
+z: 5
 w: 704
 h: 64
 status: 0
@@ -1221,7 +1221,7 @@ status: 0
 BlankBlock{
 x: 3968
 y: -576
-z: 0
+z: 5
 w: 320
 h: 128
 status: 0
@@ -1254,7 +1254,7 @@ tex:
 BlankBlock{
 x: 3840
 y: -1344
-z: 0
+z: 5
 w: 64
 h: 832
 status: 0
@@ -1263,7 +1263,7 @@ status: 0
 BlankBlock{
 x: 3904
 y: -896
-z: 0
+z: 5
 w: 384
 h: 192
 status: 0
@@ -1272,7 +1272,7 @@ status: 0
 BlankBlock{
 x: 4608
 y: -1536
-z: 0
+z: 5
 w: 64
 h: 896
 status: 0
@@ -1281,7 +1281,7 @@ status: 0
 BlankBlock{
 x: 2624
 y: -1536
-z: 0
+z: 5
 w: 1600
 h: 64
 status: 0
@@ -1290,7 +1290,7 @@ status: 0
 BlankBlock{
 x: 3264
 y: -1344
-z: 0
+z: 5
 w: 576
 h: 64
 status: 0
@@ -1321,7 +1321,7 @@ tex:
 BlankBlock{
 x: 2304
 y: -1344
-z: 0
+z: 5
 w: 64
 h: 128
 status: 0
@@ -1330,7 +1330,7 @@ status: 0
 BlankBlock{
 x: 1920
 y: -1280
-z: 0
+z: 5
 w: 384
 h: 64
 status: 0
@@ -1339,7 +1339,7 @@ status: 0
 BlankBlock{
 x: 1920
 y: -1024
-z: 0
+z: 5
 w: 1408
 h: 64
 status: 0
@@ -1348,7 +1348,7 @@ status: 0
 BlankBlock{
 x: 3264
 y: -1280
-z: 0
+z: 5
 w: 64
 h: 256
 status: 0
@@ -1369,7 +1369,7 @@ tex:
 BlankBlock{
 x: 1280
 y: -1280
-z: 0
+z: 5
 w: 640
 h: 64
 status: 0
@@ -1378,7 +1378,7 @@ status: 0
 BlankBlock{
 x: 1920
 y: -1184
-z: 0
+z: 5
 w: 64
 h: 160
 status: 0
@@ -1387,7 +1387,7 @@ status: 0
 BlankBlock{
 x: 1280
 y: -1184
-z: 0
+z: 5
 w: 640
 h: 32
 status: 0
@@ -1396,7 +1396,7 @@ status: 0
 BlankBlock{
 x: 416
 y: -672
-z: 0
+z: 5
 w: 160
 h: 32
 status: 0
@@ -1405,7 +1405,7 @@ status: 0
 BlankBlock{
 x: 576
 y: -672
-z: 0
+z: 5
 w: 64
 h: 544
 status: 0
@@ -1414,7 +1414,7 @@ status: 0
 BlankBlock{
 x: 1280
 y: -1472
-z: 0
+z: 5
 w: 64
 h: 192
 status: 0
@@ -1445,7 +1445,7 @@ tex:
 BlankBlock{
 x: 960
 y: -1536
-z: 0
+z: 5
 w: 384
 h: 64
 status: 0
@@ -1454,7 +1454,7 @@ status: 0
 BlankBlock{
 x: 512
 y: -1536
-z: 0
+z: 5
 w: 192
 h: 64
 status: 0
@@ -1463,7 +1463,7 @@ status: 0
 BlankBlock{
 x: 448
 y: -1536
-z: 0
+z: 5
 w: 64
 h: 512
 status: 0
@@ -1472,7 +1472,7 @@ status: 0
 BlankBlock{
 x: 192
 y: -768
-z: 0
+z: 5
 w: 704
 h: 64
 status: 0
@@ -1481,7 +1481,7 @@ status: 0
 BlankBlock{
 x: 1280
 y: -1152
-z: 0
+z: 5
 w: 64
 h: 192
 status: 0
@@ -1527,7 +1527,7 @@ status: 0
 BlankBlock{
 x: -192
 y: -1088
-z: 0
+z: 5
 w: 64
 h: 448
 status: 0
@@ -1536,7 +1536,7 @@ status: 0
 BlankBlock{
 x: -192
 y: -640
-z: 0
+z: 5
 w: 640
 h: 64
 status: 0
@@ -1545,7 +1545,7 @@ status: 0
 BlankBlock{
 x: -128
 y: -1088
-z: 0
+z: 5
 w: 576
 h: 64
 status: 0
@@ -1554,7 +1554,7 @@ status: 0
 BlankBlock{
 x: 64
 y: -896
-z: 0
+z: 5
 w: 832
 h: 64
 status: 0
@@ -1563,7 +1563,7 @@ status: 0
 BlankBlock{
 x: 192
 y: -832
-z: 0
+z: 5
 w: 64
 h: 64
 status: 0
@@ -1572,7 +1572,7 @@ status: 0
 BlankBlock{
 x: 3072
 y: -480
-z: 0
+z: 5
 w: 896
 h: 32
 status: 0
@@ -2156,5 +2156,55 @@ w: 2176
 h: 896
 status: 0
 tex: tallgrass11
+}
+
+TileBlock{
+x: 4800
+y: -384
+z: 2
+w: 64
+h: 64
+status: 0
+tex: sand02
+}
+
+TileBlock{
+x: 4480
+y: -448
+z: 2
+w: 64
+h: 64
+status: 0
+tex: sand02
+}
+
+PushableBlock{
+x: 3458
+y: 0
+z: 0
+w: 64
+h: 64
+status: 0
+tex: drysandblock
+}
+
+PushableBlock{
+x: 4070
+y: 0
+z: 0
+w: 64
+h: 128
+status: 0
+tex: drysandblock
+}
+
+PushableBlock{
+x: 3392
+y: 0
+z: 0
+w: 64
+h: 192
+status: 0
+tex: drysandblock
 }
 

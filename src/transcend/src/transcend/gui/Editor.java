@@ -9,23 +9,23 @@
 
 package transcend.gui;
 
-import org.lwjgl.util.Point;
-import java.util.ArrayList;
-import javax.swing.JOptionPane;
 import NexT.util.Toolkit;
-import transcend.world.BElement;
+import java.util.ArrayList;
 import java.util.HashMap;
-import transcend.main.MainFrame;
-import org.newdawn.slick.Color;
-import transcend.event.MouseListener;
+import javax.swing.JOptionPane;
 import org.lwjgl.input.Mouse;
 import static org.lwjgl.opengl.GL11.*;
+import org.lwjgl.util.Point;
+import org.newdawn.slick.Color;
+import transcend.event.MouseListener;
+import transcend.main.MainFrame;
+import transcend.world.BElement;
 
 public class Editor extends GObject implements MouseListener{
     public static final int MODE_BLOCKS = 0;
     public static final int MODE_ENTITIES = 1;
-    private String[] blocks = {"blankblock","halfblankblock","complexblock","tileblock","movingblock","windblock","gameevent","info","water","emitter","daycycle","nullblock"};
-    private String[] entities = {"RigidBody","enemyb1","enemyc1"};
+    private String[] blocks = {"blankblock","halfblankblock","complexblock","tileblock","movingblock","windblock","gameevent","info","water","pushableblock","daycycle","nullblock"};
+    private String[] entities = {"enemyb1","enemyc1"};
     private boolean active=false;
     private boolean inComplex=false;
     private ArrayList<Point> complexPoints = new ArrayList<Point>();

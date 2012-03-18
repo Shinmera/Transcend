@@ -8,12 +8,10 @@
 \**********************/
 
 package transcend.entity;
-import NexT.util.SimpleSet;
+import java.util.HashMap;
 import transcend.event.Event;
 import transcend.event.EventListener;
 import transcend.graph.Animation;
-import java.io.File;
-import java.util.HashMap;
 import transcend.main.MainFrame;
 import transcend.world.Element;
 

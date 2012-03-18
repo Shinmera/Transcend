@@ -8,14 +8,12 @@
 \**********************/
 
 package transcend.block;
-import transcend.entity.Entity;
-import transcend.gui.CameraPath;
-import java.util.HashMap;
 import NexT.util.SimpleSet;
-import java.io.File;
-import org.newdawn.slick.Color;
-import transcend.main.MainFrame;
+import java.util.HashMap;
 import static org.lwjgl.opengl.GL11.*;
+import org.newdawn.slick.Color;
+import transcend.gui.CameraPath;
+import transcend.main.MainFrame;
 import transcend.world.BElement;
 
 public class MovingBlock extends Block{

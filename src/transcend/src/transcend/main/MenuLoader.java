@@ -1,5 +1,5 @@
 /**********************\
-  file: Expression file is undefined on line 2, column 11 in Templates/Classes/Class.java.
+  file: MenuLoader.java
   package: transcend
   author: Nick
   team: NexT
@@ -9,22 +9,10 @@
 
 package transcend.main;
 
-import transcend.gui.GCheckBox;
-import transcend.gui.GLabel;
-import transcend.gui.Editor;
-import transcend.gui.GTextArea;
-import transcend.gui.GList;
-import transcend.gui.GImage;
-import transcend.gui.HPowerBar;
-import transcend.gui.GButton;
-import transcend.gui.LoadHelper;
-import transcend.gui.GRadioButton;
-import transcend.gui.GTextField;
-import transcend.gui.GPanel;
-import transcend.gui.HFormSelector;
 import java.awt.Font;
 import java.io.File;
 import org.newdawn.slick.Color;
+import transcend.gui.*;
 import static transcend.main.MainFrame.*;
 
 public class MenuLoader extends LoadHelper{

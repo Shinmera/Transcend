@@ -40,7 +40,7 @@ public class Player extends RigidBody implements KeyboardListener,EventListener{
     public static final int REEL_SWITCH = 6;
     public static final int REEL_DIE = 7;
     public static final double SWITCH_PENALTY = 25;
-    public double POWER_REGENERATION = 1.0/(30.0);
+    public double POWER_REGENERATION;
 
     /*public Element ceiling = null,left = null,right = null,heart = null,bottom = null;*/
     private boolean K_LEFT,K_RIGHT,K_UP,K_DOWN,K_JUMP,K_RUN,K_SWITCH,K_ATTACK,K_USE,K_MAP;

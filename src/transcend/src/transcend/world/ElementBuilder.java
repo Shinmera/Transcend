@@ -35,6 +35,7 @@ import java.util.logging.Level;
 import NexT.util.ClassPathHacker;
 import NexT.util.ConfigManager;
 import NexT.util.SimpleSet;
+import transcend.block.*;
 import transcend.gui.CameraPath;
 import transcend.particle.Emitter;
 import transcend.main.Const;
@@ -91,6 +92,11 @@ public class ElementBuilder {
         }
         else if(name.equals("movingblock")){
             MovingBlock block = new MovingBlock();
+            block.setOptions(args);
+            MainFrame.world.addBlock(block);
+        }
+        else if(name.equals("pushableblock")){
+            PushableBlock block = new PushableBlock();
             block.setOptions(args);
             MainFrame.world.addBlock(block);
         }
