@@ -364,8 +364,9 @@ public class MainFrame implements KeyboardListener{
     
     public void resize(){
         DISPLAY_HEIGHT = frame.getHeight();
-        DISPLAY_WIDTH = (int) (DISPLAY_ASPECT*DISPLAY_HEIGHT);
-        frame.setSize(DISPLAY_WIDTH, DISPLAY_HEIGHT);
+        DISPLAY_WIDTH = frame.getWidth();
+        //DISPLAY_WIDTH = (int) (DISPLAY_ASPECT*DISPLAY_HEIGHT);
+        //frame.setSize(DISPLAY_WIDTH, DISPLAY_HEIGHT);
         if(menu!=null&&hud!=null){
             //menu.clear();hud.clear();
             //new MenuLoader().load();

@@ -60,6 +60,19 @@ public class Element extends BElement{
         }
         return e;
     }
+    
+    public Element check(double ax,double ay,double solidity){
+        Element e=null;
+        Object[] blocks = Toolkit.joinArray(MainFrame.world.getBlockList(),MainFrame.world.getEntityList());
+        for(int i=0;i<blocks.length;i++){
+            Element block = (Element)blocks[i];
+            if((block!=null)&&(block.wID!=wID)&&(block.checkInside(ax,ay))&&(block.solid>=solidity)){
+                e=block;
+                break;
+            }
+        }
+        return e;
+    }
 
     public static Entity checkEntity(int wID,double ax,double ay,double bx,double by){
         Entity e=null;

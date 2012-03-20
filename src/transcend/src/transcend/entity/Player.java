@@ -167,26 +167,20 @@ public class Player extends RigidBody implements KeyboardListener,EventListener{
             }
         }
         //SIDES
-        if((left=check(x-w/2-1+vx,y+h/2+3,x-w/2-1+vx,y+h-3))!=null){
-            if(left.solid>0.5&&vx<0){
-                vx=0;
-                Vector v = left.getCollisionPoint(new Ray(x,y,0,-1,0,0));
-                if(v!=null){
-                    if((int)(v.getX())>-Integer.MAX_VALUE)x=v.getX()+w/2;
-                }
+        if((left=check(x-w/2-1+vx,y+h/2+3,x-w/2-1+vx,y+h-3,0.51))!=null){
+            vx=0;
+            Vector v = left.getCollisionPoint(new Ray(x,y+h/2,0,-1,0,0));
+            if(v!=null){
+                if((int)(v.getX())>-Integer.MAX_VALUE)x=v.getX()+w/2;
             }
-            if(left.solid<=0.5)left=null;
         }
 
-        if((right=check(x+w/2+vx,y+h/2+3,x+w/2+1+vx,y+h-3))!=null){
-            if(right.solid>0.5&&vx>0){
-                vx=0;
-                Vector v = right.getCollisionPoint(new Ray(x,y,0,1,0,0));
-                if(v!=null){
-                    if((int)(v.getX())<Integer.MAX_VALUE)x=v.getX()-w/2;
-                }
+        if((right=check(x+w/2+vx,y+h/2+3,x+w/2+1+vx,y+h-3,0.51))!=null){
+            vx=0;
+            Vector v = right.getCollisionPoint(new Ray(x,y+h/2,0,1,0,0));
+            if(v!=null){
+                if((int)(v.getX())<Integer.MAX_VALUE)x=v.getX()-w/2;
             }
-            if(right.solid<=0.5)right=null;
         }
 
         //INPUT

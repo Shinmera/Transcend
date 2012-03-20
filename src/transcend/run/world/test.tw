@@ -5,13 +5,13 @@ camera: follow 1.08
 }
 
 player{
-x:3568.6000000000136
+x:2928.2
 y:-1.0
 }
 
 MovingBlock{
 x: 640
-y: -664
+y: -284
 z: 0
 w: 192
 h: 64
@@ -27,7 +27,7 @@ y: 0
 z: -5
 w: 0
 h: 0
-time: 14883
+time: 18717
 full: 8
 }
 
@@ -2206,5 +2206,15 @@ w: 64
 h: 192
 status: 0
 tex: drysandblock
+}
+
+TileBlock{
+x: 512
+y: -1472
+z: -2
+w: 224
+h: 256
+status: 0
+tex: tallgrass11
 }
 

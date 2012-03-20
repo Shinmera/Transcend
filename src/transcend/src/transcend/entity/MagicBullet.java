@@ -36,22 +36,19 @@ public class MagicBullet extends Entity{
         this.y+=vy;
         
         Element e;
-        if((e=check(x+vx,y+vy,x+vx,y+vy))!=null){
-            if(e.solid>0.2){
-                if(e instanceof Entity){
-                    Entity e2 = (Entity)e;
-                    e2.health-=health*effectiveness;
-                }
-                MainFrame.world.delByID(wID);
+        if((e=check(x+vx,y+vy,x+vx,y+vy,0.0))!=null){
+            if(e instanceof Entity){
+                Entity e2 = (Entity)e;
+                e2.health-=health*effectiveness;
             }
+            MainFrame.world.delByID(wID);
         }
         w=(int)(64*health/100.0);
         h=w;
-        
     }
     
     public void draw(){
-        drawable.draw((int)x-w/2, (int)y-h/2, w, h);
+        drawable.draw((int)x-w, (int)y-h, w*2, h*2);
     }
     
 }
