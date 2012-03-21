@@ -44,10 +44,10 @@ defun getVXAcc{
             return (+ vx vxaccc )
         }
     }
-    if vx > 1 {
+    if vx >= 1 {
         return (- vx vxdcc )
     }
-    if vx < -1 {
+    if vx =< -1 {
         return (+ vx vxdcc )
     }
     return 0.0
