@@ -1,91 +1,10 @@
-02:04 [INFO][MF] Booting up...
-02:04 [INFO][CONST] Loading
-02:04 [INFO][FileStorage] Initial indexing...
-02:04 [INFO][FileStorage] Done, indexed 19 files.
-02:04 [INFO][InputEventHandler] Loaded layout swiss. 23 keys mapped.
-02:04 [INFO][InputEventHandler] Loaded layout lefty. 10 keys mapped.
-02:04 [INFO][CONST] Loading
-02:04 [INFO]LWJGL found 1 display modes.
-02:04 [INFO]Java found 1 display modes.
-02:04 [WARNING]No display modes found. Falling back to manual.
-02:04 [INFO][CONST] Saving
-02:04 [INFO][CONST] Loading
-02:04 [INFO][MF] Initializing...
-02:04 [INFO][MF] initGL
-02:04 [INFO][TextureRenderer] Generating FrameBufferObject
-02:04 [INFO][MF] initGame
-02:04 [INFO][FontPool] Reloading Arial Bold 20
-02:04 [INFO][TexturePool] Reloading load.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/data/load.png
-02:04 [WARNING][Texture][load.png] Early loading of deferred texture!
-02:04 [INFO][FontPool] Reloading Arial 12
-02:04 [INFO][Loader] Loading Menu and Base...
-02:04 [INFO][TexturePool] Reloading health_bar.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/ui/health_bar.png
-02:04 [INFO][TexturePool] Reloading form_human.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/ui/form_human.png
-02:04 [INFO][TexturePool] Reloading form_mouse.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/ui/form_mouse.png
-02:04 [INFO][TexturePool] Reloading form_pony.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/ui/form_pony.png
-02:04 [INFO][TexturePool] Reloading form_dolphin.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/ui/form_dolphin.png
-02:04 [INFO][TexturePool] Reloading form_eagle.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/ui/form_eagle.png
-02:04 [INFO][TexturePool] Reloading logo.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/ui/logo.png
-02:04 [INFO][Loader][14%] health_bar.png
-02:04 [INFO][Loader][28%] form_human.png
-02:04 [INFO][Loader][42%] form_mouse.png
-02:04 [INFO][Loader][57%] form_pony.png
-02:04 [INFO][Loader][71%] form_dolphin.png
-02:04 [INFO][Loader][85%] form_eagle.png
-02:04 [INFO][Loader][100%] logo.png
-02:04 [INFO][Loader] Finished loading. Ready.
-02:04 [INFO][Loader] Loading World...
-02:04 [INFO][World] Clearing sound pool
-02:04 [INFO][World] Loading World from /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/world/test.tw
-02:04 [INFO][TexturePool] Reloading player0.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/sprite/player0.png
-02:04 [INFO][TexturePool] Reloading player1.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/sprite/player1.png
-02:04 [INFO][TexturePool] Reloading player2.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/sprite/player2.png
-02:04 [INFO][TexturePool] Reloading player3.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/sprite/player3.png
-02:04 [INFO][TexturePool] Reloading player4.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/sprite/player4.png
-02:04 [WARNING][Texture][player0.png] Early loading of deferred texture!
-02:04 [INFO][TexturePool] Reloading sand11.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/64/sand11.png
-02:04 [INFO][TexturePool] Reloading tallgrass11.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/64/tallgrass11.png
-02:04 [INFO][TexturePool] Reloading tallgrass311.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/64/tallgrass311.png
-02:04 [INFO][TexturePool] Reloading tallgrass20.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/64/tallgrass20.png
-02:04 [INFO][TexturePool] Reloading tallgrass22.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/64/tallgrass22.png
-02:04 [INFO][TexturePool] Reloading palmtree.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/single/palmtree.png
-02:04 [INFO][TexturePool] Reloading grasssand21.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/64/grasssand21.png
-02:04 [INFO][TexturePool] Reloading sand21.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/64/sand21.png
-02:04 [INFO][TexturePool] Reloading grasssand11.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/64/grasssand11.png
-02:04 [INFO][TexturePool] Reloading savepoint.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/single/savepoint.png
-02:04 [WARNING][Texture][savepoint.png] Early loading of deferred texture!
-02:04 [INFO][TexturePool] Reloading water_clear.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/64/water_clear.png
-02:04 [INFO][TexturePool] Reloading sand20.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/64/sand20.png
-02:04 [INFO][TexturePool] Reloading sand22.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/64/sand22.png
-02:04 [INFO][TexturePool] Reloading sand02.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/64/sand02.png
-02:04 [INFO][TexturePool] Reloading drysandblock.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/64/drysandblock.png
-02:04 [INFO][TexturePool] Reloading tallgrass21.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/64/tallgrass21.png
-02:04 [INFO][TexturePool] Reloading tallgrass00.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/64/tallgrass00.png
-02:04 [INFO][TexturePool] Reloading tallgrass02.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/64/tallgrass02.png
-02:04 [INFO][TexturePool] Reloading palmtree2.png at /media/Projects/Projects/JAVAPROJECTS/transcend/src/transcend/run/tex/single/palmtree2.png
-02:04 [INFO][World] Loaded 220 elements. 64 Blocks 1 Entities 154 Tiles.
-02:04 [INFO][World] Current edges: xl: -2880 yb: -2176 xr: 6016 yt: 1792
-02:04 [INFO][Loader][12%] player1.png
-02:04 [INFO][Loader][16%] player2.png
-02:04 [INFO][Loader][20%] player3.png
-02:04 [INFO][Loader][25%] player4.png
-02:04 [INFO][Loader][29%] sand11.png
-02:04 [INFO][Loader][33%] tallgrass11.png
-02:04 [INFO][Loader][37%] tallgrass311.png
-02:04 [INFO][Loader][41%] tallgrass20.png
-02:04 [INFO][Loader][45%] tallgrass22.png
-02:04 [INFO][Loader][50%] palmtree.png
-02:04 [INFO][Loader][54%] grasssand21.png
-02:04 [INFO][Loader][58%] sand21.png
-02:04 [INFO][Loader][62%] grasssand11.png
-02:04 [INFO][Loader][66%] water_clear.png
-02:04 [INFO][Loader][70%] sand20.png
-02:04 [INFO][Loader][75%] sand22.png
-02:04 [INFO][Loader][79%] sand02.png
-02:04 [INFO][Loader][83%] drysandblock.png
-02:04 [INFO][Loader][87%] tallgrass21.png
-02:04 [INFO][Loader][91%] tallgrass00.png
-02:04 [INFO][Loader][95%] tallgrass02.png
-02:04 [INFO][Loader][100%] palmtree2.png
-02:04 [INFO][Loader] Finished loading. Ready.
-02:04 [INFO][MF] Shutting down...
+13:28 [INFO][MF] Booting up...
+13:28 [INFO][CONST] Loading
+13:28 [INFO][FileStorage] Initial indexing...
+13:28 [INFO][FileStorage] Done, indexed 19 files.
+13:28 [INFO][InputEventHandler] Loaded layout swiss. 23 keys mapped.
+13:28 [INFO][InputEventHandler] Loaded layout lefty. 10 keys mapped.
+13:28 [INFO][CONST] Loading
+13:28 [INFO]LWJGL found 1 display modes.
+13:28 [INFO]Java found 1 display modes.
+13:28 [WARNING]No display modes found. Falling back to manual.
