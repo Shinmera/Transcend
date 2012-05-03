@@ -16,8 +16,8 @@ import java.util.logging.Level;
 import java.util.logging.LogRecord;
 
 public class XLogger extends Handler{
-    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-    PrintWriter pw;
+    private SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+    private PrintWriter pw;
     
     public XLogger(File f) throws UnsupportedEncodingException, FileNotFoundException{
         OutputStreamWriter fw = new OutputStreamWriter(new FileOutputStream(f),"UTF-8");
@@ -25,11 +25,12 @@ public class XLogger extends Handler{
     }
 
     public String sformat(LogRecord record) {
-        if(MainFrame.gameLog!=null)MainFrame.gameLog.addMessage(sdf.format(record.getMillis())+" ["+record.getLevel().getName()+"]"+record.getMessage());
+        if(MainFrame.gameLog!=null)
+            MainFrame.gameLog.addMessage(sdf.format(record.getMillis())+" ["+MainFrame.mode+"]["+record.getLevel().getName()+"]"+record.getMessage());
         if(record.getThrown()==null)
-            return sdf.format(record.getMillis())+" ["+record.getLevel().getName()+"]"+record.getMessage();
+            return sdf.format(record.getMillis())+" ["+MainFrame.mode+"]["+record.getLevel().getName()+"]"+record.getMessage();
         else{
-            System.out.println(sdf.format(record.getMillis())+" ["+record.getLevel().getName()+"]"+record.getMessage()
+            System.out.println(sdf.format(record.getMillis())+" ["+MainFrame.mode+"]["+record.getLevel().getName()+"]"+record.getMessage()
                 +"\n"+record.getResourceBundleName()+"."+record.getSourceClassName()+"."+record.getSourceMethodName()+": ");
             record.getThrown().printStackTrace();
             return "";
@@ -39,9 +40,9 @@ public class XLogger extends Handler{
     public String format(LogRecord record) {
         if(record.getLevel()==null)record.setLevel(Level.INFO);
         if(record.getThrown()==null)
-            return sdf.format(record.getMillis())+" ["+record.getLevel().getName()+"]"+record.getMessage();
+            return sdf.format(record.getMillis())+" ["+MainFrame.mode+"]["+record.getLevel().getName()+"]"+record.getMessage();
         else
-            return sdf.format(record.getMillis())+" ["+record.getLevel().getName()+"]"+record.getMessage()
+            return sdf.format(record.getMillis())+" ["+MainFrame.mode+"]["+record.getLevel().getName()+"]"+record.getMessage()
                 +"\n"+record.getResourceBundleName()+"."+record.getSourceClassName()+"."+record.getSourceMethodName()+": "
                 +record.getThrown().getMessage();
     }

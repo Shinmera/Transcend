@@ -26,7 +26,7 @@ public class AI {
     public static final int CHOICE_R  = 0x08;
     public static final int TRESHOLD = 200;
     public static final int FORCE_REFRESH = 6;
-    public static final double FORCE_TIMEOUT = MainFrame.fps*0.45;
+    public static final double FORCE_TIMEOUT = MainFrame.FPS*0.45;
 
     private int goal_x=0,goal_y=0;
     private int wID = -1;

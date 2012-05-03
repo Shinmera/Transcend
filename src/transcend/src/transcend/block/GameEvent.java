@@ -106,7 +106,7 @@ public class GameEvent extends Block implements EventListener{
         if(event==Event.PLAYER_TOUCH){
             if(type==EVENT_SWITCH_WORLD&&!to.equals("")){
                 MainFrame.loader.setHelper(new LoadHelper(){
-                    public void load(){MainFrame.worldLoader.loadWorld(MainFrame.fileStorage.getFile("world/"+to));}
+                    public void load(){MainFrame.world.loadWorld(MainFrame.fileStorage.getFile("world/"+to));}
                 });
             }
             if(type==EVENT_QUICKSAVE){
@@ -115,12 +115,12 @@ public class GameEvent extends Block implements EventListener{
         }
         if((event==Event.PLAYER_ATTACK)&&(MainFrame.player.bottom!=null)&&(MainFrame.player.bottom.wID==wID)){
             if(type==EVENT_SAVE_WORLD&&!to.equals("")){
-                MainFrame.worldLoader.saveGame(MainFrame.fileStorage.getFile("save/"+to));
+                MainFrame.world.saveGame(MainFrame.fileStorage.getFile("save/"+to));
                 MainFrame.player.setSetbackPoint(MainFrame.player.getX(),MainFrame.player.getY());
             }
             if(type==EVENT_SWITCH_WORLD&&!to.equals("")){
                 MainFrame.loader.setHelper(new LoadHelper(){
-                    public void load(){MainFrame.worldLoader.loadWorld(MainFrame.fileStorage.getFile("world/"+to));}
+                    public void load(){MainFrame.world.loadWorld(MainFrame.fileStorage.getFile("world/"+to));}
                 });
                 MainFrame.loader.start();
             }

@@ -9,37 +9,22 @@
 
 package transcend.world;
 
-import transcend.block.HalfBlankBlock;
-import transcend.block.Info;
-import transcend.block.Water;
-import transcend.block.BlankBlock;
-import transcend.block.MovingBlock;
-import transcend.block.WindBlock;
-import transcend.block.NullBlock;
-import transcend.block.GameEvent;
-import transcend.block.ComplexBlock;
-import transcend.entity.EnemyC1;
-import transcend.entity.EnemyB1;
-import transcend.entity.RigidBody;
-import transcend.tile.TileBlock;
-import transcend.tile.ColorBlock;
-import transcend.tile.TileSet;
-import transcend.tile.Background;
-import transcend.tile.SoundEmitter;
-import transcend.tile.DayCycle;
-import transcend.tile.FitBlock;
+import NexT.util.ClassPathHacker;
+import NexT.util.ConfigManager;
+import NexT.util.SimpleSet;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.logging.Level;
-import NexT.util.ClassPathHacker;
-import NexT.util.ConfigManager;
-import NexT.util.SimpleSet;
 import transcend.block.*;
+import transcend.entity.EnemyB1;
+import transcend.entity.EnemyC1;
+import transcend.entity.RigidBody;
 import transcend.gui.CameraPath;
-import transcend.particle.Emitter;
 import transcend.main.Const;
 import transcend.main.MainFrame;
+import transcend.particle.Emitter;
+import transcend.tile.*;
 
 public class ElementBuilder {
     HashMap<String,Class> elements = new HashMap<String,Class>();

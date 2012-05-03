@@ -90,7 +90,7 @@ public class Emitter extends Tile{
             particles.get(i).update(this,f);
         }
 
-        if(mlife>0)life+=1.0/MainFrame.fps;
+        if(mlife>0)life+=1.0/MainFrame.FPS;
         if(life>mlife)MainFrame.world.delByID(wID);
         if(particles.size()<mpart&&spray>0){
             for(int i=0;i<spray;i++){

@@ -28,7 +28,7 @@ public class GLog extends GLabel{
     public void addMessage(String msg){
         if(log.remainingCapacity()==0)log.poll();
         log.offer(msg);
-        nTimer=MainFrame.fps*3;
+        nTimer=MainFrame.FPS*3;
     }
     
     public void paint(){

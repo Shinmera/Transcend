@@ -38,14 +38,14 @@ public class MenuLoader extends LoadHelper{
         GPanel p_main = new GPanel(DISPLAY_WIDTH/2-panel_width/2,0,panel_width,DISPLAY_HEIGHT-DISPLAY_HEIGHT/4);
 
         GButton b_quit = new GButton("Quit"){
-            public void onRelease(){destroy();}
+            public void onRelease(){MainFrame.frame.setCloseRequested(true);}
         };
 
         GButton b_start = new GButton("Start Game"){
             public void onRelease(){
                 menu.get("p_main").setVisible(false);
                 loader.setHelper(new LoadHelper(){public void load(){
-                    worldLoader.loadWorld(new File("world"+File.separator+"intro.tw"));
+                    world.loadWorld(new File("world"+File.separator+"intro.tw"));
                     menu.setVisible(false);
                     hud.setVisible(true);
                     unpause();
@@ -159,7 +159,7 @@ public class MenuLoader extends LoadHelper{
         GButton b_quit = new GButton("Quit to Menu"){
             public void onRelease(){
                 MainFrame.loader.setHelper(new LoadHelper(){
-                    public void load() {MainFrame.worldLoader.loadWorld(MainFrame.fileStorage.getFile("menu.tw"));}
+                    public void load() {MainFrame.world.loadWorld(MainFrame.fileStorage.getFile("menu.tw"));}
                 });
                 MainFrame.loader.start("Loading menu...");
                 editor.setVisible(false);
@@ -214,7 +214,7 @@ public class MenuLoader extends LoadHelper{
             public void onRelease(){
                 final String name = ((GList)((GPanel)menu.get("p_load")).get("list")).getSelected();
                 loader.setHelper(new LoadHelper(){public void load(){
-                    worldLoader.loadGame(MainFrame.fileStorage.getFile("save/"+name));
+                    world.loadGame(MainFrame.fileStorage.getFile("save/"+name));
                     menu.setVisible(false);
                     hud.setVisible(true);
                     unpause();
@@ -248,8 +248,8 @@ public class MenuLoader extends LoadHelper{
             public void setVisible(boolean visible){
                 super.setVisible(visible);
                 GTextField file = (GTextField)get("t_file");
-                if(file!=null&&worldLoader.isLoaded()){
-                    file.setText(worldLoader.getLoaded().getName());
+                if(file!=null&&world.isLoaded()){
+                    file.setText(world.getLoaded().getName());
                 }
             }
         };
@@ -309,13 +309,13 @@ public class MenuLoader extends LoadHelper{
         final GTextField t_file = new GTextField("");
         GButton b_save = new GButton("Save"){
             public void onRelease(){
-                worldLoader.saveWorld(new File("world"+File.separator+t_file.getText()));
+                world.saveWorld(new File("world"+File.separator+t_file.getText()));
             }
         };
         GButton b_load = new GButton("Load"){
             public void onRelease(){
                 MainFrame.loader.setHelper(new LoadHelper(){
-                    public void load() {MainFrame.worldLoader.loadWorld(MainFrame.fileStorage.getFile(t_file.getText()));}
+                    public void load() {MainFrame.world.loadWorld(MainFrame.fileStorage.getFile(t_file.getText()));}
                 });
                 MainFrame.loader.start("Loading world...");
             }

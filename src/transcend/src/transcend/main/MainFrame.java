@@ -8,23 +8,13 @@
 \**********************/
 
 package transcend.main;
-import NexT.repo.Repository;
 import NexT.script.ScriptManager;
 import NexT.util.Toolkit;
-import java.awt.BorderLayout;
-import java.awt.Canvas;
 import java.awt.Dimension;
-import java.awt.Image;
-import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.nio.IntBuffer;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
-import javax.imageio.ImageIO;
-import javax.swing.JFrame;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.LWJGLUtil;
@@ -44,12 +34,12 @@ import transcend.graph.*;
 import transcend.gui.*;
 import static transcend.main.Jitter.j;
 import static transcend.main.Jitter.jps;
-import transcend.world.ElementBuilder;
 import transcend.world.World;
-import transcend.world.WorldLoader;
 
 public class MainFrame implements KeyboardListener{
+    public static String mode = "NULL";
     static{
+        mode="INIT-0";
         try{System.setProperty("org.lwjgl.librarypath"  ,new File(new File(new File(System.getProperty("user.dir")), "native"), LWJGLUtil.getPlatformName()).getAbsolutePath());
         }catch(Exception ex){Const.LOGGER.log(Level.SEVERE,"Failed to set LWJGL library path!",ex);}
         org.lwjgl.Sys.initialize();
@@ -57,31 +47,27 @@ public class MainFrame implements KeyboardListener{
                           "(c)2011-2012 "+Const.MAINTAINER+" \n"+
                           "Developed by "+Const.DEVELOPER+"\n"+
                           "http://www.tymoon.eu", "/", 1, null);
-        Const.LOGGER.info("[MF] Booting up...");
+        Const.LOGGER.info("[MAIN] Booting up...");
     }
     public static final Const CONST = new Const();
     public static final File basedir = new File(System.getProperty("user.dir"));
     public static final FileStorage fileStorage = new FileStorage();
-    public static final JFrame frame = new JFrame("Transcend - v"+Const.VERSION);
+    public static final TFrame frame = new TFrame("Transcend - v"+Const.VERSION);
     public static final World world = new World();
-    public static final WorldLoader worldLoader = new WorldLoader();
-    public static final ElementBuilder elementBuilder = new ElementBuilder();
     public static final InputEventHandler ieh = new InputEventHandler();
     public static final EventHandler eh = new EventHandler();
     public static final Camera camera = new Camera();
     public static final Editor editor = new Editor();
     public static final TexturePool texturePool = new TexturePool();
-    public static final TextureLoader textureLoader = new TextureLoader();
     public static final SoundPool soundPool = new SoundPool();
     public static final FontPool fontPool = new FontPool();
     public static final ScriptManager scriptManager = new ScriptManager();
-    public static final Repository repo = new Repository();
     public static final Player player = new Player();
     public static final int[][] DEFAULT_DIM = {{1280,960},{1280,720},{1280,800}};//4:3 16:9 16:10
     public static int DISPLAY_WIDTH = Const.DISPLAY_WIDTH;
     public static int DISPLAY_HEIGHT= Const.DISPLAY_HEIGHT;
     public static double DISPLAY_ASPECT= DISPLAY_WIDTH/DISPLAY_HEIGHT;
-    public static int fps = 60, ups = 60;
+    public static int FPS = 60, UPS = 60;
     public static int ACSIZE = 2;
     public static Texture backTileTexture = null,frontTileTexture = null;
     public static boolean pause = false;
@@ -90,91 +76,71 @@ public class MainFrame implements KeyboardListener{
     public static Loader loader;
     private static Color clearcolor = new Color(0.2f,0.2f,0.2f);
     private final Updater updater = new Updater();
-    private final Canvas canvas = new Canvas();
     private TextureRenderer textureRenderer;
-    private boolean closeRequested = false;
-    private boolean frameChanged = false;
 
+    //TODO: Automate INIT sequence.
     public static void main(String[] args) throws Throwable{
         MainFrame mf = new MainFrame();
         try{
+            setMode("INIT-1");
             if(!DisplayModeChooser.showDialog("Display Mode"))System.exit(0);
-            MainFrame.CONST.loadRegistry();
             mf.create();
             mf.run();
         }
-        catch(Exception ex){Const.LOGGER.log(Level.SEVERE,"[MF] Error in main thread!",ex);}
-        finally{MainFrame.destroy();}
+        catch(Exception ex){Const.LOGGER.log(Level.SEVERE,"[MAIN] Error in main thread!",ex);}
+        finally{mf.destroy();}
     }
 
     public void create() throws LWJGLException, IOException {
-        Const.LOGGER.info("[MF] Initializing...");
-        
-        //FRAME
-        canvas.addComponentListener(new ComponentListener() {
-            public void componentResized(ComponentEvent e){ frameChanged = true;}
-            public void componentMoved(ComponentEvent e) {}
-            public void componentShown(ComponentEvent e) {}
-            public void componentHidden(ComponentEvent e) {}
-        });
-        frame.addWindowFocusListener(new WindowFocusListener() {
-            public void windowGainedFocus(WindowEvent e){canvas.requestFocusInWindow(); }
-            public void windowLostFocus(WindowEvent e) {}
-        });
-        frame.addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent e){ closeRequested = true; }
-        });
-        frame.setLayout(new BorderLayout());
-        frame.add(canvas, BorderLayout.CENTER);
-        
-        List<Image> icons = new ArrayList<Image>();
-        icons.add(ImageIO.read(fileStorage.getFile("icon_16")));
-        icons.add(ImageIO.read(fileStorage.getFile("icon_32")));
-        icons.add(ImageIO.read(fileStorage.getFile("icon_64")));
-        icons.add(ImageIO.read(fileStorage.getFile("icon_128")));
-        frame.setIconImages(icons);
+        Const.LOGGER.info("[MAIN] Initializing...");
         
         DISPLAY_WIDTH =Display.getDisplayMode().getWidth();
         DISPLAY_HEIGHT=Display.getDisplayMode().getHeight();
         DISPLAY_ASPECT=DISPLAY_WIDTH/(DISPLAY_HEIGHT+0.0);
-        fps=CONST.gInteger("FPS");
-        ups=CONST.gInteger("UPS");
+        FPS=CONST.gInteger("FPS");
+        UPS=CONST.gInteger("UPS");
         ACSIZE=CONST.gInteger("ANTIALIAS");
-        try{repo.setURL(new URL(CONST.gString("REPO")));}
-        catch(Exception e){Const.LOGGER.log(Level.SEVERE, "[MF] Repo URL malformed. Check the constants!",e);}
         
-        Display.setParent(canvas);
-        frame.setPreferredSize(new Dimension(DISPLAY_WIDTH,DISPLAY_HEIGHT));
-        frame.setMinimumSize(new Dimension(300,200));
-        frame.pack();
-        frame.setVisible(true);
+        Const.LOGGER.info("[MAIN] Creating Display interface...");
+        Display.setParent(frame.getCanvas());
         Display.create();
         
+        Const.LOGGER.info("[MAIN] Creating Keyboard and Mouse interfaces...");
         Keyboard.create();
         Mouse.setGrabbed(false);
         Mouse.create();
+        
+        setMode("INIT-2");
         initGL();
         initGame();
+        Const.LOGGER.info("[MAIN] Launching update loop...");
         updater.start();
+
+        frame.setPreferredSize(new Dimension(MainFrame.DISPLAY_WIDTH,MainFrame.DISPLAY_HEIGHT));
+        frame.setVisible(true);
     }
 
-    public static void destroy() {
-        Const.LOGGER.info("[MF] Shutting down...");
+    public void destroy() {
+        setMode("DOWN-0");
+        Const.LOGGER.info("[MAIN] Shutting down...");
+        updater.interrupt();
         try{
             Mouse.destroy();
             Keyboard.destroy();
             Display.destroy();
-            frame.dispose();
             AL.destroy();
+            frame.dispose();
         }catch(Throwable t){//Apparently shit can go bonkers in this.
             Const.LOGGER.log(Level.SEVERE,"Couldn't clean up properly!",t);
         }finally{
+            setMode("DOWN-1");
+            Const.LOGGER.info("[MAIN] Goodbye.");
             System.exit(0);
         }
     }
 
     public void initGame(){
-        Const.LOGGER.info("[MF] initGame");
+        Const.LOGGER.info("[MAIN] initGame");
         loader = new Loader();
         ieh.addKeyboardListener(this);
         camera.setBoundary(300);
@@ -201,7 +167,7 @@ public class MainFrame implements KeyboardListener{
     }
 
     public void initGL() {
-        Const.LOGGER.info("[MF] initGL");
+        Const.LOGGER.info("[MAIN] initGL");
         //2D Initialization
        	glClearColor(clearcolor.getRed(),clearcolor.getGreen(),clearcolor.getBlue(),clearcolor.getAlpha());
         glClearAccum(0,0,0,0);
@@ -235,9 +201,9 @@ public class MainFrame implements KeyboardListener{
 
     public void update() {
         //Load default world
-        if(!worldLoader.isLoaded()&&!loader.isLoading()){
+        if(!world.isLoaded()&&!loader.isLoading()){
             loader.setHelper(new LoadHelper(){public void load(){
-                worldLoader.loadWorld(new File("world"+File.separator+"test.tw"));
+                world.loadWorld(new File("world"+File.separator+"test.tw"));
                 //createTileTextures();
             }});
             loader.start("Loading World...");
@@ -330,22 +296,23 @@ public class MainFrame implements KeyboardListener{
     }
 
     public void run() throws Throwable {
-        while(!closeRequested) {
+        setMode("USER-0");
+        while(!frame.isCloseRequested()) {
             try{
                 try {
                     //FIX for multithreading.
                     GLContext.useContext(this);
                 } catch (LWJGLException ex) {
-                    Const.LOGGER.log(Level.WARNING,"[MF] Failed to get context for texture ID generation.",ex);
+                    Const.LOGGER.log(Level.WARNING,"[MAIN] Failed to get context for texture ID generation.",ex);
                 }
                 if(Display.isVisible()) {
-                    if(frameChanged){resize();}
+                    if(frame.isFrameChanged()){resize();}
                     
                     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
                     if(loader.isLoading()){loader.run();
                     }else{render();}
                     loader.draw();
-                    SoundStore.get().poll(1000/fps);
+                    SoundStore.get().poll(1000/FPS);
                     glFlush();
                 }else{
                     if(Display.isDirty())render();
@@ -353,18 +320,20 @@ public class MainFrame implements KeyboardListener{
                     catch(InterruptedException ex) {Const.LOGGER.info("Failed thread sync.");}
                 }
                 Display.update();
-                Display.sync(fps);
+                Display.sync(FPS);
             }catch(Throwable ex){
                 Const.LOGGER.log(Level.SEVERE,"Exception in main run loop!",ex);
                 org.lwjgl.Sys.alert("Transcend Engine "+Const.VERSION,"Encountered an exception in the main loop!\nStack Trace:\n"+ex.getMessage()+"\n\nGoodbye!");
                 throw ex;
             }
         }
+        destroy();
     }
     
+    //TODO: Save to config
     public void resize(){
-        DISPLAY_HEIGHT = canvas.getHeight();
-        DISPLAY_WIDTH = canvas.getWidth();
+        DISPLAY_HEIGHT = frame.getCanvas().getHeight();
+        DISPLAY_WIDTH = frame.getCanvas().getWidth();
         //DISPLAY_WIDTH = (int) (DISPLAY_ASPECT*DISPLAY_HEIGHT);
         //frame.setSize(DISPLAY_WIDTH, DISPLAY_HEIGHT);
         if(menu!=null&&hud!=null){
@@ -377,9 +346,10 @@ public class MainFrame implements KeyboardListener{
         glOrtho(0, DISPLAY_WIDTH, 0, DISPLAY_HEIGHT, -10, 10);
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
-        frameChanged=false;
+        frame.setFrameChanged(false);
     }
 
+    public static void setMode(String m){mode=m;}
     public static void pause(){pause=true;Mouse.setGrabbed(false);}
     public static void unpause(){pause=false;if(!editor.getActive())Mouse.setGrabbed(true);}
     public static Color getClearColor(){return clearcolor;}
@@ -422,9 +392,9 @@ public class MainFrame implements KeyboardListener{
             while(!isInterrupted()){
                 try{
                     update();
-                    try{Thread.sleep(1000/ups);}catch(Exception ex){Const.LOGGER.log(Level.WARNING,"Updater thread failed!",ex);}
+                    try{Thread.sleep(1000/UPS);}catch(Exception ex){Const.LOGGER.log(Level.WARNING,"[Updater] Updater thread failed!",ex);}
                 }catch(Throwable ex){
-                    Const.LOGGER.log(Level.SEVERE,"Exception in main update loop! Attempting to continue... ",ex);
+                    Const.LOGGER.log(Level.SEVERE,"[Updater] Exception in main update loop! Attempting to continue... ",ex);
                 }
             }
         }

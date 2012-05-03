@@ -29,7 +29,7 @@ import org.newdawn.slick.Color;
 import transcend.main.Const;
 import transcend.main.MainFrame;
 
-public class WorldLoader {
+public class WorldLoader extends ElementBuilder{
     private File loaded = null;
 
     public File getLoaded(){return loaded;}
@@ -193,7 +193,7 @@ public class WorldLoader {
                                     if(Toolkit.isNumeric(cam[1]))MainFrame.camera.setZoom(MainFrame.camera.getZoom()*Double.parseDouble(cam[1]));
                                 }
                             }else
-                                MainFrame.elementBuilder.buildElement(type, arguments);
+                                buildElement(type, arguments);
                         }
                     }
                 }

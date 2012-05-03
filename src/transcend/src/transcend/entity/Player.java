@@ -64,7 +64,7 @@ public class Player extends RigidBody implements KeyboardListener,EventListener{
     public void init(){
         ieh.addKeyboardListener(this);
         scriptManager.loadScript(fileStorage.getFile("scr/player"));
-        POWER_REGENERATION = 1.0/(MainFrame.ups);
+        POWER_REGENERATION = 1.0/(MainFrame.UPS);
         x=0;y=0;z=0;
         
         //Load all forms in advance.
@@ -98,7 +98,7 @@ public class Player extends RigidBody implements KeyboardListener,EventListener{
                 MainFrame.world.addEntity(bullet);
             }
             bullet.setPosition((int)(x+(w+10)*drawable.getDirection()),(int)(y+h/4*3));
-            bullet.setHealth(bullet.getHealth()+1.0/fps*10);
+            bullet.setHealth(bullet.getHealth()+1.0/FPS*10);
         }
         
         if(toForm!=-1){
@@ -320,7 +320,7 @@ public class Player extends RigidBody implements KeyboardListener,EventListener{
     public void switchForm(int newForm){
         if(unlocked[newForm]&&power>SWITCH_PENALTY&&form!=newForm&&toForm==-1){
             power-=SWITCH_PENALTY;
-            switchTimer=fps*1;
+            switchTimer=FPS*1;
             drawable.setReel(REEL_SWITCH);
             toForm=newForm;
         }

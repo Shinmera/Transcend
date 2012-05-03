@@ -48,24 +48,26 @@ public class Loader{
 
     public void run(){
         if(!loading)return;
+        MainFrame.setMode("USER-1");
         if(delay<DELAY_TIMER){delay++;return;}
         if (helper!=null) {
             Const.LOGGER.info("[Loader] "+loadingMessage);
-            textureCountAtBeginning = MainFrame.textureLoader.getTexturesCount()-1; //So we can get an accurate amount of stuff being loaded, not a total.
+            textureCountAtBeginning = MainFrame.texturePool.getTexturesCount()-1; //So we can get an accurate amount of stuff being loaded, not a total.
             helper.load();
             helper=null;
         }
-        if (MainFrame.textureLoader.getDeferredCount() > 0) {
-            Texture nextResource = MainFrame.textureLoader.getNextDeferred();
+        if (MainFrame.texturePool.getDeferredCount() > 0) {
+            Texture nextResource = MainFrame.texturePool.getNextDeferred();
             String currentt = current;
-            current = ((MainFrame.textureLoader.getTexturesCount()-textureCountAtBeginning)-MainFrame.textureLoader.getDeferredCount())*100/
-                       (MainFrame.textureLoader.getTexturesCount()-textureCountAtBeginning)+"%";
+            current = ((MainFrame.texturePool.getTexturesCount()-textureCountAtBeginning)-MainFrame.texturePool.getDeferredCount())*100/
+                       (MainFrame.texturePool.getTexturesCount()-textureCountAtBeginning)+"%";
             if(!current.equals(currentt))Const.LOGGER.info("[Loader]["+current+"] "+nextResource.getResourceName());
             
             try {nextResource.load();}
             catch (Exception ex) {Const.LOGGER.log(Level.SEVERE,"[Loader] Failed to load resource!", ex);}
         } else {
             Const.LOGGER.info("[Loader] Finished loading. Ready.");
+            MainFrame.setMode("USER-0");
             loading=false;
         }
     }

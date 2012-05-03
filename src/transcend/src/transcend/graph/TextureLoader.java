@@ -87,6 +87,11 @@ public class TextureLoader {
                                             ComponentColorModel.OPAQUE,
                                             DataBuffer.TYPE_BYTE);
     }
+    
+    public void clearPool(){
+        table.clear();
+        deferred.clear();
+    }
 
     /**
      * Create a new texture ID

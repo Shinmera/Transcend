@@ -64,7 +64,7 @@ public class Particle {
     public void update(){
         x+=vx;
         y+=vy;
-        life+=1.0/MainFrame.fps;
+        life+=1.0/MainFrame.FPS;
     }
 
     public void draw(){

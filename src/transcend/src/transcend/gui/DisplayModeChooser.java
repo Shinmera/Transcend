@@ -12,18 +12,19 @@ import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
-import javax.swing.*;
-import java.awt.event.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.util.*;
 import java.util.logging.Level;
+import javax.swing.*;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import transcend.main.Const;
+import transcend.main.MainFrame;
 
+//TODO: Show fixed size from config as preselected choice rather than fixed.
 public class DisplayModeChooser extends JDialog implements ActionListener, ItemListener{
     int w=300,h=200;
     HashMap<String,Boolean> fs_capable;
@@ -33,7 +34,6 @@ public class DisplayModeChooser extends JDialog implements ActionListener, ItemL
     JCheckBox vsync,full;
     JLabel lmodes;
     boolean status;
-    Const constants;
 
     public DisplayModeChooser(String title){
         super((Frame)null,title,true);
@@ -46,7 +46,6 @@ public class DisplayModeChooser extends JDialog implements ActionListener, ItemL
 
         fs_capable = new HashMap<String,Boolean>();
         dmodes = new ArrayList<DisplayMode>();
-        constants = new Const();
 
         ok = new JButton("Ok");
         cancel=new JButton("Cancel");
@@ -91,7 +90,7 @@ public class DisplayModeChooser extends JDialog implements ActionListener, ItemL
                         fs_capable.put(label, mode.isFullscreenCapable());
                         dmodes.add(mode);
                         modes.addItem(label);
-                        if(constants.gString("DEFAULT_SCREEN").equals(label))
+                        if(MainFrame.CONST.gString("DEFAULT_SCREEN").equals(label))
                             tosel=dmodes.size()-1;
                     }
                 }
@@ -110,7 +109,7 @@ public class DisplayModeChooser extends JDialog implements ActionListener, ItemL
                     fs_capable.put(label, false);
                     dmodes.add(new DisplayMode(mode.getWidth(),mode.getHeight()));
                     modes.addItem(label);
-                    if(constants.gString("DEFAULT_SCREEN").equals(label))
+                    if(MainFrame.CONST.gString("DEFAULT_SCREEN").equals(label))
                         tosel=dmodes.size()-1;
                     }
                 }
@@ -121,28 +120,28 @@ public class DisplayModeChooser extends JDialog implements ActionListener, ItemL
                     String label = mode.getWidth()+"x"+mode.getHeight()+" @"+mode.getFrequency();
                     fs_capable.put(label, mode.isFullscreenCapable());
                     dmodes.add(mode);modes.addItem(label);
-                    //if(constants.gString("DEFAULT_SCREEN").equals(label))tosel=dmodes.size()-1;
+                    //if(MainFrame.Const.gString("DEFAULT_SCREEN").equals(label))tosel=dmodes.size()-1;
                     mode = new DisplayMode(1024,768);
                     label = mode.getWidth()+"x"+mode.getHeight()+" @"+mode.getFrequency();
                     fs_capable.put(label, mode.isFullscreenCapable());
                     dmodes.add(mode);modes.addItem(label);
-                    //if(constants.gString("DEFAULT_SCREEN").equals(label))tosel=dmodes.size()-1;
+                    //if(MainFrame.CONST.gString("DEFAULT_SCREEN").equals(label))tosel=dmodes.size()-1;
                     mode = new DisplayMode(1680,1050);
                     label = mode.getWidth()+"x"+mode.getHeight()+" @"+mode.getFrequency();
                     fs_capable.put(label, mode.isFullscreenCapable());
                     dmodes.add(mode);modes.addItem(label);
-                    //if(constants.gString("DEFAULT_SCREEN").equals(label))tosel=dmodes.size()-1;
+                    //if(MainFrame.CONST.gString("DEFAULT_SCREEN").equals(label))tosel=dmodes.size()-1;
                     mode = new DisplayMode(1920,1080);
                     label = mode.getWidth()+"x"+mode.getHeight()+" @"+mode.getFrequency();
                     fs_capable.put(label, mode.isFullscreenCapable());
                     dmodes.add(mode);modes.addItem(label);
-                    //if(constants.gString("DEFAULT_SCREEN").equals(label))tosel=dmodes.size()-1;
+                    //if(MainFrame.CONST.gString("DEFAULT_SCREEN").equals(label))tosel=dmodes.size()-1;
             }
         }catch(Exception ex){ex.printStackTrace();}
 
         modes.setSelectedIndex(tosel);
-        full.setSelected(constants.gBoolean("DEFAULT_FULL"));
-        vsync.setSelected(constants.gBoolean("DEFAULT_VSYNC"));
+        full.setSelected(MainFrame.CONST.gBoolean("DEFAULT_FULL"));
+        vsync.setSelected(MainFrame.CONST.gBoolean("DEFAULT_VSYNC"));
 
         getRootPane().setDefaultButton(ok);
         setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
@@ -171,8 +170,8 @@ public class DisplayModeChooser extends JDialog implements ActionListener, ItemL
         if(e.getActionCommand().equals("Ok")){
             status=true;
             try{
-            if(constants.gInteger("FORCED_W")>=320&&constants.gInteger("FORCED_H")>=240){
-                Display.setDisplayMode(new DisplayMode(constants.gInteger("FORCED_W"),constants.gInteger("FORCED_H")));
+            if(MainFrame.CONST.gInteger("FORCED_W")>=320&&MainFrame.CONST.gInteger("FORCED_H")>=240){
+                Display.setDisplayMode(new DisplayMode(MainFrame.CONST.gInteger("FORCED_W"),MainFrame.CONST.gInteger("FORCED_H")));
                 Display.setFullscreen(full.isSelected());
                 Display.setVSyncEnabled(vsync.isSelected());
             }else{
@@ -181,10 +180,10 @@ public class DisplayModeChooser extends JDialog implements ActionListener, ItemL
                 Display.setVSyncEnabled(vsync.isSelected());
             }
             }catch(Exception ex){Const.LOGGER.log(Level.WARNING,"Failed to set Display settings",ex);}
-            constants.sString("DEFAULT_SCREEN",modes.getSelectedItem().toString());
-            constants.sBoolean("DEFAULT_FULL",full.isSelected());
-            constants.sBoolean("DEFAULT_VSYNC",vsync.isSelected());
-            constants.saveRegistry();
+            MainFrame.CONST.sString("DEFAULT_SCREEN",modes.getSelectedItem().toString());
+            MainFrame.CONST.sBoolean("DEFAULT_FULL",full.isSelected());
+            MainFrame.CONST.sBoolean("DEFAULT_VSYNC",vsync.isSelected());
+            MainFrame.CONST.saveRegistry();
             setVisible(false);
         }else if(e.getActionCommand().equals("Advanced")){
             AdvancedDialog adialog = new AdvancedDialog("Advanced Settings");
@@ -217,7 +216,7 @@ public class DisplayModeChooser extends JDialog implements ActionListener, ItemL
             setResizable(false);
 
             //create entry list.
-            HashMap map = constants.registry;
+            HashMap map = MainFrame.CONST.registry;
             String[][] arr = new String[map.size()][2];
             String[] columns = {"Key","Value"};
             Set entries = map.entrySet();
@@ -253,10 +252,10 @@ public class DisplayModeChooser extends JDialog implements ActionListener, ItemL
 
         public void actionPerformed(ActionEvent e) {
             if(e.getActionCommand().equals("Ok")){
-                for(int i=0;i<constants.registry.size();i++){
-                    constants.registry.put(list.getValueAt(i,0)+"",list.getValueAt(i,1)+"");
+                for(int i=0;i<MainFrame.CONST.registry.size();i++){
+                    MainFrame.CONST.registry.put(list.getValueAt(i,0)+"",list.getValueAt(i,1)+"");
                 }
-                constants.saveRegistry();
+                MainFrame.CONST.saveRegistry();
             }
             setVisible(false);
         }

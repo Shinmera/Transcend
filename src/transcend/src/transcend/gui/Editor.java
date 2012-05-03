@@ -200,12 +200,12 @@ public class Editor extends GObject implements MouseListener{
                         ((GTextArea)((GPanel)MainFrame.hud.get("p_editor")).get("args")).append("tex="+tex);
                     }
                     MainFrame.loader.setHelper(new LoadHelper(){
-                        public void load(){MainFrame.elementBuilder.buildElement(blocks[curItem], args);}
+                        public void load(){MainFrame.world.buildElement(blocks[curItem], args);}
                     });
                     MainFrame.loader.start("Injecting Block...",false);
                 }else{
                     MainFrame.loader.setHelper(new LoadHelper(){
-                        public void load(){MainFrame.elementBuilder.buildElement(entities[curItem], args);}
+                        public void load(){MainFrame.world.buildElement(entities[curItem], args);}
                     });
                     MainFrame.loader.start("Injecting Entity...",false);
                 }

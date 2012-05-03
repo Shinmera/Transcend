@@ -11,19 +11,16 @@ package transcend.graph;
 
 import java.io.File;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.logging.Level;
 import transcend.main.Const;
-import transcend.main.MainFrame;
 
-public class TexturePool {
+public class TexturePool extends TextureLoader{
     private HashMap<String,Texture> textures = new HashMap();
     
     public TexturePool(){}
     
     public void clearPool(){
-        Iterator it = textures.entrySet().iterator();
-        MainFrame.texturePool.clearPool();
+        super.clearPool();
         textures.clear();
     }
 
@@ -38,7 +35,7 @@ public class TexturePool {
         try{
             String extension = f.getName().substring(f.getName().indexOf(".")+1);
             //Texture texture = TextureLoader.getTexture(extension.toUpperCase(), new FileInputStream(f),GL_LINEAR);
-            Texture texture = MainFrame.textureLoader.getDeferredTexture(name);
+            Texture texture = getDeferredTexture(name);
             textures.put(name, texture);
             return texture;
         }catch(Exception e){Const.LOGGER.log(Level.SEVERE,"[TexturePool] Failed to load texture at "+f.getAbsolutePath()+".",e);return null;}

@@ -12,14 +12,14 @@ package transcend.world;
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.THashMap;
 import gnu.trove.procedure.TObjectProcedure;
+import static org.lwjgl.opengl.GL11.*;
 import transcend.block.Block;
 import transcend.entity.Entity;
 import transcend.main.Const;
 import transcend.main.MainFrame;
 import transcend.tile.Tile;
-import static org.lwjgl.opengl.GL11.*;
 
-public class World {
+public class World extends WorldLoader{
     private final UpdateProcedure updateProc            = new UpdateProcedure();
     private final DrawProcedure drawProc                = new DrawProcedure();
     private final DrawProcedureLayered drawProcLayered  = new DrawProcedureLayered();

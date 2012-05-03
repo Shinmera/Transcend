@@ -250,6 +250,6 @@ public class Texture {
     }
 
     public void load(){
-        if(!loaded)MainFrame.textureLoader.loadDeferredTexture(this);
+        if(!loaded)MainFrame.texturePool.loadDeferredTexture(this);
     }
 }
