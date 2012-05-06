@@ -9,27 +9,27 @@
 
 package transcend.world;
 
+import NexT.util.ClassPathHacker;
+import NexT.util.ConfigManager;
 import NexT.util.SimpleSet;
 import NexT.util.Toolkit;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.io.Reader;
+import java.io.*;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 import org.newdawn.slick.Color;
+import transcend.block.*;
+import transcend.entity.EnemyB1;
+import transcend.entity.EnemyC1;
+import transcend.entity.RigidBody;
+import transcend.gui.CameraPath;
 import transcend.main.Const;
 import transcend.main.MainFrame;
+import transcend.particle.Emitter;
+import transcend.tile.*;
 
-public class WorldLoader extends ElementBuilder{
+public class WorldLoader extends World{
     private File loaded = null;
 
     public File getLoaded(){return loaded;}
@@ -98,8 +98,8 @@ public class WorldLoader extends ElementBuilder{
             pw.println("y:"+MainFrame.player.getY());
             pw.println("}\n");
 
-            for(int i=0;i<MainFrame.world.size();i++){
-                BElement e = MainFrame.world.getByID(MainFrame.world.getID(i));
+            for(int i=0;i<size();i++){
+                BElement e = getByID(getID(i));
                 if(!e.getClass().getName().equals("entity.Player")){
                     SimpleSet s = e.getOptions();
                     if((s!=null)&&(!s.containsKey("nosave"))){
@@ -120,7 +120,7 @@ public class WorldLoader extends ElementBuilder{
             pw.flush();
             pw.close();
         }catch(IOException e){Const.LOGGER.log(Level.SEVERE,"Failed to save World: Write exception",e);}
-        Const.LOGGER.info("[World] Saved "+MainFrame.world.size()+" elements.");
+        Const.LOGGER.info("[World] Saved "+size()+" elements.");
 
         return true;
     }
@@ -140,8 +140,8 @@ public class WorldLoader extends ElementBuilder{
             BufferedReader in = new BufferedReader(new FileReader(file));
             String read = in.readLine();
             if((read==null)||(!read.equals("#!transcend world file"))){Const.LOGGER.log(Level.SEVERE,"Failed to load World: Invalid header");return false;}
-            MainFrame.world.clear();
-            int id = MainFrame.world.addEntity(MainFrame.player);
+            clear();
+            int id = addEntity(MainFrame.player);
             MainFrame.camera.follow(id);
             while((read = in.readLine()) != null){
                 if(read.contains("#"))read = read.substring(0,read.indexOf("#"));
@@ -200,11 +200,177 @@ public class WorldLoader extends ElementBuilder{
                 line++;
             }
             in.close();
-            MainFrame.world.findEdges();
+            findEdges();
         }catch(IOException e){Const.LOGGER.log(Level.SEVERE,"Failed to load World: Read exception",e);return false;}
-        Const.LOGGER.info("[World] Loaded "+elementsLoaded+" elements. "+MainFrame.world.blockSize()+" Blocks "+MainFrame.world.entitySize()+" Entities "+MainFrame.world.tileSize()+" Tiles.");
-        Const.LOGGER.info("[World] Current edges: xl: "+MainFrame.world.leftLimit+" yb: "+MainFrame.world.lowerLimit+" xr: "+MainFrame.world.rightLimit+" yt: "+MainFrame.world.upperLimit);
+        Const.LOGGER.info("[World] Loaded "+elementsLoaded+" elements. "+blockSize()+" Blocks "+entitySize()+" Entities "+tileSize()+" Tiles.");
+        Const.LOGGER.info("[World] Current edges: xl: "+leftLimit+" yb: "+lowerLimit+" xr: "+rightLimit+" yt: "+upperLimit);
         loaded = file;
         return true;
+    }
+    
+    
+    
+    HashMap<String,Class> elements = new HashMap<String,Class>();
+    SimpleSet<String,String> elementData = new SimpleSet<String,String>();
+
+    public boolean loadElement(String name){
+        if(elements.containsKey(name))return true;
+        try {
+            File f = MainFrame.fileStorage.getFile(name);
+            ClassPathHacker.addFile(f);
+            f = new File(f.getAbsolutePath()+".cfg");
+            if(!f.exists()){
+                Const.LOGGER.log(Level.WARNING,"Failed to load block "+name+". Config not found.");
+                return false;
+            }
+            ConfigManager man = new ConfigManager(name);
+            if(!man.loadConfig(f.getAbsolutePath())){
+                Const.LOGGER.log(Level.WARNING,"Failed to load block "+name+". Config read error.");
+                return false;
+            }
+            try{
+                Class aclass = MainFrame.class.getClassLoader().loadClass(name);
+                elements.put(name, aclass);
+                elementData = man.output().asSimpleSet();
+            }catch(Exception ex){
+                Const.LOGGER.log(Level.WARNING,"Failed to instantiate block "+name+".",ex);
+            }
+        } catch (IOException ex) {
+            Const.LOGGER.log(Level.WARNING,"Failed to load block "+name+". ClassPathHacker failed.",ex);
+            return false;
+        }
+
+        return true;
+    }
+
+    public void buildElement(String name,HashMap<String,String> args){
+        name = name.trim().toLowerCase();
+        //HARD CODED BLOCKS
+        if(name.equals("tileblock")){
+            TileBlock block = new TileBlock();
+            block.setOptions(args);
+            addTile(block);
+        }
+        else if(name.equals("fitblock")){
+            FitBlock block = new FitBlock();
+            block.setOptions(args);
+            addTile(block);
+        }
+        else if(name.equals("movingblock")){
+            MovingBlock block = new MovingBlock();
+            block.setOptions(args);
+            addBlock(block);
+        }
+        else if(name.equals("pushableblock")){
+            PushableBlock block = new PushableBlock();
+            block.setOptions(args);
+            addBlock(block);
+        }
+        else if(name.equals("complexblock")){
+            ComplexBlock block = new ComplexBlock();
+            block.setOptions(args);
+            block.determineCoordinates();
+            addBlock(block);
+        }
+        else if(name.equals("blankblock")){
+            BlankBlock block = new BlankBlock();
+            block.setOptions(args);
+            addBlock(block);
+        }
+        else if(name.equals("halfblankblock")){
+            HalfBlankBlock block = new HalfBlankBlock();
+            block.setOptions(args);
+            addBlock(block);
+        }
+        else if(name.equals("nullblock")){
+            NullBlock block = new NullBlock();
+            block.setOptions(args);
+            addBlock(block);
+        }
+        else if(name.equals("windblock")){
+            WindBlock block = new WindBlock();
+            block.setOptions(args);
+            addBlock(block);
+        }
+        else if(name.equals("water")){
+            Water block = new Water();
+            block.setOptions(args);
+            addBlock(block);
+        }
+        else if(name.equals("colorblock")){
+            ColorBlock block = new ColorBlock();
+            block.setOptions(args);
+            addTile(block);
+        }
+        else if(name.equals("background")){
+            Background block = new Background();
+            block.setOptions(args);
+            addTile(block);
+        }
+        else if(name.equals("tileset")){
+            TileSet block = new TileSet();
+            block.setOptions(args);
+            addTile(block);
+        }
+        else if(name.equals("soundemitter")){
+            SoundEmitter block = new SoundEmitter();
+            block.setOptions(args);
+            addTile(block);
+        }
+        else if(name.equals("emitter")){
+            Emitter block = new Emitter();
+            block.setOptions(args);
+            addTile(block);
+        }
+        else if(name.equals("rigidbody")){
+            RigidBody entity = new RigidBody();
+            entity.setOptions(args);
+            addEntity(entity);
+        }
+        else if(name.equals("enemyb1")){
+            EnemyB1 entity = new EnemyB1();
+            entity.setOptions(args);
+            addEntity(entity);
+        }
+        else if(name.equals("enemyc1")){
+            EnemyC1 entity = new EnemyC1();
+            entity.setOptions(args);
+            addEntity(entity);
+        }
+        else if(name.equals("camerapath")){
+            CameraPath path = new CameraPath();
+            path.setOptions(args);
+            addTile(path,args.get("name"));
+        }
+        else if(name.equals("gameevent")){
+            GameEvent block = new GameEvent();
+            block.setOptions(args);
+            addBlock(block);
+        }
+        else if(name.equals("info")){
+            Info block = new Info();
+            block.setOptions(args);
+            addBlock(block);
+        }
+        else if(name.equals("daycycle")){
+            DayCycle block = new DayCycle();
+            block.setOptions(args);
+            addTile(block,"daycycle");
+        }
+        //ATTEMPT TO DYNAMICALLY LOAD BLOCK
+        /*else{
+            if(loadElement(name)){
+                try {
+                    Element block = (Element) elements.get(name).newInstance();
+                    block.setPosition(Integer.parseInt(args.get("x")),Integer.parseInt(args.get("y")));
+                    block.setSize(Integer.parseInt(args.get("w")),Integer.parseInt(args.get("h")));
+                    if(args.containsKey("z"))block.setLayer(Integer.parseInt(args.get("z")));
+                    block.setOptions(args);
+                    addElement(block);
+                } catch (Exception ex) {
+                    Const.LOGGER.log(Level.WARNING,"Failed to instantiate block '"+name+"'.",ex);
+                }
+            }
+        }*/
     }
 }

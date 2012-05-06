@@ -35,7 +35,7 @@ public class RigidBody extends Entity{
     }
     
     public void onCollisionLeft(Element left){
-        if(left.solid>0.5&&vx<0){
+        if(left.getSolid()>0.5&&vx<0){
             int x1=Integer.MAX_VALUE;
             int x2=Integer.MAX_VALUE;
 
@@ -49,11 +49,11 @@ public class RigidBody extends Entity{
             //if(x1<Integer.MAX_VALUE)x=x1+w/2-1;
             vx=0;
         }
-        if(left.solid<=0.5)left=null;
+        if(left.getSolid()<=0.5)left=null;
     }
     
     public void onCollisionRight(Element right){
-        if(right.solid>0.5){
+        if(right.getSolid()>0.5){
             int x1=Integer.MAX_VALUE;
             int x2=Integer.MAX_VALUE;
 
@@ -67,11 +67,11 @@ public class RigidBody extends Entity{
             //if(x1>Integer.MIN_VALUE)x=x1-w/2;
             vx=0;
         }
-        if(right.solid<=0.5)left=null;
+        if(right.getSolid()<=0.5)left=null;
     }
     
     public void onCollisionTop(Element top){
-        if(top.solid>0.5){
+        if(top.getSolid()>0.5){
             int y1=Integer.MAX_VALUE;
             int y2=Integer.MAX_VALUE;
 

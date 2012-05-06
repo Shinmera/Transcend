@@ -34,7 +34,7 @@ import transcend.graph.*;
 import transcend.gui.*;
 import static transcend.main.Jitter.j;
 import static transcend.main.Jitter.jps;
-import transcend.world.World;
+import transcend.world.WorldLoader;
 
 public class MainFrame implements KeyboardListener{
     public static String mode = "NULL";
@@ -53,7 +53,7 @@ public class MainFrame implements KeyboardListener{
     public static final File basedir = new File(System.getProperty("user.dir"));
     public static final FileStorage fileStorage = new FileStorage();
     public static final TFrame frame = new TFrame("Transcend - v"+Const.VERSION);
-    public static final World world = new World();
+    public static final WorldLoader world = new WorldLoader();
     public static final InputEventHandler ieh = new InputEventHandler();
     public static final EventHandler eh = new EventHandler();
     public static final Camera camera = new Camera();

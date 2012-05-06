@@ -9,24 +9,23 @@
 
 package transcend.tile;
 
-import transcend.graph.AbstractGraph;
-import transcend.main.MainFrame;
-import transcend.event.Event;
-import transcend.event.EventListener;
 import NexT.util.SimpleSet;
 import java.util.HashMap;
-import transcend.graph.Animation;
-import org.newdawn.slick.Color;
-import transcend.world.BElement;
 import static org.lwjgl.opengl.GL11.*;
+import org.newdawn.slick.Color;
+import transcend.event.Event;
+import transcend.event.EventListener;
+import transcend.graph.AbstractGraph;
+import transcend.graph.Animation;
+import transcend.main.MainFrame;
+import transcend.world.BElement;
 
 public class Tile extends BElement implements EventListener{
-    public static final int ELEMENT_ID = 0x101;
     public static final int STATUS_CLEAN = 0x00;
     public static final int STATUS_INFECTED = 0x01;
     public static final int STATUS_CLEANING = 0x02;
     public float depth = 1;
-    public Animation drawable = new Animation();
+    protected Animation drawable = new Animation();
     private int status = STATUS_CLEAN;
     private int cleancount = 0;
 

@@ -117,7 +117,7 @@ public class EnemyC1 extends Entity implements EventListener{
             }
         } else if(ground.y+ground.h-y<ground.h && vy<0) {y=ground.y+ground.h;vy = 0;
         } else if(vy<0)vy=0;
-        if((ceiling!=null)&&(vy>0&&ceiling.solid>0.5)){vy=0;y=ceiling.y-h-1;}
+        if((ceiling!=null)&&(vy>0&&ceiling.getSolid()>0.5)){vy=0;y=ceiling.y-h-1;}
 
         if(vx<=0)left= check(x+vx  ,y+3,x+vx  ,y+h-3);else left=null;
         if(vx>=0)right=check(x+w+vx,y+3,x+w+vx,y+h-3);else right=null;

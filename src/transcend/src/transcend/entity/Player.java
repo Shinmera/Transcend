@@ -158,7 +158,7 @@ public class Player extends RigidBody implements KeyboardListener,EventListener{
         }
         //CEILING
         if((top=check(x-w/2+3,y+h  ,x+w/2-3,y+h))!=null&&vy>0){
-            if(top.solid>0.5){
+            if(top.getSolid()>0.5){
                 vy=0;
                 Vector v = top.getCollisionPoint(new Ray(x,y,0,0,1,0));
                 if(v!=null){

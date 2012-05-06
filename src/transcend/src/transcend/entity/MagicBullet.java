@@ -8,8 +8,6 @@
 
 package transcend.entity;
 
-import org.newdawn.slick.Color;
-import transcend.graph.AbstractGraph;
 import transcend.main.MainFrame;
 import transcend.world.Element;
 
@@ -39,7 +37,7 @@ public class MagicBullet extends Entity{
         if((e=check(x+vx,y+vy,x+vx,y+vy,0.0))!=null){
             if(e instanceof Entity){
                 Entity e2 = (Entity)e;
-                e2.health-=health*effectiveness;
+                e2.setHealth(e2.getHealth()-health*effectiveness);
             }
             MainFrame.world.delByID(wID);
         }

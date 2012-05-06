@@ -12,8 +12,6 @@ package transcend.entity;
 import transcend.world.Element;
 
 public class Entity extends Element{
-    public static final int ELEMENT_ID = 0x1;
-
     public static final int STATUS_NONE = 0x0;
     public static final int STATUS_IDLE = 0x1;
     public static final int STATUS_MOVE = 0x2;

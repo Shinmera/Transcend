@@ -19,7 +19,7 @@ import transcend.main.Const;
 import transcend.main.MainFrame;
 import transcend.tile.Tile;
 
-public class World extends WorldLoader{
+public class World{
     private final UpdateProcedure updateProc            = new UpdateProcedure();
     private final DrawProcedure drawProc                = new DrawProcedure();
     private final DrawProcedureLayered drawProcLayered  = new DrawProcedureLayered();

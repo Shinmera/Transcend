@@ -16,9 +16,8 @@ import NexT.util.Vector;
 import java.util.HashMap;
 
 public class BElement {
-    public static final int ELEMENT_ID = 0x0;
     public int wID = -1;
-    public String name = "element";
+    private String name = "element";
     public double x=0,y=0,z=0;
     public int w=0,h=0;
 
@@ -32,7 +31,6 @@ public class BElement {
     public double getLayer(){return z;}
     public int getWidth(){return w;}
     public int getHeight(){return h;}
-    public int getElementID(){return this.ELEMENT_ID;}
     public boolean isBaseElement(){return true;}
 
     public void setName(String name){this.name=name;}

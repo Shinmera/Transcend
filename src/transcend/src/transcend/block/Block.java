@@ -10,19 +10,18 @@
 package transcend.block;
 
 import NexT.util.SimpleSet;
-import transcend.event.EventListener;
-import transcend.event.Event;
 import java.util.HashMap;
-import transcend.world.Element;
+import transcend.event.Event;
+import transcend.event.EventListener;
 import transcend.main.MainFrame;
+import transcend.world.Element;
 
 public class Block extends Element implements EventListener{
-    public static final int ELEMENT_ID = 0x51;
     public static final int STATUS_CLEAN = 0x00;
     public static final int STATUS_INFECTED = 0x01;
 
-    public boolean moveable;
-    private int status=STATUS_CLEAN;
+    protected boolean moveable;
+    protected int status=STATUS_CLEAN;
 
     public Block(){
         MainFrame.eh.registerEvent(Event.AREA_CLEAR, 1, this);
@@ -36,7 +35,7 @@ public class Block extends Element implements EventListener{
         this.x=x;this.y=y;this.z=z;this.w=w;this.h=h;
     }
 
-    public boolean getMoveable(){return moveable;}
+    public boolean isMoveable(){return moveable;}
     public int getStatus(){return status;}
 
     public void setMoveable(boolean m){this.moveable = m; }
