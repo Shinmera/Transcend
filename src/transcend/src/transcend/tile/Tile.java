@@ -43,6 +43,8 @@ public class Tile extends BElement implements EventListener{
     public int getStatus(){return status;}
 
     public void draw(){
+        
+        
         drawable.draw((int)x,(int)y,w,h);
         if(depth!=0&&z!=0){
             if(z<0){
